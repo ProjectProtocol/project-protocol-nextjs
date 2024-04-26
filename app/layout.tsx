@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { Open_Sans } from "next/font/google";
+import { Source_Sans_3 } from "next/font/google";
 import "@/styles/index.scss";
 
-const openSans = Open_Sans({ subsets: ["latin"] });
+const sourceSans3 = Source_Sans_3({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={openSans.className}>{children}</body>
+      <body className={sourceSans3.className}>{children}</body>
     </html>
   );
 }
