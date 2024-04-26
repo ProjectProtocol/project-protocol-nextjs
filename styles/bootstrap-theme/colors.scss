@@ -1,0 +1,63 @@
+// https://github.com/twbs/bootstrap/blob/main/scss/_variables.scss
+
+// Colors
+$black: #2b2b2b;
+$blush: #ff867b;
+$celadon: #78d4ac;
+$cherry: #cb3311;
+$cobalt: #276fbf;
+$light-cobalt: lighten($cobalt, 10%);
+$loquat: #ffa727;
+$medium-gray: #c9c9c9;
+$mindaro: #ddfcad;
+$mandarin: #f88737;
+$slate: #606060;
+$sea-green: #12acab;
+$tangelo: #f06748;
+$meyer-lemon: #ffc775;
+$platinum: #f8f7f8;
+$white: #ffffff;
+$propro-green: #61d345;
+
+// Theme colors
+$primary: $tangelo;
+$secondary: $mandarin;
+$success: $propro-green;
+$danger: $cherry;
+$dark: $slate;
+$light: $platinum;
+$info: $sea-green;
+
+$custom-colors: (
+  'white': $white,
+  'cobalt': $cobalt,
+  'light-cobalt': $light-cobalt,
+  'loquat': $loquat,
+  'meyer-lemon': $meyer-lemon,
+  'medium-gray': $medium-gray,
+  'rating-1': $cherry,
+  'rating-2': $tangelo,
+  'rating-3': $mandarin,
+  'rating-4': $loquat,
+  'rating-5': $meyer-lemon,
+);
+
+$body-color: $black;
+
+$min-contrast-ratio: 3;
+
+// Shadows
+$box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.16);
+$enable-shadows: true;
+
+// Placeholder
+$placeholder-opacity-max: 0.12;
+$placeholder-opacity-min: 0.08;
+
+// Links and Navs
+$link-color: $body-color;
+
+$navbar-light-hover-color: rgba($primary, 1);
+$navbar-light-active-color: rgba($black, 1);
+$navbar-light-color: rgba($black, 0.85);
+$navbar-light-disabled-color: rgba($black, 0.3);
