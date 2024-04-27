@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Source_Sans_3 } from "next/font/google";
 import "@/styles/index.scss";
+import Menu from "@/src/components/Menu";
+import { Container } from "react-bootstrap";
 
 const sourceSans3 = Source_Sans_3({ subsets: ["latin"] });
 
@@ -15,10 +17,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={sourceSans3.className + " w-100 vh-100 p-0"}>
+    <main className="bg-light min-vh-100 d-flex flex-column">
+      <Menu />
+      <Container className="p-3" style={{ maxWidth: 935 }}>
         {children}
-      </body>
-    </html>
+      </Container>
+    </main>
   );
 }

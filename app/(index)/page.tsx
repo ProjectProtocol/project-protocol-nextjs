@@ -1,18 +1,29 @@
 import { Card, Col, Row } from "react-bootstrap";
-import SearchIcon from "./svg/SearchIcon";
-import VoteIcon from "./svg/VoteIcon";
-import ResourceCard from "./resources/ResourceCard";
-import ResourcesIcon from "./svg/ResourcesIcon";
-import LandingPageCard from "./LandingPageCard";
 import losAngeles from "../../public/images/cedric-letsch-UZVlSjrIJ3o-unsplash.jpg";
-import PageHeader from "./PageHeader";
 import Link from "next/link";
-import useTranslation from "../lib/util/dummyTranslation";
 import Image from "next/image";
-import Resource from "../lib/types/Resource";
+import { SearchData } from "@/src/lib/types/SearchData";
+import Resource from "@/src/lib/types/Resource";
+import useTranslation from "@/src/lib/util/dummyTranslation";
+import PageHeader from "@/src/components/PageHeader";
+import LandingPageCard from "@/src/components/LandingPageCard";
+import ResourcesIcon from "@/src/components/svg/ResourcesIcon";
+import SearchIcon from "@/src/components/svg/SearchIcon";
+import VoteIcon from "@/src/components/svg/VoteIcon";
+import ResourceCard from "@/src/components/resources/ResourceCard";
+import { ApiResources } from "@/src/api";
 
-export default function LandingPage({ resources }: { resources: Resource[] }) {
+
+
+async function getData() {
+  "use server"
+  const res = await ApiResources.list({});
+  return res.data.slice(0, 3) as Resource[];
+}
+
+export default async function Page() {
   const { t } = useTranslation();
+  const resources = await getData()
 
   return (
     <div className="vertical-rhythm">
