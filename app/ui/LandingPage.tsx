@@ -1,11 +1,7 @@
-// import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Card, Col, Row } from "react-bootstrap";
-// import { Link } from "react-router-dom";
-// import { ApiResources } from "src/api";
 import SearchIcon from "./svg/SearchIcon";
 import VoteIcon from "./svg/VoteIcon";
-// import ResourceCard from "src/components/Resources/ResourceCard";
-// import Resource from "../lib/types/Resource";
+import ResourceCard from "./resources/ResourceCard";
 import ResourcesIcon from "./svg/ResourcesIcon";
 import LandingPageCard from "./LandingPageCard";
 import losAngeles from "../../public/images/cedric-letsch-UZVlSjrIJ3o-unsplash.jpg";
@@ -13,21 +9,11 @@ import PageHeader from "./PageHeader";
 import Link from "next/link";
 import useTranslation from "../lib/util/dummyTranslation";
 import Image from "next/image";
+import Resource from "../lib/types/Resource";
 
-export default function LandingPage() {
+export default function LandingPage({ resources }: { resources: Resource[] }) {
+  console.log(resources);
   const { t } = useTranslation();
-  // const queryClient = useQueryClient();
-  // const { data: resourceData } = useQuery<SearchData<Resource>>({
-  //   queryKey: ["landingPageResources"],
-  //   queryFn: async () => await ApiResources.list({}),
-  // });
-
-  // function updateResource({ resource }: { resource: Resource }) {
-  //   queryClient.setQueryData(
-  //     ["landingPageResources"],
-  //     updateQueryItem(resource)
-  //   );
-  // }
 
   return (
     <div className="vertical-rhythm">
@@ -109,13 +95,13 @@ export default function LandingPage() {
         </Col>
         <Col xs={12}>
           <div className="d-flex flex-column gap-3">
-            {/* {resourceData?.data.slice(0, 3).map((resource: Resource) => (
+            {resources.map((resource: Resource) => (
               <ResourceCard
                 key={resource.id}
                 resource={resource}
-                onUpdate={updateResource}
+                onUpdate={() => {}}
               />
-            ))} */}
+            ))}
           </div>
         </Col>
       </Row>

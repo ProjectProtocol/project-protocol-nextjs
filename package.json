@@ -9,14 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "axios": "^1.6.8",
     "bootstrap": "^5.3.3",
     "classnames": "^2.5.1",
+    "lodash-es": "^4.17.21",
     "next": "14.2.3",
     "react": "^18",
     "react-bootstrap": "^2.10.2",
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@types/lodash-es": "^4.17.12",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
