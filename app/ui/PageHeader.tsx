@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { Col, Row } from "react-bootstrap";
+import BackLink from "./BackLink";
 
 interface IPageHeader {
   title: string;
@@ -12,7 +12,6 @@ interface IPageHeader {
 const SIGNED_IN = false;
 
 export default function PageHeader({ title, showBack = false }: IPageHeader) {
-  const router = useRouter();
   return (
     <div className="py-2">
       {/* MOBILE PAGE HEADER */}
@@ -20,10 +19,7 @@ export default function PageHeader({ title, showBack = false }: IPageHeader) {
         <Col>
           {showBack && (
             <div className="d-flex flex-row h-100 justify-content-start align-items-center">
-              <a role="button" onClick={() => router.back()}>
-                <i className="bi bi-chevron-left align-middle" />
-                Back
-              </a>
+              <BackLink />
             </div>
           )}
         </Col>
@@ -44,12 +40,7 @@ export default function PageHeader({ title, showBack = false }: IPageHeader) {
                 <i className="bi bi-person-circle align-middle fs-3" />
               </Link>
             ) : (
-              <a
-                className="link-primary text-decoration-none"
-                onClick={() => {}}
-              >
-                Sign Up
-              </a>
+              <a className="link-primary text-decoration-none">Sign Up</a>
             )}
           </div>
         </Col>
@@ -59,10 +50,7 @@ export default function PageHeader({ title, showBack = false }: IPageHeader) {
       <div className="d-none d-md-block vertical-rhythm">
         {showBack && (
           <div>
-            <a role="button" onClick={() => router.back()}>
-              <i className="bi bi-chevron-left align-middle" />
-              Back
-            </a>
+            <BackLink />
           </div>
         )}
         <h2 className="fw-semibold p-0 m-0">{title}</h2>

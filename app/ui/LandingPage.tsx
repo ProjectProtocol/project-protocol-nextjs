@@ -2,17 +2,20 @@
 import { Card, Col, Row } from "react-bootstrap";
 // import { Link } from "react-router-dom";
 // import { ApiResources } from "src/api";
-import SearchIcon from "src/components/svg/SearchIcon";
-import VoteIcon from "src/components/svg/VoteIcon";
+import SearchIcon from "./svg/SearchIcon";
+import VoteIcon from "./svg/VoteIcon";
 // import ResourceCard from "src/components/Resources/ResourceCard";
 // import Resource from "../lib/types/Resource";
 import ResourcesIcon from "./svg/ResourcesIcon";
 import LandingPageCard from "./LandingPageCard";
-import losAngeles from "../..public/images/los-angeles.jpg";
+import losAngeles from "../../public/images/cedric-letsch-UZVlSjrIJ3o-unsplash.jpg";
 import PageHeader from "./PageHeader";
 import Link from "next/link";
+import useTranslation from "../lib/util/dummyTranslation";
+import Image from "next/image";
 
 export default function LandingPage() {
+  const { t } = useTranslation();
   // const queryClient = useQueryClient();
   // const { data: resourceData } = useQuery<SearchData<Resource>>({
   //   queryKey: ["landingPageResources"],
@@ -32,14 +35,22 @@ export default function LandingPage() {
       <Row className="g-3">
         <Col xs={12}>
           <div
-            className="w-100 position-relative rounded justify-content-end align-items-end  d-flex flex-column"
+            className="w-100 position-relative rounded justify-content-end align-items-end d-flex flex-column overflow-hidden"
             style={{
               height: "300px",
               width: "100%",
-              background: `url(${losAngeles}) no-repeat center center`,
-              backgroundSize: "cover",
             }}
           >
+            <Image
+              src={losAngeles.src}
+              alt="Los Angeles"
+              fill
+              style={{
+                objectFit: "cover",
+                objectPosition: "center",
+              }}
+              className="position-absolute"
+            />
             <Card
               body
               className="w-100 text-start text-lg-end rounded-top-0"
@@ -50,10 +61,10 @@ export default function LandingPage() {
             >
               <h4 className="text-white">{t("home.welcomeTitle")}</h4>
               <p className="text-white m-0">
-                Resources, support, and shared experiences during re-entry
+                {t("home.welcomeMessage")}
                 <br />
                 <Link href="/about" className="text-white small text-nowrap">
-                  Learn More
+                  {t("ui.learnMore")}
                   <i className="bi bi-arrow-right ms-1 align-middle"></i>
                 </Link>
               </p>
@@ -63,10 +74,8 @@ export default function LandingPage() {
         <Col xs={12} md={4}>
           <LandingPageCard
             href="/resources"
-            title={"Search for Re-entry resources"}
-            description={
-              "Find community vetted resources for your current needs"
-            }
+            title={t("home.resourcesTitle")}
+            description={t("home.resourcesDescription")}
             cardClass="bg-light-cobalt"
             icon={<ResourcesIcon />}
           />
@@ -93,7 +102,7 @@ export default function LandingPage() {
           <div className="d-flex flex-row justify-content-between mt-3 align-items-center">
             <h3 className="m-0">{t("home.recentResources")}</h3>
             <div>
-              <Link to="/resources">{t("home.moreResources")}</Link>
+              <Link href="/resources">{t("home.moreResources")}</Link>
               <i className="bi bi-chevron-right ms-2 align-middle"></i>
             </div>
           </div>
