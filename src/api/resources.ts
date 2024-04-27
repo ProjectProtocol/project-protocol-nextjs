@@ -1,4 +1,4 @@
-import { ResourceTag } from "../lib/types/Resource";
+import { ResourceTag } from "../../src/lib/types/Resource";
 import apiClient from "./client";
 
 interface IResourceListParams {

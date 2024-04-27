@@ -1,8 +1,8 @@
 import { Container } from "react-bootstrap";
-import Menu from "./ui/Menu";
-import LandingPage from "./ui/LandingPage";
-import Resource from "./lib/types/Resource";
-import { SearchData } from "./lib/types/SearchData";
+import Menu from "@/src/components/Menu";
+import LandingPage from "@/src/components/LandingPage";
+import Resource from "@/src/lib/types/Resource";
+import { SearchData } from "@/src/lib/types/SearchData";
 
 async function getData() {
   const res = await fetch("http://localhost:3000/resources");

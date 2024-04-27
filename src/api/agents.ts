@@ -1,6 +1,6 @@
-import { SearchData } from "../lib/types/SearchData";
+import { SearchData } from "../../src/lib/types/SearchData";
 import apiClient from "./client";
-import Agent from "../lib/types/Agent";
+import Agent from "../../src/lib/types/Agent";
 
 export async function get(id: string) {
   const result = await apiClient
