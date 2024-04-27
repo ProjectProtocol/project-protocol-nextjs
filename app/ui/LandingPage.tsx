@@ -12,7 +12,6 @@ import Image from "next/image";
 import Resource from "../lib/types/Resource";
 
 export default function LandingPage({ resources }: { resources: Resource[] }) {
-  console.log(resources);
   const { t } = useTranslation();
 
   return (

@@ -1,7 +1,6 @@
 import { Container } from "react-bootstrap";
 import Menu from "./ui/Menu";
 import LandingPage from "./ui/LandingPage";
-import { GetStaticProps, InferGetStaticPropsType } from "next";
 import Resource from "./lib/types/Resource";
 import { SearchData } from "./lib/types/SearchData";
 
