@@ -1,0 +1,256 @@
+{
+  "account": {
+    "changePassword": {
+      "action": "Cambiar",
+      "error": "Ha ocurrido un error",
+      "title": "Cambiar Contraseña"
+    },
+    "confirmation": {
+      "loading": "Cargando ..."
+    },
+    "create": {
+      "submit": "Enviar"
+    },
+    "delete": {
+      "form": {
+        "submit": "Eliminar tu cuenta"
+      },
+      "detail": "Eliminar tu cuenta",
+      "title": "Eliminar tu cuenta"
+    },
+    "login": {
+      "login": "Iniciar sesión",
+      "loginLabel": "Iniciar sesión",
+      "signup": "Registrarse"
+    },
+    "resetPassword": {
+      "modal": {
+        "heading": "El cambio de contraseña se realizó correctamente",
+        "intro": "Ingresa una nueva contraseña de al menos 8 caracteres.",
+        "newPassword": "Nueva contraseña",
+        "submit": "Cambiar tu contraseña",
+        "title": "Cambiar tu contraseña"
+      },
+      "newPasswordConfirm": {
+        "label": "Confirmar nueva contraseña"
+      },
+      "emailLabel": "Correo"
+    },
+    "confirm": "Confirmar tu cuenta",
+    "confirmDetail": "Hemos enviado un correo electrónico a {{email}} con las instrucciones de confirmación. Asegúrate de revisar tu bandeja de correo no deseado y spam.",
+    "email": "Correo",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "signUp": "Registrarse",
+    "title": "Configuración de la cuenta"
+  },
+  "agent": {
+    "form": {
+      "createListing": "Crear entrada de agente",
+      "edit": "Editar",
+      "firstName": "Nombre del agente",
+      "lastName": "Apellido del agente",
+      "lastNameRequired": "Por favor proporciona un apellido",
+      "office": "Oficina",
+      "selectOffice": "Seleccionar una oficina",
+      "selectOfficeRequired": "Por favor selecciona una oficina",
+      "title": "Información del agente"
+    },
+    "addAgent": "Agregar un agente",
+    "agent": "Agente",
+    "agents": "Agentes",
+    "agentInfo": "Información del agente",
+    "averageRatingTitle": "Calificación",
+    "formIntro": "Utiliza este formulario para contribuir con una nueva entrada de agente a la base de datos de Project Protocol. Después de la creación, tú y otras personas podrán leer y contribuir a reseñas sobre experiencias de primera mano con esta persona.",
+    "heading": "Agente: {{fullName}}",
+    "logIn": "o inicia sesión",
+    "noResults": "No se han encontrado resultados. Por favor intenta una búsqueda diferente.",
+    "office": "Oficina",
+    "officerIconAlt": "Icono de oficial",
+    "overallRatings": "Calificaciones generales",
+    "popularTags": "Etiquetas populares",
+    "rateAgent": "Calificar",
+    "rating_one": "{{count}} Opinión",
+    "rating_other": "{{count}} Opiniónes",
+    "result_one": "{{count}} Resultado",
+    "result_other": "{{count}} Resultados",
+    "searchByAddress": "Buscar una oficina usando la dirección o el nombre de la ciudad.",
+    "searchByOffice": "Buscar agentes para esta oficina",
+    "searchOffices": "Buscar oficinas",
+    "selectOffice": "Seleccionar una oficina",
+    "signUp": "Regístrate para calificar",
+    "successToast": "Agente creado con éxito",
+    "unrateable": "Por favor, espera 24 horas antes de volver a calificar a este agente."
+  },
+  "contact": {
+    "email": "Correo:",
+    "title": "Contáctanos"
+  },
+  "confirmationModal": {
+    "title": "Confirmar tu cuenta para calificar los agentes",
+    "body": "Hemos enviado un correo electrónico a <strong>{{email}}</strong> con las instrucciones de confirmación. Asegúrate de revisar tu bandeja de correo no deseado y spam.",
+    "confirmationSent": "Correo electrónico enviado",
+    "resendLink": "Haz clic aquí para reenviar el correo de confirmación"
+  },
+  "error": {
+    "generic": "Ha ocurrido un error"
+  },
+  "footer": {
+    "about": "Acerca de",
+    "contact": "Contáctanos",
+    "ethicalPrinciples": "Principios éticos",
+    "howDoesItWork": "¿Como funciona?",
+    "tos": "Términos de servicio"
+  },
+  "home": {
+    "resourcesDescription": "Encuentra recursos verificados por la comunidad para tus necesidades actuales",
+    "resourcesTitle": "Buscar recursos de reingreso",
+    "rateMyPoDescription": "Comparte tu experiencia de forma anónima",
+    "rateMyPoTitle": "Calificar a tu PO",
+    "recentResources": "Recursos recientes",
+    "title": "Inicio",
+    "voteDescription": "Las personas con libertad condicional tienen derecho a votar",
+    "voteTitle": "Registrarse para votar",
+    "welcomeMessage": "Recursos, apoyo, y compartiendo experiencias durante tu reingreso a la sociedad.",
+    "welcomeTitle": "Bienvenido a Project Protocol",
+    "moreResources": "Más recursos"
+  },
+  "navigation": {
+    "account": "Cuenta",
+    "registerToVote": "Registrarse para votar",
+    "resources": "Recursos",
+    "searchOfficers": "Buscar por agente",
+    "signUp": "Registrarse",
+    "localeSwitcher": {
+      "selectLanguage": "Elija su idioma"
+    }
+  },
+  "pages": {
+    "about": "Acerca de",
+    "ethicalPrinciples": "Principios éticos",
+    "howDoesItWork": "¿Como funciona?",
+    "termsOfService": "Términos de servicio"
+  },
+  "ratings": {
+    "category": {
+      "helpful": {
+        "title": "Útil",
+        "titleHelper": "¿Cuán útil ha sido este agente durante tu proceso de reingreso? Por ejemplo, ¿te conectan con los recursos necesarios?",
+        "helperLeft": "No es útil",
+        "helperRight": "Muy útil"
+      },
+      "caring": {
+        "title": "Atento",
+        "titleHelper": "¿Cuánto le importa a este agente tu bienestar?",
+        "helperLeft": "No le importa",
+        "helperRight": "Le importa mucho"
+      },
+      "respectful": {
+        "title": "Respetuoso",
+        "titleHelper": "¿Te sientes generalmente respetado por este agente? ¿Te tratan con dignidad?",
+        "helperLeft": "No es respetuoso",
+        "helperRight": "Muy respetuoso"
+      },
+      "availability": {
+        "title": "Disponible",
+        "titleHelper": "¿Este agente es generoso con el tiempo que te dedica? ¿Qué tan fácil es acceder a este agente? ¿Sientes que son considerados con el tiempo que pasan contigo?",
+        "helperLeft": "Muy ocupado",
+        "helperRight": "Hace tiempo para mi"
+      }
+    },
+    "tags": {
+      "title": "Selecciona todas las etiquetas que correspondan",
+      "values": {
+        "communicative": "Communicativo",
+        "supportive": "Apoyante",
+        "aboveAndBeyond": "Demonstra esfuerzo",
+        "flexible": "Trabaja alrededor de mi horario",
+        "trustsMe": "Confia en mi",
+        "traumaInformed": "Trauma informado",
+        "unresponsive": "No responde",
+        "noResources": "No da accesso a recursos",
+        "notOnTime": "Lluega tarde",
+        "disrespectsHome": "Le falta respeto a mi hogar",
+        "disrespectsFamily": "Le falta respeto a mi familia",
+        "racist": "Racista",
+        "sexist": "Sexista",
+        "shortTempered": "Es de mal genio",
+        "inappropriateComments": "Commentario inapropiados",
+        "unpredictable": "Actitud impredecible",
+        "indifferent": "Es Indiferente",
+        "retaliatory": "Amenaza con represalias",
+        "unannouncedVisits": "Visita sin anunciar",
+        "communityOrgSupport": "Permite la participación con organizaciones comuni"
+      }
+    },
+    "additionalComments": "Comentarios adicionales",
+    "additionalCommentsHelpText": "Los comentarios se ocultarán hasta que hayan sido aprobados.",
+    "additionalCommentsPlaceholder": "Comentarios adicionales...",
+    "unpublishedCommentHeader": "Los comentarios están ocultos al público hasta que hayan sido aprobados.",
+    "unpublishedCommentHeaderLink": "¿Qué quiere decir esto?",
+    "error": "Por favor corrige los errores antes de continuar.",
+    "optional": "opcional",
+    "rating": "Calificación",
+    "required": "Por favor proporciona una calificación de {{name}}",
+    "submit": "Enviar para su revisión",
+    "title": "Calificar agente",
+    "createdWithCommentSuccess": "Tus calificaciones han sido publicadas. Cualquier comentario que haya proporcionado se ocultará hasta que se apruebe.",
+    "createdSuccess": "Reseńa creada exitosamente"
+  },
+  "resources": {
+    "filters": {
+      "clear": "Borrar {{count}} filtros",
+      "show": "Buscar por locación o tema"
+    },
+    "locationFilter": {
+      "distanceAccessibilityLabel": "Elige una distancia para buscar dentro.",
+      "locationAccessibilityLabel": "Ingresa una ubicación para buscar cerca.",
+      "miles": "{{count}} millas",
+      "of": "de",
+      "placeholder": "Ciudad, Estado o ZIP",
+      "title": "Locación",
+      "within": "A menos de"
+    },
+    "searchPlaceholder": "Buscar recursos",
+    "signInRequired": "Debes iniciar sesión para dar 'me gusta' o 'no me gusta' a los recursos.",
+    "suggestResource": "Sugerir un recurso",
+    "tags": {
+      "advocacy": "Abogacía",
+      "education": "Educación",
+      "familyReunification": "Reunificación Familiar",
+      "housing": "Vivienda",
+      "identityBasedSupport": "Apoyo Basado en la Identidad",
+      "jobTraining": "Formación Profesional",
+      "legalHelp": "Ayuda Legal",
+      "lifeSkills": "Habilidades para la Vida",
+      "mentalHealthSupport": "Apoyo de Salud Mental",
+      "reentryProgram": "Programa de Reingreso",
+      "serviceProviders": "Proveedores de Servicios",
+      "title": "Temas"
+    },
+    "title": "Recursos"
+  },
+  "search": {
+    "addAnAgent": "Agregar agente",
+    "orLogIn": "o inicia sesión",
+    "mostRecent": "Calificaciones recientes",
+    "noResults": "¿No encuentras lo que buscabas?",
+    "placeholder": "Buscar por agente para calificar",
+    "resultsDisplayed": "{{total}} resultados",
+    "signUpToAddAgent": "Registrarse para agregar agente",
+    "confirmAccountToAddAgent": "Confirmar tu cuenta para agregar agente"
+  },
+  "ui": {
+    "back": "Atrás",
+    "cancel": "Cancelar",
+    "dismiss": "Descartar",
+    "learnMore": "Aprende más",
+    "noResults": "No se han encontrado resultados. Por favor intenta una búsqueda diferente.",
+    "optional": "(opcional)",
+    "ppLogoAlt": "Logotipo de Project Protocol",
+    "submit": "Enviar"
+  },
+  "vote": {
+    "title": "Restauración del derecho de voto en California/Register to Vote",
+    "register": "Regístrate para votar"
+  }
+}

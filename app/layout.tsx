@@ -16,7 +16,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={sourceSans3.className}>{children}</body>
+      <body className={sourceSans3.className + " w-100 vh-100 p-0"}>
+        {children}
+      </body>
     </html>
   );
 }
