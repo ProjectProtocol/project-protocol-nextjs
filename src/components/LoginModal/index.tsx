@@ -4,6 +4,7 @@ import useTranslation from "@/src/lib/util/dummyTranslation";
 import LoginForm from "./LoginForm";
 import Image from "next/image";
 import defaultIcon from "@/public/images/icon.svg";
+
 interface LoginModal extends ModalProps {
   postLogin?: () => void;
 }

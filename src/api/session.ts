@@ -19,7 +19,8 @@ export async function create(
       email,
       password,
     })
-    .catch((e) => e.response);
+    .then((r) => r.data)
+    .catch((e) => false);
 
   return result;
 }
