@@ -30,10 +30,10 @@ export default function PopUp({
           <div className="mb-3">
             <h3>
               <Image
-                src={imageSrc.src}
+                src={imageSrc}
                 alt={t('ui.ppLogoAlt')}
                 className="me-2"
-                style={{ height: '1.125rem' }}
+                style={{ width: "auto",height: '1.125rem' }}
               />
               {title}
             </h3>

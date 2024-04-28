@@ -6,6 +6,9 @@ import User from "../lib/types/User";
 import LocaleSwitcher from "./LocaleSwitcher";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import LoginModal from "./LoginModal";
+import PageHeader from "./PageHeader";
 
 const MENU_MAX_WIDTH = 935;
 
@@ -14,7 +17,10 @@ interface IMenu {
 }
 
 export default function Menu({ user }: IMenu) {
+  const [showLogin, setShowLogin] = useState(false);
+
   return (
+    <>
     <Navbar
       variant="dark"
       className="bg-black flex-column py-0 overflow-hidden"
@@ -80,13 +86,17 @@ export default function Menu({ user }: IMenu) {
               </Nav.Link>
             ) : (
               <Nav.Link>
-                <Button onClick={() => {}}>Sign Up</Button>
+                <Button onClick={() => setShowLogin(true)}>Sign Up</Button>
               </Nav.Link>
             )}
           </Nav>
-          <Nav className="d-md-none">{/* <LocaleSwitcher dark /> */}</Nav>
+          <LoginModal show={showLogin} onHide={() => setShowLogin(false)} />
+          <Nav className="d-md-none">
+            <LocaleSwitcher dark />
+          </Nav>
         </Container>
       </div>
     </Navbar>
+    </>
   );
 }

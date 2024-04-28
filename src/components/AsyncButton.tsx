@@ -1,18 +1,19 @@
-import { Button, ButtonProps, Spinner } from 'react-bootstrap'
+'use client'
 
-export interface IAsyncButton extends ButtonProps {
-  loading: boolean
-}
+import { Button, ButtonProps, Spinner } from 'react-bootstrap'
+import { useFormStatus } from 'react-dom'
+
+export interface IAsyncButton extends ButtonProps {}
 
 export default function AsyncButton({
-  loading,
   children,
   disabled,
   ...props
 }: IAsyncButton) {
+  const { pending } = useFormStatus()
   return (
-    <Button disabled={loading || disabled} {...props}>
-      {loading ? (
+    <Button disabled={pending || disabled} {...props}>
+      {pending ? (
         <>
           <Spinner
             size="sm"
