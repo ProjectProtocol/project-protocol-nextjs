@@ -1,24 +1,58 @@
-'use server'
+"use server";
 
-import { LoginFormSchema } from '@/src/lib/definitions'
-import { z } from 'zod'
+import { ApiSession } from "@/src/api";
+import { LoginFormSchema } from "@/src/lib/definitions";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export async function login(prevState: any, formData: FormData) {
-  console.log(formData.get('email'))
+  console.log(formData.get("email"));
   const validatedFields = LoginFormSchema.safeParse({
-    email: formData.get('email'),
-    password: formData.get('password'),
-
-  })
+    email: formData.get("email"),
+    password: formData.get("password"),
+  });
 
   if (!validatedFields.success) {
-    console.log(validatedFields)
-    console.log(validatedFields.error?.flatten().fieldErrors)
     return {
-      errors: validatedFields.error?.flatten().fieldErrors,
-    }
+      error: validatedFields.error.flatten().fieldErrors,
+    };
   }
 
-  console.log("hi", validatedFields.data)
+  const { email, password } = validatedFields.data;
+  const res = await ApiSession.create(email, password);
 
+  console.log(prevState);
+
+  const setCookieHeader =
+    res.headers["set-cookie"] && res.headers["set-cookie"][0];
+
+  if (setCookieHeader) {
+    const jwt = extractJWT(setCookieHeader);
+    const dateString = extractExpiry(setCookieHeader);
+
+    console.log(setCookieHeader.split(";")[2]);
+
+    cookies().set("session", jwt, {
+      httpOnly: true,
+      sameSite: "none",
+      secure: true,
+      expires: new Date(dateString),
+    });
+
+    return {
+      user: res.data,
+    };
+  }
+
+  redirect("/");
 }
+
+function extractJWT(setCookie: string) {
+  return setCookie.split(";")[0].split("=")[1];
+}
+
+function extractExpiry(setCookie: string) {
+  return setCookie.split(";")[2].split("=")[1];
+}
+
+// Tue, 28 May 2024 03:17:18 GMT
