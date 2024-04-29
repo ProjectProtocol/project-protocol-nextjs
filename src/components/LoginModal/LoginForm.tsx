@@ -1,11 +1,11 @@
 "use client";
+
 import Input from "../Input";
-import { kebabCase, uniqueId } from "lodash-es";
+import { kebabCase } from "lodash-es";
 import AsyncButton from "@/src/components/AsyncButton";
 import useTranslation from "@/src/lib/util/dummyTranslation";
 import { useFormState } from "react-dom";
 import { login } from "@/app/actions/auth";
-import { AuthFormState } from "@/src/lib/definitions";
 
 interface ILoginForm {
   title: string;
@@ -21,7 +21,7 @@ export default function LoginForm({
 
   const emailErrors = state?.error?.email?.join(".");
   const passwordErrors = state?.error?.password?.join(".");
-  console.log(emailErrors);
+
   return (
     <div className="d-block">
       <div className="text-center mb-3">

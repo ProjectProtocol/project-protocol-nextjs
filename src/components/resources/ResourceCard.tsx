@@ -5,12 +5,13 @@ import ResourceVoteControls from "./ResourceVoteControls";
 import useTranslation from "@/src/lib/util/dummyTranslation";
 import Resource, { ResourceTag } from "@/src/lib/types/Resource";
 import Image from "next/image";
+import { dislikeResource, likeResource } from "@/app/actions/resources";
+
 interface IResourceCard {
   resource: Resource;
-  onUpdate: ({ resource }: { resource: Resource }) => void;
 }
 
-export default function ResourceCard({ resource, onUpdate }: IResourceCard) {
+export default function ResourceCard({ resource }: IResourceCard) {
   const { t } = useTranslation();
   const {
     url,
@@ -91,11 +92,7 @@ export default function ResourceCard({ resource, onUpdate }: IResourceCard) {
             />
           ))}
         </div>
-        {/* <ResourceVoteControls
-          resource={resource}
-          onLike={() => {}}
-          onDislike={() => {}}
-        /> */}
+        <ResourceVoteControls resource={resource} />
       </div>
     </Card>
   );

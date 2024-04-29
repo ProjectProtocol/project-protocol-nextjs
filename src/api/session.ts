@@ -1,11 +1,10 @@
 import { AxiosResponse } from "axios";
 import apiClient from "./client";
 
-export async function reauthenticate() {
+export async function reauthenticate({ token }: { token: string }) {
   const result = await apiClient
-    .get("/auth/reauthenticate")
-    .then((r) => r.data)
-    .catch(() => false);
+    .get("/auth/reauthenticate", { headers: { Cookie: `jwt=${token}` } })
+    .catch((e) => e.response);
 
   return result;
 }
@@ -19,8 +18,7 @@ export async function create(
       email,
       password,
     })
-    .then((r) => r.data)
-    .catch((e) => false);
+    .catch((e) => e.response);
 
   return result;
 }

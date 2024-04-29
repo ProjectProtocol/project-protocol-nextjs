@@ -18,6 +18,7 @@ export default function LocaleSwitcher({ dark = false }: { dark?: boolean }) {
   const [currentLanguage, setCurrentLanguage] = useState<Lang>("en");
   const activeClass = `fw-semibold ${dark ? "text-white" : "text-body"}`;
   const inactiveClass = dark ? "link-white" : "link-dark";
+
   return (
     <div aria-label={"Select language"} className="flex flex-row">
       {Object.keys(languages).map((lng) => {

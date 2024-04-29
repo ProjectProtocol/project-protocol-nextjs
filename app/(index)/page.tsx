@@ -12,18 +12,25 @@ import SearchIcon from "@/src/components/svg/SearchIcon";
 import VoteIcon from "@/src/components/svg/VoteIcon";
 import ResourceCard from "@/src/components/resources/ResourceCard";
 import { ApiResources } from "@/src/api";
+import { reauthenticate } from "../actions/auth";
+import User from "@/src/lib/types/User";
 
-
-
-async function getData() {
-  "use server"
+async function getResources() {
+  "use server";
   const res = await ApiResources.list({});
   return res.data.slice(0, 3) as Resource[];
 }
 
+async function getUser(): Promise<User | undefined> {
+  const { user } = await reauthenticate();
+
+  return user;
+}
+
 export default async function Page() {
   const { t } = useTranslation();
-  const resources = await getData()
+  const resources = await getResources();
+  const user = await getUser();
 
   return (
     <div className="vertical-rhythm">
@@ -106,11 +113,7 @@ export default async function Page() {
         <Col xs={12}>
           <div className="d-flex flex-column gap-3">
             {resources.map((resource: Resource) => (
-              <ResourceCard
-                key={resource.id}
-                resource={resource}
-                onUpdate={() => {}}
-              />
+              <ResourceCard key={resource.id} resource={resource} />
             ))}
           </div>
         </Col>

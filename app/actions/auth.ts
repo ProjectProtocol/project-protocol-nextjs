@@ -2,11 +2,22 @@
 
 import { ApiSession } from "@/src/api";
 import { LoginFormSchema } from "@/src/lib/definitions";
+import { AnyARecord } from "dns";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
+/**
+ * LOGIN
+ * 1. Validate the form data
+ * 2. Extract the email and password from the form data
+ * 3. Authenticate user with the API
+ * 4. Extract JWT session token from the response and store in browser cookies
+ * @param prevState
+ * @param formData
+ * @returns
+ */
+
 export async function login(prevState: any, formData: FormData) {
-  console.log(formData.get("email"));
   const validatedFields = LoginFormSchema.safeParse({
     email: formData.get("email"),
     password: formData.get("password"),
@@ -17,42 +28,63 @@ export async function login(prevState: any, formData: FormData) {
       error: validatedFields.error.flatten().fieldErrors,
     };
   }
-
   const { email, password } = validatedFields.data;
-  const res = await ApiSession.create(email, password);
 
-  console.log(prevState);
+  const { headers, data } = await ApiSession.create(email, password);
 
-  const setCookieHeader =
-    res.headers["set-cookie"] && res.headers["set-cookie"][0];
+  try {
+    const jwtSetCookieHeader =
+      headers["set-cookie"] && headers["set-cookie"][0];
 
-  if (setCookieHeader) {
-    const jwt = extractJWT(setCookieHeader);
-    const dateString = extractExpiry(setCookieHeader);
-
-    console.log(setCookieHeader.split(";")[2]);
-
-    cookies().set("session", jwt, {
-      httpOnly: true,
-      sameSite: "none",
-      secure: true,
-      expires: new Date(dateString),
-    });
-
+    createSessionCookie(jwtSetCookieHeader);
+  } catch (error) {
+    console.log("Unable to create session", error);
     return {
-      user: res.data,
+      message: "Invalid email or password",
     };
   }
+}
 
+export async function logout() {
+  console.log("OK?");
+  cookies().delete("jwt");
   redirect("/");
 }
 
-function extractJWT(setCookie: string) {
-  return setCookie.split(";")[0].split("=")[1];
+export async function reauthenticate() {
+  const token = cookies().get("jwt")?.value;
+
+  if (!token) {
+    console.error("No token found in cookies");
+    return false;
+  }
+
+  const { data, headers } = await ApiSession.reauthenticate({ token }).catch(
+    (e) => console.log("Whoops", e)
+  );
+
+  // const jwtSetCookieHeader = headers["set-cookie"] && headers["set-cookie"][0];
+
+  // createSessionCookie(jwtSetCookieHeader);
+
+  return data;
 }
 
-function extractExpiry(setCookie: string) {
-  return setCookie.split(";")[2].split("=")[1];
-}
+function createSessionCookie(setCookieHeader?: string) {
+  if (!setCookieHeader) {
+    throw new Error("No set-cookie header provided");
+  }
 
-// Tue, 28 May 2024 03:17:18 GMT
+  const jwt = setCookieHeader.split(";")[0].split("=")[1];
+  const dateString = setCookieHeader.split(";")[2].split("=")[1];
+  const expiryDate = new Date(dateString);
+  cookies().delete("jwt");
+  cookies().set({
+    name: "jwt",
+    value: jwt,
+    httpOnly: true,
+    sameSite: "none",
+    secure: true,
+    expires: expiryDate,
+  });
+}
