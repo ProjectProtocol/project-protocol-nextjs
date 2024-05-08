@@ -11,15 +11,6 @@ interface LoginModal extends ModalProps {
 
 export default function LoginModal({ ...props }: LoginModal) {
   const { t } = useTranslation();
-  const logIn = async ({
-    email,
-    password,
-  }: {
-    email: string;
-    password: string;
-  }) => {
-    console.log(email, password);
-  };
 
   return (
     <PopUp {...props} closeButton style={props.show ? {} : { zIndex: 0 }}>

@@ -4,7 +4,6 @@ import { useMemo } from "react";
 import ResourceVoteControls from "./ResourceVoteControls";
 import useTranslation from "@/src/lib/util/dummyTranslation";
 import Resource, { ResourceTag } from "@/src/lib/types/Resource";
-import Image from "next/image";
 import ImageWithFallback from "../ImageWithFallback";
 interface IResourceCard {
   resource: Resource;

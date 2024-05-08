@@ -11,7 +11,7 @@ import SearchIcon from "@/src/components/svg/SearchIcon";
 import VoteIcon from "@/src/components/svg/VoteIcon";
 import ResourceCard from "@/src/components/resources/ResourceCard";
 import { ApiResources } from "@/src/api";
-import User from "@/src/lib/types/User";
+import LoginModal from "@/src/components/LoginModal";
 
 async function getResources() {
   "use server";
@@ -24,9 +24,15 @@ async function getResources() {
   }
 }
 
-export default async function Page() {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: { login?: string };
+}) {
   const { t } = useTranslation();
   const resources = await getResources();
+
+  console.log(searchParams);
 
   return (
     <div className="vertical-rhythm">
@@ -115,6 +121,7 @@ export default async function Page() {
           </div>
         </Col>
       </Row>
+      {/* <LoginModal /> */}
     </div>
   );
 }
