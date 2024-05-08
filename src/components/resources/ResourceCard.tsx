@@ -5,7 +5,7 @@ import ResourceVoteControls from "./ResourceVoteControls";
 import useTranslation from "@/src/lib/util/dummyTranslation";
 import Resource, { ResourceTag } from "@/src/lib/types/Resource";
 import Image from "next/image";
-
+import ImageWithFallback from "../ImageWithFallback";
 interface IResourceCard {
   resource: Resource;
 }
@@ -42,10 +42,11 @@ export default function ResourceCard({ resource }: IResourceCard) {
       <div className="vertical-rhythm-sm">
         <div className="d-flex flex-row align-items-top">
           <div
-            className="bg-white d-flex justify-content-center align-items-center rounded rounded-circle border me-2"
+            className="bg-white d-flex justify-content-center align-items-center rounded rounded-circle border me-2 text-cobalt"
             style={{ width: "30px", height: "30px", padding: "6px" }}
           >
-            <Image
+            <ImageWithFallback
+              fallbackImage="/images/business.svg"
               alt="Resource icon"
               width={18}
               height={18}
