@@ -10,6 +10,7 @@ interface IResourceListParams {
 }
 
 export async function list(params: IResourceListParams) {
+  console.log("what");
   const result = await apiClient
     .get(`resources`, { params })
     .then((r) => r.data)

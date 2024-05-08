@@ -1,11 +1,10 @@
 import CategoryPill from "./CategoryPill";
-import { Button, Card } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import { useMemo } from "react";
 import ResourceVoteControls from "./ResourceVoteControls";
 import useTranslation from "@/src/lib/util/dummyTranslation";
 import Resource, { ResourceTag } from "@/src/lib/types/Resource";
 import Image from "next/image";
-import { dislikeResource, likeResource } from "@/app/actions/resources";
 
 interface IResourceCard {
   resource: Resource;

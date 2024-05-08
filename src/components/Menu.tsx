@@ -50,10 +50,11 @@ export default function Menu({ user }: IMenu) {
                 role="button"
               >
                 <Image
+                  priority
                   src={icon.src}
                   width="28"
-                  height="28"
-                  className="me-2"
+                  height="0"
+                  className="me-2 h-auto"
                   alt={"Project Protocol logo"}
                 />
                 <span
@@ -71,7 +72,7 @@ export default function Menu({ user }: IMenu) {
               <Nav.Link as={Link} className=" m-0" href="/rate-my-po">
                 Rate My PO
               </Nav.Link>
-              <Nav.Link as={Link} className="  m-0" href="resources">
+              <Nav.Link as={Link} className="  m-0" href="/resources">
                 Resources
               </Nav.Link>
               {user ? (

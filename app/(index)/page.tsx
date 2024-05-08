@@ -2,7 +2,6 @@ import { Card, Col, Row } from "react-bootstrap";
 import losAngeles from "../../public/images/cedric-letsch-UZVlSjrIJ3o-unsplash.jpg";
 import Link from "next/link";
 import Image from "next/image";
-import { SearchData } from "@/src/lib/types/SearchData";
 import Resource from "@/src/lib/types/Resource";
 import useTranslation from "@/src/lib/util/dummyTranslation";
 import PageHeader from "@/src/components/PageHeader";
@@ -12,25 +11,22 @@ import SearchIcon from "@/src/components/svg/SearchIcon";
 import VoteIcon from "@/src/components/svg/VoteIcon";
 import ResourceCard from "@/src/components/resources/ResourceCard";
 import { ApiResources } from "@/src/api";
-import { reauthenticate } from "../actions/auth";
 import User from "@/src/lib/types/User";
 
 async function getResources() {
   "use server";
   const res = await ApiResources.list({});
-  return res.data.slice(0, 3) as Resource[];
-}
 
-async function getUser(): Promise<User | undefined> {
-  const { user } = await reauthenticate();
-
-  return user;
+  if (res?.data) {
+    return res.data.slice(0, 3) as Resource[];
+  } else {
+    return [];
+  }
 }
 
 export default async function Page() {
   const { t } = useTranslation();
   const resources = await getResources();
-  const user = await getUser();
 
   return (
     <div className="vertical-rhythm">
@@ -111,6 +107,7 @@ export default async function Page() {
           </div>
         </Col>
         <Col xs={12}>
+          {/* Make a mini-resource list component and stick the request in it */}
           <div className="d-flex flex-column gap-3">
             {resources.map((resource: Resource) => (
               <ResourceCard key={resource.id} resource={resource} />
