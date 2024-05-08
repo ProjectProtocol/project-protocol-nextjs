@@ -5,6 +5,7 @@ import Menu from "@/src/components/Menu";
 import { Container } from "react-bootstrap";
 import Footer from "@/src/components/Footer";
 import MobileTabs from "@/src/components/MobileTabs";
+import LoginModal from "@/src/components/LoginModal";
 
 const sourceSans3 = Source_Sans_3({ subsets: ["latin"] });
 
@@ -26,6 +27,7 @@ export default async function RootLayout({
       </Container>
       <MobileTabs />
       <Footer />
+      <LoginModal />
     </main>
   );
 }

@@ -3,6 +3,7 @@ import NavbarBrand from "react-bootstrap/NavbarBrand";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import NavLink from "react-bootstrap/NavLink";
+import NavItem from "react-bootstrap/NavItem";
 import icon from "../../public/images/icon.svg";
 import User from "../lib/types/User";
 import LocaleSwitcher from "./LocaleSwitcher";
@@ -83,9 +84,11 @@ export default function Menu({ user }: IMenu) {
                 </div>
               </NavLink>
             ) : (
-              <NavLink>
-                <Link href="?login=true">Sign Up</Link>
-              </NavLink>
+              <NavItem>
+                <Link className="btn btn-primary" href="?login=true">
+                  Sign Up
+                </Link>
+              </NavItem>
             )}
           </Nav>
           <Nav className="d-md-none">

@@ -13,7 +13,7 @@ export default function LoginModal({ ...props }: LoginModal) {
   const { t } = useTranslation();
 
   return (
-    <PopUp {...props} closeButton style={props.show ? {} : { zIndex: 0 }}>
+    <PopUp closeButton modalKey="login">
       <div
         style={{ maxWidth: "300px", margin: "0 auto", minHeight: "500px" }}
         className="d-flex flex-column justify-content-center"

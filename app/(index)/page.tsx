@@ -12,6 +12,7 @@ import VoteIcon from "@/src/components/svg/VoteIcon";
 import ResourceCard from "@/src/components/resources/ResourceCard";
 import { ApiResources } from "@/src/api";
 import LoginModal from "@/src/components/LoginModal";
+import PopUp from "@/src/components/PopUp";
 
 async function getResources() {
   "use server";
@@ -31,8 +32,6 @@ export default async function Page({
 }) {
   const { t } = useTranslation();
   const resources = await getResources();
-
-  console.log(searchParams);
 
   return (
     <div className="vertical-rhythm">
@@ -121,7 +120,6 @@ export default async function Page({
           </div>
         </Col>
       </Row>
-      {/* <LoginModal /> */}
     </div>
   );
 }
