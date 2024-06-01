@@ -1,90 +1,69 @@
-"use server";
-
+import NextAuth, { DefaultSession } from "next-auth";
+import Credentials from "next-auth/providers/credentials";
 import { ApiSession } from "@/src/api";
-import { LoginFormSchema } from "@/src/lib/definitions";
-import { AnyARecord } from "dns";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
-/**
- * LOGIN
- * 1. Validate the form data
- * 2. Extract the email and password from the form data
- * 3. Authenticate user with the API
- * 4. Extract JWT session token from the response and store in browser cookies
- * @param prevState
- * @param formData
- * @returns
- */
-
-export async function login(prevState: any, formData: FormData) {
-  const validatedFields = LoginFormSchema.safeParse({
-    email: formData.get("email"),
-    password: formData.get("password"),
-  });
-
-  if (!validatedFields.success) {
-    return {
-      error: validatedFields.error.flatten().fieldErrors,
-    };
-  }
-  const { email, password } = validatedFields.data;
-
-  const { headers, data } = await ApiSession.create(email, password);
-
-  try {
-    const jwtSetCookieHeader =
-      headers["set-cookie"] && headers["set-cookie"][0];
-
-    createSessionCookie(jwtSetCookieHeader);
-  } catch (error) {
-    console.log("Unable to create session", error);
-    return {
-      message: "Invalid email or password",
-    };
+// https://authjs.dev/getting-started/typescript#module-augmentation
+declare module "next-auth" {
+  interface Session {
+    user: {
+      isConfirmed: boolean;
+      confirmationSentAt?: string;
+      accessToken: string;
+    } & DefaultSession["user"];
   }
 }
 
-export async function logout() {
-  console.log("OK?");
-  cookies().delete("jwt");
-  redirect("/");
+interface ICredentials {
+  email: string;
+  password: string;
 }
+export const { handlers, signIn, signOut, auth } = NextAuth({
+  providers: [
+    Credentials({
+      // You can specify which fields should be submitted, by adding keys to the `credentials` object.
+      // e.g. domain, username, password, 2FA token, etc.
+      credentials: {
+        email: {},
+        password: {},
+      },
+      authorize: async (credentials) => {
+        try {
+          // logic to verify if user exists
+          const res = await ApiSession.create(
+            credentials.email as string,
+            credentials.password as string
+          );
 
-export async function reauthenticate() {
-  const token = cookies().get("jwt")?.value;
+          const authHeader = res.headers["authorization"];
+          let user = res.data?.user;
 
-  if (!token) {
-    console.error("No token found in cookies");
-    return false;
-  }
+          if (!user) {
+            throw new Error("User not found.");
+          }
 
-  const { data, headers } = await ApiSession.reauthenticate({ token }).catch(
-    (e) => console.log("Whoops", e)
-  );
-
-  // const jwtSetCookieHeader = headers["set-cookie"] && headers["set-cookie"][0];
-
-  // createSessionCookie(jwtSetCookieHeader);
-
-  return data;
-}
-
-function createSessionCookie(setCookieHeader?: string) {
-  if (!setCookieHeader) {
-    throw new Error("No set-cookie header provided");
-  }
-
-  const jwt = setCookieHeader.split(";")[0].split("=")[1];
-  const dateString = setCookieHeader.split(";")[2].split("=")[1];
-  const expiryDate = new Date(dateString);
-  cookies().delete("jwt");
-  cookies().set({
-    name: "jwt",
-    value: jwt,
-    httpOnly: true,
-    sameSite: "none",
-    secure: true,
-    expires: expiryDate,
-  });
-}
+          user.accessToken = authHeader;
+          // return user object with the their profile data
+          return user;
+        } catch (error) {
+          console.log(error);
+        }
+      },
+    }),
+  ],
+  callbacks: {
+    async jwt({ token, user }) {
+      return { ...token, ...user };
+    },
+    async session({ session, token }) {
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          isConfirmed: token.isConfirmed,
+          confirmationSentAt: token.confirmationSentAt,
+          accessToken: token.accessToken,
+        },
+      };
+    },
+  },
+});

@@ -1,16 +1,19 @@
-'use client'
+"use client";
 
-import { Button, ButtonProps, Spinner } from 'react-bootstrap'
-import { useFormStatus } from 'react-dom'
+import Button, { ButtonProps } from "react-bootstrap/Button";
+import Spinner from "react-bootstrap/Spinner";
+import { useFormState, useFormStatus } from "react-dom";
 
-export interface IAsyncButton extends ButtonProps {}
+export interface IAsyncButton extends ButtonProps {
+  children: React.ReactNode;
+}
 
 export default function AsyncButton({
   children,
   disabled,
   ...props
 }: IAsyncButton) {
-  const { pending } = useFormStatus()
+  const { pending } = useFormStatus();
   return (
     <Button disabled={pending || disabled} {...props}>
       {pending ? (
@@ -27,5 +30,5 @@ export default function AsyncButton({
         children
       )}
     </Button>
-  )
+  );
 }

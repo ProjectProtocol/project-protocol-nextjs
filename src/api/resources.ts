@@ -1,5 +1,8 @@
+"use server";
+
 import { ResourceTag } from "../../src/lib/types/Resource";
-import apiClient from "./client";
+import apiClient, { authenticatedClient } from "./client";
+import { auth } from "@/app/actions/auth";
 
 interface IResourceListParams {
   search?: string;
@@ -9,17 +12,10 @@ interface IResourceListParams {
   tags?: ResourceTag[];
 }
 
-export async function list(params: IResourceListParams) {
-  const result = await apiClient
-    .get(`resources`, { params })
-    .then((r) => r.data)
-    .catch(() => false);
-
-  return result;
-}
-
 export async function like(id: number) {
-  const result = await apiClient
+  const session = await auth();
+  const client = authenticatedClient(session?.user?.accessToken);
+  const result = await client
     .post(`resources/${id}/like`)
     .then((r) => r.data)
     .catch(() => false);
@@ -28,7 +24,9 @@ export async function like(id: number) {
 }
 
 export async function dislike(id: number) {
-  const result = await apiClient
+  const session = await auth();
+  const client = authenticatedClient(session?.user?.accessToken);
+  const result = await client
     .post(`resources/${id}/dislike`)
     .then((r) => r.data)
     .catch(() => false);
@@ -37,7 +35,9 @@ export async function dislike(id: number) {
 }
 
 export async function get(id: string) {
-  const result = await apiClient
+  const session = await auth();
+  const client = authenticatedClient(session?.user?.accessToken);
+  const result = await client
     .get(`resources/${id}`)
     .then((r) => r.data.resource)
     .catch(() => false);

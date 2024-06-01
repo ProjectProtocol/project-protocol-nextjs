@@ -6,13 +6,14 @@ import defaultIcon from "@/public/images/icon.svg";
 import Image from "next/image";
 import useTranslation from "../lib/util/dummyTranslation";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 
 export interface IPopUp extends ModalProps {
   title?: string;
   titleHelper?: string;
   icon?: string;
   bodyClass?: string;
-  modalKey: string;
 }
 
 // This is a great pattern for easy dynamic modals that support server component children in nextjs
@@ -23,24 +24,15 @@ export default function PopUp({
   titleHelper,
   icon,
   closeButton,
-  modalKey,
   ...props
 }: IPopUp) {
   const { t } = useTranslation();
-  const pathname = usePathname();
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const show = searchParams.get(modalKey) !== null;
+
   const imageSrc = icon || defaultIcon;
 
-  function hideModal() {
-    const nextSearchParams = new URLSearchParams(searchParams.toString());
-    nextSearchParams.delete(modalKey);
-    router.replace(`${pathname}?${nextSearchParams}`);
-  }
-
   return (
-    <Modal centered {...props} show={show} onHide={hideModal}>
+    <Modal centered {...props} show={true} onHide={router.back}>
       <ModalHeader closeButton={closeButton} />
       <ModalBody className={bodyClass}>
         {title && (

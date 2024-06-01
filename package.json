@@ -9,9 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@contentful/rich-text-react-renderer": "^15.19.6",
+    "@contentful/rich-text-types": "^16.3.5",
     "axios": "^1.6.8",
     "bootstrap": "^5.3.3",
     "classnames": "^2.5.1",
+    "contentful": "^10.9.3",
     "lodash-es": "^4.17.21",
     "next": "14.2.3",
     "next-auth": "5.0.0-beta.17",

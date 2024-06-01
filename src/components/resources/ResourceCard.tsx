@@ -5,6 +5,10 @@ import ResourceVoteControls from "./ResourceVoteControls";
 import useTranslation from "@/src/lib/util/dummyTranslation";
 import Resource, { ResourceTag } from "@/src/lib/types/Resource";
 import ImageWithFallback from "../ImageWithFallback";
+import { COLLECTION_TAG } from "./LatestResources";
+import { ApiResources } from "@/src/api";
+import { revalidateTag } from "next/cache";
+
 interface IResourceCard {
   resource: Resource;
 }
@@ -35,6 +39,18 @@ export default function ResourceCard({ resource }: IResourceCard) {
       return [street, city, state, zip].join(", ");
     }
   }, [street, city, state, zip]);
+
+  async function likeResource() {
+    "use server";
+    await ApiResources.like(resource.id);
+    revalidateTag(COLLECTION_TAG);
+  }
+
+  async function dislikeResource() {
+    "use server";
+    await ApiResources.dislike(resource.id);
+    revalidateTag(COLLECTION_TAG);
+  }
 
   return (
     <Card body>
@@ -91,7 +107,11 @@ export default function ResourceCard({ resource }: IResourceCard) {
             />
           ))}
         </div>
-        <ResourceVoteControls resource={resource} />
+        <ResourceVoteControls
+          resource={resource}
+          likeResource={likeResource}
+          dislikeResource={dislikeResource}
+        />
       </div>
     </Card>
   );

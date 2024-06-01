@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Col, Row } from "react-bootstrap";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 import BackLink from "./BackLink";
 
 interface IPageHeader {
@@ -40,7 +41,12 @@ export default function PageHeader({ title, showBack = false }: IPageHeader) {
                 <i className="bi bi-person-circle align-middle fs-3" />
               </Link>
             ) : (
-              <a className="link-primary text-decoration-none">Sign Up</a>
+              <a
+                href="?login=true"
+                className="link-primary text-decoration-none"
+              >
+                Sign Up
+              </a>
             )}
           </div>
         </Col>

@@ -3,7 +3,7 @@ import { snakeCase } from "lodash-es";
 import transformKeys from "../../src/lib/util/transformKeys";
 
 const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  baseURL: process.env.API_URL,
   responseType: "json",
   withCredentials: true,
   headers: {
@@ -17,5 +17,10 @@ const apiClient = axios.create({
     ...(axios.defaults.transformRequest as AxiosRequestTransformer[]),
   ],
 });
+
+export function authenticatedClient(bearerToken?: string) {
+  apiClient.defaults.headers.common["Authorization"] = bearerToken;
+  return apiClient;
+}
 
 export default apiClient;

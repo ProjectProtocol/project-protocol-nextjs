@@ -1,29 +1,18 @@
 "use client";
-import { ApiResources } from "@/src/api";
+
 import Resource from "@/src/lib/types/Resource";
-import { revalidatePath } from "next/cache";
-import { useState } from "react";
-import { Button } from "react-bootstrap";
 
 interface IResourceVoteControls {
   resource: Resource;
+  likeResource: () => void;
+  dislikeResource: () => void;
 }
 
 export default function ResourceVoteControls({
   resource,
+  likeResource,
+  dislikeResource,
 }: IResourceVoteControls) {
-  const [resourceData, setResourceData] = useState<Resource>(resource);
-
-  async function dislikeResource() {
-    const data = await ApiResources.dislike(resource.id);
-    setResourceData(data.resource);
-  }
-
-  async function likeResource() {
-    const data = await ApiResources.like(resource.id);
-    setResourceData(data.resource);
-  }
-
   return (
     <div className="d-flex flex-row flex-wrap gap-2 align-items-center text-dark">
       <div className={"d-flex flex-row gap-1"}>
@@ -34,7 +23,7 @@ export default function ResourceVoteControls({
             resource.isCurrentUserLiked ? "-fill" : ""
           }`}
           role="button"
-          onClick={likeResource}
+          onClick={async () => await likeResource()}
         />
       </div>
       <div className={"d-flex flex-row gap-1"}>
@@ -45,7 +34,7 @@ export default function ResourceVoteControls({
             resource.isCurrentUserDisliked ? "-fill" : ""
           }`}
           role="button"
-          onClick={dislikeResource}
+          onClick={async () => await dislikeResource()}
         />
       </div>
     </div>

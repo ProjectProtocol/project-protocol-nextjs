@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Project Protocol in NextJS
 
-## Getting Started
+Porting to Nextjs in a way that makes it worthwhile requires an overhaul of the architecture of the original SPA vitejs app. Some of the key concepts are:
 
-First, run the development server:
+- Maximizing the use of server components so that pages are prebuilt and cached for the best site performance.
+- Judicious use of client components to minimize how much code needs to be sent to the browser.
+- Strongly rooting everything in hierarchy to take advantage of streaming and dynamic rendering to the browser.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Auth plan of attach
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Should be doable with NextAuth library.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- LOGIN REQUEST:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+  - Browser -> Nextjs server -> Rails
+    - Failure -> Nextjs Server -> return error to browser
+    - Success -> Nextjs Server -> set jwt as session token in browser
 
-## Learn More
+- AUTHENTICATED REQUEST
 
-To learn more about Next.js, take a look at the following resources:
+  - Browser -> (Nextjs Middleware -> Server action) -> Rails
+  - Check age of session token. If older than X days, reauthenticate and update session token in browser (middleware)
+  - Send API request through with AUTHORIZATION => "Bearer <token>" header
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- LOGOUT REQUEST
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+  - Browser -> Nextjs Server -> Rails
+    - Failure -> token must have been invalid. Gracefully catch and log errors.
+    - Success or Failure -> destroy browser session token
 
-## Deploy on Vercel
+- Protected pages
+  - How to get auth status for redirects and UI updates?
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+TODO:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [ ] Error boundaries/page
+- [ ] Loading bar / pushing down data requests
+- [ ] Translations (tolgee + nextjs)
+- [ ] Profile Page
+- [ ] Rate my PO
+- [ ] Resources
+- [ ] Better font handling (get rid of cdn link in sass) + typography for contentful pages

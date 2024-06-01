@@ -1,37 +1,19 @@
-import { Card, Col, Row } from "react-bootstrap";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Card from "react-bootstrap/Card";
 import losAngeles from "../../public/images/cedric-letsch-UZVlSjrIJ3o-unsplash.jpg";
 import Link from "next/link";
 import Image from "next/image";
-import Resource from "@/src/lib/types/Resource";
 import useTranslation from "@/src/lib/util/dummyTranslation";
 import PageHeader from "@/src/components/PageHeader";
 import LandingPageCard from "@/src/components/LandingPageCard";
 import ResourcesIcon from "@/src/components/svg/ResourcesIcon";
 import SearchIcon from "@/src/components/svg/SearchIcon";
 import VoteIcon from "@/src/components/svg/VoteIcon";
-import ResourceCard from "@/src/components/resources/ResourceCard";
-import { ApiResources } from "@/src/api";
-import LoginModal from "@/src/components/LoginModal";
-import PopUp from "@/src/components/PopUp";
+import LatestResources from "@/src/components/resources/LatestResources";
 
-async function getResources() {
-  "use server";
-  const res = await ApiResources.list({});
-
-  if (res?.data) {
-    return res.data.slice(0, 3) as Resource[];
-  } else {
-    return [];
-  }
-}
-
-export default async function Page({
-  searchParams,
-}: {
-  searchParams: { login?: string };
-}) {
+export default async function Page() {
   const { t } = useTranslation();
-  const resources = await getResources();
 
   return (
     <div className="vertical-rhythm">
@@ -46,6 +28,7 @@ export default async function Page({
             }}
           >
             <Image
+              priority
               src={losAngeles.src}
               alt="Los Angeles"
               fill
@@ -112,12 +95,7 @@ export default async function Page({
           </div>
         </Col>
         <Col xs={12}>
-          {/* Make a mini-resource list component and stick the request in it */}
-          <div className="d-flex flex-column gap-3">
-            {resources.map((resource: Resource) => (
-              <ResourceCard key={resource.id} resource={resource} />
-            ))}
-          </div>
+          <LatestResources />
         </Col>
       </Row>
     </div>

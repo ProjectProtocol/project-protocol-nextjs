@@ -5,7 +5,6 @@ import Nav from "react-bootstrap/Nav";
 import NavLink from "react-bootstrap/NavLink";
 import NavItem from "react-bootstrap/NavItem";
 import icon from "../../public/images/icon.svg";
-import User from "../lib/types/User";
 import LocaleSwitcher from "./LocaleSwitcher";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,10 +12,10 @@ import Link from "next/link";
 const MENU_MAX_WIDTH = 935;
 
 interface IMenu {
-  user?: User;
+  signedIn?: boolean;
 }
 
-export default function Menu({ user }: IMenu) {
+export default async function Menu({ signedIn }: IMenu) {
   return (
     <Navbar
       variant="dark"
@@ -68,7 +67,7 @@ export default function Menu({ user }: IMenu) {
             <NavLink as={Link} className="  m-0" href="/resources">
               Resources
             </NavLink>
-            {user ? (
+            {signedIn ? (
               <NavLink
                 as={Link}
                 className="m-0"
@@ -76,16 +75,16 @@ export default function Menu({ user }: IMenu) {
                 title="Account"
               >
                 <div className="d-flex justify-content-center align-items-center">
-                  Profile
                   <i
                     className="bi bi-person-circle align-middle fs"
+                    title="Profile"
                     style={{ fontSize: "1.4rem" }}
                   />
                 </div>
               </NavLink>
             ) : (
               <NavItem>
-                <Link className="btn btn-primary" href="?login=true">
+                <Link className="btn btn-primary" href="/login" scroll={false}>
                   Sign Up
                 </Link>
               </NavItem>
