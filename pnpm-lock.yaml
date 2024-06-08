@@ -35,6 +35,9 @@ importers:
       next-auth:
         specifier: 5.0.0-beta.17
         version: 5.0.0-beta.17(next@14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.0))(react@18.3.1)
+      next-intl:
+        specifier: ^3.14.1
+        version: 3.14.1(next@14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.0))(react@18.3.1)
       react:
         specifier: ^18
         version: 18.3.1
@@ -136,6 +139,27 @@ packages:
   '@eslint/js@8.57.0':
     resolution: {integrity: sha512-Ys+3g2TaW7gADOJzPt83SJtCDhMjndcDMFVQ/Tj9iA1BfJzFKD9mAUXT3OenpuPHbI6P/myECxRJrofUsDx/5g==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+
+  '@formatjs/ecma402-abstract@1.18.3':
+    resolution: {integrity: sha512-J961RbhyjHWeCIv+iOceNxpoZ/qomJOs5lH+rUJCeKNa59gME4KC0LJVMeWODjHsnv/hTH8Hvd6sevzcAzjuaQ==}
+
+  '@formatjs/ecma402-abstract@2.0.0':
+    resolution: {integrity: sha512-rRqXOqdFmk7RYvj4khklyqzcfQl9vEL/usogncBHRZfZBDOwMGuSRNFl02fu5KGHXdbinju+YXyuR+Nk8xlr/g==}
+
+  '@formatjs/fast-memoize@2.2.0':
+    resolution: {integrity: sha512-hnk/nY8FyrL5YxwP9e4r9dqeM6cAbo8PeU9UjyXojZMNvVad2Z06FAVHyR3Ecw6fza+0GH7vdJgiKIVXTMbSBA==}
+
+  '@formatjs/icu-messageformat-parser@2.7.8':
+    resolution: {integrity: sha512-nBZJYmhpcSX0WeJ5SDYUkZ42AgR3xiyhNCsQweFx3cz/ULJjym8bHAzWKvG5e2+1XO98dBYC0fWeeAECAVSwLA==}
+
+  '@formatjs/icu-skeleton-parser@1.8.2':
+    resolution: {integrity: sha512-k4ERKgw7aKGWJZgTarIcNEmvyTVD9FYh0mTrrBMHZ1b8hUu6iOJ4SzsZlo3UNAvHYa+PnvntIwRPt1/vy4nA9Q==}
+
+  '@formatjs/intl-localematcher@0.2.32':
+    resolution: {integrity: sha512-k/MEBstff4sttohyEpXxCmC3MqbUn9VvHGlZ8fauLzkbwXmVrEeyzS+4uhrvAk9DWU9/7otYWxyDox4nT/KVLQ==}
+
+  '@formatjs/intl-localematcher@0.5.4':
+    resolution: {integrity: sha512-zTwEpWOzZ2CiKcB93BLngUX59hQkuZjT2+SAQEscSm52peDW/getsawMcWF1rGRpMCX6D7nSJA3CzJ8gn13N/g==}
 
   '@humanwhocodes/config-array@0.11.14':
     resolution: {integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg==}
@@ -1034,6 +1058,9 @@ packages:
     resolution: {integrity: sha512-NGnrKwXzSms2qUUih/ILZ5JBqNTSa1+ZmP6flaIp6KmSElgE9qdndzS3cqjrDovwFdmwsGsLdeFgB6suw+1e9g==}
     engines: {node: '>= 0.4'}
 
+  intl-messageformat@10.5.14:
+    resolution: {integrity: sha512-IjC6sI0X7YRjjyVH9aUgdftcmZK7WXdHeil4KwbjDnRWjnVitKpAx3rr6t6di1joFp5188VqKcobOPA6mCLG/w==}
+
   invariant@2.2.4:
     resolution: {integrity: sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==}
 
@@ -1277,6 +1304,10 @@ packages:
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
 
+  negotiator@0.6.3:
+    resolution: {integrity: sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==}
+    engines: {node: '>= 0.6'}
+
   next-auth@5.0.0-beta.17:
     resolution: {integrity: sha512-XA/7JtAjOgDfAeotJPFUsFZGGItZwzZrxLt9Gc9fE7EchLk6zydZfuZ22Vvwixs3IilkN644D5IoD5tEOAFGCQ==}
     peerDependencies:
@@ -1292,6 +1323,12 @@ packages:
         optional: true
       nodemailer:
         optional: true
+
+  next-intl@3.14.1:
+    resolution: {integrity: sha512-Jb5KdYaJCH3z4O/Ab05YOi7lzaqtFcnOa8KdUCHvHKxPYNM7H6I/5hC3dvKPDb9S5gW6wMp3bNQoMzcWw227jw==}
+    peerDependencies:
+      next: ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
 
   next@14.2.3:
     resolution: {integrity: sha512-dowFkFTR8v79NPJO4QsBUtxv0g9BrS/phluVpMAt2ku7H+cbcBJlopXjkWlwxrk/xGqMemr7JkGPGemPrLLX7A==}
@@ -1736,6 +1773,11 @@ packages:
   uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
 
+  use-intl@3.14.1:
+    resolution: {integrity: sha512-LVjHUSnQxryiWY+zCFkwoe+a8LK4RIM/4+lV54FSLehOH3gO1JcnXQ85TbfKUTfvEDY7B0DkH7WOM+CWppZanA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+
   warning@4.0.3:
     resolution: {integrity: sha512-rpJyN222KWIvHJ/F53XSZv0Zl/accqHR8et1kpaMTD/fLCRxtV8iX8czMzY7sVZupTI3zcUTg8eycS2kNF9l6w==}
 
@@ -1832,6 +1874,39 @@ snapshots:
       - supports-color
 
   '@eslint/js@8.57.0': {}
+
+  '@formatjs/ecma402-abstract@1.18.3':
+    dependencies:
+      '@formatjs/intl-localematcher': 0.5.4
+      tslib: 2.6.2
+
+  '@formatjs/ecma402-abstract@2.0.0':
+    dependencies:
+      '@formatjs/intl-localematcher': 0.5.4
+      tslib: 2.6.2
+
+  '@formatjs/fast-memoize@2.2.0':
+    dependencies:
+      tslib: 2.6.2
+
+  '@formatjs/icu-messageformat-parser@2.7.8':
+    dependencies:
+      '@formatjs/ecma402-abstract': 2.0.0
+      '@formatjs/icu-skeleton-parser': 1.8.2
+      tslib: 2.6.2
+
+  '@formatjs/icu-skeleton-parser@1.8.2':
+    dependencies:
+      '@formatjs/ecma402-abstract': 2.0.0
+      tslib: 2.6.2
+
+  '@formatjs/intl-localematcher@0.2.32':
+    dependencies:
+      tslib: 2.6.2
+
+  '@formatjs/intl-localematcher@0.5.4':
+    dependencies:
+      tslib: 2.6.2
 
   '@humanwhocodes/config-array@0.11.14':
     dependencies:
@@ -2894,6 +2969,13 @@ snapshots:
       hasown: 2.0.2
       side-channel: 1.0.6
 
+  intl-messageformat@10.5.14:
+    dependencies:
+      '@formatjs/ecma402-abstract': 2.0.0
+      '@formatjs/fast-memoize': 2.2.0
+      '@formatjs/icu-messageformat-parser': 2.7.8
+      tslib: 2.6.2
+
   invariant@2.2.4:
     dependencies:
       loose-envify: 1.4.0
@@ -3113,11 +3195,21 @@ snapshots:
 
   natural-compare@1.4.0: {}
 
+  negotiator@0.6.3: {}
+
   next-auth@5.0.0-beta.17(next@14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.0))(react@18.3.1):
     dependencies:
       '@auth/core': 0.30.0
       next: 14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.0)
       react: 18.3.1
+
+  next-intl@3.14.1(next@14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.0))(react@18.3.1):
+    dependencies:
+      '@formatjs/intl-localematcher': 0.2.32
+      negotiator: 0.6.3
+      next: 14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.0)
+      react: 18.3.1
+      use-intl: 3.14.1(react@18.3.1)
 
   next@14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.0):
     dependencies:
@@ -3631,6 +3723,12 @@ snapshots:
   uri-js@4.4.1:
     dependencies:
       punycode: 2.3.1
+
+  use-intl@3.14.1(react@18.3.1):
+    dependencies:
+      '@formatjs/ecma402-abstract': 1.18.3
+      intl-messageformat: 10.5.14
+      react: 18.3.1
 
   warning@4.0.3:
     dependencies:
