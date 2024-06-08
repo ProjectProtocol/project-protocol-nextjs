@@ -1,11 +1,11 @@
 import { auth } from "@/app/actions/auth";
 import LoginUI from "@/src/components/LoginModal/LoginUI";
 import PageHeader from "@/src/components/PageHeader";
-import useTranslation from "@/src/lib/util/dummyTranslation";
+import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 
 export default async function Page() {
-  const { t } = useTranslation();
+  const t = await getTranslations();
   const session = await auth();
 
   if (session) {

@@ -8,6 +8,7 @@ import useTranslation from "../lib/util/dummyTranslation";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 
 export interface IPopUp extends ModalProps {
   title?: string;
@@ -26,7 +27,7 @@ export default function PopUp({
   closeButton,
   ...props
 }: IPopUp) {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const router = useRouter();
 
   const imageSrc = icon || defaultIcon;

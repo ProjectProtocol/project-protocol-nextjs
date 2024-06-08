@@ -4,20 +4,20 @@ import Card from "react-bootstrap/Card";
 import losAngeles from "../../public/images/cedric-letsch-UZVlSjrIJ3o-unsplash.jpg";
 import Link from "next/link";
 import Image from "next/image";
-import useTranslation from "@/src/lib/util/dummyTranslation";
 import PageHeader from "@/src/components/PageHeader";
 import LandingPageCard from "@/src/components/LandingPageCard";
 import ResourcesIcon from "@/src/components/svg/ResourcesIcon";
 import SearchIcon from "@/src/components/svg/SearchIcon";
 import VoteIcon from "@/src/components/svg/VoteIcon";
 import LatestResources from "@/src/components/resources/LatestResources";
+import { getTranslations } from "next-intl/server";
 
 export default async function Page() {
-  const { t } = useTranslation();
+  const t = await getTranslations();
 
   return (
     <div className="vertical-rhythm">
-      <PageHeader title={"Home"} showBack={false} />
+      <PageHeader title={t("home.title")} showBack={false} />
       <Row className="g-3">
         <Col xs={12}>
           <div
@@ -51,7 +51,7 @@ export default async function Page() {
                 {t("home.welcomeMessage")}
                 <br />
                 <Link href="/about" className="text-white small text-nowrap">
-                  {t("ui.learnMore")}
+                  {t("shared.learnMore")}
                   <i className="bi bi-arrow-right ms-1 align-middle"></i>
                 </Link>
               </p>

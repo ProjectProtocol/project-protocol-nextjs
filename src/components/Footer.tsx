@@ -1,20 +1,20 @@
 import Link from "next/link";
-import useTranslation from "../lib/util/dummyTranslation";
+import { getTranslations } from "next-intl/server";
 
 type FooterLink = {
   url: string;
   label: string;
 };
 
-export default function Footer() {
-  const { t } = useTranslation();
+export default async function Footer() {
+  const t = await getTranslations();
 
   const links = [
-    { url: "/about", label: t("footer.about") },
-    { url: "/how-does-it-work", label: t("footer.howDoesItWork") },
-    { url: "/ethical-principles", label: t("footer.ethicalPrinciples") },
-    { url: "/terms-of-service", label: t("footer.tos") },
-    { url: "/contact-us", label: t("footer.contact") },
+    { url: "/about", label: t("navigation.about") },
+    { url: "/how-does-it-work", label: t("navigation.howDoesItWork") },
+    { url: "/ethical-principles", label: t("navigation.ethicalPrinciples") },
+    { url: "/terms-of-service", label: t("navigation.termsOfService") },
+    { url: "/contact-us", label: t("navigation.contact") },
   ];
 
   return (
