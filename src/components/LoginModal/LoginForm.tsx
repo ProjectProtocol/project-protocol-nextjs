@@ -1,10 +1,10 @@
 "use client";
 import Input from "../Input";
 import AsyncButton from "@/src/components/AsyncButton";
-import useTranslation from "@/src/lib/util/dummyTranslation";
 import { handleLogin } from "@/app/actions/actions";
 import { useFormState } from "react-dom";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 interface ILoginForm {
   submitLabel: string;
@@ -15,16 +15,16 @@ export default function LoginForm({ submitLabel = "Submit" }: ILoginForm) {
   const [state, formAction] = useFormState(handleLogin, {
     message: pathname,
   });
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   return (
     <div className="d-block">
-      <div className="mb-3">{t("account.loginModal.loginTitleHelper")}</div>
+      <div className="mb-3">{t("login.loginTitleHelper")}</div>
       <form action={formAction} className="vertical-rhythm w-100">
         <Input
           size="lg"
           controlId={`login-email`}
-          label={t("account.create.email")}
+          label={t("login.email")}
           error={state?.errors?.email?.join(", ")}
           isInvalid={!!state?.errors?.email}
           type="email"
@@ -36,7 +36,7 @@ export default function LoginForm({ submitLabel = "Submit" }: ILoginForm) {
           <Input
             size="lg"
             controlId={"login-password"}
-            label={t("account.create.password")}
+            label={t("login.password")}
             error={state?.errors?.password?.join(", ")}
             isInvalid={!!state?.errors?.password}
             autoComplete="current-password"

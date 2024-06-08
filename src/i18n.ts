@@ -1,3 +1,4 @@
+import { merge } from "lodash-es";
 import { getRequestConfig } from "next-intl/server";
 import { cookies } from "next/headers";
 
@@ -9,6 +10,7 @@ export default getRequestConfig(async () => {
   // https://next-intl-docs.vercel.app/docs/getting-started
   // const locale = "en-US";
   const cookieStore = cookies();
+
   let locale = cookieStore.get("NEXT_LOCALE")?.value || "en-US";
 
   return {

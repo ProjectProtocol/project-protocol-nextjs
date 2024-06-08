@@ -2,19 +2,19 @@ import CategoryPill from "./CategoryPill";
 import { Card } from "react-bootstrap";
 import { useMemo } from "react";
 import ResourceVoteControls from "./ResourceVoteControls";
-import useTranslation from "@/src/lib/util/dummyTranslation";
 import Resource, { ResourceTag } from "@/src/lib/types/Resource";
 import ImageWithFallback from "../ImageWithFallback";
 import { COLLECTION_TAG } from "./LatestResources";
 import { ApiResources } from "@/src/api";
 import { revalidateTag } from "next/cache";
+import { useTranslations } from "next-intl";
 
 interface IResourceCard {
   resource: Resource;
 }
 
 export default function ResourceCard({ resource }: IResourceCard) {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const {
     url,
     name,

@@ -14,7 +14,7 @@ export default async function Page() {
 
   return (
     <div className="m-auto" style={{ maxWidth: "400px" }}>
-      <PageHeader title={t("account.loginModal.loginTitle")} showBack />
+      <PageHeader title={t("login.loginTitle")} showBack />
       <LoginUI />
     </div>
   );

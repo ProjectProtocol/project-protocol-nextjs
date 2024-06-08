@@ -4,10 +4,7 @@ import ModalHeader from "react-bootstrap/ModalHeader";
 import ModalBody from "react-bootstrap/ModalBody";
 import defaultIcon from "@/public/images/icon.svg";
 import Image from "next/image";
-import useTranslation from "../lib/util/dummyTranslation";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 export interface IPopUp extends ModalProps {

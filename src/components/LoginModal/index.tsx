@@ -1,15 +1,15 @@
 import { ModalProps } from "react-bootstrap";
-import useTranslation from "@/src/lib/util/dummyTranslation";
 import LoginForm from "./LoginForm";
 import Image from "next/image";
 import defaultIcon from "@/public/images/icon.svg";
+import { getTranslations } from "next-intl/server";
 
 interface LoginModal extends ModalProps {
   postLogin?: () => void;
 }
 
 export default async function LoginModal({ ...props }: LoginModal) {
-  const { t } = useTranslation();
+  const t = await getTranslations();
 
   return (
     <div
@@ -20,15 +20,15 @@ export default async function LoginModal({ ...props }: LoginModal) {
         <h5>
           <span className="d-flex align-items-start">
             <Image
-              alt="Project Protocol Logo"
+              alt={t("shared.ppLogoAlt")}
               src={defaultIcon}
               width={20}
               className="me-2"
             />
-            {t("account.loginModal.loginTitle")}
+            {t("login.loginTitle")}
           </span>
         </h5>
-        <LoginForm submitLabel={t("account.login.loginLabel")} />
+        <LoginForm submitLabel={t("login.loginLabel")} />
       </div>
     </div>
   );
