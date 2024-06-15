@@ -35,7 +35,7 @@ TODO:
 
 - [ ] Error boundaries/page
 - [ ] Loading bar / pushing down data requests
-- [ ] Translations (tolgee + nextjs)
+- [x] Translations - switched to crowdin and next-intl
 - [ ] Profile Page
 - [ ] Rate my PO
 - [ ] Resources
