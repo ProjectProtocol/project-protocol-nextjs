@@ -30,7 +30,7 @@ export default function LoginForm({ submitLabel = "Submit" }: ILoginForm) {
           type="email"
           name="email"
           autoComplete="email"
-          placeholder={t("account.create.emailPlaceholder")}
+          placeholder={t("login.emailPlaceholder")}
         />
         <div>
           <Input

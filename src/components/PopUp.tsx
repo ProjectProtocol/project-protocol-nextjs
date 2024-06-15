@@ -38,7 +38,7 @@ export default function PopUp({
             <h3>
               <Image
                 src={imageSrc}
-                alt={t("ui.ppLogoAlt")}
+                alt={t("shared.ppLogoAlt")}
                 className="me-2"
                 style={{ width: "auto", height: "1.125rem" }}
               />
