@@ -1,6 +1,5 @@
 import classNames from "classnames";
 import { cookies } from "next/headers";
-import { useState } from "react";
 import Button from "react-bootstrap/Button";
 
 type LanguageProps = {
