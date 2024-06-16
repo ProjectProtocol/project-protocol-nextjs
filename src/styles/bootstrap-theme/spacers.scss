@@ -1,0 +1,14 @@
+$spacer: 1rem; // 16px
+$spacers: (
+  0: 0,
+  1: $spacer * 0.25,
+  // 4
+  2: $spacer * 0.5,
+  // 8
+  3: $spacer,
+  // 16
+  4: $spacer * 1.5,
+  // 24
+  5: $spacer * 3,
+  // 48
+);

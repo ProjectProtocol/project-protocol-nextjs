@@ -1,0 +1,10 @@
+@import './index.scss';
+@import './string-utils.scss';
+
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+:export {
+  @each $key, $value in $theme-colors {
+    #{camelize($key)}: $value;
+  }
+}
