@@ -1,6 +1,6 @@
 # ProPro + Nextjs Proof of Concept
 
-The `proof-of-concept` branch was an initial pass at implementing the Project Protocol web app in nextjs. I've separated it to rebuild more cleanly on the `main` branch so we can start building it out in earnest in a more methodical way.
+The [proof-of-concept](https://github.com/ProjectProtocol/project-protocol-nextjs/tree/proof-of-concept) branch is from an initial pass at implementing the Project Protocol web app in nextjs. I've separated it to rebuild more cleanly on the `main` branch so we can start building it out in earnest in a more methodical way.
 
 This branch is a bit chaotic but it has useful proofs of concept for:
 
