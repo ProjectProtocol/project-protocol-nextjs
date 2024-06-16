@@ -1,0 +1,12 @@
+$font-family-sans-serif: "Source Sans 3";
+
+$headings-font-weight: 600;
+
+.fw-semibold {
+  font-weight: 600;
+}
+
+// So far, there are only two header sizes in the designs:
+$h3-font-size: 1rem * 1.25 !default;
+$h4-font-size: 1rem * 1.125 !default;
+$h5-font-size: 1rem * 1.08 !default;

@@ -1,12 +1,19 @@
 # Project Protocol in NextJS
 
+**June 15, 2024 Update**
+I've moved the initial POC to a `proof-of-concept` branch and rebuilt a fresh Nextjs app on the `main` branch so the fundamental structure of the app can be implemented more cleanly as a starting point. See the [Proof of Concept](/POC.md) document for more detail.
+
+This readme has been kind of a scratch pad up to this point but I hope to clean it up soon and begin to scaffold out a project in linear that we can all contribute to.
+
+### About
+
 Porting to Nextjs in a way that makes it worthwhile requires an overhaul of the architecture of the original SPA vitejs app. Some of the key concepts are:
 
 - Maximizing the use of server components so that pages are prebuilt and cached for the best site performance.
 - Judicious use of client components to minimize how much code needs to be sent to the browser.
 - Strongly rooting everything in hierarchy to take advantage of streaming and dynamic rendering to the browser.
 
-## Auth plan of attach
+### Auth plan of attach
 
 Should be doable with NextAuth library.
 
@@ -35,7 +42,7 @@ TODO:
 
 - [ ] Error boundaries/page
 - [ ] Loading bar / pushing down data requests
-- [ ] Translations (tolgee + nextjs)
+- [x] Translations - switched to crowdin and next-intl
 - [ ] Profile Page
 - [ ] Rate my PO
 - [ ] Resources

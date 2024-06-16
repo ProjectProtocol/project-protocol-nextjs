@@ -5,9 +5,10 @@ import Nav from "react-bootstrap/Nav";
 import NavLink from "react-bootstrap/NavLink";
 import NavItem from "react-bootstrap/NavItem";
 import icon from "../../public/images/icon.svg";
-import LocaleSwitcher from "./LocaleSwitcher";
 import Image from "next/image";
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import LocaleSwitcher from "./LocaleSwitcher";
 
 const MENU_MAX_WIDTH = 935;
 
@@ -16,6 +17,8 @@ interface IMenu {
 }
 
 export default async function Menu({ signedIn }: IMenu) {
+  const t = await getTranslations();
+
   return (
     <Navbar
       variant="dark"
@@ -59,13 +62,13 @@ export default async function Menu({ signedIn }: IMenu) {
           </NavbarBrand>
           <Nav className="fs-4 d-none d-md-flex align-items-center text-white gap-2">
             <NavLink as={Link} className=" m-0" href="/">
-              Home
+              {t("home.title")}
             </NavLink>
-            <NavLink as={Link} className=" m-0" href="/rate-my-po">
-              Rate My PO
+            <NavLink as={Link} className=" m-0" href="rate-my-po">
+              {t("navigation.rateMyPo")}
             </NavLink>
-            <NavLink as={Link} className="  m-0" href="/resources">
-              Resources
+            <NavLink as={Link} className="  m-0" href="resources">
+              {t("navigation.resources")}
             </NavLink>
             {signedIn ? (
               <NavLink
@@ -85,7 +88,7 @@ export default async function Menu({ signedIn }: IMenu) {
             ) : (
               <NavItem>
                 <Link className="btn btn-primary" href="/login" scroll={false}>
-                  Sign Up
+                  {t("navigation.signUp")}
                 </Link>
               </NavItem>
             )}
