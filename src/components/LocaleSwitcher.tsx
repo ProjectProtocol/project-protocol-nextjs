@@ -1,3 +1,4 @@
+import { switchLanguage } from "@/i18n";
 import classNames from "classnames";
 import { cookies } from "next/headers";
 import Button from "react-bootstrap/Button";
@@ -17,20 +18,17 @@ export default function LocaleSwitcher({ dark = false }: { dark?: boolean }) {
   const cookieStore = cookies();
   const currentLanguage = cookieStore.get("NEXT_LOCALE")?.value || "en-US";
 
-  async function changeLanguage() {
-    "use server";
-    const store = cookies();
-    const currentNextLocale = store.get("NEXT_LOCALE");
-    const newLocale = currentNextLocale?.value === "en-US" ? "es-MX" : "en-US";
-    store.set("NEXT_LOCALE", newLocale);
-  }
-
   const activeClass = `fw-semibold ${dark ? "text-white" : "text-body"}`;
   const inactiveClass = dark ? "link-white" : "link-dark";
 
   return (
     <div aria-label={"Select language"} className="flex flex-row">
-      <form action={changeLanguage}>
+      <form
+        action={async () => {
+          "use server";
+          await switchLanguage();
+        }}
+      >
         {Object.keys(languages).map((lng) => {
           const lang = lng as Lang;
           const label = languages[lang].nativeName;

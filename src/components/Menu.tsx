@@ -9,15 +9,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import LocaleSwitcher from "./LocaleSwitcher";
+import { getUser } from "@/lib/session";
 
-const MENU_MAX_WIDTH = 935;
+export const MENU_MAX_WIDTH = 935;
 
-interface IMenu {
-  signedIn?: boolean;
-}
-
-export default async function Menu({ signedIn }: IMenu) {
+export default async function Menu() {
   const t = await getTranslations();
+  const user = await getUser();
 
   return (
     <Navbar
@@ -70,7 +68,7 @@ export default async function Menu({ signedIn }: IMenu) {
             <NavLink as={Link} className="  m-0" href="resources">
               {t("navigation.resources")}
             </NavLink>
-            {signedIn ? (
+            {user ? (
               <NavLink
                 as={Link}
                 className="m-0"
