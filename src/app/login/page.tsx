@@ -1,7 +1,5 @@
-import LoginForm from "@/components/LoginForm";
-import { getTranslations } from "next-intl/server";
+import LoginForm from "@/components/login/LoginForm";
 
 export default async function Page() {
-  const t = await getTranslations();
   return <LoginForm />;
 }
