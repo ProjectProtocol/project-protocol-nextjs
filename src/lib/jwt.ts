@@ -16,15 +16,15 @@ const key = new TextEncoder().encode(secretKey);
 
 export async function encrypt(payload: any) {
   return await new SignJWT(payload)
-    .setProtectedHeader({ alg: "HS256" }) // Set the algorithm for JWT signing
-    .setIssuedAt() // Set the issuance time of the JWT
-    .setExpirationTime("7 day from now") // Set the expiration time of the JWT
-    .sign(key); // Sign the JWT using the secret key
+    .setProtectedHeader({ alg: "HS256" })
+    .setIssuedAt()
+    .setExpirationTime("7 day from now")
+    .sign(key);
 }
 
 export async function decrypt(input: string): Promise<any> {
   const { payload } = await jwtVerify(input, key, {
-    algorithms: ["HS256"], // Specify the allowed algorithms for JWT verification
+    algorithms: ["HS256"],
   });
   return payload; // Return the decrypted payload
 }
