@@ -2,7 +2,7 @@ import LocaleSwitcher from "@/components/LocaleSwitcher";
 import Image from "next/image";
 import { Container } from "react-bootstrap";
 import icon from "../../../public/images/icon.svg";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 import { getUser } from "@/lib/session";
 
@@ -12,6 +12,7 @@ export default async function Layout({
   children: React.ReactNode;
 }) {
   const t = await getTranslations();
+  const locale = await getLocale();
   const user = await getUser();
   if (user) {
     redirect("/");
@@ -27,7 +28,7 @@ export default async function Layout({
             </a>
           </div>
           <div className="text-center">
-            <LocaleSwitcher />
+            <LocaleSwitcher locale={locale} />
           </div>
           <div className="text-center vertical-rhythm">
             <Image
