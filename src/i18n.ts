@@ -1,7 +1,7 @@
 import { getRequestConfig } from "next-intl/server";
 import { cookies } from "next/headers";
 import defaultMessages from "./locales/en-US.json";
-import { get } from "http";
+import deepmerge from "deepmerge";
 
 export const ALL_LOCALES = ["en-US", "es-MX"];
 
@@ -16,7 +16,7 @@ export default getRequestConfig(async () => {
   let locale = cookieStore.get("NEXT_LOCALE")?.value || "en-US";
 
   const localeMessages = (await import(`./locales/${locale}.json`)).default;
-  const messages = { ...defaultMessages, ...localeMessages };
+  const messages = deepmerge(defaultMessages, localeMessages);
 
   return {
     locale,
@@ -29,10 +29,3 @@ export default getRequestConfig(async () => {
     },
   };
 });
-
-export async function switchLanguage() {
-  const store = cookies();
-  const currentNextLocale = store.get("NEXT_LOCALE");
-  const newLocale = currentNextLocale?.value === "en-US" ? "es-MX" : "en-US";
-  await store.set("NEXT_LOCALE", newLocale);
-}
