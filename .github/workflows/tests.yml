@@ -26,6 +26,8 @@ jobs:
         env:
           TOLGEE_ACCESS_TOKEN: ${{ secrets.TOLGEE_ACCESS_TOKEN }}
         run: |
+          npm install -g @tolgee/cli
+
           node ./bin/update-locales.js
 
           if [[ `git status --porcelain` ]]; then
