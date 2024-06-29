@@ -21,3 +21,18 @@ jobs:
       - run: pnpm i
       - run: pnpm lint
       # - run: pnpm test
+      - name: Check locales are up to date with tolgee
+
+        env:
+          TOLGEE_ACCESS_TOKEN: ${{ secrets.TOLGEE_ACCESS_TOKEN }}
+        run: |
+          node ./scripts/update-locales.js
+
+          if [[ `git status --porcelain` ]]; then
+            echo "❌ Please update locales with tolgee and commit changes"
+            echo "Changes detected:"
+            git diff
+            exit 1
+          else
+            echo "✅ Locales are up to date"
+          fi
