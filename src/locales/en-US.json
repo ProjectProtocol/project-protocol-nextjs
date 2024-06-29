@@ -59,6 +59,7 @@
       "selectOfficeRequired": "Please select an office",
       "title": "Agent info"
     },
+    "heading": "Agent: {{fullName}}",
     "logIn": "or log in",
     "office": "Office",
     "officerIconAlt": "Officer icon",
@@ -123,21 +124,27 @@
     "email": "Email address",
     "emailMessage": "Email is invalid",
     "emailPlaceholder": "name@example.com",
+    "emailRequired": "Email is required.",
+    "emailTakenError": "Email is already in use. Check for mistakes or",
     "forgotPassword": "Forgot password?",
     "forgotPasswordTitle": "Forgot password",
     "forgotPasswordTitleHelper": "Enter the email address you used to register, and we'll email you a password reset link.",
     "login": "Log in",
     "loginConfirmSignupDetail1": "We sent an email to <b>{email}</b> to confirm this email belongs to you.",
     "loginConfirmSignupDetail2": "Tap on the button in the email to finish signing up.",
+    "loginFieldsError": "Email or password is incorrect. Check for mistakes and try again.",
+    "loginFromError": "log in to your account.",
     "loginHelper": "Don't have an account?",
     "loginLabel": "Log in",
     "loginTitle": "Project Protocol",
-    "loginTitleHelper": "Log in to your account",
+    "loginTitleHelper": "Login in to your account",
     "password": "Password",
+    "passwordRequired": "Password is required.",
     "readTermsOfService": "Read our terms of service",
     "register": {
       "success": "Account creation was successful"
     },
+    "resetPasswordHelper": "Reset your password if you need to.",
     "resetPassword": {
       "submit": "Reset password"
     },
@@ -165,6 +172,8 @@
   },
   "password_reset": {
     "emailPlaceholder": "name@example.com",
+    "expiredToken": "Token has expired, please request password reset again.",
+    "invalidToken": "Invalid Token",
     "modal": {
       "intro": "Please enter a new password of at least 8 characters.",
       "submit": "Change Password",
@@ -177,13 +186,18 @@
       "required": "Password confirmation is required"
     },
     "newPasswordConfirmMismatch": "Passwords do not match",
+    "resetRequestError": "Something went wrong, please try again.",
+    "resetRequestSuccess": "Check your email for password reset instructions.",
+    "resetSuccess": "Your password has been reset. Please log in.",
     "submit": "Reset password",
     "update": "Update password"
   },
   "rate_agent": {
     "additionalComments": "Additional comments",
+    "additionalCommentsDisabled": "Because you are currently on parole with this officer, leaving comments is disabled.",
     "additionalCommentsHelpText": "Any comments you share will be hidden until they have been approved.",
     "additionalCommentsPlaceholder": "How else would you describe your PO?",
+    "additionalCommentsTooltip": "We want to make sure that all comments follow our guidelines and do not put you at risk for personal harm.",
     "category": {
       "availability": {
         "helperLeft": "Very busy",
@@ -212,6 +226,7 @@
     },
     "createdSuccess": "Review created successfully",
     "createdWithCommentSuccess": "Your ratings have been posted. Any comments you provided will be hidden until approved.",
+    "currentlyOnParole": "Are you currently on parole with this officer?",
     "error": "Please fix errors before proceeding",
     "optional": "optional",
     "rating": "rating",
