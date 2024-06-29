@@ -26,3 +26,5 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 
 // background: var(--Bento-Cobalt, linear-gradient(90deg, rgba(39, 111, 191, 0.72) 0%, rgba(39, 111, 191, 0.52) 54.12%, rgba(39, 111, 191, 0.28) 100%));
 @import "bootstrap/scss/bootstrap.scss";
+
+@import "bootstrap-icons/font/bootstrap-icons.css";

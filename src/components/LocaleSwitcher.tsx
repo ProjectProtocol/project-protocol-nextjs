@@ -1,58 +1,54 @@
+"use client";
+
+import { switchLanguage } from "@/lib/actions/locale";
 import classNames from "classnames";
-import { cookies } from "next/headers";
+import { usePathname } from "next/navigation";
 import Button from "react-bootstrap/Button";
 
 type LanguageProps = {
   nativeName: string;
+  key: "en-US" | "es-MX";
 };
 
-type Lang = "en" | "es";
+const languages: LanguageProps[] = [
+  { nativeName: "English", key: "en-US" },
+  { nativeName: "Español", key: "es-MX" },
+];
 
-const languages = {
-  en: { nativeName: "English", key: "en-US" },
-  es: { nativeName: "Español", key: "es-MX" },
-};
-
-export default function LocaleSwitcher({ dark = false }: { dark?: boolean }) {
-  const cookieStore = cookies();
-  const currentLanguage = cookieStore.get("NEXT_LOCALE")?.value || "en-US";
-
-  async function changeLanguage() {
-    "use server";
-    const store = cookies();
-    const currentNextLocale = store.get("NEXT_LOCALE");
-    const newLocale = currentNextLocale?.value === "en-US" ? "es-MX" : "en-US";
-    store.set("NEXT_LOCALE", newLocale);
-  }
-
+export default function LocaleSwitcher({
+  dark = false,
+  locale,
+}: {
+  dark?: boolean;
+  locale: string;
+}) {
   const activeClass = `fw-semibold ${dark ? "text-white" : "text-body"}`;
   const inactiveClass = dark ? "link-white" : "link-dark";
+  const path = usePathname();
 
   return (
     <div aria-label={"Select language"} className="flex flex-row">
-      <form action={changeLanguage}>
-        {Object.keys(languages).map((lng) => {
-          const lang = lng as Lang;
-          const label = languages[lang].nativeName;
-          const active = languages[lang].key === currentLanguage;
+      {languages.map(({ nativeName, key }) => {
+        const active = key === locale;
 
-          return (
-            <Button
-              variant="link"
-              key={`locale-switcher-${lang}`}
-              className={classNames("text-decoration-none px-2 py-1", {
-                [activeClass]: active,
-                [inactiveClass]: !active,
-              })}
-              role="button"
-              type="submit"
-              lang={lng}
-            >
-              {label}
-            </Button>
-          );
-        })}
-      </form>
+        return (
+          <Button
+            variant="link"
+            key={`locale-switcher-${key}`}
+            className={classNames("text-decoration-none px-2 py-1", {
+              [activeClass]: active,
+              [inactiveClass]: !active,
+            })}
+            role="button"
+            type="submit"
+            onClick={async () => {
+              await switchLanguage({ locale: key });
+            }}
+          >
+            {nativeName}
+          </Button>
+        );
+      })}
     </div>
   );
 }

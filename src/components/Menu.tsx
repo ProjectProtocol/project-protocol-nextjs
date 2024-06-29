@@ -7,17 +7,16 @@ import NavItem from "react-bootstrap/NavItem";
 import icon from "../../public/images/icon.svg";
 import Image from "next/image";
 import Link from "next/link";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import LocaleSwitcher from "./LocaleSwitcher";
+import { getUser } from "@/lib/session";
 
-const MENU_MAX_WIDTH = 935;
+export const MENU_MAX_WIDTH = 935;
 
-interface IMenu {
-  signedIn?: boolean;
-}
-
-export default async function Menu({ signedIn }: IMenu) {
+export default async function Menu() {
   const t = await getTranslations();
+  const user = await getUser();
+  const locale = await getLocale();
 
   return (
     <Navbar
@@ -29,7 +28,7 @@ export default async function Menu({ signedIn }: IMenu) {
       <div className="w-100 d-none d-md-block bg-white">
         <Container style={{ maxWidth: MENU_MAX_WIDTH }}>
           <div className="d-flex flex-row justify-content-end align-items-center py-2">
-            <LocaleSwitcher />
+            <LocaleSwitcher locale={locale} />
           </div>
         </Container>
       </div>
@@ -70,7 +69,7 @@ export default async function Menu({ signedIn }: IMenu) {
             <NavLink as={Link} className="  m-0" href="resources">
               {t("navigation.resources")}
             </NavLink>
-            {signedIn ? (
+            {user ? (
               <NavLink
                 as={Link}
                 className="m-0"
@@ -94,7 +93,7 @@ export default async function Menu({ signedIn }: IMenu) {
             )}
           </Nav>
           <Nav className="d-md-none">
-            <LocaleSwitcher dark />
+            <LocaleSwitcher locale={locale} dark />
           </Nav>
         </Container>
       </div>
