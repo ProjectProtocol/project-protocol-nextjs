@@ -1,4 +1,4 @@
-import Menu from "@/components/Menu";
+import Menu from "@/components/Menu/Menu";
 import { getTranslations } from "next-intl/server";
 
 export default async function Home() {
