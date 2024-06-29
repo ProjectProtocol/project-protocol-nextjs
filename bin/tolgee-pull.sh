@@ -1,9 +1,9 @@
 # Set environment variables
-if [ -z "${VAR}" ]; then
-    echo "Tolgee-Pull running in CI"
-else
+if [ -z "${CI}" ]; then
     echo "Tolgee-pull running locally"
     source .env.local
+else
+    echo "Tolgee-Pull running in CI"
 fi
 
 OUTPUT_DIR=$1

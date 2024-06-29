@@ -59,6 +59,7 @@
       "selectOfficeRequired": "Please select an office",
       "title": "Agent info"
     },
+    "heading": "Agent: {{fullName}}",
     "logIn": "or log in",
     "office": "Office",
     "officerIconAlt": "Officer icon",
