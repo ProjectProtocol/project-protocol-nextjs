@@ -4,11 +4,11 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import NavLink from "react-bootstrap/NavLink";
 import NavItem from "react-bootstrap/NavItem";
-import icon from "../../public/images/icon.svg";
+import icon from "../../../public/images/icon.svg";
 import Image from "next/image";
 import Link from "next/link";
 import { getLocale, getTranslations } from "next-intl/server";
-import LocaleSwitcher from "./LocaleSwitcher";
+import LocaleSwitcher from "../LocaleSwitcher";
 import { getUser } from "@/lib/session";
 
 export const MENU_MAX_WIDTH = 935;
