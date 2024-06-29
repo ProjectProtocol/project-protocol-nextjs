@@ -13,14 +13,21 @@ Porting the project protocol client to Nextjs for SEO, page performance, static 
    echo "API_URL=http://localhost:3000" >> .env.local
    ```
 
-2. Install dependencies
+2. Add `TOLGEE_ACCESS_TOKEN` to .env.local
+
+   ```shell
+   ...
+   TOLGEE_ACCESS_TOKEN=<your tolgee api key>
+   ```
+
+3. Install dependencies
    Run:
 
    ```shell
    pnpm i
    ```
 
-3. Start dev server
+4. Start dev server
    Run:
    ```shell
    pnpm dev

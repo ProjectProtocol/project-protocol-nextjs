@@ -1,9 +1,16 @@
+const path = require("path");
+const fs = require("fs");
 const { spawn } = require("child_process");
 const flattenLocaleFiles = require("./flatten-locale-files");
 
+const config = {
+  downloadFolder: path.join("tmp", "tolgee-files"),
+  targetFolder: path.join("src", "locales"),
+};
+
 async function downloadTolgee() {
   return new Promise((resolve, reject) => {
-    const ls = spawn("bash", ["./bin/tolgee-pull.sh", "./tmp"]);
+    const ls = spawn("bash", ["./bin/tolgee-pull.sh", config.downloadFolder]);
 
     ls.stdout.on("data", (data) => {
       console.log(`UpdateLocales: ${data}`);
@@ -26,8 +33,12 @@ async function updateLocales() {
     console.error("UpdateLocales: Failed to update locales");
     process.exit(1);
   }
+  flattenLocaleFiles(config.downloadFolder, config.targetFolder);
 
-  flattenLocaleFiles();
+  console.log("UpdateLocales: Cleaing up files...");
+  fs.rmSync(config.downloadFolder, { recursive: true, force: true });
+
+  console.log("UpdateLocales: Completed successfully!");
 }
 
 updateLocales();

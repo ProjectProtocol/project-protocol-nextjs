@@ -2,12 +2,8 @@ const path = require("path");
 const fs = require("fs");
 const { set } = require("lodash");
 
-const i18nPath = path.join("tmp");
-const messagesPath = path.join("src/locales");
-
-const folders = fs.readdirSync(i18nPath);
-
-function flattenTranslations() {
+function flattenTranslations(sourceDir) {
+  const folders = fs.readdirSync(sourceDir);
   let en = {};
   let es = {};
 
@@ -16,8 +12,8 @@ function flattenTranslations() {
       continue;
     }
     console.log("FlattenLocalFiles: flattening", dir);
-    const english = getTranslations(path.join(i18nPath, dir, "en-US.json"));
-    const spanish = getTranslations(path.join(i18nPath, dir, "es-MX.json"));
+    const english = getTranslations(path.join(sourceDir, dir, "en-US.json"));
+    const spanish = getTranslations(path.join(sourceDir, dir, "es-MX.json"));
 
     en = { ...en, [dir]: english };
     es = { ...es, [dir]: spanish };
@@ -40,15 +36,15 @@ function unflattenKeys(obj) {
   }, {});
 }
 
-function flattenLocaleFiles() {
-  const { en, es } = flattenTranslations();
+function flattenLocaleFiles(sourceDir, targetDir) {
+  const { en, es } = flattenTranslations(sourceDir);
 
   fs.writeFileSync(
-    path.join(messagesPath, "es-MX.json"),
+    path.join(targetDir, "es-MX.json"),
     JSON.stringify(es, null, 2)
   );
   fs.writeFileSync(
-    path.join(messagesPath, "en-US.json"),
+    path.join(targetDir, "en-US.json"),
     JSON.stringify(en, null, 2)
   );
 }
