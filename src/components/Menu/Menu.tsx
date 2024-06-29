@@ -46,9 +46,10 @@ export default async function Menu() {
               <Image
                 priority
                 src={icon.src}
-                width="28"
+                width="0"
                 height="0"
-                className="me-2 h-auto"
+                className="me-2"
+                style={{ width: 28, height: 28 }}
                 alt={"Project Protocol logo"}
               />
               <span
