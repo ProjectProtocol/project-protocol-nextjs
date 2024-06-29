@@ -32,21 +32,19 @@ export default function LocaleSwitcher({
         const active = key === locale;
 
         return (
-          <Button
-            variant="link"
+          <a
             key={`locale-switcher-${key}`}
             className={classNames("text-decoration-none px-2 py-1", {
               [activeClass]: active,
               [inactiveClass]: !active,
             })}
             role="button"
-            type="submit"
             onClick={async () => {
               await switchLanguage({ locale: key });
             }}
           >
             {nativeName}
-          </Button>
+          </a>
         );
       })}
     </div>
