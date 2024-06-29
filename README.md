@@ -9,7 +9,7 @@ Porting the project protocol client to Nextjs for SEO, page performance, static 
 
    ```shell
    touch .env.local
-   echo "AUTH_TOKEN=$(openssl rand -base64 32)" >> .env.local
+   echo "AUTH_SECRET=$(openssl rand -base64 32)" >> .env.local
    echo "API_URL=http://localhost:3000" >> .env.local
    ```
 
