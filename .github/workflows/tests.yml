@@ -27,7 +27,7 @@ jobs:
         run: |
           pnpm fetch-locales
 
-          if [[ `git status --porcelain` ]]; then
+          if [[ `git status --porcelain src/locales` ]]; then
             echo "❌ Please update locales with tolgee and commit changes"
             echo "Changes detected:"
             git diff
