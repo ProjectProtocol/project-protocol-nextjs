@@ -25,11 +25,9 @@ jobs:
         env:
           TOLGEE_ACCESS_TOKEN: ${{ secrets.TOLGEE_ACCESS_TOKEN }}
         run: |
-          npm install -g @tolgee/cli
+          pnpm fetch-locales
 
-          node ./bin/update-locales.js
-
-          if [[ `git status --porcelain` ]]; then
+          if [[ `git status --porcelain src/locales` ]]; then
             echo "❌ Please update locales with tolgee and commit changes"
             echo "Changes detected:"
             git diff

@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node ./bin/update-locales.js && next dev",
+    "dev": "pnpm fetch-locales && next dev",
+    "fetch-locales": "node ./bin/update-locales.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -23,6 +24,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@tolgee/cli": "^2.0.4",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-bootstrap": "^0.32.36",
