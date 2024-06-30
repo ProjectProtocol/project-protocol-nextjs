@@ -1,3 +1,5 @@
+import path from "path";
+
 export const apiURL: string = process.env.API_URL || "";
 
 /**
@@ -11,7 +13,7 @@ export default class Api {
   }
 
   post(url: string, options: any) {
-    return fetch(apiURL + url, {
+    return fetch(path.join(apiURL, url), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -22,7 +24,7 @@ export default class Api {
   }
 
   get(url: string, options: any) {
-    return fetch(apiURL + url, {
+    return fetch(path.join(apiURL, url), {
       method: "GET",
       headers: {
         Authorization: this.authHeader,
@@ -32,7 +34,7 @@ export default class Api {
   }
 
   put(url: string, options: any) {
-    return fetch(apiURL + url, {
+    return fetch(path.join(apiURL, url), {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -43,7 +45,7 @@ export default class Api {
   }
 
   delete(url: string, options: any) {
-    return fetch(apiURL + url, {
+    return fetch(path.join(apiURL, url), {
       method: "DELETE",
       headers: {
         Authorization: this.authHeader,

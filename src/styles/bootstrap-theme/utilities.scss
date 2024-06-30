@@ -1,18 +1,46 @@
-@import 'bootstrap/scss/functions';
-@import 'bootstrap/scss/variables';
-@import 'bootstrap/scss/variables-dark';
-@import 'bootstrap/scss/maps';
-@import 'bootstrap/scss/mixins';
-@import 'bootstrap/scss/utilities';
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
 
 $utilities: map-merge(
   $utilities,
   (
-    'width':
+    "width":
       map-merge(
-        map-get($utilities, 'width'),
+        map-get($utilities, "width"),
         (
           responsive: true,
+        )
+      ),
+    "shadow":
+      map-merge(
+        map-get($utilities, "shadow"),
+        (
+          state: (
+            hover,
+            active,
+          ),
+        )
+      ),
+    "background-color":
+      map-merge(
+        map-get($utilities, "background-color"),
+        (
+          state: (
+            active,
+          ),
+        )
+      ),
+    "subtle-background-color":
+      map-merge(
+        map-get($utilities, "subtle-background-color"),
+        (
+          state: (
+            active,
+          ),
         )
       ),
   )

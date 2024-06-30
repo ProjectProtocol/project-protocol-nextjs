@@ -22,7 +22,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
-      <body className={font.className + " w-100 vh-100 p-0"}>
+      <body className={font.className + " w-100 min-vh-100 p-0 bg-light"}>
         <NextIntlClientProvider messages={messages}>
           {children}
         </NextIntlClientProvider>
