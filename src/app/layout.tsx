@@ -4,6 +4,8 @@ import "@/styles/index.scss";
 
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
+import AuthProvider from "@/components/AuthProvider";
+import { getUser } from "@/lib/session";
 
 const font = Source_Sans_3({ subsets: ["latin"] });
 
@@ -17,6 +19,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const user = await getUser();
   const locale = await getLocale();
   const messages = await getMessages();
 
@@ -24,7 +27,7 @@ export default async function RootLayout({
     <html lang={locale}>
       <body className={font.className + " w-100 min-vh-100 p-0 bg-light"}>
         <NextIntlClientProvider messages={messages}>
-          {children}
+          <AuthProvider user={user}>{children}</AuthProvider>
         </NextIntlClientProvider>
       </body>
     </html>

@@ -1,10 +1,11 @@
 "use client";
 
 import { SearchMeta } from "@/types/Search";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import { InView } from "react-intersection-observer";
 import { uniqueId } from "lodash";
+import { randomUUID } from "crypto";
 
 const paginatorAnimations = {};
 
@@ -29,13 +30,11 @@ export default function Paginator<T>({
   const [totalPages, setTotalPages] = useState(meta.totalPages);
   const [itemPages, setItemPages] = useState<T[][]>([data] || []);
   const [pageLoading, setPageLoading] = useState(false);
-  const [renderkey, setRenderKey] = useState(uniqueId());
 
   useEffect(() => {
     setItemPages([data]);
     setPage(meta.page);
     setTotalPages(meta.totalPages);
-    setRenderKey(uniqueId());
   }, [data, meta]);
 
   const hasNextPage = useMemo(() => {
@@ -56,20 +55,21 @@ export default function Paginator<T>({
   return (
     <>
       {itemPages.map((items, pageIdx) =>
-        items.map((i: T, idx: number) => (
-          <>
-            <ItemComponent
-              item={i}
-              page={pageIdx}
-              index={idx}
-              key={`${keyGenerator(i, pageIdx)}-${pageIdx}-${renderkey}`}
-            />
-            {ListEndComponent &&
-              !hasNextPage &&
-              pageIdx === totalPages - 1 &&
-              idx === items.length - 1 && <ListEndComponent index={idx + 1} />}
-          </>
-        ))
+        items.map((i: T, idx: number) => {
+          const key = keyGenerator(i, pageIdx);
+
+          return (
+            <Fragment key={`paginator-fragment-${key}`}>
+              <ItemComponent item={i} page={pageIdx} index={idx} key={key} />
+              {ListEndComponent &&
+                !hasNextPage &&
+                pageIdx === totalPages - 1 &&
+                idx === items.length - 1 && (
+                  <ListEndComponent key={"list-end-" + key} index={idx + 1} />
+                )}
+            </Fragment>
+          );
+        })
       )}
       {/* When user scrolls to the end of the list, InView triggers getMore() */}
       <InView

@@ -2,14 +2,15 @@ import Card from "react-bootstrap/Card";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { getUser } from "@/lib/session";
+import { useAuth } from "@/components/AuthProvider";
 
 interface IAddAgentCard {
   signedIn?: boolean;
 }
 
-export default async function AddAgentCard({ signedIn }: IAddAgentCard) {
+export default function AddAgentCard({ signedIn }: IAddAgentCard) {
   const t = useTranslations();
-  const user = await getUser();
+  const { user } = useAuth();
   return (
     <Card border="0" className="mb-3">
       <Card.Body className="p-4 text-center vertical-rhythm">

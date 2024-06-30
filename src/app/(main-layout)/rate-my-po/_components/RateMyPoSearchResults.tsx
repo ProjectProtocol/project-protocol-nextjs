@@ -5,8 +5,6 @@ import SearchResult from "@/components/search/SearchResult";
 import Paginator from "@/components/Paginator";
 import Agent from "@/types/Agent";
 import Office from "@/types/Office";
-import { uniqueId } from "lodash-es";
-import { useEffect, useState } from "react";
 import { LazyMotion, domAnimation, m } from "framer-motion";
 import AddAgentCard from "./AddAgentCard";
 
@@ -21,20 +19,14 @@ export default function SearchResultsList({
   searchText,
   getMore,
 }: SearchResultsListProps) {
-  const [renderKey, setRenderKey] = useState(uniqueId());
-
-  useEffect(() => {
-    setRenderKey(uniqueId());
-  }, [initialData]);
-
   return (
     <LazyMotion features={domAnimation}>
       <Paginator<Agent | Office>
         data={initialData.data}
         meta={initialData.meta}
         getData={getMore}
-        keyGenerator={(item, page) =>
-          `search-result-${searchText}-${item.type}-${item.id}-${renderKey}-${page}`
+        keyGenerator={(item) =>
+          `search-result-${searchText}-${item.type}-${item.id}`
         }
         ItemComponent={({ item, index }) => (
           <m.div
