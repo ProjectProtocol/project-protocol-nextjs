@@ -55,6 +55,15 @@ export default function SearchResultsList({
           </m.div>
         )}
       />
+      {initialData.meta.total === 0 && (
+        <m.div
+          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 30 }}
+          transition={{ ease: "easeOut" }}
+        >
+          <AddAgentCard />
+        </m.div>
+      )}
     </LazyMotion>
   );
 }
