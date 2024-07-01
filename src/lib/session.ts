@@ -1,3 +1,4 @@
+"use server";
 import { cookies } from "next/headers";
 import { decrypt, encrypt, freshExpiryDate } from "./jwt";
 import { NextRequest, NextResponse } from "next/server";

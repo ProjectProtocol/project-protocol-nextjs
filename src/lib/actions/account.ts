@@ -15,7 +15,6 @@ export default async function resetPassword(
   });
 
   if (!validatedFields.success) {
-    console.log("What");
     return {
       errors: validatedFields.error.flatten().fieldErrors,
     };
@@ -30,8 +29,6 @@ export default async function resetPassword(
       error: "Invalid email or password",
     };
   }
-
-  console.log(response.status);
 
   redirect("/");
 }

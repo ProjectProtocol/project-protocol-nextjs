@@ -14,7 +14,7 @@ export default function MobileTabItem({
 }) {
   const path = usePathname();
   const isActive = to === "/" ? path === "/" : path.startsWith(to);
-  console.log(path, to);
+
   return (
     <a
       href={to}
