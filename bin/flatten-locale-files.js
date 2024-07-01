@@ -1,6 +1,8 @@
 const path = require("path");
 const fs = require("fs");
+const os = require("os");
 const { set } = require("lodash");
+const { ostring } = require("zod");
 
 function flattenTranslations(sourceDir) {
   const folders = fs.readdirSync(sourceDir);
@@ -39,14 +41,14 @@ function unflattenKeys(obj) {
 function flattenLocaleFiles(sourceDir, targetDir) {
   const { en, es } = flattenTranslations(sourceDir);
 
-  fs.writeFileSync(
-    path.join(targetDir, "es-MX.json"),
-    JSON.stringify(es, null, 2)
-  );
-  fs.writeFileSync(
-    path.join(targetDir, "en-US.json"),
-    JSON.stringify(en, null, 2)
-  );
+  [
+    { data: en, lang: "en-US" },
+    { data: es, lang: "es-MX" },
+  ].forEach(({ data, lang }) => {
+    const destFile = path.join(targetDir, `${lang}.json`);
+    fs.writeFileSync(destFile, JSON.stringify(data, null, 2));
+    fs.appendFileSync(destFile, os.EOL, "utf8");
+  });
 }
 
 module.exports = flattenLocaleFiles;
