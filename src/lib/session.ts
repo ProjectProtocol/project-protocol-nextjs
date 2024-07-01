@@ -26,7 +26,7 @@ export async function getSession(): Promise<Session | null> {
  */
 export async function getUser() {
   const session = await getSession();
-  if (!session) return null;
+  if (!session) return;
   return session.user;
 }
 
