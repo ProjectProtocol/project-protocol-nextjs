@@ -2,12 +2,19 @@
 import { cookies } from "next/headers";
 import { decrypt, encrypt, freshExpiryDate } from "./jwt";
 import { NextRequest, NextResponse } from "next/server";
+import User from "@/types/User";
+import Api from "./api";
 
+type Session = {
+  user: User;
+  apiToken: string;
+  expires: Date;
+};
 /**
  * Retrieves the session from the session cookie.
  * @returns The decrypted session payload if found, otherwise null.
  */
-export async function getSession() {
+export async function getSession(): Promise<Session | null> {
   const session = cookies().get("session")?.value;
   if (!session) return null;
   return await decrypt(session);
@@ -31,20 +38,32 @@ export async function getUser() {
  * @returns The NextResponse object with updated session expiration time.
  */
 export async function updateSession(request: NextRequest) {
-  const session = request.cookies.get("session")?.value;
-  if (!session) return;
+  const res = NextResponse.next();
+  const sessionCookie = request.cookies.get("session")?.value;
+  if (!sessionCookie) return;
+
+  const session: Session = await decrypt(sessionCookie);
+  const response = await new Api(session?.apiToken).get("/auth/reauthenticate");
+  if (!response.ok) {
+    res.cookies.delete("session");
+    return res;
+  }
+
+  const { user } = await response.json();
+  const apiToken = String(response.headers.get("authorization"));
 
   // Refresh the session expiration time
-  const parsed = await decrypt(session);
-  parsed.expires = freshExpiryDate();
-  const res = NextResponse.next();
+  session.expires = freshExpiryDate();
+  session.user = user;
+  session.apiToken = apiToken;
 
   // Set the updated session cookie
+
   res.cookies.set({
     name: "session",
-    value: await encrypt(parsed),
+    value: await encrypt(session),
     httpOnly: true,
-    expires: parsed.expires,
+    expires: session.expires,
   });
   return res;
 }

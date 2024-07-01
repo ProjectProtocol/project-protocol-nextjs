@@ -1,5 +1,3 @@
-import path from "path";
-
 export const apiURL: string = process.env.API_URL || "";
 
 /**
@@ -12,8 +10,8 @@ export default class Api {
     this.authHeader = authHeader;
   }
 
-  post(url: string, options: any) {
-    return fetch(path.join(apiURL, url), {
+  post(url: string, options: any = {}) {
+    return fetch(new URL(url, apiURL), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -23,8 +21,8 @@ export default class Api {
     });
   }
 
-  get(url: string, options: any) {
-    return fetch(path.join(apiURL, url), {
+  get(url: string, options: any = {}) {
+    return fetch(new URL(url, apiURL), {
       method: "GET",
       headers: {
         Authorization: this.authHeader,
@@ -33,8 +31,8 @@ export default class Api {
     });
   }
 
-  put(url: string, options: any) {
-    return fetch(path.join(apiURL, url), {
+  put(url: string, options: any = {}) {
+    return fetch(new URL(url, apiURL), {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -44,8 +42,8 @@ export default class Api {
     });
   }
 
-  delete(url: string, options: any) {
-    return fetch(path.join(apiURL, url), {
+  delete(url: string, options: any = {}) {
+    return fetch(new URL(url, apiURL), {
       method: "DELETE",
       headers: {
         Authorization: this.authHeader,

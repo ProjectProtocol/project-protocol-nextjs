@@ -1,9 +1,85 @@
+import AgentInfo from "@/components/AgentInfo";
 import PageHeader from "@/components/PageHeader";
+import Api from "@/lib/api";
+import RateAgentButton from "./_components/RateAgentButton";
+import { getTranslations } from "next-intl/server";
+import RatingBar from "./_components/RatingBar";
+import { Rating } from "@/types/Review";
+import TagBadge from "@/components/TagBadge";
+import { Tag, tagsTranslationMap } from "@/types/Tag";
+import Divider from "@/components/Divider";
+import AgentReviews from "./_components/AgentReviews";
+import { Suspense } from "react";
 
-export default function Page({ params }: { params: { agentId: string } }) {
+export default async function Page({
+  params,
+}: {
+  params: { agentId: string };
+}) {
+  const t = await getTranslations();
+  const { agent } = await new Api()
+    .get(`/agents/${params.agentId}`)
+    .then((res) => res.json());
+
   return (
     <div>
-      <PageHeader title={"Agent " + params.agentId} showBack />
+      <PageHeader title={""} showBack />
+      <div className="vertical-rhythm">
+        <div className="d-flex flex-row">
+          <div className="w-100">
+            <AgentInfo agent={agent} large />
+          </div>
+          <div className="d-flex flex-column justify-content-end">
+            <div
+              className="position-relative mb-3 text-center"
+              style={{ minWidth: 150 }}
+            >
+              <h4 className="mb-0">{t("agent.averageRatingTitle")}</h4>
+              <span className="h2 fw-bold m-0">{agent.averageRating}</span>
+              <span
+                className="fw-bold"
+                style={{ marginLeft: 2, position: "relative", top: -10 }}
+              >
+                /5
+              </span>
+            </div>
+            <RateAgentButton agent={agent} />
+          </div>
+        </div>
+        <div className="mb-4">
+          <div className="fw-normal mb-2 small">
+            {t("agent.overallRatings")}
+          </div>
+          {agent.overallStats.map((r: Rating, i: number) => (
+            <RatingBar
+              key={`overall-rating-${i}`}
+              rating={r}
+              delay={i}
+              animated={true}
+            />
+          ))}
+        </div>
+        <div className="mb-4">
+          <div className="fw-normal mb-2 small">{t("agent.popularTags")}</div>
+          {agent.topTags.map((tag: Tag, i: number) => (
+            <TagBadge
+              label={t(tagsTranslationMap[tag.name])}
+              className="me-2 mb-2 p-2"
+              key={`agent-detail-tag-${i}`}
+            />
+          ))}
+        </div>
+        <Divider />
+        <div className="vertical-rhythm" style={{ marginBottom: 100 }}>
+          <Suspense
+            fallback={
+              <div className="w-100 text-center p-3">Loading reviews...</div>
+            }
+          >
+            <AgentReviews agent={agent} />
+          </Suspense>
+        </div>
+      </div>
     </div>
   );
 }

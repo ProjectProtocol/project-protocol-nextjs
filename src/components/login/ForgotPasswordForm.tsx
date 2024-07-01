@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { useFormState } from "react-dom";
 import AsyncButton from "../AsyncButton";
 import { getErrorState } from "@/lib/forms";
-import resetPassword from "@/lib/actions/account";
+import { resetPassword } from "@/lib/actions/account";
 
 const initialState = {
   error: undefined,
