@@ -1,10 +1,9 @@
 "use server";
 
-import { redirect } from "next/navigation";
 import { z } from "zod";
-import { encrypt, freshExpiryDate } from "../jwt";
-import { cookies } from "next/headers";
 import { createSession } from "../session";
+import { flashError, flashSuccess } from "../flash-messages";
+import { getTranslations } from "next-intl/server";
 
 const apiURL: string = process.env.API_URL || "";
 
@@ -14,6 +13,7 @@ const loginSchema = z.object({
 });
 
 export async function login(prevState: any, formData: FormData) {
+  const t = await getTranslations();
   // Validate form data
   const validatedFields = loginSchema.safeParse({
     email: formData.get("email"),
@@ -35,14 +35,15 @@ export async function login(prevState: any, formData: FormData) {
     cache: "no-store",
     body: JSON.stringify(validatedFields.data),
   });
+  const data = await response.json();
 
   if (!response.ok) {
+    flashError(t("login.loginFieldsError"));
     return {
-      error: "Invalid email or password",
+      error: data.error,
     };
   }
 
-  const data = await response.json();
   const apiToken = response.headers.get("authorization");
   if (!apiToken) {
     return {
@@ -52,6 +53,6 @@ export async function login(prevState: any, formData: FormData) {
 
   const { email, isConfirmed, confirmationSentAt } = data.user;
   const user = { email, isConfirmed, confirmationSentAt };
-
+  flashSuccess(t("login.success"));
   await createSession(user, apiToken);
 }
