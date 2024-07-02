@@ -1,10 +1,8 @@
 "use server";
 
-import { redirect } from "next/navigation";
 import { z } from "zod";
-import { encrypt, freshExpiryDate } from "../jwt";
-import { cookies } from "next/headers";
 import { createSession } from "../session";
+import { flashError } from "../flash-messages";
 
 const apiURL: string = process.env.API_URL || "";
 
@@ -35,14 +33,15 @@ export async function login(prevState: any, formData: FormData) {
     cache: "no-store",
     body: JSON.stringify(validatedFields.data),
   });
+  const data = await response.json();
 
   if (!response.ok) {
+    flashError(data.error);
     return {
-      error: "Invalid email or password",
+      error: data.error,
     };
   }
 
-  const data = await response.json();
   const apiToken = response.headers.get("authorization");
   if (!apiToken) {
     return {

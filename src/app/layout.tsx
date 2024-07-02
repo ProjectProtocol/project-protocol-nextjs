@@ -6,6 +6,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 import AuthProvider from "@/components/AuthProvider";
 import { getUser } from "@/lib/session";
+import NotificationArea from "@/components/notifications/NotificationArea";
 
 const font = Source_Sans_3({ subsets: ["latin"] });
 
@@ -26,6 +27,7 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body className={font.className + " w-100 min-vh-100 p-0 bg-light"}>
+        <NotificationArea />
         <NextIntlClientProvider messages={messages}>
           <AuthProvider user={user}>{children}</AuthProvider>
         </NextIntlClientProvider>
