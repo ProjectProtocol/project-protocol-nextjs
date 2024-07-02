@@ -68,6 +68,7 @@
     "rateAgent": "Rate agent",
     "rating_one": "{{count}} Rating",
     "rating_other": "{{count}} Ratings",
+    "ratings": "{count, plural, =0 {# Ratings} one {# Rating} other {# Ratings}}",
     "result_one": "{{count}} Result",
     "result_other": "{{count}} Results",
     "searchByAddress": "Search for an office using the address or city name.",

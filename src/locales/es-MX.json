@@ -68,6 +68,7 @@
     "rateAgent": "Calificar",
     "rating_one": "{{count}} Opinión",
     "rating_other": "{{count}} Opiniónes",
+    "ratings": "{count, plural, =0 {# Opiniónes} one {# Opinión} other {# Opiniónes}}",
     "result_one": "{{count}} Resultado",
     "result_other": "{{count}} Resultados",
     "searchByAddress": "Buscar una oficina usando la dirección o el nombre de la ciudad.",

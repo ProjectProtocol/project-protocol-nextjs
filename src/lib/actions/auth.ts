@@ -2,7 +2,8 @@
 
 import { z } from "zod";
 import { createSession } from "../session";
-import { flashError } from "../flash-messages";
+import { flashError, flashSuccess } from "../flash-messages";
+import { getTranslations } from "next-intl/server";
 
 const apiURL: string = process.env.API_URL || "";
 
@@ -12,6 +13,7 @@ const loginSchema = z.object({
 });
 
 export async function login(prevState: any, formData: FormData) {
+  const t = await getTranslations();
   // Validate form data
   const validatedFields = loginSchema.safeParse({
     email: formData.get("email"),
@@ -36,7 +38,7 @@ export async function login(prevState: any, formData: FormData) {
   const data = await response.json();
 
   if (!response.ok) {
-    flashError(data.error);
+    flashError(t("login.loginFieldsError"));
     return {
       error: data.error,
     };
@@ -51,6 +53,6 @@ export async function login(prevState: any, formData: FormData) {
 
   const { email, isConfirmed, confirmationSentAt } = data.user;
   const user = { email, isConfirmed, confirmationSentAt };
-
+  flashSuccess(t("login.success"));
   await createSession(user, apiToken);
 }
