@@ -10,6 +10,7 @@ import { Tag, tagsTranslationMap } from "@/types/Tag";
 import Divider from "@/components/Divider";
 import AgentReviews from "./_components/AgentReviews";
 import { Suspense } from "react";
+import { getSession } from "@/lib/session";
 
 export default async function Page({
   params,
@@ -17,7 +18,8 @@ export default async function Page({
   params: { agentId: string };
 }) {
   const t = await getTranslations();
-  const { agent } = await new Api()
+  const session = await getSession();
+  const { agent } = await new Api(session?.apiToken)
     .get(`/agents/${params.agentId}`)
     .then((res) => res.json());
 
