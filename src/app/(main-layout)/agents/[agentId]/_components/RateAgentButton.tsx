@@ -7,6 +7,7 @@ import { useAuth } from "@/components/AuthProvider";
 import { useState } from "react";
 import ConfirmationModal from "./ConfirmationModal";
 import Agent from "@/types/Agent";
+import toast from "react-hot-toast";
 
 export default function RateAgentButton({ agent }: { agent: Agent }) {
   const t = useTranslations();
@@ -15,17 +16,17 @@ export default function RateAgentButton({ agent }: { agent: Agent }) {
 
   const rateButtonOnClick = () => {
     if (!user) return;
-    if (user.isConfirmed && agent.isRateable) {
-      console.log("Unratable toast");
-      // return toast(t("unrateable"), {
-      //   icon: "ℹ️",
-      //   id: `agent-unrateable-toast`,
-      //   duration: 3000,
-      // });
+    if (user.isConfirmed && !agent.isRateable) {
+      toast(t("agent.unrateable"), {
+        icon: "ℹ️",
+        id: `agent-unrateable-toast`,
+        duration: 3000,
+      });
+      return;
     }
 
     if (user.isConfirmed) {
-      console.log("Show rating modal");
+      toast.success("TODO: Show rating modal");
     } else {
       setShowConfirmationModal(true);
     }
@@ -38,7 +39,7 @@ export default function RateAgentButton({ agent }: { agent: Agent }) {
           {t("agent.rateAgent")}
         </Button>
       ) : (
-        <Button href="/login" className="w-100">
+        <Button href="/login/signup" className="w-100">
           {t("agent.signUp")}
         </Button>
       )}

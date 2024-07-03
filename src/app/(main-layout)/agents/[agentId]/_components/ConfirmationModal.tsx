@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { resendConfirmation } from "@/lib/actions/account";
+import toast from "react-hot-toast";
 
 interface IConfirmationModal extends IPopUp {
   user?: User;
@@ -23,7 +24,7 @@ export default function ConfirmationModal({
     if (success) {
       setResentCodeAt(new Date());
     } else {
-      console.log(t("shared.genericError"));
+      toast.error(t("shared.genericError"));
     }
   };
 

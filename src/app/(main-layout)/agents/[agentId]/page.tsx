@@ -71,11 +71,7 @@ export default async function Page({
         </div>
         <Divider />
         <div className="vertical-rhythm" style={{ marginBottom: 100 }}>
-          <Suspense
-            fallback={
-              <div className="w-100 text-center p-3">Loading reviews...</div>
-            }
-          >
+          <Suspense>
             <AgentReviews agent={agent} />
           </Suspense>
         </div>
