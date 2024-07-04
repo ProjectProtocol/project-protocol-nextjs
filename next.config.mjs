@@ -12,6 +12,12 @@ const nextConfig = {
       },
     ],
   },
+  logging: {
+    level: "verbose",
+    fetches: {
+      fullUrl: true,
+    },
+  },
 };
 
 export default withNextIntl(nextConfig);

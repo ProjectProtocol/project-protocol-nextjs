@@ -4,6 +4,8 @@ import RateMyPoSearchbar from "./_components/RateMyPoSearchBar";
 import { search } from "@/lib/actions/search";
 import { RateMyPoData } from "./_types";
 import RateMyPoSearchResults from "./_components/RateMyPoSearchResults";
+import { Suspense } from "react";
+import LoadingPlaceholder from "./_components/LoadingPlaceholder";
 
 export default async function Page({
   searchParams,
@@ -18,14 +20,6 @@ export default async function Page({
     searchText: searchParams?.search,
   });
 
-  async function getMore(page: number) {
-    "use server";
-    return await search({
-      searchText: searchParams?.search,
-      page,
-    });
-  }
-
   return (
     <div className="vertical-rhythm">
       <PageHeader title={t("rate_my_po.title")} />
@@ -37,11 +31,9 @@ export default async function Page({
             })
           : t("rate_my_po.mostRecent")}
       </p>
-      <RateMyPoSearchResults
-        getMore={getMore}
-        initialData={searchResults}
-        searchText={searchParams?.search}
-      />
+      <Suspense fallback={<LoadingPlaceholder />}>
+        <RateMyPoSearchResults searchText={searchParams?.search} />
+      </Suspense>
     </div>
   );
 }
