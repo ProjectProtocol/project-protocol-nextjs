@@ -1,15 +1,14 @@
+"use server";
 import { z } from "zod";
 import Api from "../api";
 import { redirect } from "next/navigation";
+import { getSession } from "../session";
 
 const resetPasswordSchema = z.object({
   email: z.string().email("Invalid email address"),
 });
 
-export default async function resetPassword(
-  prevState: any,
-  formData: FormData
-) {
+export async function resetPassword(prevState: any, formData: FormData) {
   const validatedFields = resetPasswordSchema.safeParse({
     email: formData.get("email"),
   });
@@ -31,4 +30,17 @@ export default async function resetPassword(
   }
 
   redirect("/");
+}
+
+export async function resendConfirmation() {
+  const session = await getSession();
+  const response = await new Api(session?.apiToken).post(
+    "/auth/confirmations/resend"
+  );
+
+  if (!response.ok) {
+    return false;
+  }
+
+  return true;
 }
