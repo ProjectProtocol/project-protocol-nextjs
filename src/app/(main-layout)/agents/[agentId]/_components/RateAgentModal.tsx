@@ -1,6 +1,7 @@
 import PopUp, { IPopUp } from "@/components/PopUp";
 import Agent from "@/types/Agent";
 import { useTranslations } from "next-intl";
+import RatingRadio from "./RatingRadio";
 
 interface RateAgentModalProps {
   agent: Agent;
@@ -25,6 +26,10 @@ export default function RateAgentModal({
       centered={false}
     >
       <h1>RateAgentModal</h1>
+      <RatingRadio name="helpful" />
+      <RatingRadio name="caring" />
+      <RatingRadio name="respectful" />
+      <RatingRadio name="availability" />
     </PopUp>
   );
 }
