@@ -10,14 +10,7 @@ type Session = {
   apiToken: string;
   expires: Date;
 };
-import User from "@/types/User";
-import Api from "./api";
 
-type Session = {
-  user: User;
-  apiToken: string;
-  expires: Date;
-};
 /**
  * Retrieves the session from the session cookie.
  * @returns The decrypted session payload if found, otherwise null.
@@ -40,10 +33,10 @@ export async function getUser() {
 
 /**
  * Updates the session expiration time.
- * Used in middleware.ts to refresh the session expiration time on every request so
- * logged in users don't time out.
+ * Used in middleware.ts to refresh the the API token and the nextjs-managed session cookie when
+ * the session is about to expire.
  * @param request - The NextRequest object.
- * @returns The NextResponse object with updated session expiration time.
+ * @returns The NextResponse object
  */
 export async function updateSession(request: NextRequest) {
   const res = NextResponse.next();
