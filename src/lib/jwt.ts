@@ -8,7 +8,11 @@ if (!secretKey || typeof secretKey !== "string" || secretKey.length < 32) {
 }
 
 export function freshExpiryDate() {
-  return new Date(Date.now() + 1000 * 60 * 60 * 24 * 7);
+  return new Date(Date.now() + 1000 * 60 * 60 * 24 * 7); // 7 days from now
+}
+
+export function timeToExpiryInMs(expiry: Date | string) {
+  return new Date(expiry).getTime() - Date.now();
 }
 
 // Encode the secret key as bytes
