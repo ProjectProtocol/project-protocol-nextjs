@@ -2,13 +2,14 @@
 
 import { useTranslations } from "next-intl";
 import RatingRadioButton from "./RatingRadioButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface IRatingRadio {
   name: "helpful" | "caring" | "availability" | "respectful";
   /** Optionally customize the container with css classes */
   containerClass?: string;
-  errorMessage?: string;
+  errorMessage?: string[];
+  clearErrors: () => void;
 }
 
 /**
@@ -19,17 +20,17 @@ export default function RatingRadio({
   name,
   containerClass,
   errorMessage,
+  clearErrors,
 }: IRatingRadio) {
   const t = useTranslations("rate_agent");
-  const i18nKey = `category.${name}`;
-  const [value, setValue] = useState<number>();
+  const [value, setValue] = useState<number>(0);
 
   return (
     <div className={containerClass}>
       <h4 className={errorMessage ? "text-danger" : ""}>
         {t(`category.${name}.title`)}
       </h4>
-      <p className="text-danger mb-2">{errorMessage}</p>
+      <p className="text-danger mb-2">{errorMessage?.join(" ")}</p>
       <p>{t(`category.${name}.titleHelper`)}</p>
       <input type="hidden" name={name} value={value} />
       <div className="d-flex flex-row justify-content-between mb-2">
@@ -37,7 +38,10 @@ export default function RatingRadio({
           <RatingRadioButton
             value={n}
             key={[name, "button", n].join("-")}
-            onClick={(v) => setValue(v)}
+            onClick={(v) => {
+              clearErrors();
+              setValue(v);
+            }}
             isActive={value === n}
           />
         ))}

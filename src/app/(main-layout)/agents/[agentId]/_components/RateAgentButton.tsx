@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useAuth } from "@/components/AuthProvider";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ConfirmationModal from "./ConfirmationModal";
 import Agent from "@/types/Agent";
 import toast from "react-hot-toast";
@@ -15,6 +15,10 @@ export default function RateAgentButton({ agent }: { agent: Agent }) {
   const { user } = useAuth();
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [showRateAgentModal, setShowRateAgentModal] = useState(false);
+
+  useEffect(() => {
+    setShowRateAgentModal(false);
+  }, [agent]);
 
   const rateButtonOnClick = () => {
     if (!user) return;
