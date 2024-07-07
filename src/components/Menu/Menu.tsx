@@ -64,10 +64,10 @@ export default async function Menu() {
             <NavLink as={Link} className=" m-0" href="/">
               {t("home.title")}
             </NavLink>
-            <NavLink as={Link} className=" m-0" href="rate-my-po">
+            <NavLink as={Link} className=" m-0" href="/rate-my-po">
               {t("navigation.rateMyPo")}
             </NavLink>
-            <NavLink as={Link} className="  m-0" href="resources">
+            <NavLink as={Link} className="  m-0" href="/resources">
               {t("navigation.resources")}
             </NavLink>
             {user ? (
