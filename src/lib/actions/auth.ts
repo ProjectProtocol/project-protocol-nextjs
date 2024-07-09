@@ -4,6 +4,7 @@ import { z } from "zod";
 import { createSession } from "../session";
 import { flashError, flashSuccess } from "../flash-messages";
 import { getTranslations } from "next-intl/server";
+import { redirect } from "next/navigation";
 
 const apiURL: string = process.env.API_URL || "";
 
@@ -55,4 +56,9 @@ export async function login(prevState: any, formData: FormData) {
   const user = { email, isConfirmed, confirmationSentAt };
   flashSuccess(t("login.success"));
   await createSession(user, apiToken);
+
+  const redirectURL = formData.get("callbackURL");
+  if (redirectURL) {
+    redirect(String(redirectURL));
+  }
 }
