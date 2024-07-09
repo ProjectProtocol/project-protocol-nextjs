@@ -7,7 +7,7 @@ import MobileTabItem from "./MobileTabItem";
 export default function MobileTabs() {
   return (
     <Navbar fixed="bottom" className="bg-white shadow shadow-lg d-md-none">
-      <div className="d-flex justify-content-around align-items-center w-100 h-100 py-1">
+      <div className="d-flex align-items-center w-100 h-100 py-1">
         <MobileTabItem icon={<HomeIcon />} label="Home" to="/" />
         <MobileTabItem
           icon={<SearchIcon />}
