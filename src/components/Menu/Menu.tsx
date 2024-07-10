@@ -50,11 +50,11 @@ export default async function Menu() {
                 width="0"
                 height="0"
                 className="me-2"
-                style={{ width: 25, height: 25 }}
+                style={{ width: 28, height: 28 }}
                 alt={"Project Protocol logo"}
               />
               <span
-                className="fs-md-2  fs-3 w-100 d-md-inline fw-medium pe-auto text-white"
+                className="fs-2 w-100 d-md-inline fw-medium pe-auto text-white"
                 style={{ letterSpacing: -0.5 }}
               >
                 Project Protocol
