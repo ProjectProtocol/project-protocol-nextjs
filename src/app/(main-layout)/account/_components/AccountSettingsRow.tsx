@@ -1,5 +1,3 @@
-"use client";
-
 import { Col } from "react-bootstrap";
 
 interface IAccountSettingsRow {
