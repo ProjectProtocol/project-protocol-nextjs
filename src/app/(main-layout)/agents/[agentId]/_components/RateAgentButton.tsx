@@ -1,18 +1,23 @@
 "use client";
 
 import { Button } from "react-bootstrap";
-import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useAuth } from "@/components/AuthProvider";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ConfirmationModal from "./ConfirmationModal";
 import Agent from "@/types/Agent";
 import toast from "react-hot-toast";
+import RateAgentModal from "./RateAgentModal";
 
 export default function RateAgentButton({ agent }: { agent: Agent }) {
   const t = useTranslations();
   const { user } = useAuth();
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  const [showRateAgentModal, setShowRateAgentModal] = useState(false);
+
+  useEffect(() => {
+    setShowRateAgentModal(false);
+  }, [agent]);
 
   const rateButtonOnClick = () => {
     if (!user) return;
@@ -26,7 +31,7 @@ export default function RateAgentButton({ agent }: { agent: Agent }) {
     }
 
     if (user.isConfirmed) {
-      toast.success("TODO: Show rating modal");
+      setShowRateAgentModal(true);
     } else {
       setShowConfirmationModal(true);
     }
@@ -55,6 +60,11 @@ export default function RateAgentButton({ agent }: { agent: Agent }) {
         show={showConfirmationModal}
         onHide={() => setShowConfirmationModal(false)}
         user={user}
+      />
+      <RateAgentModal
+        agent={agent}
+        show={showRateAgentModal}
+        onHide={() => setShowRateAgentModal(false)}
       />
     </div>
   );

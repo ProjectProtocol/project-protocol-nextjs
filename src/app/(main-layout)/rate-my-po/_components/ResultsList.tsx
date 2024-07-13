@@ -42,7 +42,7 @@ export default function ResultsList({
             <m.div
               animate={{ opacity: 1, y: 0 }}
               initial={{ opacity: 0, y: 30 }}
-              transition={{ delay: index * 0.15, ease: "easeOut" }}
+              transition={{ delay: index * 0.05, ease: "easeOut" }}
             >
               <SearchResult result={item} />
             </m.div>
@@ -51,7 +51,7 @@ export default function ResultsList({
             <m.div
               animate={{ opacity: 1, y: 0 }}
               initial={{ opacity: 0, y: 30 }}
-              transition={{ delay: index * 0.15, ease: "easeOut" }}
+              transition={{ delay: index * 0.05, ease: "easeOut" }}
             >
               <AddAgentCard />
             </m.div>
