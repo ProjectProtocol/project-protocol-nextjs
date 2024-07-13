@@ -5,16 +5,13 @@ import { Button } from "react-bootstrap";
 import { useTranslations } from "next-intl";
 import { destroySession } from "@/lib/session";
 import { useAuth } from "@/components/AuthProvider";
-import { useRouter } from "next/navigation";
 
 export default function AccountSettings() {
   const { user } = useAuth();
   const t = useTranslations();
-  const router = useRouter();
 
   const signOut = async () => {
     await destroySession();
-    router.push("/");
   };
 
   return (
@@ -28,7 +25,7 @@ export default function AccountSettings() {
               {t("account.signOut")}
             </Button>
           }
-        ></AccountSettingsRow>
+        />
       )}
     </Row>
   );
