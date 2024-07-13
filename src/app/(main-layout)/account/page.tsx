@@ -1,6 +1,6 @@
 import PageHeader from "@/components/PageHeader";
 import { getTranslations } from "next-intl/server";
-import { getUser, destroySession } from "@/lib/session";
+import { getUser } from "@/lib/session";
 import { redirect } from "next/navigation";
 import AccountSettings from "./_components/AccountSettings";
 
