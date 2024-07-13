@@ -65,7 +65,6 @@ export default function RateAgentButton({ agent }: { agent: Agent }) {
         agent={agent}
         show={showRateAgentModal}
         onHide={() => setShowRateAgentModal(false)}
-        onSubmit={() => {}}
       />
     </div>
   );
