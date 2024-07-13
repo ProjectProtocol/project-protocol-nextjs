@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "react-bootstrap";
-import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useAuth } from "@/components/AuthProvider";
 import { useEffect, useState } from "react";
