@@ -37,6 +37,7 @@
     },
     "resendCode": "Resend code",
     "signOut": "Sign out",
+    "signOutSuccess": "Sign out successful",
     "signUp": "Sign up",
     "title": "Account settings"
   },

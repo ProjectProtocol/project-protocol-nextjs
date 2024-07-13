@@ -1,20 +1,21 @@
-import { destroySession, getUser } from "@/lib/session";
+import PageHeader from "@/components/PageHeader";
+import { getTranslations } from "next-intl/server";
+import { getUser } from "@/lib/session";
 import { redirect } from "next/navigation";
+import AccountSettings from "./_components/AccountSettings";
 
 export default async function Page() {
   const user = await getUser();
+  const t = await getTranslations();
+
   if (!user) {
     redirect("/");
   }
 
   return (
-    <form
-      action={async () => {
-        "use server";
-        await destroySession();
-      }}
-    >
-      <button type="submit">Sign out {user.email}</button>
-    </form>
+    <div>
+      <PageHeader title={t("account.title")} showBack />
+      <AccountSettings />
+    </div>
   );
 }

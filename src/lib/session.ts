@@ -4,6 +4,8 @@ import { decrypt, encrypt, freshExpiryDate, timeToExpiryInMs } from "./jwt";
 import { NextRequest, NextResponse } from "next/server";
 import User from "@/types/User";
 import Api from "./api";
+import { flashSuccess } from "./flash-messages";
+import { getTranslations } from "next-intl/server";
 
 type Session = {
   user: User;
@@ -92,5 +94,7 @@ export async function createSession(user: any, apiToken: string) {
  * Signs the user out by deleting the session cookie.
  */
 export async function destroySession() {
+  const t = await getTranslations();
   cookies().delete("session");
+  flashSuccess(t("account.signOutSuccess"));
 }

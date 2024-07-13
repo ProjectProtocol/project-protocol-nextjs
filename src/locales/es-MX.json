@@ -37,6 +37,7 @@
     },
     "resendCode": "Reenviar código",
     "signOut": "Cerrar sesión",
+    "signOutSuccess": "Cerrar sesión con éxito",
     "signUp": "Registrarse",
     "title": "Configuración de la cuenta"
   },
