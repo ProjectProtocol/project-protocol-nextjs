@@ -45,6 +45,7 @@ export default async function Menu() {
             >
               <Image
                 priority
+                unoptimized
                 src={icon.src}
                 width="0"
                 height="0"

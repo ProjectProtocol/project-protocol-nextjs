@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Open_Sans } from "next/font/google";
+import { Source_Sans_3 } from "next/font/google";
 import "@/styles/index.scss";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
@@ -7,7 +7,7 @@ import AuthProvider from "@/components/AuthProvider";
 import { getUser } from "@/lib/session";
 import NotificationArea from "@/components/notifications/NotificationArea";
 
-const font = Open_Sans({ subsets: ["latin"] });
+const font = Source_Sans_3({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Project Protocol",

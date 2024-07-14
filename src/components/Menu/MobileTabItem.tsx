@@ -16,17 +16,19 @@ export default function MobileTabItem({
   const isActive = to === "/" ? path === "/" : path.startsWith(to);
 
   return (
-    <a
-      href={to}
-      className={classNames(
-        "d-flex flex-column align-items-center text-decoration-none",
-        {
-          "text-primary": isActive,
-        }
-      )}
-    >
-      {icon}
-      <span>{label}</span>
-    </a>
+    <div className="w-100">
+      <a
+        href={to}
+        className={classNames(
+          "d-flex flex-column align-items-center text-decoration-none",
+          {
+            "text-primary": isActive,
+          }
+        )}
+      >
+        {icon}
+        <span>{label}</span>
+      </a>
+    </div>
   );
 }

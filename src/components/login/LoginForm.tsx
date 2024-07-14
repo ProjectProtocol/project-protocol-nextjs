@@ -22,7 +22,7 @@ const initialState = {
   errors: {},
 };
 
-export default function LoginForm() {
+export default function LoginForm({ callbackURL }: { callbackURL?: string }) {
   const t = useTranslations();
   const [state, formAction] = useFormState(login, initialState);
 
@@ -30,6 +30,7 @@ export default function LoginForm() {
     <div className="d-block p-4">
       <div className="text-center mb-3">{t("login.loginTitleHelper")}</div>
       <form className="vertical-rhythm" action={formAction}>
+        <input type="hidden" name="callbackURL" value={callbackURL} />
         <Input
           size="lg"
           controlId={`login-email`}
