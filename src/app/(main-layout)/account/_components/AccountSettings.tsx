@@ -8,6 +8,7 @@ import { destroySession } from "@/lib/session";
 import { useAuth } from "@/components/AuthProvider";
 import { useState } from "react";
 import ChangePasswordModal from "./ChangePasswordModal";
+import DeleteAccountModal from "./DeleteAccountModal";
 
 export default function AccountSettings() {
   const { user } = useAuth();
@@ -63,6 +64,11 @@ export default function AccountSettings() {
           <ChangePasswordModal
             show={showChangePassword}
             onHide={() => setShowChangePassword(false)}
+            closeButton
+          />
+          <DeleteAccountModal
+            show={showDeleteAccount}
+            onHide={() => setShowDeleteAccount(false)}
             closeButton
           />
         </>
