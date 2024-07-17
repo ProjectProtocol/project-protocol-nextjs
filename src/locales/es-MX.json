@@ -98,6 +98,8 @@
       "homeLink": "Inicio",
       "pageTitle": "¡Ups!"
     },
+    "explore": "Explorar Project Protocol",
+    "learnHowToRate": "Aprenda cómo calificar tu PO",
     "moreResources": "Más recursos",
     "rateMyPoDescription": "Comparte tu experiencia de forma anónima",
     "rateMyPoTitle": "Calificar a tu PO",
@@ -111,7 +113,7 @@
       "title": "Restauración del derecho de voto en California/Register to Vote"
     },
     "voteTitle": "Registrarse para votar",
-    "welcomeMessage": "Recursos, apoyo, y compartiendo experiencias durante tu reingreso a la sociedad",
+    "welcomeMessage": "Empoderando a las personas en su viaje de reingreso",
     "welcomeTitle": "Bienvenido a Project Protocol"
   },
   "login": {

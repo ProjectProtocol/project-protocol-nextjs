@@ -47,6 +47,7 @@ export default function AccountSettings() {
           <ChangePasswordModal
             show={showChangePassword}
             onHide={() => setShowChangePassword(false)}
+            closeButton
           />
         </>
       )}

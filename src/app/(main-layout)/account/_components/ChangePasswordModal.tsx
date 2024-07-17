@@ -11,6 +11,7 @@ import { useEffect } from "react";
 
 interface ICHangePasswordModal {
   onHide: () => void;
+  closeButton?: boolean;
 }
 
 const initialState = {
@@ -23,6 +24,7 @@ const initialState = {
 
 export default function ChangePasswordModal({
   onHide,
+  closeButton,
   ...popUpProps
 }: ICHangePasswordModal & IPopUp) {
   const t = useTranslations();
@@ -35,7 +37,12 @@ export default function ChangePasswordModal({
   }, [state]);
 
   return (
-    <PopUp title={t("account.changePassword.title")} {...popUpProps}>
+    <PopUp
+      title={t("account.changePassword.title")}
+      {...popUpProps}
+      closeButton
+      onHide={onHide}
+    >
       {state?.error && (
         <div className="alert alert-danger" role="alert">
           {t("account.changePassword.error")}
