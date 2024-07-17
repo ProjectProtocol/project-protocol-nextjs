@@ -9,7 +9,7 @@ import AsyncButton from "@/components/AsyncButton";
 import { getErrorState } from "@/lib/forms";
 import { useEffect } from "react";
 
-interface ICHangePasswordModal {
+interface IChangePasswordModal {
   onHide: () => void;
   closeButton?: boolean;
 }
@@ -26,7 +26,7 @@ export default function ChangePasswordModal({
   onHide,
   closeButton,
   ...popUpProps
-}: ICHangePasswordModal & IPopUp) {
+}: IChangePasswordModal & IPopUp) {
   const t = useTranslations();
   const [state, formAction] = useFormState(changePassword, initialState);
 
