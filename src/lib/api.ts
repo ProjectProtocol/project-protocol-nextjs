@@ -42,6 +42,17 @@ export default class Api {
     });
   }
 
+  patch(url: string, options: any = {}) {
+    return fetch(new URL(url, apiURL), {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: this.authHeader,
+      },
+      ...options,
+    });
+  }
+
   delete(url: string, options: any = {}) {
     return fetch(new URL(url, apiURL), {
       method: "DELETE",

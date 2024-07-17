@@ -98,6 +98,8 @@
       "homeLink": "Main page",
       "pageTitle": "Oops!"
     },
+    "explore": "Explore Project Protocol",
+    "learnHowToRate": "Learn how to rate your PO",
     "moreResources": "More resources",
     "rateMyPoDescription": "Anonymously share your parole experience",
     "rateMyPoTitle": "Rate your PO",
@@ -115,7 +117,7 @@
       "title": "Voting rights restored in California"
     },
     "voteTitle": "Register to vote",
-    "welcomeMessage": "Resources, support, and shared experiences during re-entry",
+    "welcomeMessage": "Empowering people on their reentry journey",
     "welcomeTitle": "Welcome to Project Protocol"
   },
   "login": {

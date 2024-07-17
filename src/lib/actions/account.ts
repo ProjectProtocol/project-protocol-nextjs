@@ -3,6 +3,9 @@ import { z } from "zod";
 import Api from "../api";
 import { redirect } from "next/navigation";
 import { getSession } from "../session";
+import { getTranslations } from "next-intl/server";
+import { flashError, flashSuccess } from "../flash-messages";
+import { snakeCaseKeys } from "../transformKeys";
 
 const resetPasswordSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -43,4 +46,44 @@ export async function resendConfirmation() {
   }
 
   return true;
+}
+
+export async function changePassword(prevState: any, formData: FormData) {
+  const session = await getSession();
+  const t = await getTranslations();
+
+  const changePasswordSchema = z
+    .object({
+      password: z.string(),
+      newPassword: z.string().min(8, t("account.changePassword.detail")),
+      newPasswordConfirm: z.string().min(8, t("account.changePassword.detail")),
+    })
+    .refine((data) => data.newPassword === data.newPasswordConfirm, {
+      message: t("password_reset.newPasswordConfirmMismatch"),
+      path: ["newPasswordConfirm"],
+    });
+
+  const validatedFields = changePasswordSchema.safeParse({
+    password: formData.get("password"),
+    newPassword: formData.get("newPassword"),
+    newPasswordConfirm: formData.get("newPasswordConfirm"),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+    };
+  }
+
+  const response = await new Api(session?.apiToken).patch("/profile", {
+    body: JSON.stringify(snakeCaseKeys(validatedFields.data)),
+  });
+
+  if (!response.ok) {
+    return {
+      error: t("account.changePassword.error"),
+    };
+  }
+
+  flashSuccess(t("account.changePassword.success.heading"));
 }
