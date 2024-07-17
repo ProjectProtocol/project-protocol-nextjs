@@ -14,6 +14,7 @@ export default function AccountSettings() {
   const t = useTranslations();
 
   const [showChangePassword, setShowChangePassword] = useState(false);
+  const [showDeleteAccount, setShowDeleteAccount] = useState(false);
 
   const signOut = async () => {
     await destroySession();
@@ -42,6 +43,20 @@ export default function AccountSettings() {
                 onClick={() => setShowChangePassword(true)}
               >
                 {t("account.changePassword.action")}
+              </Button>
+            }
+          />
+          <AccountSettingsRow
+            title={t("account.delete.title")}
+            detail={t("account.delete.detail")}
+            action={
+              <Button
+                variant="outline-danger"
+                size="sm"
+                onClick={() => setShowDeleteAccount(true)}
+              >
+                <i className="bi bi-trash me-2" />
+                {t("account.delete.action")}
               </Button>
             }
           />
