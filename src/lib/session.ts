@@ -96,5 +96,4 @@ export async function createSession(user: any, apiToken: string) {
 export async function destroySession() {
   const t = await getTranslations();
   cookies().delete("session");
-  flashSuccess(t("account.signOutSuccess"));
 }

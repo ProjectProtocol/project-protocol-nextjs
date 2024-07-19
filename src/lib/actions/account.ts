@@ -2,9 +2,9 @@
 import { z } from "zod";
 import Api from "../api";
 import { redirect } from "next/navigation";
-import { getSession } from "../session";
+import { destroySession, getSession } from "../session";
 import { getTranslations } from "next-intl/server";
-import { flash, flashError, flashSuccess } from "../flash-messages";
+import { flashError, flashSuccess } from "../flash-messages";
 import { snakeCaseKeys } from "../transformKeys";
 
 const resetPasswordSchema = z.object({
@@ -106,9 +106,9 @@ export async function deleteAccount(prevState: any, formData: FormData) {
     };
   }
 
-  const response = await new Api(session?.apiToken).delete("/auth", {
-    body: JSON.stringify(validatedFields.data),
-  });
+  const response = await new Api(session?.apiToken).delete(
+    `/auth?password=${validatedFields.data.password}`
+  );
 
   if (!response.ok) {
     flashError(t("account.delete.error"));
@@ -118,5 +118,5 @@ export async function deleteAccount(prevState: any, formData: FormData) {
   }
 
   flashSuccess(t("account.delete.success"));
-  redirect("/");
+  await destroySession();
 }

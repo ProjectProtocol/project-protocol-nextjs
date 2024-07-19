@@ -9,6 +9,7 @@ import { useAuth } from "@/components/AuthProvider";
 import { useState } from "react";
 import ChangePasswordModal from "./ChangePasswordModal";
 import DeleteAccountModal from "./DeleteAccountModal";
+import toast from "react-hot-toast";
 
 export default function AccountSettings() {
   const { user } = useAuth();
@@ -19,6 +20,7 @@ export default function AccountSettings() {
 
   const signOut = async () => {
     await destroySession();
+    toast.success(t("account.signOutSuccess"));
   };
 
   return (
