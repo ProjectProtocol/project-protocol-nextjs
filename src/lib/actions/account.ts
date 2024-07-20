@@ -2,7 +2,7 @@
 import { z } from "zod";
 import Api from "../api";
 import { redirect } from "next/navigation";
-import { getSession } from "../session";
+import { destroySession, getSession } from "../session";
 import { getTranslations } from "next-intl/server";
 import { flashError, flashSuccess } from "../flash-messages";
 import { snakeCaseKeys } from "../transformKeys";
@@ -86,4 +86,37 @@ export async function changePassword(prevState: any, formData: FormData) {
   }
 
   flashSuccess(t("account.changePassword.success.heading"));
+}
+
+export async function deleteAccount(prevState: any, formData: FormData) {
+  const session = await getSession();
+  const t = await getTranslations();
+
+  const deleteAccountSchema = z.object({
+    password: z.string(),
+  });
+
+  const validatedFields = deleteAccountSchema.safeParse({
+    password: formData.get("password"),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+    };
+  }
+
+  const response = await new Api(session?.apiToken).delete(
+    `/auth?password=${validatedFields.data.password}`
+  );
+
+  if (!response.ok) {
+    flashError(t("account.delete.error"));
+    return {
+      error: t("account.delete.error"),
+    };
+  }
+
+  flashSuccess(t("account.delete.success"));
+  await destroySession();
 }

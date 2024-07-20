@@ -8,15 +8,19 @@ import { destroySession } from "@/lib/session";
 import { useAuth } from "@/components/AuthProvider";
 import { useState } from "react";
 import ChangePasswordModal from "./ChangePasswordModal";
+import DeleteAccountModal from "./DeleteAccountModal";
+import toast from "react-hot-toast";
 
 export default function AccountSettings() {
   const { user } = useAuth();
   const t = useTranslations();
 
   const [showChangePassword, setShowChangePassword] = useState(false);
+  const [showDeleteAccount, setShowDeleteAccount] = useState(false);
 
   const signOut = async () => {
     await destroySession();
+    toast.success(t("account.signOutSuccess"));
   };
 
   return (
@@ -45,9 +49,28 @@ export default function AccountSettings() {
               </Button>
             }
           />
+          <AccountSettingsRow
+            title={t("account.delete.title")}
+            detail={t("account.delete.detail")}
+            action={
+              <Button
+                variant="outline-danger"
+                size="sm"
+                onClick={() => setShowDeleteAccount(true)}
+              >
+                <i className="bi bi-trash me-2" />
+                {t("account.delete.action")}
+              </Button>
+            }
+          />
           <ChangePasswordModal
             show={showChangePassword}
             onHide={() => setShowChangePassword(false)}
+            closeButton
+          />
+          <DeleteAccountModal
+            show={showDeleteAccount}
+            onHide={() => setShowDeleteAccount(false)}
             closeButton
           />
         </>
