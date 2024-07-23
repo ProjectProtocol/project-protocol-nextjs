@@ -4,7 +4,6 @@ import { decrypt, encrypt, freshExpiryDate, timeToExpiryInMs } from "./jwt";
 import { NextRequest, NextResponse } from "next/server";
 import User from "@/types/User";
 import Api from "./api";
-import { flashSuccess } from "./flash-messages";
 import { getTranslations } from "next-intl/server";
 
 type Session = {

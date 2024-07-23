@@ -176,7 +176,9 @@
     "modal": {
       "intro": "Introduce una nueva contraseña de al menos 8 caracteres."
     },
-    "newPassword": "Nueva Contraseña",
+    "newPassword": {
+      "title": "Nueva contraseña"
+    },
     "newPasswordConfirm": "Confirmar nueva contraseña",
     "newPasswordConfirmMismatch": "Las contraseñas no coinciden",
     "resetRequestError": "Ha ocurrido un error",
