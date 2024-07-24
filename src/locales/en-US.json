@@ -186,7 +186,8 @@
       "title": "Change Password"
     },
     "newPassword": {
-      "required": "Password is required"
+      "required": "Password is required",
+      "title": "New password"
     },
     "newPasswordConfirm": {
       "required": "Password confirmation is required"
