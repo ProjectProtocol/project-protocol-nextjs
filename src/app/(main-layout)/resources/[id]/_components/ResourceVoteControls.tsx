@@ -9,7 +9,11 @@ import { Button } from "react-bootstrap";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 
-export default function ResourceVoteControls(resource: Resource) {
+export default function ResourceVoteControls({
+  resource,
+}: {
+  resource: Resource;
+}) {
   const t = useTranslations();
   const { user } = useAuth();
   const [currResource, setResource] = useState(resource);
