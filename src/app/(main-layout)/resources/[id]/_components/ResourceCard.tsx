@@ -4,8 +4,9 @@ import { Card } from "react-bootstrap";
 import { useMemo } from "react";
 import SocialMediaLink from "./SocialMediaLink";
 import TagBadge from "@/components/TagBadge";
+import ResourceVoteControls from "./ResourceVoteControls";
 
-export default function ResourceCard(resource: Resource) {
+export default function ResourceCard({ resource }: { resource: Resource }) {
   const t = useTranslations();
 
   const {
@@ -91,6 +92,9 @@ export default function ResourceCard(resource: Resource) {
               key={`resource-detail-tag-${i}`}
             />
           ))}
+        </div>
+        <div className="d-flex flex-row flex-wrap gap-2 align-items-center text-dark">
+          <ResourceVoteControls resource={resource} />
         </div>
       </div>
     </Card>
