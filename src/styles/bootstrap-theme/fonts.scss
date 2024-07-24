@@ -6,7 +6,12 @@ $headings-font-weight: 600;
   font-weight: 600;
 }
 
+.large {
+  font-size: 1.125rem;
+}
+
 // So far, there are only two header sizes in the designs:
+$h2-font-size: 1rem * 1.5 !default;
 $h3-font-size: 1rem * 1.25 !default;
 $h4-font-size: 1rem * 1.125 !default;
 $h5-font-size: 1rem * 1.08 !default;
