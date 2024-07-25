@@ -98,6 +98,15 @@ export default function ResourceCard({ resource }: { resource: Resource }) {
         </div>
         <div className="d-flex flex-row flex-wrap gap-2 align-items-center text-dark">
           <ResourceVoteControls resource={resource} />
+          <a
+            href={`/resources/${resource.id}`}
+            className="text-decoration-none"
+          >
+            <div className={"d-flex flex-row gap-1 text-dark"}>
+              <span>{resource.commentsCount}</span>
+              <i className="bi me-1 align-middle bi-chat-left" />
+            </div>
+          </a>
         </div>
       </div>
     </Card>
