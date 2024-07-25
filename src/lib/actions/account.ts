@@ -70,11 +70,14 @@ export interface IPasswordResetsFormState {
   token: string;
 }
 
+type ResetPasswordResponse = {
+  error?: MessageKeys<IntlMessages, "password_reset">;
+};
 export async function resetPassword({
   newPassword,
   newPasswordConfirm,
   token,
-}: IPasswordResetsFormState) {
+}: IPasswordResetsFormState): Promise<ResetPasswordResponse> {
   const t = await getTranslations();
   let messageKey;
 
@@ -85,21 +88,15 @@ export async function resetPassword({
     }),
   });
 
-  const { message, error } = await response.json();
-
+  const body = await response.json();
+  let error;
   if (!response.ok) {
-    if (error) {
-      messageKey = `password_reset.${error}`;
-    } else {
-      messageKey = "shared.genericError";
-    }
-    flashError(t(messageKey as MessageKeys<IntlMessages, "password_reset">));
-  } else {
-    messageKey = `password_reset.${message}`;
-    flashSuccess(t(messageKey as MessageKeys<IntlMessages, "password_reset">));
+    error = body?.error
+      ? `password_reset.${body.error}`
+      : "shared.genericError";
   }
 
-  redirect("/");
+  return { error } as ResetPasswordResponse;
 }
 
 export async function changePassword(prevState: any, formData: FormData) {

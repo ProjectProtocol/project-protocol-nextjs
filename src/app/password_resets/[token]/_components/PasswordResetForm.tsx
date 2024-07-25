@@ -6,9 +6,12 @@ import Input from "@/components/Input";
 import { useCallback } from "react";
 import AsyncButton from "@/components/AsyncButton";
 import { IPasswordResetsFormState, resetPassword } from "@/lib/actions/account";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 export default function PasswordResetForm({ token }: { token: string }) {
   const t = useTranslations();
+  const router = useRouter();
   const { register, watch, handleSubmit, getFieldState, formState } =
     useForm<IPasswordResetsFormState>({
       mode: "onSubmit",
@@ -20,7 +23,14 @@ export default function PasswordResetForm({ token }: { token: string }) {
     });
 
   async function onSubmit(data: IPasswordResetsFormState) {
-    await resetPassword(data);
+    const { error } = await resetPassword(data);
+
+    if (error) {
+      toast.error(t(error));
+    } else {
+      toast.success(t("password_reset.resetSuccess"));
+      router.replace("/");
+    }
   }
 
   const validationProps = useCallback(
