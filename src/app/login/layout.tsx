@@ -23,7 +23,7 @@ export default async function Layout({
       <Container fluid>
         <div
           className="m-auto vertical-rhythm"
-          style={{ maxWidth: 336, minHeight: 500 }}
+          style={{ maxWidth: 336, minHeight: 700 }}
         >
           <div className="text-end mb-5">
             <a href="/">
@@ -36,7 +36,7 @@ export default async function Layout({
           <div className="text-center vertical-rhythm">
             <Image
               priority
-              src={icon.src}
+              src={icon}
               width="40"
               height="0"
               className="me-2 h-auto"
