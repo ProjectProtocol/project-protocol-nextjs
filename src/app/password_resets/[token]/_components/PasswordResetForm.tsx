@@ -56,7 +56,7 @@ export default function PasswordResetForm({ token }: { token: string }) {
         {...validationProps("newPasswordConfirm")}
         {...register("newPasswordConfirm", {
           required: t("shared.requiredField", {
-            field: t("password_reset.newPasswordConfirm.title"),
+            field: t("account.changePassword.newPasswordConfirm"),
           }),
           validate: (value) =>
             value === watch("newPassword") ||
@@ -68,7 +68,7 @@ export default function PasswordResetForm({ token }: { token: string }) {
           type="submit"
           className="w-100 btn-lg"
           disabled={!formState.isValid}
-          loading={formState.isSubmitted}
+          loading={formState.isSubmitting}
         >
           {t("password_reset.submit")}
         </AsyncButton>
