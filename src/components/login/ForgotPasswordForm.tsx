@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { useFormState } from "react-dom";
 import AsyncButton from "../AsyncButton";
 import { getErrorState } from "@/lib/forms";
-import { resetPassword } from "@/lib/actions/account";
+import { requestPasswordReset } from "@/lib/actions/account";
 
 const initialState = {
   error: undefined,
@@ -14,7 +14,7 @@ const initialState = {
 
 export default function ForgotPasswordForm() {
   const t = useTranslations();
-  const [state, formAction] = useFormState(resetPassword, initialState);
+  const [state, formAction] = useFormState(requestPasswordReset, initialState);
 
   return (
     <div className="d-block p-4">

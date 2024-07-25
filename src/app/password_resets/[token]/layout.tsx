@@ -1,7 +1,7 @@
 import LocaleSwitcher from "@/components/LocaleSwitcher";
 import Image from "next/image";
 import { Container } from "react-bootstrap";
-import icon from "../../../public/images/icon.svg";
+import icon from "@/../../public/images/icon.svg";
 import { getLocale, getTranslations } from "next-intl/server";
 import { getUser } from "@/lib/session";
 import { redirect } from "next/navigation";
@@ -36,13 +36,13 @@ export default async function Layout({
           <div className="text-center vertical-rhythm">
             <Image
               priority
-              src={icon.src}
+              src={icon}
               width="40"
               height="0"
               className="me-2 h-auto"
               alt={"Project Protocol logo"}
             />
-            <h2 className="mb-0">{t("login.loginTitle")}</h2>
+            <h2 className="mb-0">{t("password_reset.newPassword.title")}</h2>
           </div>
           {children}
         </div>

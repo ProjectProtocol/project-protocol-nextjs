@@ -6,13 +6,19 @@ import { destroySession, getSession } from "../session";
 import { getTranslations } from "next-intl/server";
 import { flashError, flashSuccess } from "../flash-messages";
 import { snakeCaseKeys } from "../transformKeys";
+import { MessageKeys } from "next-intl";
 
-const resetPasswordSchema = z.object({
-  email: z.string().email("Invalid email address"),
-});
+/**
+ * Initiates a password reset request for "forgot password" flow.
+ */
+export async function requestPasswordReset(_: any, formData: FormData) {
+  const t = await getTranslations();
 
-export async function resetPassword(prevState: any, formData: FormData) {
-  const validatedFields = resetPasswordSchema.safeParse({
+  const requestPasswordResetSchema = z.object({
+    email: z.string().email(t("login.emailMessage")),
+  });
+
+  const validatedFields = requestPasswordResetSchema.safeParse({
     email: formData.get("email"),
   });
 
@@ -23,18 +29,25 @@ export async function resetPassword(prevState: any, formData: FormData) {
   }
 
   const response = await new Api().post("/auth/password_resets", {
-    body: JSON.stringify(validatedFields.data),
+    body: JSON.stringify({ ...validatedFields.data, original_location: "/" }),
   });
 
   if (!response.ok) {
     return {
-      error: "Invalid email or password",
+      error: t("shared.genericError"),
     };
-  }
+  } else {
+    flashSuccess(t("password_reset.resetRequestSuccess"), {
+      template: "dismissable",
+    });
 
-  redirect("/");
+    redirect("/");
+  }
 }
 
+/**
+ * Resend confirmation email to user.
+ */
 export async function resendConfirmation() {
   const session = await getSession();
   const response = await new Api(session?.apiToken).post(
@@ -46,6 +59,47 @@ export async function resendConfirmation() {
   }
 
   return true;
+}
+
+/*
+ * Reset password
+ */
+export interface IPasswordResetsFormState {
+  newPassword: string;
+  newPasswordConfirm: string;
+  token: string;
+}
+
+export async function resetPassword({
+  newPassword,
+  newPasswordConfirm,
+  token,
+}: IPasswordResetsFormState) {
+  const t = await getTranslations();
+  let messageKey;
+
+  const response = await new Api().patch(`/auth/password_resets/${token}`, {
+    body: JSON.stringify({
+      new_password: newPassword,
+      new_password_confirm: newPasswordConfirm,
+    }),
+  });
+
+  const { message, error } = await response.json();
+
+  if (!response.ok) {
+    if (error) {
+      messageKey = `password_reset.${error}`;
+    } else {
+      messageKey = "shared.genericError";
+    }
+    flashError(t(messageKey as MessageKeys<IntlMessages, "password_reset">));
+  } else {
+    messageKey = `password_reset.${message}`;
+    flashSuccess(t(messageKey as MessageKeys<IntlMessages, "password_reset">));
+  }
+
+  redirect("/");
 }
 
 export async function changePassword(prevState: any, formData: FormData) {
