@@ -1,10 +1,10 @@
 import Resource, { ResourceTag } from "@/types/Resource";
 import { useTranslations } from "next-intl";
 import { Card } from "react-bootstrap";
-import { useMemo } from "react";
 import SocialMediaLink from "./SocialMediaLink";
 import TagBadge from "@/components/TagBadge";
 import ResourceVoteControls from "./ResourceVoteControls";
+import Image from "next/image";
 
 export default function ResourceCard({ resource }: { resource: Resource }) {
   const t = useTranslations();
@@ -31,11 +31,11 @@ export default function ResourceCard({ resource }: { resource: Resource }) {
     : city && state
     ? `${city}, ${state}`
     : null;
-  const addressLabel = useMemo(() => {
-    if (street && city && state && zip) {
-      return [street, city, state, zip].join(", ");
-    }
-  }, [street, city, state, zip]);
+
+  const addressLabel =
+    street && city && state && zip
+      ? [street, city, state, zip].join(", ")
+      : undefined;
 
   return (
     <Card body>
@@ -45,8 +45,11 @@ export default function ResourceCard({ resource }: { resource: Resource }) {
             className="bg-white d-flex justify-content-center align-items-center rounded rounded-circle border me-2"
             style={{ width: "30px", height: "30px", padding: "6px" }}
           >
-            <img
+            <Image
               src={`https://s2.googleusercontent.com/s2/favicons?domain_url=${url}`}
+              width={18}
+              height={18}
+              alt={`Favorite icon for ${name}`}
             />
           </div>
           <div className="flex flex-column">

@@ -4,8 +4,6 @@ import { SearchMeta } from "@/types/Search";
 import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import { InView } from "react-intersection-observer";
-import { uniqueId } from "lodash";
-import { randomUUID } from "crypto";
 
 const paginatorAnimations = {};
 
