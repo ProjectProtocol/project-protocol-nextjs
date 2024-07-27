@@ -25,7 +25,11 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
-      <body className={font.className + " w-100 min-vh-100 p-0 bg-light"}>
+      <body
+        className={
+          font.className + " w-100 min-vh-100 p-0 bg-light overflow-y-scroll"
+        }
+      >
         <NotificationArea />
         <NextIntlClientProvider messages={messages}>
           <AuthProvider user={user}>{children}</AuthProvider>
