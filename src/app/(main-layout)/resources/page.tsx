@@ -1,10 +1,9 @@
 import PageHeader from "@/components/PageHeader";
 import { getTranslations } from "next-intl/server";
 import ResourcesList from "./_components/ResourcesList";
-import { searchResources } from "@/lib/actions/resource";
 import { Suspense } from "react";
 import ResourceSearchBar from "./_components/ResourceSearchBar";
-import SearchResultsInfo from "@/components/search/SearchResultsInfo";
+import ResourcesLoadingPlaceholder from "./_components/ResourcesLoadingPlaceholder";
 
 export default async function Page({
   searchParams,
@@ -17,7 +16,7 @@ export default async function Page({
     <div className="vertical-rhythm">
       <PageHeader title={t("resources.title")} />
       <ResourceSearchBar />
-      <Suspense>
+      <Suspense fallback={<ResourcesLoadingPlaceholder />}>
         <ResourcesList searchText={searchParams.search} />
       </Suspense>
     </div>
