@@ -6,14 +6,7 @@ import { SearchData } from "@/types/Search";
 import ResourceCard from "../[id]/_components/ResourceCard";
 import { useSearchParams } from "next/navigation";
 import { domAnimation, LazyMotion, m } from "framer-motion";
-
-async function getResources(page = 0, search = "") {
-  const response = await fetch(
-    `/api/resources?page=${String(page)}&search=${search}`
-  );
-  const data = await response.json();
-  return data;
-}
+import { searchResources } from "@/lib/actions/resource";
 
 export default function ResourceSearchResults({
   initialData,
@@ -30,7 +23,9 @@ export default function ResourceSearchResults({
           <Paginator<Resource>
             data={initialData.data}
             meta={initialData.meta}
-            getData={async (page) => await getResources(page, searchText)}
+            getData={async (page) =>
+              await searchResources({ page, search: searchText })
+            }
             keyGenerator={(item, page) =>
               `search-result-${searchText}-${item.type}-${page}-${item.id}`
             }
