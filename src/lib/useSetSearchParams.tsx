@@ -22,7 +22,7 @@ export default function useSetSearchParams(): [
   const router = useRouter();
 
   const setSearchParams = useCallback(
-    (setterFunc: (prev: URLSearchParams) => URLSearchParams) => {
+    (setterFunc: (nextParams: URLSearchParams) => URLSearchParams) => {
       const prevParams = new URLSearchParams(searchParams.toString());
       const newParams = setterFunc(prevParams);
       const newParamsString = newParams.toString();

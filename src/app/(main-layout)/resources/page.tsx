@@ -20,7 +20,7 @@ export default async function Page({
       <ResourceSearchBar />
       <ResourceFilters searchParams={searchParams} />
       <Suspense fallback={<ResourcesLoadingPlaceholder />}>
-        <ResourcesList searchText={searchParams.search} />
+        <ResourcesList searchParams={searchParams} />
       </Suspense>
     </div>
   );
