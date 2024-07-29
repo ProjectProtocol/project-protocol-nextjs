@@ -2,9 +2,8 @@
 
 import { getSession } from "../session";
 import Api from "../api";
-import { SearchData } from "@/types/Search";
-import Resource, { ResourceSearchParams, ResourceTag } from "@/types/Resource";
-import { castArray } from "lodash";
+import { SearchData, Page } from "@/types/Search";
+import Resource from "@/types/Resource";
 
 export async function like(id: number) {
   const session = await getSession();
@@ -44,7 +43,39 @@ export async function searchResources(
 
   const url = "resources?" + params.toString();
 
-  const result = await api.get(url).then((r) => r.json());
+  const result = await new Api(session?.apiToken)
+    .get(url)
+    .then((r) => r.json());
 
   return result;
+}
+
+export async function listComments(
+  id: number,
+  { page = 0 }: { page?: number }
+): Promise<Page<Comment>> {
+  const session = await getSession();
+  const params = {
+    page: String(page),
+  };
+
+  const result = await new Api(session?.apiToken)
+    .get(`/resources/${id}/comments`, { params })
+    .then((r) => r.json());
+
+  return { data: result.data, meta: result.meta as any };
+}
+
+export async function createComment(id: number, { body }: { body: string }) {
+  const session = await getSession();
+  const params = {
+    comment: {
+      body: body,
+    },
+  };
+  const result = await new Api(session?.apiToken)
+    .post(`/resources/${id}/comments`, { params })
+    .then((r) => r.json());
+
+  return result.comment;
 }
