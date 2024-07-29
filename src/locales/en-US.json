@@ -96,6 +96,8 @@
     },
     "error": {
       "homeLink": "Main page",
+      "notFound": "Not Found",
+      "notFoundMessage": "Sorry, the page you are looking for does not exist.",
       "pageTitle": "Oops!"
     },
     "explore": "Explore Project Protocol",
@@ -322,7 +324,6 @@
     "genericError": "Something went wrong, please try again",
     "learnMore": "Learn more",
     "noResults": "No results found. Please try a different search.",
-    "notFound": "Not Found",
     "OK": "OK",
     "optional": "(optional)",
     "orLogIn": "or log in",

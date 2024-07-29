@@ -96,6 +96,8 @@
     },
     "error": {
       "homeLink": "Inicio",
+      "notFound": "No Encontrado",
+      "notFoundMessage": "Lo sentimos, la página que estás buscando no existe.",
       "pageTitle": "¡Ups!"
     },
     "explore": "Explorar Project Protocol",
@@ -300,7 +302,6 @@
     "genericError": "Ha ocurrido un error",
     "learnMore": "Aprende más",
     "noResults": "No se han encontrado resultados. Por favor intenta una búsqueda diferente.",
-    "notFound": "No Encontrado",
     "OK": "OK",
     "optional": "(opcional)",
     "orLogIn": "o inicia sesión",
