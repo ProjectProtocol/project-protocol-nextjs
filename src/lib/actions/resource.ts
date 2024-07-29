@@ -52,7 +52,7 @@ export async function searchResources(
 
 export async function listComments(
   id: number,
-  { page = 0 }: { page?: number }
+  page: number = 0
 ): Promise<Page<Comment>> {
   const session = await getSession();
   const params = {
@@ -63,7 +63,7 @@ export async function listComments(
     .get(`/resources/${id}/comments`, { params })
     .then((r) => r.json());
 
-  return { data: result.data, meta: result.meta as any };
+  return result;
 }
 
 export async function createComment(id: number, { body }: { body: string }) {
@@ -73,8 +73,9 @@ export async function createComment(id: number, { body }: { body: string }) {
       body: body,
     },
   };
+
   const result = await new Api(session?.apiToken)
-    .post(`/resources/${id}/comments`, { params })
+    .post(`/resources/${id}/comments`, { body: JSON.stringify(params) })
     .then((r) => r.json());
 
   return result.comment;

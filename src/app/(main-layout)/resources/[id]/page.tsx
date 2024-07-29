@@ -6,6 +6,8 @@ import Divider from "@/components/Divider";
 import ResourceComments from "./_components/ResourceComments";
 import UnauthorizedCommentArea from "./_components/UnauthorizedCommentArea";
 import CommentArea from "./_components/CommentArea";
+import { Suspense } from "react";
+import ResourcesLoadingPlaceholder from "../_components/ResourcesLoadingPlaceholder";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const session = await getSession();
@@ -21,7 +23,9 @@ export default async function Page({ params }: { params: { id: string } }) {
       <Divider />
       {!user && <UnauthorizedCommentArea />}
       {user && <CommentArea resource={resource} />}
-      <ResourceComments resource={resource} />
+      <Suspense fallback={<ResourcesLoadingPlaceholder />}>
+        <ResourceComments resource={resource} />
+      </Suspense>
     </div>
   );
 }

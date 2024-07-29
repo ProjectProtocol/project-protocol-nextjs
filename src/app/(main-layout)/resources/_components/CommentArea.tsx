@@ -8,6 +8,7 @@ import { createComment } from "@/lib/actions/resource";
 import Resource from "@/types/Resource";
 import classNames from "classnames";
 import { useRef } from "react";
+import toast from "react-hot-toast";
 
 export default function CommentArea({ resource }: { resource: Resource }) {
   const t = useTranslations();
@@ -25,6 +26,16 @@ export default function CommentArea({ resource }: { resource: Resource }) {
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     resizeTextArea();
     setCommentText(e.target.value);
+  };
+
+  const onSubmit = async () => {
+    const response = await createComment(resource.id, { body: commentText });
+    if (response.ok) {
+      toast.success(t("resources.commentCreatedSuccess"));
+      setCommentText("");
+    } else {
+      toast.error(t("shared.genericError"));
+    }
   };
 
   useEffect(() => {
@@ -60,9 +71,7 @@ export default function CommentArea({ resource }: { resource: Resource }) {
             height: "38px",
           }}
           disabled={submitDisabled}
-          onClick={async () =>
-            await createComment(resource.id, { body: commentText })
-          }
+          onClick={onSubmit}
         >
           <i
             className={classNames("bi bi-send-fill", {
