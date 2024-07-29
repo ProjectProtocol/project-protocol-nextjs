@@ -4,7 +4,7 @@ import {
   useRouter,
   useSearchParams,
 } from "next/navigation";
-import { useCallback } from "react";
+import { startTransition, useCallback } from "react";
 
 /**
  * useSetSearchParams is a hook that provides a function to update the URL search params
@@ -23,12 +23,16 @@ export default function useSetSearchParams(): [
 
   const setSearchParams = useCallback(
     (setterFunc: (nextParams: URLSearchParams) => URLSearchParams) => {
-      const prevParams = new URLSearchParams(searchParams.toString());
-      const newParams = setterFunc(prevParams);
-      const newParamsString = newParams.toString();
-      const url = newParamsString ? `${pathname}?${newParamsString}` : pathname;
+      startTransition(() => {
+        const prevParams = new URLSearchParams(searchParams.toString());
+        const newParams = setterFunc(prevParams);
+        const newParamsString = newParams.toString();
+        const url = newParamsString
+          ? `${pathname}?${newParamsString}`
+          : pathname;
 
-      router.replace(url);
+        router.replace(url);
+      });
     },
     [pathname, router, searchParams]
   );

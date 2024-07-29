@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Collapse from "react-bootstrap/Collapse";
 import classNames from "classnames";
-import { usePathname, useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import ResourceTagFilter from "./ResourceTagFilter";
 import ResourceLocationFilter from "./ResourceLocationFilter";
@@ -19,7 +18,9 @@ export default function ResourceFilters({
   const t = useTranslations("resources");
 
   /* Reveal filters if a filter has been set via resource card tag */
-  const [filtersOpen, setFiltersOpen] = useState(false);
+  const [filtersOpen, setFiltersOpen] = useState(
+    !!searchParams.tags || !!searchParams.location
+  );
 
   return (
     <div

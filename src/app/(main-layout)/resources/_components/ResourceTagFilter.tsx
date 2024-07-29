@@ -4,15 +4,17 @@ import { ResourceTag, resourceTags } from "@/types/Resource";
 import { useTranslations } from "next-intl";
 import CategoryPill from "./CategoryPill";
 import useSetSearchParams from "@/lib/useSetSearchParams";
+import { useState } from "react";
 
 const tagList = Object.values(resourceTags);
 
 export default function ResourceTagFilter() {
   const t = useTranslations("resources");
   const [searchParams, setSearchParams] = useSetSearchParams();
-  const currentTags = searchParams.getAll("tags");
+  const [currentTags, setCurrentTags] = useState(searchParams.getAll("tags"));
 
   function updateTags(tags: string[]) {
+    setCurrentTags(tags);
     setSearchParams((prev) => {
       const newParams = new URLSearchParams(prev.toString());
       newParams.delete("tags");

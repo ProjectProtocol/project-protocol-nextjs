@@ -13,7 +13,10 @@ export default async function ResourcesList({
   return (
     <>
       <SearchResultsInfo meta={initialData.meta} />
-      <ResourceSearchResults initialData={initialData} />
+      <ResourceSearchResults
+        initialData={initialData}
+        searchParams={searchParams}
+      />
     </>
   );
 }
