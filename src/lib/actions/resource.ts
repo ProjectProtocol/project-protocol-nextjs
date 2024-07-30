@@ -4,6 +4,7 @@ import { getSession } from "../session";
 import Api from "../api";
 import { SearchData, Page } from "@/types/Search";
 import Resource from "@/types/Resource";
+import { ResourceSearchParams } from "@/types/Resource";
 
 export async function like(id: number) {
   const session = await getSession();
@@ -43,9 +44,7 @@ export async function searchResources(
 
   const url = "resources?" + params.toString();
 
-  const result = await new Api(session?.apiToken)
-    .get(url)
-    .then((r) => r.json());
+  const result = await api.get(url).then((r) => r.json());
 
   return result;
 }
