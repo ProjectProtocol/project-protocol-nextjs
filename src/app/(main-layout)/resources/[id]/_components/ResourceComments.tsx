@@ -1,6 +1,6 @@
 import Resource from "@/types/Resource";
 import { listComments } from "@/lib/actions/resource";
-import ResourceCommentsList from "../../_components/ResourceCommentsList";
+import ResourceCommentsList from "./ResourceCommentsList";
 
 export default async function ResourceComments({
   resource,

@@ -5,6 +5,9 @@ import Api from "../api";
 import { SearchData, Page } from "@/types/Search";
 import Resource, { ResourceSearchParams } from "@/types/Resource";
 import { castArray } from "lodash";
+import { flashError, flashSuccess } from "../flash-messages";
+import { getTranslations } from "next-intl/server";
+import { revalidatePath } from "next/cache";
 
 export async function like(id: number) {
   const session = await getSession();
@@ -66,6 +69,7 @@ export async function listComments(
 }
 
 export async function createComment(id: number, { body }: { body: string }) {
+  const t = await getTranslations();
   const session = await getSession();
   const params = {
     comment: {
@@ -73,9 +77,21 @@ export async function createComment(id: number, { body }: { body: string }) {
     },
   };
 
-  const result = await new Api(session?.apiToken)
-    .post(`/resources/${id}/comments`, { body: JSON.stringify(params) })
-    .then((r) => r.json());
+  const result = await new Api(session?.apiToken).post(
+    `/resources/${id}/comments`,
+    { body: JSON.stringify(params) }
+  );
 
-  return result.comment;
+  if (!result.ok) {
+    flashError(t("shared.genericError"));
+    return {
+      errors: {},
+    };
+  }
+
+  flashSuccess(t("resources.commentCreatedSuccess"));
+  revalidatePath(`/resources/${id}`);
+  revalidatePath(`/resources/${id}/comments`);
+
+  return { ok: true };
 }

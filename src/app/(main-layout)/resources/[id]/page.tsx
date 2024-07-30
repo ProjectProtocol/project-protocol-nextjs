@@ -4,7 +4,7 @@ import ResourceCard from "../_components/ResourceCard";
 import { getSession, getUser } from "@/lib/session";
 import Divider from "@/components/Divider";
 import ResourceComments from "./_components/ResourceComments";
-import UnauthorizedCommentArea from "../_components/UnauthorizedCommentArea";
+import UnauthorizedCommentArea from "./_components/UnauthorizedCommentArea";
 import CommentArea from "./_components/CommentArea";
 import { Suspense } from "react";
 import ResourcesLoadingPlaceholder from "../_components/ResourcesLoadingPlaceholder";
