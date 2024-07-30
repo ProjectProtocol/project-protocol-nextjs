@@ -14,7 +14,7 @@ export default function PasswordResetForm({ token }: { token: string }) {
   const router = useRouter();
   const { register, watch, handleSubmit, getFieldState, formState } =
     useForm<IPasswordResetsFormState>({
-      mode: "onSubmit",
+      mode: "onBlur",
       defaultValues: {
         newPassword: "",
         newPasswordConfirm: "",
