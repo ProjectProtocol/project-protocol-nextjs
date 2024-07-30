@@ -3,8 +3,8 @@
 import { getSession } from "../session";
 import Api from "../api";
 import { SearchData, Page } from "@/types/Search";
-import Resource from "@/types/Resource";
-import { ResourceSearchParams } from "@/types/Resource";
+import Resource, { ResourceSearchParams } from "@/types/Resource";
+import { castArray } from "lodash";
 
 export async function like(id: number) {
   const session = await getSession();

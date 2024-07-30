@@ -4,7 +4,6 @@ import Paginator from "@/components/Paginator";
 import Resource, { ResourceSearchParams } from "@/types/Resource";
 import { SearchData } from "@/types/Search";
 import ResourceCard from "../_components/ResourceCard";
-import { useSearchParams } from "next/navigation";
 import { domAnimation, LazyMotion, m } from "framer-motion";
 import { searchResources } from "@/lib/actions/resource";
 
