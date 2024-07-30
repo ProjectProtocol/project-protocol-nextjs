@@ -1,25 +1,24 @@
 "use client";
 
 import SearchBar from "@/components/SearchBar";
+import useSetSearchParams from "@/lib/useSetSearchParams";
 import { debounce } from "lodash";
 import { useTranslations } from "next-intl";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Col, Row } from "react-bootstrap";
 
 export default function ResourceSearchBar() {
-  const params = useSearchParams();
-  const pathname = usePathname();
-  const router = useRouter();
+  const [searchParams, setSearchParams] = useSetSearchParams();
   const t = useTranslations();
 
   const handleInput = debounce((term?: string) => {
-    const searchParams = new URLSearchParams(params);
-    if (term) {
-      searchParams.set("search", term);
-    } else {
-      searchParams.delete("search");
-    }
-    router.replace(`${pathname}?${searchParams.toString()}`);
+    setSearchParams((nextParams) => {
+      if (term) {
+        nextParams.set("search", term);
+      } else {
+        nextParams.delete("search");
+      }
+      return nextParams;
+    });
   }, 500);
 
   return (
@@ -29,7 +28,7 @@ export default function ResourceSearchBar() {
           name="search"
           placeholder={t("resources.searchPlaceholder")}
           size="lg"
-          defaultValue={params.get("search")?.toString()}
+          defaultValue={searchParams.get("search")?.toString()}
           onChange={(e) => handleInput(e.target.value)}
           onClear={() => handleInput()}
           activeColor="cobalt"

@@ -3,7 +3,8 @@
 import { getSession } from "../session";
 import Api from "../api";
 import { SearchData } from "@/types/Search";
-import Resource from "@/types/Resource";
+import Resource, { ResourceSearchParams, ResourceTag } from "@/types/Resource";
+import { castArray } from "lodash";
 
 export async function like(id: number) {
   const session = await getSession();
@@ -23,18 +24,25 @@ export async function dislike(id: number) {
   return result.resource;
 }
 
-export async function searchResources({
-  search = "",
-  page = 0,
-}): Promise<SearchData<Resource>> {
+export async function searchResources(
+  searchParams: ResourceSearchParams = {}
+): Promise<SearchData<Resource>> {
   const session = await getSession();
   const api = new Api(session?.apiToken);
-  const params = {
-    search,
-    page: String(page),
-  };
+  const params = new URLSearchParams();
 
-  const url = "resources?" + new URLSearchParams(params);
+  for (const [key, value] of Object.entries(searchParams)) {
+    if (value) {
+      if (Array.isArray(value) || key === "tags") {
+        const tagsValue = castArray(value);
+        tagsValue.forEach((v) => params.append(key + "[]", v));
+      } else {
+        params.set(key, value);
+      }
+    }
+  }
+
+  const url = "resources?" + params.toString();
 
   const result = await api.get(url).then((r) => r.json());
 
