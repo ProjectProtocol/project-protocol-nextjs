@@ -30,8 +30,8 @@ export default async function RootLayout({
           font.className + " w-100 min-vh-100 p-0 bg-light overflow-y-scroll"
         }
       >
-        <NotificationArea />
         <NextIntlClientProvider messages={messages}>
+          <NotificationArea />
           <AuthProvider user={user}>{children}</AuthProvider>
         </NextIntlClientProvider>
       </body>

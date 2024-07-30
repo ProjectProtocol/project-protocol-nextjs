@@ -5,7 +5,8 @@ export type FlashMessage = {
   id?: string;
   message: string;
   type: "success" | "error";
-  dismissable?: boolean;
+  template?: string;
+  opts?: any;
 };
 
 /**
@@ -27,8 +28,8 @@ export function flashError(txt: string) {
   flash({ message: txt, type: "error" });
 }
 
-export function flashSuccess(txt: string) {
-  flash({ message: txt, type: "success" });
+export function flashSuccess(txt: string, opts: any = {}) {
+  flash({ message: txt, type: "success", ...opts });
 }
 
 /**
