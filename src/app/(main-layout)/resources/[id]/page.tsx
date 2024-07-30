@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import Api from "@/lib/api";
 import PageHeader from "@/components/PageHeader";
-import ResourceCard from "./_components/ResourceCard";
+import ResourceCard from "../_components/ResourceCard";
 import { getSession } from "@/lib/session";
 
 export default async function Page({ params }: { params: { id: string } }) {
