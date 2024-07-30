@@ -3,6 +3,7 @@
 import { getSession } from "../session";
 import Api from "../api";
 import { SearchData, Page } from "@/types/Search";
+import Comment from "@/types/Comment";
 import Resource, { ResourceSearchParams } from "@/types/Resource";
 import { castArray } from "lodash";
 import { flashError, flashSuccess } from "../flash-messages";
