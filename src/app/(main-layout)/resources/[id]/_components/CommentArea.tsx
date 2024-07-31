@@ -6,14 +6,14 @@ import { Button } from "react-bootstrap";
 import { useTranslations } from "next-intl";
 import { createComment } from "@/lib/actions/resource";
 import Resource from "@/types/Resource";
-import classNames from "classnames";
 import { useRef } from "react";
+import CommentSendIcon from "./CommentSendIcon";
 import toast from "react-hot-toast";
 
 export default function CommentArea({ resource }: { resource: Resource }) {
   const t = useTranslations();
   const [commentText, setCommentText] = useState("");
-  const [submitDisabled, setSubmitDisabled] = useState(false);
+  const [submitDisabled, setSubmitDisabled] = useState(true);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
   const resizeTextArea = () => {
@@ -73,12 +73,7 @@ export default function CommentArea({ resource }: { resource: Resource }) {
           disabled={submitDisabled}
           onClick={onSubmit}
         >
-          <i
-            className={classNames("bi bi-send-fill", {
-              ["mediumGray"]: submitDisabled,
-              ["cobalt"]: !submitDisabled,
-            })}
-          />
+          <CommentSendIcon disabled={submitDisabled} />
         </Button>
       </div>
     </Card>
