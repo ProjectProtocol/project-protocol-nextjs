@@ -6,7 +6,6 @@ import { SearchData, Page } from "@/types/Search";
 import Comment from "@/types/Comment";
 import Resource, { ResourceSearchParams } from "@/types/Resource";
 import { castArray } from "lodash";
-import { flashError, flashSuccess } from "../flash-messages";
 import { getTranslations } from "next-intl/server";
 import { revalidatePath } from "next/cache";
 
@@ -84,15 +83,12 @@ export async function createComment(id: number, { body }: { body: string }) {
   );
 
   if (!result.ok) {
-    flashError(t("shared.genericError"));
     return {
       errors: {},
     };
   }
 
-  flashSuccess(t("resources.commentCreatedSuccess"));
   revalidatePath(`/resources/${id}`);
-  revalidatePath(`/resources/${id}/comments`);
 
   return { ok: true };
 }
