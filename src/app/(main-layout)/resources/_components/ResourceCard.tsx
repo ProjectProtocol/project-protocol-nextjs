@@ -5,6 +5,7 @@ import SocialMediaLink from "./SocialMediaLink";
 import TagBadge from "@/components/TagBadge";
 import ResourceVoteControls from "./ResourceVoteControls";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function ResourceCard({ resource }: { resource: Resource }) {
   const t = useTranslations();
@@ -98,7 +99,7 @@ export default function ResourceCard({ resource }: { resource: Resource }) {
         </div>
         <div className="d-flex flex-row flex-wrap gap-2 align-items-center text-dark">
           <ResourceVoteControls resource={resource} />
-          <a
+          <Link
             href={`/resources/${resource.id}`}
             className="text-decoration-none"
           >
@@ -106,7 +107,7 @@ export default function ResourceCard({ resource }: { resource: Resource }) {
               <span>{resource.commentsCount}</span>
               <i className="bi me-1 align-middle bi-chat-left" />
             </div>
-          </a>
+          </Link>
         </div>
       </div>
     </Card>
