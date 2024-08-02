@@ -112,7 +112,11 @@ export async function changePassword({
 
   const response = await new Api(session?.apiToken).patch("/profile", {
     body: JSON.stringify(
-      snakeCaseKeys({ password: password, newPassword: newPassword })
+      snakeCaseKeys({
+        password: password,
+        newPassword: newPassword,
+        newPasswordConfirm: newPasswordConfirm,
+      })
     ),
   });
 
