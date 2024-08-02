@@ -12,7 +12,7 @@ import { useCallback } from "react";
 export default function LoginForm({ callbackURL }: { callbackURL?: string }) {
   const t = useTranslations();
   const schema = z.object({
-    email: z
+    loginEmail: z
       .string()
       .min(1, t("login.emailRequired"))
       .email(t("login.emailMessage")),
