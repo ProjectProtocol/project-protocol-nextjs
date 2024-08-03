@@ -20,6 +20,7 @@ export default function LoginForm({ callbackURL }: { callbackURL?: string }) {
       .string()
       .min(1, t("login.passwordRequired"))
       .min(8, t("shared.passwordLengthError")),
+    callbackURL: z.string().optional(),
   });
   const { register, handleSubmit, getFieldState, formState } =
     useForm<ILoginFormState>({

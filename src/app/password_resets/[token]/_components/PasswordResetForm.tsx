@@ -24,6 +24,7 @@ export default function PasswordResetForm({ token }: { token: string }) {
         .string()
         .min(1, t("password_reset.newPasswordConfirm.required"))
         .min(8, t("shared.passwordLengthError")),
+      token: z.string(),
     })
     .refine((data) => data.newPassword === data.newPasswordConfirm, {
       message: t("password_reset.newPasswordConfirmMismatch"),
@@ -65,6 +66,7 @@ export default function PasswordResetForm({ token }: { token: string }) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="vertical-rhythm">
+      <input type="hidden" name="token" value={token} />
       <Input
         label={t("account.changePassword.newPassword")}
         type="password"
