@@ -8,11 +8,30 @@ import AsyncButton from "@/components/AsyncButton";
 import { IPasswordResetsFormState, resetPassword } from "@/lib/actions/account";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function PasswordResetForm({ token }: { token: string }) {
   const t = useTranslations();
   const router = useRouter();
-  const { register, watch, handleSubmit, getFieldState, formState } =
+  const schema = z
+    .object({
+      newPassword: z
+        .string()
+        .min(1, t("password_reset.newPassword.required"))
+        .min(8, t("shared.passwordLengthError")),
+      newPasswordConfirm: z
+        .string()
+        .min(1, t("password_reset.newPasswordConfirm.required"))
+        .min(8, t("shared.passwordLengthError")),
+      token: z.string(),
+    })
+    .refine((data) => data.newPassword === data.newPasswordConfirm, {
+      message: t("password_reset.newPasswordConfirmMismatch"),
+      path: ["newPasswordConfirm"],
+    });
+
+  const { register, handleSubmit, getFieldState, formState } =
     useForm<IPasswordResetsFormState>({
       mode: "onBlur",
       defaultValues: {
@@ -20,6 +39,7 @@ export default function PasswordResetForm({ token }: { token: string }) {
         newPasswordConfirm: "",
         token,
       },
+      resolver: zodResolver(schema),
     });
 
   async function onSubmit(data: IPasswordResetsFormState) {
@@ -46,32 +66,18 @@ export default function PasswordResetForm({ token }: { token: string }) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="vertical-rhythm">
+      <input type="hidden" name="token" value={token} />
       <Input
         label={t("account.changePassword.newPassword")}
         type="password"
         {...validationProps("newPassword")}
-        {...register("newPassword", {
-          required: t("shared.requiredField", {
-            field: t("password_reset.newPassword.title"),
-          }),
-          minLength: {
-            value: 8,
-            message: t("shared.passwordLengthError"),
-          },
-        })}
+        {...register("newPassword")}
       />
       <Input
         label={t("account.changePassword.newPasswordConfirm")}
         type="password"
         {...validationProps("newPasswordConfirm")}
-        {...register("newPasswordConfirm", {
-          required: t("shared.requiredField", {
-            field: t("account.changePassword.newPasswordConfirm"),
-          }),
-          validate: (value) =>
-            value === watch("newPassword") ||
-            t("password_reset.newPasswordConfirmMismatch"),
-        })}
+        {...register("newPasswordConfirm")}
       />
       <div className="d-flex">
         <AsyncButton

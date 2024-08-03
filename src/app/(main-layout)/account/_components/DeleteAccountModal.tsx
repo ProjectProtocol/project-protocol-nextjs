@@ -4,22 +4,17 @@ import { useTranslations } from "next-intl";
 import PopUp, { IPopUp } from "@/components/PopUp";
 import AsyncButton from "@/components/AsyncButton";
 import { Button } from "react-bootstrap";
-import { deleteAccount } from "@/lib/actions/account";
-import { useFormState } from "react-dom";
-import { getErrorState } from "@/lib/forms";
+import { deleteAccount, IDeleteAccountFormState } from "@/lib/actions/account";
 import Input from "@/components/Input";
-import { useEffect } from "react";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { useCallback } from "react";
 
 interface IDeleteAccountModal {
   onHide: () => void;
   closeButton?: boolean;
 }
-
-const initialState = {
-  error: undefined,
-  password: "",
-  errors: {},
-};
 
 export default function DeleteAccountModal({
   onHide,
@@ -27,13 +22,38 @@ export default function DeleteAccountModal({
   ...popUpProps
 }: IDeleteAccountModal & IPopUp) {
   const t = useTranslations();
-  const [state, formAction] = useFormState(deleteAccount, initialState);
+  const schema = z.object({
+    password: z
+      .string()
+      .min(
+        1,
+        t("shared.requiredField", { field: t("account.delete.password") })
+      ),
+  });
+  const { register, handleSubmit, getFieldState, formState } =
+    useForm<IDeleteAccountFormState>({
+      mode: "onBlur",
+      defaultValues: {
+        password: "",
+      },
+      resolver: zodResolver(schema),
+    });
 
-  useEffect(() => {
-    if (!state?.error && !state?.errors) {
-      onHide();
-    }
-  }, [state]);
+  async function onSubmit(data: IDeleteAccountFormState) {
+    await deleteAccount(data);
+    onHide();
+  }
+
+  const validationProps = useCallback(
+    (fieldName: keyof IDeleteAccountFormState) => {
+      const { invalid, error } = getFieldState(fieldName, formState);
+      return {
+        isInvalid: invalid,
+        error: error?.message,
+      };
+    },
+    [getFieldState, formState]
+  );
 
   return (
     <PopUp
@@ -42,15 +62,15 @@ export default function DeleteAccountModal({
       closeButton
       onHide={onHide}
     >
-      <form className="vertical-rhythm" action={formAction}>
+      <form className="vertical-rhythm" onSubmit={handleSubmit(onSubmit)}>
         <p>{t("account.delete.confirmMessage")}</p>
         <p>{t("account.delete.enterPassword")}</p>
         <Input
           type="password"
-          name="password"
           label={t("account.delete.password")}
           placeholder={t("account.delete.password")}
-          {...getErrorState("password", state?.errors)}
+          {...validationProps("password")}
+          {...register("password")}
         />
         <div className="d-flex flex-row justify-content-between mt-4">
           <Button variant="outline-dark" onClick={onHide}>

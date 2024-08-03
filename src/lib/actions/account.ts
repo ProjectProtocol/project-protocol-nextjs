@@ -11,25 +11,17 @@ import { MessageKeys } from "next-intl";
 /**
  * Initiates a password reset request for "forgot password" flow.
  */
-export async function requestPasswordReset(_: any, formData: FormData) {
+export interface IRequestPasswordResetFormState {
+  email: string;
+}
+
+export async function requestPasswordReset({
+  email,
+}: IRequestPasswordResetFormState) {
   const t = await getTranslations();
 
-  const requestPasswordResetSchema = z.object({
-    email: z.string().email(t("login.emailMessage")),
-  });
-
-  const validatedFields = requestPasswordResetSchema.safeParse({
-    email: formData.get("email"),
-  });
-
-  if (!validatedFields.success) {
-    return {
-      errors: validatedFields.error.flatten().fieldErrors,
-    };
-  }
-
   const response = await new Api().post("/auth/password_resets", {
-    body: JSON.stringify({ ...validatedFields.data, original_location: "/" }),
+    body: JSON.stringify({ email: email, original_location: "/" }),
   });
 
   if (!response.ok) {
@@ -73,19 +65,21 @@ export interface IPasswordResetsFormState {
 type ResetPasswordResponse = {
   error?: MessageKeys<IntlMessages, "password_reset">;
 };
+
 export async function resetPassword({
   newPassword,
   newPasswordConfirm,
   token,
 }: IPasswordResetsFormState): Promise<ResetPasswordResponse> {
   const t = await getTranslations();
-  let messageKey;
 
   const response = await new Api().patch(`/auth/password_resets/${token}`, {
-    body: JSON.stringify({
-      new_password: newPassword,
-      new_password_confirm: newPasswordConfirm,
-    }),
+    body: JSON.stringify(
+      snakeCaseKeys({
+        newPassword: newPassword,
+        newPasswordConfirm: newPasswordConfirm,
+      })
+    ),
   });
 
   const body = await response.json();
@@ -99,66 +93,51 @@ export async function resetPassword({
   return { error } as ResetPasswordResponse;
 }
 
-export async function changePassword(prevState: any, formData: FormData) {
-  const session = await getSession();
-  const t = await getTranslations();
-
-  const changePasswordSchema = z
-    .object({
-      password: z.string(),
-      newPassword: z.string().min(8, t("account.changePassword.detail")),
-      newPasswordConfirm: z.string().min(8, t("account.changePassword.detail")),
-    })
-    .refine((data) => data.newPassword === data.newPasswordConfirm, {
-      message: t("password_reset.newPasswordConfirmMismatch"),
-      path: ["newPasswordConfirm"],
-    });
-
-  const validatedFields = changePasswordSchema.safeParse({
-    password: formData.get("password"),
-    newPassword: formData.get("newPassword"),
-    newPasswordConfirm: formData.get("newPasswordConfirm"),
-  });
-
-  if (!validatedFields.success) {
-    return {
-      errors: validatedFields.error.flatten().fieldErrors,
-    };
-  }
-
-  const response = await new Api(session?.apiToken).patch("/profile", {
-    body: JSON.stringify(snakeCaseKeys(validatedFields.data)),
-  });
-
-  if (!response.ok) {
-    return {
-      error: t("account.changePassword.error"),
-    };
-  }
-
-  flashSuccess(t("account.changePassword.success.heading"));
+export interface IChangePasswordFormState {
+  password: string;
+  newPassword: string;
+  newPasswordConfirm: string;
 }
 
-export async function deleteAccount(prevState: any, formData: FormData) {
+type ChangePasswordResponse = {
+  error?: MessageKeys<IntlMessages, "account.changePassword">;
+};
+
+export async function changePassword({
+  password,
+  newPassword,
+  newPasswordConfirm,
+}: IChangePasswordFormState) {
+  const session = await getSession();
+
+  const response = await new Api(session?.apiToken).patch("/profile", {
+    body: JSON.stringify(
+      snakeCaseKeys({
+        password: password,
+        newPassword: newPassword,
+        newPasswordConfirm: newPasswordConfirm,
+      })
+    ),
+  });
+
+  let error;
+  if (!response.ok) {
+    error = "account.changePassword.error";
+  }
+
+  return { error } as ChangePasswordResponse;
+}
+
+export interface IDeleteAccountFormState {
+  password: string;
+}
+
+export async function deleteAccount({ password }: IDeleteAccountFormState) {
   const session = await getSession();
   const t = await getTranslations();
 
-  const deleteAccountSchema = z.object({
-    password: z.string(),
-  });
-
-  const validatedFields = deleteAccountSchema.safeParse({
-    password: formData.get("password"),
-  });
-
-  if (!validatedFields.success) {
-    return {
-      errors: validatedFields.error.flatten().fieldErrors,
-    };
-  }
-
   const response = await new Api(session?.apiToken).delete(
-    `/auth?password=${validatedFields.data.password}`
+    `/auth?password=${password}`
   );
 
   if (!response.ok) {
