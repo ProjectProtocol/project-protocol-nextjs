@@ -2,6 +2,7 @@
 
 import { LazyMotion, domAnimation, m } from "framer-motion";
 import React from "react";
+import AnimatedItem from "./Paginator/AnimatedItem";
 
 export default function AnimatedList({
   children,
@@ -11,13 +12,9 @@ export default function AnimatedList({
   return (
     <LazyMotion features={domAnimation}>
       {React.Children.map(children, (child, index) => (
-        <m.div
-          animate={{ opacity: 1, y: 0 }}
-          initial={{ opacity: 0, y: 30 }}
-          transition={{ delay: index * 0.15, ease: "easeOut" }}
-        >
+        <AnimatedItem key={`animated-item-${index}`} index={index} animated>
           {child}
-        </m.div>
+        </AnimatedItem>
       ))}
     </LazyMotion>
   );
