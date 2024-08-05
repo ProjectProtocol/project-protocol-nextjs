@@ -16,7 +16,6 @@ export default function AnimatedItem({
       <m.div
         animate={{ opacity: 1, y: 0 }}
         initial={{ opacity: 0, y: 30 }}
-        exit={{ opacity: 0, y: 30 }}
         transition={{ delay: index * 0.15, ease: "easeOut" }}
       >
         {children}

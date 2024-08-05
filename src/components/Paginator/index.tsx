@@ -58,7 +58,7 @@ export default function Paginator<T>({
         <Fragment key={`item-page-${pageIdx}`}>
           {items.map((i: T, idx: number) => {
             const key = keyGenerator(i, pageIdx);
-            console.log(key);
+
             return (
               <>
                 <AnimatedItem animated={animated} index={idx} key={key}>
