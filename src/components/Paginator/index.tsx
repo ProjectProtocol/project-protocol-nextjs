@@ -1,11 +1,11 @@
 "use client";
 
 import { SearchMeta } from "@/types/Search";
+import { domAnimation, LazyMotion } from "framer-motion";
 import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import { InView } from "react-intersection-observer";
-
-const paginatorAnimations = {};
+import AnimatedItem from "./AnimatedItem";
 
 interface IPaginator<T> {
   data: T[];
@@ -13,7 +13,8 @@ interface IPaginator<T> {
   getData: (page: number) => Promise<{ data: T[]; meta: SearchMeta }>;
   keyGenerator: (item: T, page: number) => string;
   ItemComponent: React.FC<{ item: T; page: number; index: number }>;
-  ListEndComponent?: React.FC<{ index: number }>;
+  ListEndComponent?: React.FC;
+  animated?: boolean;
 }
 
 export default function Paginator<T>({
@@ -23,6 +24,7 @@ export default function Paginator<T>({
   keyGenerator,
   ItemComponent,
   ListEndComponent,
+  animated,
 }: IPaginator<T>) {
   const [page, setPage] = useState(meta.page);
   const [totalPages, setTotalPages] = useState(meta.totalPages);
@@ -51,24 +53,27 @@ export default function Paginator<T>({
   }, [page, pageLoading, itemPages, getData, hasNextPage]);
 
   return (
-    <>
-      {itemPages.map((items, pageIdx) =>
-        items.map((i: T, idx: number) => {
-          const key = keyGenerator(i, pageIdx);
+    <LazyMotion features={domAnimation}>
+      {itemPages.map((items, pageIdx) => (
+        <Fragment key={`item-page-${pageIdx}`}>
+          {items.map((i: T, idx: number) => {
+            const key = keyGenerator(i, pageIdx);
 
-          return (
-            <Fragment key={`paginator-fragment-${key}`}>
-              <ItemComponent item={i} page={pageIdx} index={idx} key={key} />
-              {ListEndComponent &&
-                !hasNextPage &&
-                pageIdx === totalPages - 1 &&
-                idx === items.length - 1 && (
-                  <ListEndComponent key={"list-end-" + key} index={idx + 1} />
-                )}
-            </Fragment>
-          );
-        })
-      )}
+            return (
+              <>
+                <AnimatedItem animated={animated} index={idx} key={key}>
+                  <ItemComponent item={i} page={pageIdx} index={idx} />
+                </AnimatedItem>
+              </>
+            );
+          })}
+          {ListEndComponent && !hasNextPage && pageIdx === totalPages - 1 && (
+            <AnimatedItem animated={animated} index={items.length}>
+              <ListEndComponent />
+            </AnimatedItem>
+          )}
+        </Fragment>
+      ))}
       {/* When user scrolls to the end of the list, InView triggers getMore() */}
       <InView
         as="div"
@@ -78,6 +83,6 @@ export default function Paginator<T>({
       >
         {pageLoading && <Spinner animation="border" />}
       </InView>
-    </>
+    </LazyMotion>
   );
 }
