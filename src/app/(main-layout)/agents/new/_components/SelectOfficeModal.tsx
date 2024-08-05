@@ -71,6 +71,7 @@ export default function SelectOfficeModal({
         />
         <SearchResultsInfo meta={initialData.meta} />
         <Paginator<Office>
+          animated
           meta={initialData.meta}
           data={initialData.data}
           keyGenerator={(o) => `agent-office-select-${o.id}`}
