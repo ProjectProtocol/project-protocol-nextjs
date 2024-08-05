@@ -26,7 +26,7 @@ export default function Paginator<T>({
 }: IPaginator<T>) {
   const [page, setPage] = useState(meta.page);
   const [totalPages, setTotalPages] = useState(meta.totalPages);
-  const [itemPages, setItemPages] = useState<T[][]>([data] || []);
+  const [itemPages, setItemPages] = useState<T[][]>(data ? [data] : []);
   const [pageLoading, setPageLoading] = useState(false);
 
   useEffect(() => {
