@@ -6,8 +6,9 @@ import Api from "../api";
 import { flashError, flashSuccess } from "../flash-messages";
 import { revalidatePath } from "next/cache";
 import { IRateAgentFormState } from "@/app/(main-layout)/agents/[agentId]/_components/RateAgentForm/types";
-import { snakeCase } from "lodash";
+import { replace, snakeCase } from "lodash";
 import { snakeCaseKeys } from "../transformKeys";
+import { redirect } from "next/navigation";
 
 export default async function rateAgent(
   agentId: string,
@@ -35,4 +36,29 @@ export default async function rateAgent(
   );
 
   revalidatePath(`/agents/${agentId}`);
+}
+
+export async function createAgent({
+  firstName = "",
+  lastName,
+  officeId,
+}: {
+  firstName?: string;
+  lastName: string;
+  officeId: string;
+}) {
+  const t = await getTranslations();
+  const session = await getSession();
+  const agent = snakeCaseKeys({ firstName, lastName, officeId });
+  const response = await new Api(session?.apiToken).post(`/agents`, {
+    body: JSON.stringify({ agent }),
+  });
+
+  const data = await response.json();
+
+  if (response.ok) {
+    return data;
+  } else {
+    return false;
+  }
 }
