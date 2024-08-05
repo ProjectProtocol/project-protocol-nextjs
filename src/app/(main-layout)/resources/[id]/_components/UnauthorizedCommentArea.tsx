@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 
-export default async function UnauthorizedCommentArea() {
+export default function UnauthorizedCommentArea() {
   const t = useTranslations();
   const router = useRouter();
   return (
