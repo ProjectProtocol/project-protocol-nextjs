@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 interface ISelectOfficeModal {
   show: boolean;
   close: () => void;
-  selectOffice: (o: Office) => void;
+  selectOffice: (office: Office) => void;
 }
 
 export default function SelectOfficeModal({
@@ -48,6 +48,7 @@ export default function SelectOfficeModal({
       scrollable
       centered={false}
       bodyClass="p-md-4 overflow-y-scroll"
+      style={{ minHeight: "600px" }}
       onHide={() => {
         setSearchText("");
         close();
