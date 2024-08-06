@@ -9,8 +9,8 @@ import { signUp } from "@/lib/actions/auth";
 import { useCallback } from "react";
 import Input from "../Input";
 import AsyncButton from "../AsyncButton";
-import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export default function SignupForm({ callbackURL }: { callbackURL?: string }) {
   const t = useTranslations();
@@ -41,10 +41,14 @@ export default function SignupForm({ callbackURL }: { callbackURL?: string }) {
     const { error, isConfirmed } = await signUp(data);
     if (error) {
       toast.error(t(error));
-    } else if (!isConfirmed) {
-      router.replace(`/login/confirmations?email=${data.signUpEmail}`);
+    } else if (isConfirmed && callbackURL) {
+      router.replace(callbackURL);
+    } else if (!isConfirmed && callbackURL) {
+      router.replace(
+        `/login/confirmations?email=${data.signUpEmail}&callbackURL=${callbackURL}`
+      );
     } else {
-      router.replace(callbackURL || "/");
+      router.replace(`/login/confirmations?email=${data.signUpEmail}`);
     }
   }
 

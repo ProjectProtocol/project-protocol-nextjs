@@ -82,14 +82,16 @@ export async function signUp({
 
   const apiToken = response.headers.get("authorization");
   if (!apiToken) {
+    flashError(t("shared.genericError"));
     return {
       error: "Unable to retrieve API token",
     };
   }
 
-  const { isConfirmed } = data.user;
+  const { email, isConfirmed, confirmationSentAt } = data.user;
+  const user = { email, isConfirmed, confirmationSentAt };
   flashSuccess(t("login.register.success"));
-
+  await createSession(user, apiToken);
   return { isConfirmed };
 }
 
