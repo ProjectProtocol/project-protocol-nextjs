@@ -93,11 +93,7 @@ export async function signUp({
   flashSuccess(t("login.register.success"));
   await createSession(user, apiToken);
 
-  if (!user.isConfirmed) {
-    redirect("/login/confirmations");
-  } else if (callbackURL) {
-    redirect(String(callbackURL));
-  }
+  return { email, isConfirmed };
 }
 
 export async function confirmAccount(token: string) {

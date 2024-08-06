@@ -38,7 +38,16 @@ export default function SignupForm({ callbackURL }: { callbackURL?: string }) {
     });
 
   async function onSubmit(data: ISignupFormState) {
-    await signUp(data);
+    const { error, email, isConfirmed } = await signUp(data);
+    if (error) {
+      toast.error(error);
+    } else {
+      if (isConfirmed) {
+        router.replace(callbackURL || "/");
+      } else {
+        router.replace(`/confirmations?email=${encodeURIComponent(email)}`);
+      }
+    }
   }
 
   const validationProps = useCallback(
