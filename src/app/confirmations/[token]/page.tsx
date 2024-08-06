@@ -17,12 +17,13 @@ export default function Page({ params }: { params: { token: string } }) {
     } else {
       toast.success(t("account.confirmation.success"));
     }
-    router.replace("/login");
+    router.replace("/");
   }
 
   useEffect(() => {
     accountConfirmation();
   });
+
   return (
     <>
       <div className="text-center vertical-rhythm">
