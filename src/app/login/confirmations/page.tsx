@@ -1,10 +1,11 @@
-"use client";
-
 import ConfirmEmail from "@/components/login/ConfirmEmail";
-import { useSearchParams } from "next/navigation";
+import { getSession } from "@/lib/session";
 
-export default function Page() {
-  const searchParams = useSearchParams();
-  const email = searchParams.get("email") || "";
+export default async function Page() {
+  const session = await getSession();
+  const email = session?.user.email;
+  if (!email) {
+    return null;
+  }
   return <ConfirmEmail email={email} />;
 }
