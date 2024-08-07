@@ -5,5 +5,6 @@ import { useSearchParams } from "next/navigation";
 
 export default async function Page() {
   const email = useSearchParams().get("email") || "";
-  return <ConfirmEmail email={email} />;
+  const callbackURL = useSearchParams().get("callbackURL") || "";
+  return <ConfirmEmail email={email} callbackURL={callbackURL} />;
 }

@@ -12,6 +12,7 @@ export default async function LoginLayout({
   children: React.ReactNode;
 }) {
   const t = await getTranslations();
+
   return (
     <main className="vh-100 d-flex p-3 p-md-0 align-items-md-center">
       <Container fluid>

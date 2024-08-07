@@ -4,7 +4,13 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { Button } from "react-bootstrap";
 
-export default function ConfirmEmail({ email }: { email: string }) {
+export default function ConfirmEmail({
+  email,
+  callbackURL,
+}: {
+  email: string;
+  callbackURL?: string;
+}) {
   const t = useTranslations();
 
   return (
@@ -18,7 +24,7 @@ export default function ConfirmEmail({ email }: { email: string }) {
       </p>
       <p>{t("login.loginConfirmSignupDetail2")}</p>
       <div className="text-center mt-5">
-        <Button href="/">{t("shared.OK")}</Button>
+        <Button href={callbackURL || "/"}>{t("shared.OK")}</Button>
       </div>
       <div className="text-center mt-5">
         <Link href="/terms-of-service" className="link">
