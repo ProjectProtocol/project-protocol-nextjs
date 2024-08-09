@@ -50,3 +50,62 @@ export async function login({
     redirect(String(callbackURL));
   }
 }
+
+export interface ISignupFormState {
+  signUpEmail: string;
+  password: string;
+  callbackURL?: string;
+}
+
+export async function signUp({
+  signUpEmail,
+  password,
+  callbackURL,
+}: ISignupFormState) {
+  const t = await getTranslations();
+
+  const response = await new Api().post("/auth/sign_up", {
+    body: JSON.stringify({
+      email: signUpEmail,
+      password: password,
+    }),
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    flashError(t("shared.genericError"));
+    return {
+      error: data.error,
+    };
+  }
+
+  const apiToken = response.headers.get("authorization");
+  if (!apiToken) {
+    flashError(t("shared.genericError"));
+    return {
+      error: "Unable to retrieve API token",
+    };
+  }
+
+  const { email, isConfirmed, confirmationSentAt } = data.user;
+  const user = { email, isConfirmed, confirmationSentAt };
+  flashSuccess(t("login.register.success"));
+  await createSession(user, apiToken);
+
+  return { email, isConfirmed };
+}
+
+export async function confirmAccount(token: string) {
+  const t = await getTranslations();
+  const response = await new Api().post("/auth/confirmations", {
+    body: JSON.stringify({ token }),
+  });
+
+  if (!response.ok) {
+    flashError(t("shared.genericError"));
+    return false;
+  }
+
+  return true;
+}
