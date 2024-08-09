@@ -3,15 +3,11 @@
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { Button } from "react-bootstrap";
+import { useSearchParams } from "next/navigation";
 
-export default function ConfirmEmail({
-  email,
-  callbackURL,
-}: {
-  email: string;
-  callbackURL?: string;
-}) {
+export default function ConfirmEmail({ email }: { email: string }) {
   const t = useTranslations();
+  const callbackURL = useSearchParams().get("callbackURL") || "";
 
   return (
     <div className="d-block p-4">

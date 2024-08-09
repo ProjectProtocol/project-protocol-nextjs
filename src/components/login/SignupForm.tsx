@@ -46,12 +46,10 @@ export default function SignupForm({ callbackURL }: { callbackURL?: string }) {
         router.replace(callbackURL || "/");
       } else if (callbackURL) {
         router.replace(
-          `/confirmations?email=${encodeURIComponent(
-            email
-          )}&callbackURL=${encodeURIComponent(callbackURL)}`
+          `/confirmations?callbackURL=${encodeURIComponent(callbackURL)}`
         );
       } else {
-        router.replace(`/confirmations?email=${encodeURIComponent(email)}`);
+        router.replace(`/confirmations`);
       }
     }
   }
