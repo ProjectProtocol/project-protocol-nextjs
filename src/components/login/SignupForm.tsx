@@ -10,9 +10,8 @@ import { useCallback } from "react";
 import Input from "../Input";
 import AsyncButton from "../AsyncButton";
 import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
 
-export default function SignupForm({ callbackURL }: { callbackURL?: string }) {
+export default function SignupForm() {
   const t = useTranslations();
   const schema = z.object({
     signUpEmail: z
@@ -23,7 +22,6 @@ export default function SignupForm({ callbackURL }: { callbackURL?: string }) {
       .string()
       .min(1, t("login.passwordRequired"))
       .min(8, t("shared.passwordLengthError")),
-    callbackURL: z.string().optional(),
   });
   const router = useRouter();
   const { register, handleSubmit, getFieldState, formState } =
@@ -32,25 +30,14 @@ export default function SignupForm({ callbackURL }: { callbackURL?: string }) {
       defaultValues: {
         signUpEmail: "",
         password: "",
-        callbackURL,
       },
       resolver: zodResolver(schema),
     });
 
   async function onSubmit(data: ISignupFormState) {
-    const { error, email, isConfirmed } = await signUp(data);
-    if (error) {
-      toast.error(error);
-    } else {
-      if (isConfirmed) {
-        router.replace(callbackURL || "/");
-      } else if (callbackURL) {
-        router.replace(
-          `/confirmations?callbackURL=${encodeURIComponent(callbackURL)}`
-        );
-      } else {
-        router.replace(`/confirmations`);
-      }
+    const { error } = await signUp(data);
+    if (!error) {
+      router.replace(`/confirmations`);
     }
   }
 
@@ -71,7 +58,6 @@ export default function SignupForm({ callbackURL }: { callbackURL?: string }) {
         {t("login.signupTitleHelper")}
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className="vertical-rhythm">
-        <input type="hidden" name="callbackURL" value={callbackURL} />
         <Input
           size="lg"
           controlId={`signup-email`}
@@ -96,7 +82,6 @@ export default function SignupForm({ callbackURL }: { callbackURL?: string }) {
               size="lg"
               className="w-100"
               variant="primary"
-              disabled={!formState.isValid}
               type="submit"
             >
               {t("login.signup")}

@@ -1,5 +1,6 @@
 "use client";
 
+import classNames from "classnames";
 import Button, { ButtonProps } from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import { useFormStatus } from "react-dom";
@@ -19,19 +20,17 @@ export default function AsyncButton({
 
   return (
     <Button disabled={isLoading || disabled} {...props}>
-      {isLoading ? (
-        <>
-          <Spinner
-            size="sm"
-            role="status"
-            className="align-middle"
-            animation="border"
-            variant="black"
-          />
-        </>
-      ) : (
-        children
-      )}
+      <div className="position-relative w-100 h-100 d-flex justify-content-center align-items-center">
+        <Spinner
+          size="sm"
+          role="status"
+          animation="border"
+          className={classNames("position-absolute", {
+            "opacity-0": !isLoading,
+          })}
+        />
+        <div className={classNames({ "opacity-0": isLoading })}>{children}</div>
+      </div>
     </Button>
   );
 }

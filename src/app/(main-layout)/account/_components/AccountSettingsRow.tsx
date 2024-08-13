@@ -13,11 +13,11 @@ export default function AccountSettingsRow({
 }: IAccountSettingsRow) {
   return (
     <>
-      <Col xs={7}>
+      <Col xs={8}>
         <h4>{title}</h4>
         <p>{detail}</p>
       </Col>
-      <Col xs={5}>
+      <Col xs={4}>
         <div className="text-end">{action}</div>
       </Col>
     </>

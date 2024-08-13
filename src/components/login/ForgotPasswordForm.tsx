@@ -2,15 +2,15 @@
 import Input from "../Input";
 import { useTranslations } from "next-intl";
 import AsyncButton from "../AsyncButton";
-import {
-  IRequestPasswordResetFormState,
-  requestPasswordReset,
-} from "@/lib/actions/account";
+import { requestPasswordReset } from "@/lib/actions/account";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useCallback } from "react";
 
+export interface IRequestPasswordResetFormState {
+  email: string;
+}
 export default function ForgotPasswordForm() {
   const t = useTranslations();
   const schema = z.object({

@@ -88,7 +88,11 @@ export default async function Menu() {
               </NavLink>
             ) : (
               <NavItem>
-                <Link className="btn btn-primary" href="/login" scroll={false}>
+                <Link
+                  className="btn btn-primary"
+                  href="/login/signup"
+                  scroll={false}
+                >
                   {t("navigation.signUp")}
                 </Link>
               </NavItem>

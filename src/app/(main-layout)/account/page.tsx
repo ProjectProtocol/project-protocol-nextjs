@@ -15,7 +15,7 @@ export default async function Page() {
   return (
     <div>
       <PageHeader title={t("account.title")} showBack />
-      <AccountSettings />
+      <AccountSettings user={user} />
     </div>
   );
 }

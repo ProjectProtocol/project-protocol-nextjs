@@ -11,13 +11,15 @@ export default function Page({ params }: { params: { token: string } }) {
   const t = useTranslations();
   const router = useRouter();
   async function accountConfirmation() {
-    const result = await confirmAccount(params.token);
-    if (!result) {
-      toast.error(t("account.confirmation.error"));
-    } else {
+    try {
+      await confirmAccount(params.token);
+
       toast.success(t("account.confirmation.success"));
+    } catch (e) {
+      toast.error(t("account.confirmation.error"));
+    } finally {
+      router.replace("/rate-my-po");
     }
-    router.replace("/");
   }
 
   useEffect(() => {
@@ -25,11 +27,9 @@ export default function Page({ params }: { params: { token: string } }) {
   });
 
   return (
-    <>
-      <div className="text-center vertical-rhythm">
-        <p>{t("account.confirmation.loading")}</p>
-        <Spinner />
-      </div>
-    </>
+    <div className="text-center vertical-rhythm">
+      <p>{t("account.confirmation.loading")}</p>
+      <Spinner />
+    </div>
   );
 }

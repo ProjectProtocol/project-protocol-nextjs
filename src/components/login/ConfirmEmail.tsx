@@ -2,12 +2,11 @@
 
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { Button } from "react-bootstrap";
 import { useSearchParams } from "next/navigation";
 
 export default function ConfirmEmail({ email }: { email: string }) {
   const t = useTranslations();
-  const callbackURL = useSearchParams().get("callbackURL") || "";
+  const callbackURL = useSearchParams().get("callbackURL") ?? "/rate-my-po";
 
   return (
     <div className="d-block p-4">
@@ -20,7 +19,9 @@ export default function ConfirmEmail({ email }: { email: string }) {
       </p>
       <p>{t("login.loginConfirmSignupDetail2")}</p>
       <div className="text-center mt-5">
-        <Button href={callbackURL || "/"}>{t("shared.OK")}</Button>
+        <Link className="btn btn-primary" href={callbackURL}>
+          {t("shared.OK")}
+        </Link>
       </div>
       <div className="text-center mt-5">
         <Link href="/terms-of-service" className="link">
