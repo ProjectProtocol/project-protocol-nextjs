@@ -37,3 +37,10 @@ next-env.d.ts
 
 .env
 tmp/*
+
+# playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+.env*.playwright

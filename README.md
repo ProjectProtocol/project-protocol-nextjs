@@ -32,3 +32,9 @@ Porting the project protocol client to Nextjs for SEO, page performance, static 
    ```shell
    pnpm dev
    ```
+
+## Playwright tests
+
+1. Copy `.env.local` to another file called `.env.playwright`. Change the API_URL to `https://project-protocol-staging.herokuapp.com`.
+
+2. Run `pnpm exec playwright test`.
