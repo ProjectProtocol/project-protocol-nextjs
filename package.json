@@ -19,6 +19,7 @@
     "classnames": "^2.5.1",
     "contentful": "^10.12.4",
     "deepmerge": "^4.3.1",
+    "dotenv": "^16.4.5",
     "framer-motion": "^11.2.12",
     "jose": "^5.4.1",
     "lodash-es": "^4.17.21",
@@ -36,6 +37,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@playwright/test": "^1.46.0",
     "@tolgee/cli": "^2.0.4",
     "@types/node": "^20",
     "@types/react": "^18",
