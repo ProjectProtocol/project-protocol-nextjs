@@ -1,10 +1,12 @@
 "use server";
+
 import { cookies } from "next/headers";
 import { decrypt, encrypt, freshExpiryDate, timeToExpiryInMs } from "./jwt";
 import { NextRequest, NextResponse } from "next/server";
 import User from "@/types/User";
 import Api from "./api";
 import { getTranslations } from "next-intl/server";
+import { ResponseCookies } from "next/dist/compiled/@edge-runtime/cookies";
 
 type Session = {
   user: User;
@@ -59,34 +61,33 @@ export async function updateSession(request: NextRequest) {
       res.cookies.delete("session");
       return res;
     }
-
     const { user } = await response.json();
     const apiToken = String(response.headers.get("authorization"));
-    session.expires = freshExpiryDate();
-    session.user = user;
-    session.apiToken = apiToken;
 
-    // Set the updated session cookie
-    res.cookies.set({
-      name: "session",
-      value: await encrypt(session),
-      httpOnly: true,
-      expires: session.expires,
-    });
+    await signIn(user, apiToken, res.cookies);
   }
 
   return res;
 }
 
-/**
- * Creates a new session for the user.
- * @param user - The user object.
- * @param apiToken - The API token.
- */
-export async function createSession(user: any, apiToken: string) {
+export async function signIn(
+  user: User,
+  apiToken: string,
+  cookieStore: ResponseCookies
+) {
   const expires = freshExpiryDate();
-  const session = await encrypt({ user, apiToken, expires });
-  cookies().set("session", session, { expires, httpOnly: true });
+  const session = {
+    user,
+    apiToken,
+    expires,
+  };
+
+  cookieStore.set({
+    name: "session",
+    value: await encrypt(session),
+    httpOnly: true,
+    expires: session.expires,
+  });
 }
 
 /**

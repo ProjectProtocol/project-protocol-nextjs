@@ -1,80 +1,122 @@
 "use client";
 
-import { Row } from "react-bootstrap";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 import AccountSettingsRow from "./AccountSettingsRow";
 import { Button } from "react-bootstrap";
 import { useTranslations } from "next-intl";
 import { destroySession } from "@/lib/session";
-import { useAuth } from "@/components/AuthProvider";
 import { useState } from "react";
 import ChangePasswordModal from "./ChangePasswordModal";
 import DeleteAccountModal from "./DeleteAccountModal";
 import toast from "react-hot-toast";
+import User from "@/types/User";
+import { resendConfirmation } from "@/lib/actions/account";
+import AsyncButton from "@/components/AsyncButton";
 
-export default function AccountSettings() {
-  const { user } = useAuth();
-  const t = useTranslations();
+export default function AccountSettings({ user }: { user: User }) {
+  const tAccount = useTranslations("account");
+  const tShared = useTranslations("shared");
 
+  const [resentCode, setResentCode] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [showChangePassword, setShowChangePassword] = useState(false);
   const [showDeleteAccount, setShowDeleteAccount] = useState(false);
 
   const signOut = async () => {
     await destroySession();
-    toast.success(t("account.signOutSuccess"));
+    toast.success(tAccount("signOutSuccess"));
+  };
+
+  const requestConfirmationCode = async () => {
+    setLoading(true);
+    const success = await resendConfirmation();
+    if (success) {
+      setResentCode(true);
+    } else {
+      toast.error(tShared("genericError"));
+    }
+    setLoading(false);
   };
 
   return (
     <Row className="gy-4 mt-5">
-      {user && (
+      {!user.isConfirmed && (
         <>
           <AccountSettingsRow
-            title={t("shared.email")}
-            detail={user.email}
+            title={tAccount("confirm")}
+            detail={tAccount("confirmDetail", {
+              email: user.email,
+            })}
             action={
-              <Button variant="outline-dark" size="sm" onClick={signOut}>
-                {t("account.signOut")}
-              </Button>
+              resentCode ? (
+                <p>
+                  {tAccount("confirmationSent")}
+                  <i className="bi bi-check-circle text-success ms-2" />
+                </p>
+              ) : (
+                <AsyncButton
+                  className="btn btn-primary btn-sm"
+                  role="button"
+                  onClick={requestConfirmationCode}
+                  loading={loading}
+                >
+                  {tAccount("resendCode")}
+                </AsyncButton>
+              )
             }
           />
-          <AccountSettingsRow
-            title={t("account.changePassword.title")}
-            detail={t("account.changePassword.title")}
-            action={
-              <Button
-                variant="outline-dark"
-                size="sm"
-                onClick={() => setShowChangePassword(true)}
-              >
-                {t("account.changePassword.action")}
-              </Button>
-            }
-          />
-          <AccountSettingsRow
-            title={t("account.delete.title")}
-            detail={t("account.delete.detail")}
-            action={
-              <Button
-                variant="outline-danger"
-                size="sm"
-                onClick={() => setShowDeleteAccount(true)}
-              >
-                <i className="bi bi-trash me-2" />
-                {t("account.delete.action")}
-              </Button>
-            }
-          />
-          <ChangePasswordModal
-            show={showChangePassword}
-            onHide={() => setShowChangePassword(false)}
-            closeButton
-          />
-          <DeleteAccountModal
-            show={showDeleteAccount}
-            onHide={() => setShowDeleteAccount(false)}
-            closeButton
-          />
+          <Col xs={12}>
+            <hr />
+          </Col>
         </>
       )}
+      <AccountSettingsRow
+        title={tShared("email")}
+        detail={user.email}
+        action={
+          <Button variant="outline-dark" size="sm" onClick={signOut}>
+            {tAccount("signOut")}
+          </Button>
+        }
+      />
+      <AccountSettingsRow
+        title={tAccount("changePassword.title")}
+        detail={tAccount("changePassword.title")}
+        action={
+          <Button
+            variant="outline-dark"
+            size="sm"
+            onClick={() => setShowChangePassword(true)}
+          >
+            {tAccount("changePassword.action")}
+          </Button>
+        }
+      />
+      <AccountSettingsRow
+        title={tAccount("delete.title")}
+        detail={tAccount("delete.detail")}
+        action={
+          <Button
+            variant="outline-danger"
+            size="sm"
+            onClick={() => setShowDeleteAccount(true)}
+          >
+            <i className="bi bi-trash me-2" />
+            {tAccount("delete.action")}
+          </Button>
+        }
+      />
+      <ChangePasswordModal
+        show={showChangePassword}
+        onHide={() => setShowChangePassword(false)}
+        closeButton
+      />
+      <DeleteAccountModal
+        show={showDeleteAccount}
+        onHide={() => setShowDeleteAccount(false)}
+        closeButton
+      />
     </Row>
   );
 }

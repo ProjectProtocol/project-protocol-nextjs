@@ -11,13 +11,7 @@ import { MessageKeys } from "next-intl";
 /**
  * Initiates a password reset request for "forgot password" flow.
  */
-export interface IRequestPasswordResetFormState {
-  email: string;
-}
-
-export async function requestPasswordReset({
-  email,
-}: IRequestPasswordResetFormState) {
+export async function requestPasswordReset({ email }: { email: string }) {
   const t = await getTranslations();
 
   const response = await new Api().post("/auth/password_resets", {
