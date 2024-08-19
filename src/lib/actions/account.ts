@@ -144,3 +144,14 @@ export async function deleteAccount({ password }: IDeleteAccountFormState) {
   flashSuccess(t("account.delete.success"));
   await destroySession();
 }
+
+export async function acknowledgePolicy() {
+  const session = await getSession();
+  const response = await new Api(session?.apiToken).patch("/profile/policy");
+
+  if (!response.ok) {
+    return false;
+  }
+
+  return true;
+}

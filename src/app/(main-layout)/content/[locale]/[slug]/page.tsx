@@ -19,6 +19,7 @@ export async function generateStaticParams() {
     "ethical-principles",
     "vote",
     "terms-of-service",
+    "community-posting-guidelines",
   ];
 
   const pages = [];

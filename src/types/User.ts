@@ -1,7 +1,7 @@
 type User = {
-  email: string
-  isConfirmed: boolean
-  confirmationSentAt?: string
-}
+  email: string;
+  isConfirmed: boolean;
+  confirmationSentAt?: string;
+};
 
-export default User
+export default User;
