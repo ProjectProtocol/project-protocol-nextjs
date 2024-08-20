@@ -45,7 +45,9 @@ export default function ModerationModal(props: IPopUp) {
           </ul>
           <p>
             You can see more of our community moderation guidelines{" "}
-            <Link href="/community-posting-guidelines">here.</Link>
+            <Link href="/content/en-US/community-posting-guidelines">
+              here.
+            </Link>
           </p>
           <p>
             During the review process, we may email you to make changes to your
@@ -56,7 +58,9 @@ export default function ModerationModal(props: IPopUp) {
             .
           </p>
           <div className="text-center">
-            <Link href="/terms-of-service">Read our terms of service</Link>
+            <Link href="/content/en-US/terms-of-service">
+              Read our terms of service
+            </Link>
           </div>
           {!props.closeButton && (
             <div className="text-center">

@@ -4,6 +4,9 @@ import RateMyPoSearchbar from "./_components/RateMyPoSearchBar";
 import RateMyPoSearchResults from "./_components/RateMyPoSearchResults";
 import { Suspense } from "react";
 import { metaTitle } from "@/lib/metadataUtils";
+import AcknowledgePolicyModal from "./_components/AcknowledgePolicy";
+import { getSession } from "@/lib/session";
+import Api from "@/lib/api";
 
 export async function generateMetadata() {
   const t = await getTranslations("home");
@@ -21,14 +24,25 @@ export default async function Page({
   };
 }) {
   const t = await getTranslations();
+  const session = await getSession();
+  const { user } = await new Api(session?.apiToken)
+    .get("/auth/reauthenticate")
+    .then((res) => res.json());
 
   return (
-    <div className="vertical-rhythm">
-      <PageHeader title={t("rate_my_po.title")} />
-      <RateMyPoSearchbar />
-      <Suspense>
-        <RateMyPoSearchResults searchText={searchParams?.search} />
-      </Suspense>
-    </div>
+    <>
+      <div className="vertical-rhythm">
+        <PageHeader title={t("rate_my_po.title")} />
+        <RateMyPoSearchbar />
+        <Suspense>
+          <RateMyPoSearchResults searchText={searchParams?.search} />
+        </Suspense>
+      </div>
+      {user && (
+        <AcknowledgePolicyModal
+          isPolicyAcknowledged={user.isPolicyAcknowledged}
+        />
+      )}
+    </>
   );
 }

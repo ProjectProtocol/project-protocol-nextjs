@@ -7,6 +7,7 @@ import { getTranslations } from "next-intl/server";
 import { flashError, flashSuccess } from "../flash-messages";
 import { snakeCaseKeys } from "../transformKeys";
 import { MessageKeys } from "next-intl";
+import { revalidatePath } from "next/cache";
 
 /**
  * Initiates a password reset request for "forgot password" flow.
@@ -153,5 +154,6 @@ export async function acknowledgePolicy() {
     return false;
   }
 
+  revalidatePath("/auth/reauthenticate");
   return true;
 }
