@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Source_Sans_3 } from "next/font/google";
 import "@/styles/index.scss";
 import { NextIntlClientProvider } from "next-intl";
@@ -15,9 +15,23 @@ const ProgressBarWrapperNoSSR = dynamic(
 
 const font = Source_Sans_3({ subsets: ["latin"] });
 
+export const viewPort: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  minimumScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  themeColor: { media: "(prefers-color-scheme: light)", color: "#f06748" },
+};
+
 export const metadata: Metadata = {
   title: "Project Protocol",
   description: "Resources and reviews for folx on parole",
+  applicationName: "Project Protocol",
+  appleWebApp: {
+    title: "Project Protocol",
+    statusBarStyle: "default",
+  },
 };
 
 export default async function RootLayout({
