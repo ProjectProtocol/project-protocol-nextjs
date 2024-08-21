@@ -6,6 +6,15 @@ import ResourceSearchBar from "./_components/ResourceSearchBar";
 import ResourcesLoadingPlaceholder from "./_components/ResourcesLoadingPlaceholder";
 import { ResourceSearchParams } from "@/types/Resource";
 import ResourceFilters from "./_components/ResourceFilters";
+import { metaTitle } from "@/lib/metadataUtils";
+
+export async function generateMetadata() {
+  const t = await getTranslations();
+  return {
+    title: metaTitle(t("resources.title")),
+    description: t("home.resourcesDescription"),
+  };
+}
 
 export default async function Page({
   searchParams,
