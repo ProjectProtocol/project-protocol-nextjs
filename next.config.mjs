@@ -5,7 +5,7 @@ const withPWA = pwaPlugin({
   dest: "public",
   mode: "production",
   disable:
-    process.env.NODE_ENV !== "production" && process.env.ENABLE_PWA !== "true",
+    process.env.CONTEXT !== "production" && process.env.ENABLE_PWA !== "true",
 });
 
 const withNextIntl = createNextIntlPlugin();
