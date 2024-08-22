@@ -7,6 +7,7 @@ export const contentIds = {
   "how-does-it-work": "1BQDLK4P2L1E0DmCwLOrDR",
   vote: "6VgcyUQKmZTr955WYmlhr8",
   "terms-of-service": "1acLWVokjkixcvTh0b3gup",
+  "community-posting-guidelines": "fYYpah3B5mppvE7rXY1gY",
 };
 
 export type ContentfulKey = keyof typeof contentIds;
