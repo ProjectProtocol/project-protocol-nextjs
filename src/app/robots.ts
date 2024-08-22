@@ -5,6 +5,7 @@ import path from "path";
 // https://nextjs.org/docs/app/api-reference/file-conventions/metadata/robots
 export default function robots(): MetadataRoute.Robots {
   const host = process.env.HOST ?? "http://localhost:3001";
+
   return {
     rules: {
       userAgent: "*",

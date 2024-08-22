@@ -5,7 +5,7 @@ import path from "path";
 // https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap
 export default function sitemap(): MetadataRoute.Sitemap {
   let host;
-  if (process.env.NODE_ENV === "production" && !process.env.HOST) {
+  if (!process.env.HOST) {
     return [];
   } else {
     host = process.env.HOST ?? "http://localhost:3001";
