@@ -6,6 +6,7 @@ import { Document } from "@contentful/rich-text-types";
 import renderRichText from "@/lib/renderRichText";
 import "@/styles/content-pages.scss";
 import ContentPage from "../_components/ContentPage";
+import { metaTitle } from "@/lib/metadataUtils";
 
 export const dynamicParams = false;
 
@@ -27,6 +28,18 @@ export async function generateStaticParams() {
     }
   }
   return pages;
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: string; slug: ContentfulKey };
+}) {
+  const data = await getContent(params.locale, params.slug);
+  const title = data.fields.title as string;
+  return {
+    title: metaTitle(title),
+  };
 }
 
 async function getContent(locale: string, slug: ContentfulKey) {

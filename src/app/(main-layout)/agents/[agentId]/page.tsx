@@ -11,6 +11,21 @@ import Divider from "@/components/Divider";
 import AgentReviews from "./_components/AgentReviews";
 import { Suspense } from "react";
 import { getSession } from "@/lib/session";
+import Agent from "@/types/Agent";
+import { metaTitle } from "@/lib/metadataUtils";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { agentId: string };
+}) {
+  const { agent }: { agent: Agent } = await new Api()
+    .get(`/agents/${params.agentId}`)
+    .then((res) => res.json());
+  return {
+    title: metaTitle(agent.fullName),
+  };
+}
 
 export default async function Page({
   params,
