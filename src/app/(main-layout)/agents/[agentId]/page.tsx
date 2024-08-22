@@ -12,6 +12,8 @@ import AgentReviews from "./_components/AgentReviews";
 import { Suspense } from "react";
 import { getSession } from "@/lib/session";
 
+// TODO generate metadata for SEO
+
 export default async function Page({
   params,
 }: {
