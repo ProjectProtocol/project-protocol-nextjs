@@ -1,4 +1,4 @@
-import ConfirmEmail from "@/components/login/ConfirmEmail";
+import ConfirmEmail from "@/app/auth/confirmations/_components/ConfirmEmail";
 import { getUser } from "@/lib/session";
 import { redirect } from "next/navigation";
 

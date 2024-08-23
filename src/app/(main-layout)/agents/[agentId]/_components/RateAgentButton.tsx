@@ -44,14 +44,14 @@ export default function RateAgentButton({ agent }: { agent: Agent }) {
           {t("agent.rateAgent")}
         </Button>
       ) : (
-        <Button href="/login/signup" className="w-100">
+        <Button href="/auth/signup" className="w-100">
           {t("agent.signUp")}
         </Button>
       )}
 
       {!user && (
         <div className="text-center">
-          <Button variant="link" href="/login">
+          <Button variant="link" href="/auth/login">
             {t("agent.logIn")}
           </Button>
         </div>

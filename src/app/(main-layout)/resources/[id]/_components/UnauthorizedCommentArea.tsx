@@ -12,7 +12,7 @@ export default function UnauthorizedCommentArea() {
       <Button
         className="w-100 w-md-auto"
         onClick={() => {
-          router.push("/login/signup");
+          router.push("/auth/signup");
         }}
       >
         {t("resources.comments.signUpToLeaveComment")}
@@ -20,7 +20,7 @@ export default function UnauthorizedCommentArea() {
       <Button
         variant="link"
         onClick={() => {
-          router.push("/login");
+          router.push("/auth/login");
         }}
       >
         {t("shared.orLogIn")}

@@ -1,7 +1,8 @@
 "use client";
-import Input from "../Input";
+
+import Input from "@/components/Input";
 import { useTranslations } from "next-intl";
-import AsyncButton from "../AsyncButton";
+import AsyncButton from "@/components/AsyncButton";
 import { requestPasswordReset } from "@/lib/actions/account";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -65,7 +66,7 @@ export default function ForgotPasswordForm() {
         </AsyncButton>
         <div>
           {t("login.loginHelper")}
-          <a className="link ms-1" href="/login/signup">
+          <a className="link ms-1" href="/auth/signup">
             {t("login.signup")}
           </a>
         </div>

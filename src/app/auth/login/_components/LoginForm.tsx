@@ -1,8 +1,8 @@
 "use client";
 
-import Input from "../Input";
+import Input from "@/components/Input";
 import { useTranslations } from "next-intl";
-import AsyncButton from "../AsyncButton";
+import AsyncButton from "@/components/AsyncButton";
 import { login, ILoginFormState } from "@/lib/actions/auth";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -72,7 +72,7 @@ export default function LoginForm({ callbackURL }: { callbackURL?: string }) {
           {...validationProps("password")}
         />
         <div>
-          <a className="link" href="/login/forgot-password">
+          <a className="link" href="/auth/forgot-password">
             {t("login.forgotPassword")}
           </a>
         </div>
@@ -88,7 +88,7 @@ export default function LoginForm({ callbackURL }: { callbackURL?: string }) {
         </AsyncButton>
         <div className="text-center">
           {t("login.loginHelper")}
-          <a className="link ms-1" href="/login/signup">
+          <a className="link ms-1" href="/auth/signup">
             {t("login.signup")}
           </a>
         </div>

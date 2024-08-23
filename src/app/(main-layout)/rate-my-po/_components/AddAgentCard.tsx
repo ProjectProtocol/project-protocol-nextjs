@@ -25,13 +25,13 @@ export default function AddAgentCard({ signedIn }: IAddAgentCard) {
         ) : (
           <>
             <Link
-              href="/login/sign-up"
+              href="/auth/sign-up"
               aria-label={t("agent.signUpToAddAgent")}
               className="btn btn-lg btn-primary w-75 mb-3"
             >
               {t("agent.signUpToAddAgent")}
             </Link>
-            <Link href="/login" className="d-block">
+            <Link href="/auth/login" className="d-block">
               {t("shared.orLogIn")}
             </Link>
           </>

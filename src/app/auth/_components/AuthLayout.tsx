@@ -1,18 +1,16 @@
 import Image from "next/image";
 import { Container } from "react-bootstrap";
-import icon from "../../../public/images/icon.svg";
 import LocaleSwitcher from "@/components/LocaleSwitcher";
-import { getTranslations } from "next-intl/server";
 
-export default async function LoginLayout({
+export default async function AuthLayout({
   locale,
+  pageTitle,
   children,
 }: {
   locale: string;
+  pageTitle: string;
   children: React.ReactNode;
 }) {
-  const t = await getTranslations();
-
   return (
     <main className="vh-100 d-flex p-3 p-md-0 align-items-md-center">
       <Container fluid>
@@ -31,13 +29,13 @@ export default async function LoginLayout({
           <div className="text-center vertical-rhythm">
             <Image
               priority
-              src={icon}
+              src="/images/icon.svg"
               width="40"
               height="0"
               className="me-2 h-auto"
               alt={"Project Protocol logo"}
             />
-            <h2 className="mb-0">{t("login.loginTitle")}</h2>
+            <h2 className="mb-0">{pageTitle}</h2>
           </div>
           {children}
         </div>
