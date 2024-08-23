@@ -96,7 +96,7 @@ export default function SignupForm() {
         </div>
       </form>
       <div className="mt-5 text-center">
-        <a className="link ms-1" href="/terms-of-service">
+        <a className="link ms-1" href="/content/en-US/terms-of-service">
           {t("login.readTermsOfService")}
         </a>
       </div>
