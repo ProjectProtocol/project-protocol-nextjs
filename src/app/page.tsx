@@ -96,7 +96,7 @@ export default async function Page() {
             <h1>{t("home.welcomeTitle")}</h1>
             <p>
               {t("home.welcomeMessage")}.{" "}
-              <Link href="/about">{t("shared.learnMore")}</Link>
+              <Link href="/content/en-US/about">{t("shared.learnMore")}</Link>
             </p>
             <div className="d-none d-md-block">
               <IconLinks locale={locale} classes="py-3 " iconHeight={75} />
