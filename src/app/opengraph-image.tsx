@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
@@ -13,6 +15,10 @@ export const contentType = "image/png";
 
 // Image generation
 export default async function Image() {
+  const logoSrc = await fetch(
+    new URL("../../public/images/landing-image.jpeg", import.meta.url)
+  ).then((res) => res.arrayBuffer());
+
   return new ImageResponse(
     (
       // ImageResponse JSX element
@@ -25,14 +31,36 @@ export default async function Image() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          position: "relative",
         }}
       >
+        <div
+          style={{
+            width: "100%",
+            height: "100%",
+            position: "absolute",
+            backgroundColor: "black",
+          }}
+        />
+        <img
+          src={logoSrc as unknown as string} // Crazy hack to make typescript shut up
+          width="100%"
+          height="100%"
+          style={{
+            position: "absolute",
+            backgroundColor: "black",
+            opacity: 0.95,
+            filter: "blur(10px)",
+            objectFit: "cover",
+          }}
+          alt="Background image"
+        />
         <section
           style={{
             width: 400,
             height: 400,
             display: "flex",
-            background: "#fff",
+            background: "rgba(255, 255, 255, 0.95)",
             alignItems: "center",
             justifyContent: "center",
             borderRadius: "50%",
