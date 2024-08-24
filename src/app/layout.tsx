@@ -1,4 +1,4 @@
-import type { Metadata, Viewport } from "next";
+import type { Viewport } from "next";
 import { Source_Sans_3 } from "next/font/google";
 import "@/styles/index.scss";
 import { NextIntlClientProvider } from "next-intl";
@@ -27,6 +27,7 @@ export const viewPort: Viewport = {
 
 export async function generateMetadata() {
   const t = await getTranslations();
+  const host = process.env.HOST ?? "http://localhost:3001";
   return {
     title: metaTitle(t("home.title")),
     description: t("home.welcomeMessage"),
@@ -35,6 +36,7 @@ export async function generateMetadata() {
       title: "Project Protocol",
       statusBarStyle: "default",
     },
+    metadataBase: new URL(host),
   };
 }
 
