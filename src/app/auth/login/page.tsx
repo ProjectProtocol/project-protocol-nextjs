@@ -1,16 +1,13 @@
+import { useOriginalPath } from "@/components/OriginalPathProvider";
 import LoginForm from "./_components/LoginForm";
-import { headers } from "next/headers";
 import { getUser } from "@/lib/session";
-import { redirect } from "next/navigation";
 
 export default async function Page() {
-  const referrer = headers().get("referer");
-  const path = new URL(referrer || "").pathname;
-
+  const { navigateToOriginalPath } = useOriginalPath();
   const user = await getUser();
   if (user) {
-    redirect("/");
+    navigateToOriginalPath(false);
   }
 
-  return <LoginForm callbackURL={path} />;
+  return <LoginForm />;
 }

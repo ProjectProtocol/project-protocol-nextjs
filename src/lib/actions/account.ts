@@ -28,7 +28,7 @@ export async function requestPasswordReset({ email }: { email: string }) {
       template: "dismissable",
     });
 
-    redirect("/");
+    return {};
   }
 }
 

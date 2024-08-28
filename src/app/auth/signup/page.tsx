@@ -1,11 +1,12 @@
 import SignupForm from "@/app/auth/signup/_components/SignupForm";
 import { getUser } from "@/lib/session";
-import { redirect } from "next/navigation";
+import { useOriginalPath } from "@/components/OriginalPathProvider";
 
 export default async function Page() {
+  const { navigateToOriginalPath } = useOriginalPath();
   const user = await getUser();
   if (user) {
-    redirect("/");
+    navigateToOriginalPath(false);
   }
 
   return <SignupForm />;

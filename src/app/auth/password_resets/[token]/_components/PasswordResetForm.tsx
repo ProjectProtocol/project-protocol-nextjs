@@ -10,10 +10,11 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useOriginalPath } from "@/components/OriginalPathProvider";
 
 export default function PasswordResetForm({ token }: { token: string }) {
   const t = useTranslations();
-  const router = useRouter();
+  const { navigateToOriginalPath } = useOriginalPath();
   const schema = z
     .object({
       newPassword: z
@@ -49,7 +50,7 @@ export default function PasswordResetForm({ token }: { token: string }) {
       toast.error(t(error));
     } else {
       toast.success(t("password_reset.resetSuccess"));
-      router.replace("/");
+      navigateToOriginalPath(true);
     }
   }
 

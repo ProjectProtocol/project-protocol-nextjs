@@ -8,8 +8,10 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback } from "react";
+import { useOriginalPath } from "@/components/OriginalPathProvider";
 
-export default function LoginForm({ callbackURL }: { callbackURL?: string }) {
+export default function LoginForm() {
+  const { navigateToOriginalPath } = useOriginalPath();
   const t = useTranslations();
   const schema = z.object({
     loginEmail: z
@@ -28,13 +30,15 @@ export default function LoginForm({ callbackURL }: { callbackURL?: string }) {
       defaultValues: {
         loginEmail: "",
         password: "",
-        callbackURL,
       },
       resolver: zodResolver(schema),
     });
 
   async function onSubmit(data: ILoginFormState) {
-    await login(data);
+    const { error } = await login(data);
+    if (!error) {
+      navigateToOriginalPath(false);
+    }
   }
 
   const validationProps = useCallback(
@@ -52,7 +56,6 @@ export default function LoginForm({ callbackURL }: { callbackURL?: string }) {
     <div className="d-block p-4">
       <div className="text-center mb-3">{t("login.loginTitleHelper")}</div>
       <form className="vertical-rhythm" onSubmit={handleSubmit(onSubmit)}>
-        <input type="hidden" name="callbackURL" value={callbackURL} />
         <Input
           size="lg"
           controlId={`login-email`}

@@ -3,7 +3,6 @@
 import { signIn } from "../session";
 import { flashError, flashSuccess } from "../flash-messages";
 import { getTranslations } from "next-intl/server";
-import { redirect } from "next/navigation";
 import Api from "../api";
 import { cookies } from "next/headers";
 
@@ -13,11 +12,7 @@ export interface ILoginFormState {
   callbackURL?: string;
 }
 
-export async function login({
-  loginEmail,
-  password,
-  callbackURL,
-}: ILoginFormState) {
+export async function login({ loginEmail, password }: ILoginFormState) {
   const t = await getTranslations();
 
   const response = await new Api().post("/auth/sign_in", {
@@ -45,9 +40,7 @@ export async function login({
   await signIn(data.user, apiToken, cookies());
   flashSuccess(t("login.success"));
 
-  if (callbackURL) {
-    redirect(String(callbackURL));
-  }
+  return {};
 }
 
 export interface ISignupFormState {

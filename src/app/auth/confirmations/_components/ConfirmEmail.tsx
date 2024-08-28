@@ -2,11 +2,12 @@
 
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useOriginalPath } from "@/components/OriginalPathProvider";
 
 export default function ConfirmEmail({ email }: { email: string }) {
   const t = useTranslations();
-  const callbackURL = useSearchParams().get("callbackURL") ?? "/rate-my-po";
+  const { originalPath } = useOriginalPath();
+  const callbackURL = originalPath[1] || "/rate-my-po";
 
   return (
     <div className="d-block p-4">

@@ -2,20 +2,25 @@
 import { useRouter, usePathname } from "next/navigation";
 import { createContext, useContext, useState } from "react";
 
-export const OriginalPathContext = createContext({});
+type OriginalPathProviderValue = {
+  originalPath: [string?, string?];
+  setOriginalPath: (path: [string?, string?]) => void;
+  navigateToOriginalPath: (shouldReplace: boolean) => void;
+  clearOriginalPath: () => void;
+};
+
+export const OriginalPathContext = createContext<
+  OriginalPathProviderValue | undefined
+>(undefined);
 
 export default function OriginalPathProvider({
   children,
-  namespace,
-  url,
 }: {
   children: React.ReactNode;
-  namespace?: string;
-  url?: string;
 }) {
   const [originalPath, setOriginalPath] = useState<[string?, string?]>([
-    namespace,
-    url,
+    undefined,
+    undefined,
   ]);
 
   const navigateToOriginalPath = (shouldReplace: boolean) => {
@@ -37,15 +42,15 @@ export default function OriginalPathProvider({
     }
   };
 
+  const value = {
+    originalPath,
+    setOriginalPath,
+    navigateToOriginalPath,
+    clearOriginalPath,
+  };
+
   return (
-    <OriginalPathContext.Provider
-      value={{
-        originalPath,
-        setOriginalPath,
-        navigateToOriginalPath,
-        clearOriginalPath,
-      }}
-    >
+    <OriginalPathContext.Provider value={value}>
       {children}
     </OriginalPathContext.Provider>
   );
