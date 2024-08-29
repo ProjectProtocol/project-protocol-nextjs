@@ -37,7 +37,7 @@ export default function ResourceVoteControls({
               variant="light"
               onClick={() => {
                 toast.dismiss(toastObject.id);
-                router.push("/login");
+                router.push("/auth/login");
               }}
             >
               {t("login.login")}

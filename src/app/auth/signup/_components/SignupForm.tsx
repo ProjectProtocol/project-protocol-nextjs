@@ -7,8 +7,8 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signUp } from "@/lib/actions/auth";
 import { useCallback } from "react";
-import Input from "../Input";
-import AsyncButton from "../AsyncButton";
+import Input from "../../../../components/Input";
+import AsyncButton from "../../../../components/AsyncButton";
 import { useRouter } from "next/navigation";
 
 export default function SignupForm() {
@@ -89,7 +89,7 @@ export default function SignupForm() {
           }
           <div className="mt-3 text-center">
             {t("login.signupHelper")}
-            <a className="link ms-1" href="/login">
+            <a className="link ms-1" href="/auth/login">
               {t("login.login")}
             </a>
           </div>
