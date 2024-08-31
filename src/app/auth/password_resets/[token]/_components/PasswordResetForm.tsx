@@ -7,13 +7,15 @@ import { useCallback } from "react";
 import AsyncButton from "@/components/AsyncButton";
 import { IPasswordResetsFormState, resetPassword } from "@/lib/actions/account";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function PasswordResetForm({ token }: { token: string }) {
   const t = useTranslations();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectPath = searchParams.get("original_location") || "";
   const schema = z
     .object({
       newPassword: z
@@ -49,7 +51,7 @@ export default function PasswordResetForm({ token }: { token: string }) {
       toast.error(t(error));
     } else {
       toast.success(t("password_reset.resetSuccess"));
-      router.replace("/");
+      router.replace(redirectPath);
     }
   }
 
@@ -65,30 +67,33 @@ export default function PasswordResetForm({ token }: { token: string }) {
   );
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="vertical-rhythm">
-      <input type="hidden" name="token" value={token} />
-      <Input
-        label={t("account.changePassword.newPassword")}
-        type="password"
-        {...validationProps("newPassword")}
-        {...register("newPassword")}
-      />
-      <Input
-        label={t("account.changePassword.newPasswordConfirm")}
-        type="password"
-        {...validationProps("newPasswordConfirm")}
-        {...register("newPasswordConfirm")}
-      />
-      <div className="d-flex">
-        <AsyncButton
-          type="submit"
-          className="w-100 btn-lg"
-          disabled={!formState.isValid}
-          loading={formState.isSubmitting}
-        >
-          {t("password_reset.submit")}
-        </AsyncButton>
-      </div>
-    </form>
+    <div className="d-block p-4">
+      <div className="text-center mb-3">{t("password_reset.modal.intro")}</div>
+      <form onSubmit={handleSubmit(onSubmit)} className="vertical-rhythm">
+        <input type="hidden" name="token" value={token} />
+        <Input
+          label={t("account.changePassword.newPassword")}
+          type="password"
+          {...validationProps("newPassword")}
+          {...register("newPassword")}
+        />
+        <Input
+          label={t("account.changePassword.newPasswordConfirm")}
+          type="password"
+          {...validationProps("newPasswordConfirm")}
+          {...register("newPasswordConfirm")}
+        />
+        <div className="d-flex">
+          <AsyncButton
+            type="submit"
+            className="w-100 btn-lg"
+            disabled={!formState.isValid}
+            loading={formState.isSubmitting}
+          >
+            {t("password_reset.submit")}
+          </AsyncButton>
+        </div>
+      </form>
+    </div>
   );
 }
