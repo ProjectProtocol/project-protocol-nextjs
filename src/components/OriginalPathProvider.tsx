@@ -4,6 +4,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
 
 type OriginalPathProviderValue = {
+  // Returns originalPath or /
   getOriginalPath: () => string;
   redirectToOriginalPath: () => void;
 };
@@ -23,6 +24,10 @@ function isRedirectRoute(path: string): boolean {
   return false;
 }
 
+/**
+ * OriginalPathProvider - for certain route namespaces, preserve the original path that the user navigated
+ * from in order to redirect there after some user flow (e.g. login, signup, reset password, etc).
+ */
 export default function OriginalPathProvider({
   children,
 }: {
@@ -37,11 +42,9 @@ export default function OriginalPathProvider({
     // If path is in namespace
     if (isRedirectRoute(pathname)) {
       if (!originalPath) {
-        console.log("Start");
         setOriginalPath(prevPath);
       }
     } else {
-      console.log("Clear");
       setOriginalPath(undefined);
       setPrevPath(pathname);
     }
@@ -67,6 +70,10 @@ export default function OriginalPathProvider({
   );
 }
 
+/**
+ * OriginalPathProvider - for certain route namespaces, preserve the original path that the user navigated
+ * from in order to redirect there after some user flow (e.g. login, signup, reset password, etc).
+ */
 export function useOriginalPath() {
   const context = useContext(OriginalPathContext);
   if (context === undefined) {

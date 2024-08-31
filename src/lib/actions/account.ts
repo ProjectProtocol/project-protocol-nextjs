@@ -12,11 +12,17 @@ import { revalidatePath } from "next/cache";
 /**
  * Initiates a password reset request for "forgot password" flow.
  */
-export async function requestPasswordReset({ email }: { email: string }) {
+export async function requestPasswordReset({
+  email,
+  originalPath,
+}: {
+  email: string;
+  originalPath: string;
+}) {
   const t = await getTranslations();
 
   const response = await new Api().post("/auth/password_resets", {
-    body: JSON.stringify({ email: email, original_location: "/" }),
+    body: JSON.stringify({ email: email, original_location: originalPath }),
   });
 
   if (!response.ok) {
@@ -28,7 +34,7 @@ export async function requestPasswordReset({ email }: { email: string }) {
       template: "dismissable",
     });
 
-    redirect("/");
+    redirect(originalPath);
   }
 }
 
