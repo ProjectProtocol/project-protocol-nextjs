@@ -88,9 +88,9 @@ export default function LoginForm() {
         </AsyncButton>
         <div className="text-center">
           {t("login.loginHelper")}
-          <a className="link ms-1" href="/auth/signup">
+          <Link className="link ms-1" href="/auth/signup">
             {t("login.signup")}
-          </a>
+          </Link>
         </div>
       </form>
     </div>
