@@ -60,11 +60,9 @@ export default function Paginator<T>({
             const key = keyGenerator(i, pageIdx);
 
             return (
-              <>
-                <AnimatedItem animated={animated} index={idx} key={key}>
-                  <ItemComponent item={i} page={pageIdx} index={idx} />
-                </AnimatedItem>
-              </>
+              <AnimatedItem animated={animated} index={idx} key={key}>
+                <ItemComponent item={i} page={pageIdx} index={idx} />
+              </AnimatedItem>
             );
           })}
           {ListEndComponent && !hasNextPage && pageIdx === totalPages - 1 && (
