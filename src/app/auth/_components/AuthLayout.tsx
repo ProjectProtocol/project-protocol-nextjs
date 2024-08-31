@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { Container } from "react-bootstrap";
 import LocaleSwitcher from "@/components/LocaleSwitcher";
+import Link from "next/link";
+import AuthCloseButton from "./AuthCloseButton";
 
 export default async function AuthLayout({
   locale,
@@ -19,9 +21,7 @@ export default async function AuthLayout({
           style={{ maxWidth: 336, minHeight: 700 }}
         >
           <div className="text-end mb-5">
-            <a href="/">
-              <i className="bi bi-x-lg h3" />
-            </a>
+            <AuthCloseButton />
           </div>
           <div className="text-center">
             <LocaleSwitcher locale={locale} />

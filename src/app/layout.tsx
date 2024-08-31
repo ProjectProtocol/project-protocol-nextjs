@@ -8,6 +8,7 @@ import { getUser } from "@/lib/session";
 import NotificationArea from "@/components/notifications/NotificationArea";
 import dynamic from "next/dynamic";
 import { metaTitle } from "@/lib/metadataUtils";
+import OriginalPathProvider from "@/components/OriginalPathProvider";
 
 const ProgressBarWrapperNoSSR = dynamic(
   () => import("@/components/GlobalProgressBar"),
@@ -59,7 +60,9 @@ export default async function RootLayout({
         <ProgressBarWrapperNoSSR />
         <NextIntlClientProvider messages={messages}>
           <NotificationArea />
-          <AuthProvider user={user}>{children}</AuthProvider>
+          <OriginalPathProvider>
+            <AuthProvider user={user}>{children}</AuthProvider>
+          </OriginalPathProvider>
         </NextIntlClientProvider>
       </body>
     </html>

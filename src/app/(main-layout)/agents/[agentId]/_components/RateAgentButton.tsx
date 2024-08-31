@@ -8,6 +8,7 @@ import ConfirmationModal from "./ConfirmationModal";
 import Agent from "@/types/Agent";
 import toast from "react-hot-toast";
 import RateAgentModal from "./RateAgentModal";
+import Link from "next/link";
 
 export default function RateAgentButton({ agent }: { agent: Agent }) {
   const t = useTranslations();
@@ -44,16 +45,14 @@ export default function RateAgentButton({ agent }: { agent: Agent }) {
           {t("agent.rateAgent")}
         </Button>
       ) : (
-        <Button href="/auth/signup" className="w-100">
+        <Link className="btn btn-primary w-100" href="/auth/signup">
           {t("agent.signUp")}
-        </Button>
+        </Link>
       )}
 
       {!user && (
         <div className="text-center">
-          <Button variant="link" href="/auth/login">
-            {t("agent.logIn")}
-          </Button>
+          <Link href="/auth/login">{t("agent.logIn")}</Link>
         </div>
       )}
       <ConfirmationModal

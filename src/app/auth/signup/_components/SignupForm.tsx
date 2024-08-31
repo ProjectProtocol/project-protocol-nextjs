@@ -10,6 +10,7 @@ import { useCallback } from "react";
 import Input from "../../../../components/Input";
 import AsyncButton from "../../../../components/AsyncButton";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function SignupForm() {
   const t = useTranslations();
@@ -89,16 +90,16 @@ export default function SignupForm() {
           }
           <div className="mt-3 text-center">
             {t("login.signupHelper")}
-            <a className="link ms-1" href="/auth/login">
+            <Link className="link ms-1" href="/auth/login">
               {t("login.login")}
-            </a>
+            </Link>
           </div>
         </div>
       </form>
       <div className="mt-5 text-center">
-        <a className="link ms-1" href="/content/en-US/terms-of-service">
+        <Link className="link ms-1" href="/content/en-US/terms-of-service">
           {t("login.readTermsOfService")}
-        </a>
+        </Link>
       </div>
     </div>
   );
