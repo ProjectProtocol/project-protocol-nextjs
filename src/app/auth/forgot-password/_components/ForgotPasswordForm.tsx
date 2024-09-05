@@ -8,12 +8,16 @@ import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useCallback } from "react";
+import Link from "next/link";
+import { useOriginalPath } from "@/components/OriginalPathProvider";
 
 export interface IRequestPasswordResetFormState {
   email: string;
 }
 export default function ForgotPasswordForm() {
   const t = useTranslations();
+  const { getOriginalPath } = useOriginalPath();
+
   const schema = z.object({
     email: z.string().email(t("login.emailMessage")),
   });
@@ -27,7 +31,7 @@ export default function ForgotPasswordForm() {
     });
 
   async function onSubmit(data: IRequestPasswordResetFormState) {
-    await requestPasswordReset(data);
+    await requestPasswordReset({ ...data, originalPath: getOriginalPath() });
   }
 
   const validationProps = useCallback(
@@ -66,9 +70,9 @@ export default function ForgotPasswordForm() {
         </AsyncButton>
         <div>
           {t("login.loginHelper")}
-          <a className="link ms-1" href="/auth/signup">
+          <Link className="link ms-1" href="/auth/signup">
             {t("login.signup")}
-          </a>
+          </Link>
         </div>
       </form>
     </div>

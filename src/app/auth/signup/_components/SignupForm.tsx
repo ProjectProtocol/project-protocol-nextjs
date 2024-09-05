@@ -6,13 +6,16 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signUp } from "@/lib/actions/auth";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import Input from "../../../../components/Input";
 import AsyncButton from "../../../../components/AsyncButton";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import toast from "react-hot-toast";
 
 export default function SignupForm() {
   const t = useTranslations();
+  const [loading, setLoading] = useState(false);
   const schema = z.object({
     signUpEmail: z
       .string()
@@ -35,9 +38,13 @@ export default function SignupForm() {
     });
 
   async function onSubmit(data: ISignupFormState) {
+    setLoading(true);
     const { error } = await signUp(data);
     if (!error) {
-      router.replace(`/confirmations`);
+      router.replace(`/auth/confirmations`);
+    } else {
+      setLoading(false);
+      toast.error(t("shared.genericError"));
     }
   }
 
@@ -78,7 +85,7 @@ export default function SignupForm() {
         <div>
           {
             <AsyncButton
-              loading={formState.isSubmitting}
+              loading={loading}
               size="lg"
               className="w-100"
               variant="primary"
@@ -89,16 +96,16 @@ export default function SignupForm() {
           }
           <div className="mt-3 text-center">
             {t("login.signupHelper")}
-            <a className="link ms-1" href="/auth/login">
+            <Link className="link ms-1" href="/auth/login">
               {t("login.login")}
-            </a>
+            </Link>
           </div>
         </div>
       </form>
       <div className="mt-5 text-center">
-        <a className="link ms-1" href="/content/en-US/terms-of-service">
+        <Link className="link ms-1" href="/content/en-US/terms-of-service">
           {t("login.readTermsOfService")}
-        </a>
+        </Link>
       </div>
     </div>
   );

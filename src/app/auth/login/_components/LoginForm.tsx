@@ -8,9 +8,12 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback } from "react";
+import Link from "next/link";
+import { useOriginalPath } from "@/components/OriginalPathProvider";
 
-export default function LoginForm({ callbackURL }: { callbackURL?: string }) {
+export default function LoginForm() {
   const t = useTranslations();
+  const { getOriginalPath } = useOriginalPath();
   const schema = z.object({
     loginEmail: z
       .string()
@@ -28,7 +31,7 @@ export default function LoginForm({ callbackURL }: { callbackURL?: string }) {
       defaultValues: {
         loginEmail: "",
         password: "",
-        callbackURL,
+        callbackURL: getOriginalPath(),
       },
       resolver: zodResolver(schema),
     });
@@ -52,7 +55,6 @@ export default function LoginForm({ callbackURL }: { callbackURL?: string }) {
     <div className="d-block p-4">
       <div className="text-center mb-3">{t("login.loginTitleHelper")}</div>
       <form className="vertical-rhythm" onSubmit={handleSubmit(onSubmit)}>
-        <input type="hidden" name="callbackURL" value={callbackURL} />
         <Input
           size="lg"
           controlId={`login-email`}
@@ -72,9 +74,7 @@ export default function LoginForm({ callbackURL }: { callbackURL?: string }) {
           {...validationProps("password")}
         />
         <div>
-          <a className="link" href="/auth/forgot-password">
-            {t("login.forgotPassword")}
-          </a>
+          <Link href="/auth/forgot-password">{t("login.forgotPassword")}</Link>
         </div>
         <AsyncButton
           size="lg"
@@ -88,9 +88,9 @@ export default function LoginForm({ callbackURL }: { callbackURL?: string }) {
         </AsyncButton>
         <div className="text-center">
           {t("login.loginHelper")}
-          <a className="link ms-1" href="/auth/signup">
+          <Link className="link ms-1" href="/auth/signup">
             {t("login.signup")}
-          </a>
+          </Link>
         </div>
       </form>
     </div>

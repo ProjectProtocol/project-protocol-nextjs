@@ -1,12 +1,12 @@
 "use client";
 
+import { useOriginalPath } from "@/components/OriginalPathProvider";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 
 export default function ConfirmEmail({ email }: { email: string }) {
   const t = useTranslations();
-  const callbackURL = useSearchParams().get("callbackURL") ?? "/rate-my-po";
+  const { getOriginalPath } = useOriginalPath();
 
   return (
     <div className="d-block p-4">
@@ -19,7 +19,11 @@ export default function ConfirmEmail({ email }: { email: string }) {
       </p>
       <p>{t("login.loginConfirmSignupDetail2")}</p>
       <div className="text-center mt-5">
-        <Link className="btn btn-primary" href={callbackURL}>
+        <Link
+          className="btn btn-primary"
+          href={getOriginalPath()}
+          replace={true}
+        >
           {t("shared.OK")}
         </Link>
       </div>
