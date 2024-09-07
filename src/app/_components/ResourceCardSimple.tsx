@@ -1,18 +1,26 @@
-"use client";
-
+/* eslint-disable @next/next/no-img-element */
 import Resource from "@/types/Resource";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import { Card } from "react-bootstrap";
 
-export default function ResourceCardSimple({
+export default async function ResourceCardSimple({
   resource,
 }: {
   resource: Resource;
 }) {
   const { url, city, state, name, id, isOnline } = resource;
-  const [error, setError] = useState<boolean>();
+  const faviconURL = `https://s2.googleusercontent.com/s2/favicons?domain_url=${url}`;
+  const src = await fetch(faviconURL)
+    .then((res) => {
+      if (!res.ok) {
+        return "/images/icon.svg";
+      }
+      return faviconURL;
+    })
+    .catch((e) => {
+      return "/images/icon.svg";
+    });
 
   const locationLabel = isOnline
     ? "Online"
@@ -28,16 +36,12 @@ export default function ResourceCardSimple({
             className="bg-white d-flex justify-content-center align-items-center rounded rounded-circle border me-2 position-relative"
             style={{ width: "30px", height: "30px", padding: "6px" }}
           >
-            <Image
-              src={
-                error
-                  ? "/images/icon.svg"
-                  : `https://s2.googleusercontent.com/s2/favicons?domain_url=${url}`
-              }
-              width={18}
-              height={18}
+            <img
+              src={src}
+              width="0"
+              height="0"
+              style={{ width: "18px", height: "18px" }}
               alt={`Favicon for ${name}`}
-              onError={() => setError(true)}
             />
           </div>
           <div className="flex flex-column">
