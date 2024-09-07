@@ -15,6 +15,8 @@ import Footer from "@/components/Footer";
 import "@/styles/content-pages.scss";
 import landingImage from "@/../public/images/landing-image.jpeg";
 import VideoComponent from "./_components/VideoComponent";
+import { CldImage } from "next-cloudinary";
+import LandingHeroImage from "./_components/LandingHeroImage";
 
 const MAX_WIDTH = 720;
 
@@ -35,16 +37,7 @@ export default async function Page() {
   return (
     <main>
       <div className={`position-relative w-100 ${styles.topImageContainer}`}>
-        <Image
-          priority
-          src={landingImage}
-          alt="Palm trees and houses"
-          className={styles.topImage}
-          sizes="100vw"
-          placeholder="blur"
-          quality={50}
-          fill
-        />
+        <LandingHeroImage />
         <div className={styles.imageOverlay} />
 
         <Navbar>

@@ -12,6 +12,7 @@ export default function VideoComponent() {
         src="Project_Protocol_pz6wow"
         fontFace="Source Sans 3"
         poster="cld-sample-3"
+        id="landing-page-how-to"
         logo={false}
         colors={{
           accent: "#f06748",
