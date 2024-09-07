@@ -14,6 +14,7 @@ import LandingReviews from "./_components/LandingReviews";
 import Footer from "@/components/Footer";
 import "@/styles/content-pages.scss";
 import landingImage from "@/../public/images/landing-image.jpeg";
+import VideoComponent from "./_components/VideoComponent";
 
 const MAX_WIDTH = 720;
 
@@ -57,22 +58,20 @@ export default async function Page() {
                 <Image
                   priority
                   src="/images/icon.svg"
-                  width="0"
-                  height="0"
-                  className={"me-2 " + styles.navbarIcon}
-                  style={{ width: 20, height: 20 }}
+                  width="20"
+                  height="20"
+                  className="me-2"
                   alt={"Project Protocol logo"}
                 />
               </div>
-              <div className="d-none d-md-block">
+              <div className="d-none d-md-block me-2">
                 <Image
                   priority
                   unoptimized
                   src="/images/icon.svg"
                   width="0"
                   height="0"
-                  className={"me-2 " + styles.navbarIcon}
-                  style={{ width: 25, height: 25 }}
+                  style={{ width: "25px", height: "auto" }}
                   alt={"Project Protocol logo"}
                 />
               </div>
@@ -110,17 +109,7 @@ export default async function Page() {
         <LandingPageSegment classes="text-center px-3 bg-md-white">
           <h2>{t("home.learnHowToRate")}</h2>
           <div className="h-100 w-100">
-            <iframe
-              width="100%"
-              height="auto"
-              style={{ minHeight: 200 }}
-              src="https://www.youtube.com/embed/qtjKOeh3cyo?si=5RHySbmaa-BJllJo"
-              title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              className={"rounded " + styles.videoEmbed}
-              allowFullScreen
-            ></iframe>
+            <VideoComponent />
           </div>
         </LandingPageSegment>
         <LandingPageSegment classes="px-3">
