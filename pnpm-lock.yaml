@@ -53,6 +53,9 @@ importers:
       next:
         specifier: 14.2.4
         version: 14.2.4(@babel/core@7.25.2)(@playwright/test@1.46.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.6)
+      next-cloudinary:
+        specifier: ^6.12.0
+        version: 6.12.0(next@14.2.4(@babel/core@7.25.2)(@playwright/test@1.46.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.6))(react@18.3.1)
       next-intl:
         specifier: ^3.15.0
         version: 3.15.3(next@14.2.4(@babel/core@7.25.2)(@playwright/test@1.46.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.6))(react@18.3.1)
@@ -706,6 +709,21 @@ packages:
     resolution: {integrity: sha512-YTnYtra7W9e6/oAZEHj0bJehPRUlLH9/fbpT5LfB0NhQXyALCRkRs3zH9v07IYhkgpqX6Z78FnuccZr/l4Fs4Q==}
     engines: {node: '>=6.9.0'}
 
+  '@cloudinary-util/types@1.5.3':
+    resolution: {integrity: sha512-/EbFhGKw942gAmBYN8iLCB8+7PfQR6DRIkfJWWoDf8OxInIrnVAhWHy+m1g1oltrTHZKbkF57oPJmi9Yv/4IIQ==}
+
+  '@cloudinary-util/url-loader@5.10.0':
+    resolution: {integrity: sha512-FW2hkDpOQ9LgeecrID5NTx84Zfk7MSZXMy2W+sJ0g3R2SaXZyykqtcMluzX94CypPgsu1OoM8qPs3l1gKTwarQ==}
+
+  '@cloudinary-util/util@3.3.2':
+    resolution: {integrity: sha512-Cc0iFxzfl7fcOXuznpeZFGYC885Of/vDgccRDnhTe/8Rf8YKv2PjLtezyo0VgmdA/CpeZy29NCXAsf6liokbwg==}
+
+  '@cloudinary/transformation-builder-sdk@1.15.1':
+    resolution: {integrity: sha512-Dvm5DzGPq6NtXRLhpubu7SVfD+TLEWbU9q/FOxpGelWpn3NaTSOH/b+jRbpTL+EgYSHeaTeK6kHMraousPkNQg==}
+
+  '@cloudinary/url-gen@1.15.0':
+    resolution: {integrity: sha512-bjU67eZxLUgoRy/Plli4TQio7q6P31OYqnEgXxeN9TKXrzr6h0DeEdIUhKI9gy3HkEBWXWWJIPh7j7gkOJPnyA==}
+
   '@contentful/content-source-maps@0.6.1':
     resolution: {integrity: sha512-IjsyhakG17OC5xtIa5agVRsnjjxiJf9HZjpDIV6Ix036Pd5YHJrbyyiF4KNEmLlIqe3hQ0kHGWEs9S/HfECmRQ==}
 
@@ -1062,6 +1080,9 @@ packages:
     resolution: {integrity: sha512-UHcGb4lax2vzx8g0aUy/urHNZy6JJ7Elib0WJHD9fmWnSsjATQkq+47Hud325CO0S5Z17q/tbu69tpzqAor4AA==}
     engines: {node: '>= 18'}
     hasBin: true
+
+  '@tsconfig/recommended@1.0.7':
+    resolution: {integrity: sha512-xiNMgCuoy4mCL4JTywk9XFs5xpRUcKxtWEcMR6FNMtsgewYTIgIR+nvlP4A4iRCAzRsHMnPhvTRrzp4AGcRTEA==}
 
   '@types/eslint-scope@3.7.7':
     resolution: {integrity: sha512-MzMFlSLBqNF2gcHWO0G1vP/YQyfvrxZ0bF+u7mzUdZ1/xK4A4sru+nraZz5i3iEIk1l1uyicaDVTB4QbbEkAYg==}
@@ -2438,6 +2459,12 @@ packages:
 
   neo-async@2.6.2:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
+
+  next-cloudinary@6.12.0:
+    resolution: {integrity: sha512-PJSi3lAs3O0Y1b+r3z4abBcMGiwmTDikZvMegBIMGiswk61bcPaN1xc7t9k+bolBMdiunTn5CvKNLlQKf8qamw==}
+    peerDependencies:
+      next: ^12 || ^13 || ^14 || >=15.0.0-rc
+      react: ^17 || ^18 || >=19.0.0-beta
 
   next-intl@3.15.3:
     resolution: {integrity: sha512-jNc2xYzwv0Q4EQKvuHye9dXaDaneiP/ZCQC+AccyOQD6N9d/FZiSWT4wfVVD4B0IXC1Hhzj1QussUu+k3ynnTg==}
@@ -4060,6 +4087,25 @@ snapshots:
       '@babel/helper-validator-identifier': 7.24.7
       to-fast-properties: 2.0.0
 
+  '@cloudinary-util/types@1.5.3': {}
+
+  '@cloudinary-util/url-loader@5.10.0':
+    dependencies:
+      '@cloudinary-util/types': 1.5.3
+      '@cloudinary-util/util': 3.3.2
+      '@cloudinary/url-gen': 1.15.0
+      zod: 3.23.8
+
+  '@cloudinary-util/util@3.3.2': {}
+
+  '@cloudinary/transformation-builder-sdk@1.15.1':
+    dependencies:
+      '@cloudinary/url-gen': 1.15.0
+
+  '@cloudinary/url-gen@1.15.0':
+    dependencies:
+      '@cloudinary/transformation-builder-sdk': 1.15.1
+
   '@contentful/content-source-maps@0.6.1':
     dependencies:
       '@vercel/stega': 0.1.2
@@ -4397,6 +4443,8 @@ snapshots:
       yauzl: 2.10.0
     transitivePeerDependencies:
       - typescript
+
+  '@tsconfig/recommended@1.0.7': {}
 
   '@types/eslint-scope@3.7.7':
     dependencies:
@@ -5956,6 +6004,15 @@ snapshots:
   negotiator@0.6.3: {}
 
   neo-async@2.6.2: {}
+
+  next-cloudinary@6.12.0(next@14.2.4(@babel/core@7.25.2)(@playwright/test@1.46.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.6))(react@18.3.1):
+    dependencies:
+      '@cloudinary-util/types': 1.5.3
+      '@cloudinary-util/url-loader': 5.10.0
+      '@cloudinary-util/util': 3.3.2
+      '@tsconfig/recommended': 1.0.7
+      next: 14.2.4(@babel/core@7.25.2)(@playwright/test@1.46.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.6)
+      react: 18.3.1
 
   next-intl@3.15.3(next@14.2.4(@babel/core@7.25.2)(@playwright/test@1.46.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.6))(react@18.3.1):
     dependencies:

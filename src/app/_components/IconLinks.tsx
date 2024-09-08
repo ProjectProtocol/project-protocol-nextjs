@@ -27,7 +27,7 @@ function IconLink({
           alt={`Icon for ${text}`}
         />
       </div>
-      <span>{text}</span>
+      <span className="fs-6">{text}</span>
     </Link>
   );
 }
