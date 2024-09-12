@@ -1,7 +1,10 @@
 // note spanish locale in contentful is es-US
 
 import { ALL_LOCALES } from "@/i18n";
-import ContentfulClient, { ContentfulKey, contentIds } from "@/lib/contentful";
+import ContentfulClient, {
+  ContentfulPageKey,
+  contentfulPageIds,
+} from "@/lib/contentful";
 import { Document } from "@contentful/rich-text-types";
 import renderRichText from "@/lib/renderRichText";
 import "@/styles/content-pages.scss";
@@ -15,7 +18,7 @@ export async function generateStaticParams() {
 
   const pages = [];
   for (const locale of locales) {
-    for (const slug of Object.keys(contentIds)) {
+    for (const slug of Object.keys(contentfulPageIds)) {
       pages.push({ locale, slug });
     }
   }
@@ -25,7 +28,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { locale: string; slug: ContentfulKey };
+  params: { locale: string; slug: ContentfulPageKey };
 }) {
   const data = await getContent(params.locale, params.slug);
   const title = data.fields.title as string;
@@ -34,9 +37,9 @@ export async function generateMetadata({
   };
 }
 
-async function getContent(locale: string, slug: ContentfulKey) {
+async function getContent(locale: string, slug: ContentfulPageKey) {
   const contentfulLocale = locale === "es-MX" ? "es-US" : locale;
-  const data = await ContentfulClient.getEntry(contentIds[slug], {
+  const data = await ContentfulClient.getEntry(contentfulPageIds[slug], {
     locale: contentfulLocale,
   });
   return data;
@@ -53,7 +56,7 @@ type CoverImage = {
 export default async function Page({
   params,
 }: {
-  params: { slug: ContentfulKey; locale: string };
+  params: { slug: ContentfulPageKey; locale: string };
 }) {
   const data = await getContent(params.locale, params.slug);
   const title = data.fields.title as string;

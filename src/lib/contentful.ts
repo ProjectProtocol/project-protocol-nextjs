@@ -1,6 +1,6 @@
 import { createClient } from "contentful";
 
-export const contentIds = {
+export const contentfulPageIds = {
   about: "01l6lbfvmtbqQHjt7LuUFL",
   "why-email": "6K61ZF3VLMPMi0BjOQ3gjk",
   "ethical-principles": "6UFa3N1g7ytcAxeBCQVyTY",
@@ -11,7 +11,7 @@ export const contentIds = {
   "what-is-project-protocol": "1Is9QM4ez0YDMYktRuuJZx",
 };
 
-export type ContentfulKey = keyof typeof contentIds;
+export type ContentfulPageKey = keyof typeof contentfulPageIds;
 
 const client = createClient({
   space: "zwkgwua3qde9",
