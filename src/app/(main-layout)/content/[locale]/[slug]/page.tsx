@@ -67,6 +67,13 @@ export default async function Page({
     const url = (data.fields.coverImage as CoverImage).fields.file.url;
     coverImageSrc = `https:${url}?w=1200`;
   }
+  /* eslint-disable no-console */
+  console.log(
+    "Building page",
+    params.slug,
+    "with image: ",
+    coverImageSrc ?? ""
+  );
 
   return (
     <ContentPage title={title} coverImageSrc={coverImageSrc}>
