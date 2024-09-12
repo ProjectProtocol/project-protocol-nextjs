@@ -15,17 +15,19 @@ export default function ContentPage({
 }: IContentPage) {
   const TitleEl = <span className="d-md-none">{title}</span>;
   return (
-    <div className="pb-4 vertical-rhythm">
-      <PageHeader title={TitleEl} showBack />
-      {coverImageSrc ? (
-        <ContentCoverImage
-          coverImageSrc={coverImageSrc}
-          title={title as string}
-        />
-      ) : (
-        <h1 className="display-5 fw-bold">{title}</h1>
-      )}
-      {children}
+    <div className="pb-4">
+      <PageHeader title={TitleEl} showBack hideOnDesktop />
+      <div className="vertical-rhythm">
+        {coverImageSrc ? (
+          <ContentCoverImage
+            coverImageSrc={coverImageSrc}
+            title={title as string}
+          />
+        ) : (
+          <h1 className="display-5 fw-bold mt-4">{title}</h1>
+        )}
+        {children}
+      </div>
     </div>
   );
 }
