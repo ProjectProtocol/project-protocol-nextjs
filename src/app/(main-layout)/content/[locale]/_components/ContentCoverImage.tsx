@@ -1,5 +1,5 @@
 import Image from "next/image";
-
+import styles from "./content-cover-image.module.scss";
 export default function ContentCoverImage({
   coverImageSrc,
   title,
@@ -21,6 +21,7 @@ export default function ContentCoverImage({
           style={{ objectFit: "cover" }}
           alt={`Cover image for ${title}`}
         />
+        <div className={styles.coverImageOverlay} />
         <div
           className="position-relative d-flex flex-column justify-content-end"
           style={{

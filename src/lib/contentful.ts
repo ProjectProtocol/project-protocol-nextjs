@@ -2,6 +2,7 @@ import { createClient } from "contentful";
 
 export const contentfulPageIds = {
   about: "01l6lbfvmtbqQHjt7LuUFL",
+  "the-team": "41UOkLNQQfa6pK2U7Gr46d",
   "why-email": "6K61ZF3VLMPMi0BjOQ3gjk",
   "ethical-principles": "6UFa3N1g7ytcAxeBCQVyTY",
   vote: "6VgcyUQKmZTr955WYmlhr8",
