@@ -4,7 +4,6 @@ export const contentfulPageIds = {
   about: "01l6lbfvmtbqQHjt7LuUFL",
   "why-email": "6K61ZF3VLMPMi0BjOQ3gjk",
   "ethical-principles": "6UFa3N1g7ytcAxeBCQVyTY",
-  "how-does-it-work": "1BQDLK4P2L1E0DmCwLOrDR",
   vote: "6VgcyUQKmZTr955WYmlhr8",
   "terms-of-service": "1acLWVokjkixcvTh0b3gup",
   "community-posting-guidelines": "fYYpah3B5mppvE7rXY1gY",

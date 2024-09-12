@@ -11,10 +11,6 @@ export default async function Footer() {
       label: t("whatIsProjectProtocol"),
     },
     {
-      url: urlPrefix("/how-does-it-work"),
-      label: t("howDoesItWork"),
-    },
-    {
       url: urlPrefix("/ethical-principles"),
       label: t("ethicalPrinciples"),
     },
