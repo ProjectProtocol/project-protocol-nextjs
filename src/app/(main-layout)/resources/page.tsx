@@ -24,13 +24,15 @@ export default async function Page({
   const t = await getTranslations();
 
   return (
-    <div className="vertical-rhythm">
+    <>
       <PageHeader title={t("resources.title")} />
-      <ResourceSearchBar />
-      <ResourceFilters searchParams={searchParams} />
-      <Suspense fallback={<ResourcesLoadingPlaceholder />}>
-        <ResourcesList searchParams={searchParams} />
-      </Suspense>
-    </div>
+      <div className="vertical-rhythm">
+        <ResourceSearchBar />
+        <ResourceFilters searchParams={searchParams} />
+        <Suspense fallback={<ResourcesLoadingPlaceholder />}>
+          <ResourcesList searchParams={searchParams} />
+        </Suspense>
+      </div>
+    </>
   );
 }

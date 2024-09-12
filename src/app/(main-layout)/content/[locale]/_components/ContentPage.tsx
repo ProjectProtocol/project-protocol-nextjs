@@ -24,7 +24,7 @@ export default function ContentPage({
             title={title as string}
           />
         ) : (
-          <h1 className="display-5 fw-bold mt-4">{title}</h1>
+          <h1 className="display-5 fw-bold mt-5">{title}</h1>
         )}
         {children}
       </div>
