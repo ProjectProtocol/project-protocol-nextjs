@@ -6,7 +6,10 @@ export default async function Footer() {
   const locale = await getLocale();
   const urlPrefix = (path: string) => `/content/${locale}/${path}`;
   const links = [
-    { url: urlPrefix("/about"), label: t("about") },
+    {
+      url: urlPrefix("/what-is-project-protocol"),
+      label: t("whatIsProjectProtocol"),
+    },
     {
       url: urlPrefix("/how-does-it-work"),
       label: t("howDoesItWork"),

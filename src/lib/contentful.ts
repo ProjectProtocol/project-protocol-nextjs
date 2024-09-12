@@ -8,6 +8,7 @@ export const contentIds = {
   vote: "6VgcyUQKmZTr955WYmlhr8",
   "terms-of-service": "1acLWVokjkixcvTh0b3gup",
   "community-posting-guidelines": "fYYpah3B5mppvE7rXY1gY",
+  "what-is-project-protocol": "1Is9QM4ez0YDMYktRuuJZx",
 };
 
 export type ContentfulKey = keyof typeof contentIds;

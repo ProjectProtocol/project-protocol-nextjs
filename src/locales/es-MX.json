@@ -170,7 +170,8 @@
     "registerToVote": "Registrarse para votar",
     "resources": "Recursos",
     "signUp": "Registrarse",
-    "termsOfService": "Términos de servicio"
+    "termsOfService": "Términos de servicio",
+    "whatIsProjectProtocol": "¿Qué es Project Protocol?"
   },
   "password_reset": {
     "expiredToken": "El token ha expirado, por favor solicita el restablecimiento de contraseña nuevamente.",

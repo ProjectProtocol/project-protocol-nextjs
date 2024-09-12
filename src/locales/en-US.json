@@ -176,7 +176,8 @@
     "registerToVote": "Register to vote",
     "resources": "Resources",
     "signUp": "Sign up",
-    "termsOfService": "Terms of Service"
+    "termsOfService": "Terms of Service",
+    "whatIsProjectProtocol": "What is Project Protocol?"
   },
   "password_reset": {
     "emailPlaceholder": "name@example.com",

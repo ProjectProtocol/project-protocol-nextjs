@@ -12,19 +12,10 @@ export const dynamicParams = false;
 
 export async function generateStaticParams() {
   const locales = ALL_LOCALES;
-  const slugs = [
-    "about",
-    "why-email",
-    "how-does-it-work",
-    "ethical-principles",
-    "vote",
-    "terms-of-service",
-    "community-posting-guidelines",
-  ];
 
   const pages = [];
   for (const locale of locales) {
-    for (const slug of slugs) {
+    for (const slug of Object.keys(contentIds)) {
       pages.push({ locale, slug });
     }
   }
@@ -51,6 +42,14 @@ async function getContent(locale: string, slug: ContentfulKey) {
   return data;
 }
 
+type CoverImage = {
+  fields: {
+    file: {
+      url: string;
+    };
+  };
+};
+
 export default async function Page({
   params,
 }: {
@@ -60,8 +59,14 @@ export default async function Page({
   const title = data.fields.title as string;
   const body = data.fields.body as Document;
 
+  let coverImageSrc;
+  if (!!data.fields.coverImage) {
+    const url = (data.fields.coverImage as CoverImage).fields.file.url;
+    coverImageSrc = `https:${url}?w=1200`;
+  }
+
   return (
-    <ContentPage title={title}>
+    <ContentPage title={title} coverImageSrc={coverImageSrc}>
       <div className="content-page">{renderRichText(body)}</div>
     </ContentPage>
   );
