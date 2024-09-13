@@ -10,6 +10,7 @@ import renderRichText from "@/lib/renderRichText";
 import "@/styles/content-pages.scss";
 import ContentPage from "../_components/ContentPage";
 import { metaTitle } from "@/lib/metadataUtils";
+import { getCldImageUrl } from "next-cloudinary";
 
 export const dynamicParams = false;
 
@@ -45,14 +46,6 @@ async function getContent(locale: string, slug: ContentfulPageKey) {
   return data;
 }
 
-type CoverImage = {
-  fields: {
-    file: {
-      url: string;
-    };
-  };
-};
-
 export default async function Page({
   params,
 }: {
@@ -63,17 +56,10 @@ export default async function Page({
   const body = data.fields.body as Document;
 
   let coverImageSrc;
-  if (!!data.fields.coverImage) {
-    const url = (data.fields.coverImage as CoverImage).fields.file.url;
-    coverImageSrc = `https:${url}?w=1200`;
+  if (!!data.fields.cloudinaryImgId) {
+    let id = data.fields.cloudinaryImgId as string;
+    coverImageSrc = await getCldImageUrl({ src: id, width: 1200 });
   }
-  /* eslint-disable no-console */
-  console.log(
-    "Building page",
-    params.slug,
-    "with image: ",
-    coverImageSrc ?? ""
-  );
 
   return (
     <ContentPage title={title} coverImageSrc={coverImageSrc}>

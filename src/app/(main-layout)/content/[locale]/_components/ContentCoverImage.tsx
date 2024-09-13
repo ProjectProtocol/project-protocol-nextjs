@@ -18,6 +18,7 @@ export default function ContentCoverImage({
           sizes="100vw"
           priority
           fill
+          quality={10}
           style={{ objectFit: "cover" }}
           alt={`Cover image for ${title}`}
         />
