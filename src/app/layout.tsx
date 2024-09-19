@@ -17,13 +17,13 @@ const ProgressBarWrapperNoSSR = dynamic(
 
 const font = Source_Sans_3({ subsets: ["latin"] });
 
-export const viewPort: Viewport = {
+export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   minimumScale: 1,
   maximumScale: 1,
   userScalable: false,
-  themeColor: { media: "(prefers-color-scheme: light)", color: "#f06748" },
+  themeColor: [{ media: "(prefers-color-scheme: light)", color: "#f06748" }],
 };
 
 export async function generateMetadata() {

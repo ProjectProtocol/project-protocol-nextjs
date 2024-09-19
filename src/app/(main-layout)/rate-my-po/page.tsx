@@ -31,8 +31,8 @@ export default async function Page({
 
   return (
     <>
+      <PageHeader title={t("rate_my_po.title")} />
       <div className="vertical-rhythm">
-        <PageHeader title={t("rate_my_po.title")} />
         <RateMyPoSearchbar />
         <Suspense>
           <RateMyPoSearchResults searchText={searchParams?.search} />

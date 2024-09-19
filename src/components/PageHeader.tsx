@@ -9,17 +9,18 @@ interface IPageHeader {
   showAccount?: boolean;
   showBack?: boolean;
   leftAction?: JSX.Element;
+  hideOnDesktop?: boolean;
 }
 
 export default async function PageHeader({
   title,
   showBack = false,
+  hideOnDesktop,
 }: IPageHeader) {
   const user = await getUser();
   const t = await getTranslations();
-
   return (
-    <div className="py-2">
+    <div className={`py-3 ${hideOnDesktop ? "d-md-none" : ""}`}>
       {/* MOBILE PAGE HEADER */}
       <Row className="d-md-none">
         <Col>
@@ -61,7 +62,7 @@ export default async function PageHeader({
       </Row>
 
       {/* DESKTOP PAGE HEADER */}
-      <div className="d-none d-md-block vertical-rhythm">
+      <div className="d-none d-md-block vertical-rhythm py-3">
         {showBack && (
           <div>
             <BackLink>

@@ -168,7 +168,6 @@
     "account": "Account",
     "contact": "Contact us",
     "ethicalPrinciples": "Ethical principles",
-    "howDoesItWork": "How does it work?",
     "localeSwitcher": {
       "selectLanguage": "Select your language"
     },
@@ -176,7 +175,9 @@
     "registerToVote": "Register to vote",
     "resources": "Resources",
     "signUp": "Sign up",
-    "termsOfService": "Terms of Service"
+    "termsOfService": "Terms of Service",
+    "theTeam": "The team",
+    "whatIsProjectProtocol": "What is Project Protocol?"
   },
   "password_reset": {
     "emailPlaceholder": "name@example.com",

@@ -6,20 +6,23 @@ export default async function Footer() {
   const locale = await getLocale();
   const urlPrefix = (path: string) => `/content/${locale}/${path}`;
   const links = [
-    { url: urlPrefix("/about"), label: t("about") },
     {
-      url: urlPrefix("/how-does-it-work"),
-      label: t("howDoesItWork"),
+      url: urlPrefix("what-is-project-protocol"),
+      label: t("whatIsProjectProtocol"),
     },
     {
-      url: urlPrefix("/ethical-principles"),
+      url: urlPrefix("the-team"),
+      label: t("theTeam"),
+    },
+    {
+      url: urlPrefix("ethical-principles"),
       label: t("ethicalPrinciples"),
     },
     {
-      url: urlPrefix("/terms-of-service"),
+      url: urlPrefix("terms-of-service"),
       label: t("termsOfService"),
     },
-    { url: urlPrefix("/contact-us"), label: t("contact") },
+    { url: urlPrefix("contact-us"), label: t("contact") },
   ];
 
   return (
