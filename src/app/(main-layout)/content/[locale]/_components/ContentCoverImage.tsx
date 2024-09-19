@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "./content-cover-image.module.scss";
+
 export default function ContentCoverImage({
   coverImageSrc,
   title,
@@ -18,7 +19,6 @@ export default function ContentCoverImage({
           sizes="100vw"
           priority
           fill
-          quality={10}
           style={{ objectFit: "cover" }}
           alt={`Cover image for ${title}`}
         />
