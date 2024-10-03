@@ -31,7 +31,7 @@ export default function useSetSearchParams(): [
           ? `${pathname}?${newParamsString}`
           : pathname;
 
-        router.replace(url);
+        router.replace(url, { scroll: false });
       });
     },
     [pathname, router, searchParams]
