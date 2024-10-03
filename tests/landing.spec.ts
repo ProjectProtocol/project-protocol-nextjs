@@ -12,7 +12,7 @@ test("top three links to appropriate pages", async ({ page }) => {
   await expect(page).toHaveURL(/resources/);
 
   await page.goBack();
-  await page.getByRole("link", { name: "Icon for Rate your PO" }).click();
+  await page.getByRole("link", { name: "Icon for Rate my PO" }).click();
   await page.waitForURL("/rate-my-po");
   await expect(page).toHaveURL(/rate-my-po/);
 
