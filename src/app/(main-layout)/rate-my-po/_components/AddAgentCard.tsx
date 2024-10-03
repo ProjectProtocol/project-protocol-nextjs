@@ -16,7 +16,7 @@ export default function AddAgentCard({ signedIn }: IAddAgentCard) {
         <h3>{t("rate_my_po.noResults", { ns: "rate_my_po" })}</h3>
         {user ? (
           <Link
-            href="/agents/new"
+            href="/rate-my-po/new"
             aria-label={t("agent.addAgent")}
             className="w-75 btn btn-lg btn-primary"
           >

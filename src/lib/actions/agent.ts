@@ -5,7 +5,7 @@ import { getSession } from "../session";
 import Api from "../api";
 import { flashError, flashSuccess } from "../flash-messages";
 import { revalidatePath } from "next/cache";
-import { IRateAgentFormState } from "@/app/(main-layout)/agents/[agentId]/_components/RateAgentForm/types";
+import { IRateAgentFormState } from "@/app/(main-layout)/rate-my-po/[agentId]/_components/RateAgentForm/types";
 import { replace, snakeCase } from "lodash";
 import { snakeCaseKeys } from "../transformKeys";
 import { redirect } from "next/navigation";
@@ -35,7 +35,7 @@ export default async function rateAgent(
       : t("rate_agent.createdSuccess")
   );
 
-  revalidatePath(`/agents/${agentId}`);
+  revalidatePath(`/rate-my-po/${agentId}`);
 }
 
 export async function createAgent({
