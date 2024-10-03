@@ -4,7 +4,12 @@ import { Card, Col, Row } from "react-bootstrap";
 
 export default function AgentCardSimple({ agent }: { agent: Agent }) {
   return (
-    <Card body className="shadow-none" as={Link} href={"/agents/" + agent.id}>
+    <Card
+      body
+      className="shadow-none"
+      as={Link}
+      href={"/rate-my-po/" + agent.id}
+    >
       <Row>
         <Col>
           <div className="d-flex flex-column">
