@@ -96,7 +96,7 @@ export default function RateAgentForm({ onCancel, agentId }: IRateAgentForm) {
         <p className={isCurrentlyOnParole ? "text-muted" : ""}>
           {t("rate_agent.additionalCommentsHelpText")}
           <OverlayTrigger
-            placement="right"
+            placement="auto"
             overlay={
               <Popover>
                 <Popover.Body>
