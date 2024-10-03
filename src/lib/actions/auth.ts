@@ -10,14 +10,9 @@ import { cookies } from "next/headers";
 export interface ILoginFormState {
   loginEmail: string;
   password: string;
-  callbackURL?: string;
 }
 
-export async function login({
-  loginEmail,
-  password,
-  callbackURL,
-}: ILoginFormState) {
+export async function login({ loginEmail, password }: ILoginFormState) {
   const t = await getTranslations();
 
   const response = await new Api().post("/auth/sign_in", {
@@ -44,10 +39,6 @@ export async function login({
 
   await signIn(data.user, apiToken, cookies());
   flashSuccess(t("login.success"));
-
-  if (callbackURL) {
-    redirect(String(callbackURL));
-  }
 }
 
 export interface ISignupFormState {

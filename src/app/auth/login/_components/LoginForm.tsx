@@ -13,7 +13,7 @@ import { useOriginalPath } from "@/components/OriginalPathProvider";
 
 export default function LoginForm() {
   const t = useTranslations();
-  const { getOriginalPath } = useOriginalPath();
+  const { redirectToOriginalPath } = useOriginalPath();
   const schema = z.object({
     loginEmail: z
       .string()
@@ -23,7 +23,6 @@ export default function LoginForm() {
       .string()
       .min(1, t("login.passwordRequired"))
       .min(8, t("shared.passwordLengthError")),
-    callbackURL: z.string().optional(),
   });
   const { register, handleSubmit, getFieldState, formState } =
     useForm<ILoginFormState>({
@@ -31,13 +30,13 @@ export default function LoginForm() {
       defaultValues: {
         loginEmail: "",
         password: "",
-        callbackURL: getOriginalPath(),
       },
       resolver: zodResolver(schema),
     });
 
   async function onSubmit(data: ILoginFormState) {
     await login(data);
+    redirectToOriginalPath();
   }
 
   const validationProps = useCallback(
