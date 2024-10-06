@@ -38,7 +38,6 @@ export async function login({ loginEmail, password }: ILoginFormState) {
   }
 
   await signIn(data.user, apiToken, cookies());
-  flashSuccess(t("login.success"));
 }
 
 export interface ISignupFormState {

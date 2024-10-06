@@ -10,6 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback } from "react";
 import Link from "next/link";
 import { useOriginalPath } from "@/components/OriginalPathProvider";
+import toast from "react-hot-toast";
 
 export default function LoginForm() {
   const t = useTranslations();
@@ -36,6 +37,7 @@ export default function LoginForm() {
 
   async function onSubmit(data: ILoginFormState) {
     await login(data);
+    toast.success(t("login.success"));
     redirectToOriginalPath();
   }
 
