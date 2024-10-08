@@ -52,7 +52,7 @@ export default async function PageHeader({
             ) : (
               <Link
                 className="link-primary text-decoration-none"
-                href="/auth/login"
+                href="/auth/signup"
               >
                 {t("navigation.signUp")}
               </Link>
