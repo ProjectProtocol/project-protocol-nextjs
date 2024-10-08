@@ -9,6 +9,7 @@ export const contentfulPageIds = {
   "terms-of-service": "1acLWVokjkixcvTh0b3gup",
   "community-posting-guidelines": "fYYpah3B5mppvE7rXY1gY",
   "what-is-project-protocol": "1Is9QM4ez0YDMYktRuuJZx",
+  "how-it-works": "1BQDLK4P2L1E0DmCwLOrDR",
 };
 
 export type ContentfulPageKey = keyof typeof contentfulPageIds;
