@@ -1,11 +1,6 @@
 import { getLocale, getTranslations } from "next-intl/server";
-import Image from "next/image";
 import styles from "@/styles/landing-page.module.scss";
-import Container from "react-bootstrap/Container";
-import Navbar from "react-bootstrap/Navbar";
-import NavbarBrand from "react-bootstrap/NavbarBrand";
 import Link from "next/link";
-import LocaleSwitcher from "@/components/LocaleSwitcher";
 import IconLinks from "./_components/IconLinks";
 import LandingResources from "./_components/LandingResources";
 import { Suspense } from "react";
@@ -13,9 +8,7 @@ import SegmentLoading from "./_components/SegmentLoading";
 import LandingReviews from "./_components/LandingReviews";
 import Footer from "@/components/Footer";
 import "@/styles/content-pages.scss";
-import landingImage from "@/../public/images/landing-image.jpeg";
 import VideoComponent from "./_components/VideoComponent";
-import { CldImage } from "next-cloudinary";
 import LandingHeroImage from "./_components/LandingHeroImage";
 import LandingPageHeader from "./_components/LandingPageHeader";
 
@@ -59,7 +52,7 @@ export default async function Page() {
       <div className="content-page mt-0">
         {/* Desktop Explore Segment */}
         <LandingPageSegment classes="text-center px-4 px-md-0 d-none d-md-block">
-          <div className="m-auto" style={{ maxWidth: 720 }}>
+          <div className="m-auto" style={{ maxWidth: MAX_WIDTH }}>
             <h1>{t("home.welcomeTitle")}</h1>
             <p>
               {t("home.welcomeMessage")}.{" "}
@@ -82,7 +75,10 @@ export default async function Page() {
           </div>
         </LandingPageSegment>
         <LandingPageSegment classes="px-3">
-          <div className="m-auto vertical-rhythm" style={{ maxWidth: 720 }}>
+          <div
+            className="m-auto vertical-rhythm"
+            style={{ maxWidth: MAX_WIDTH }}
+          >
             <div className="d-flex flex-row align-items-center justify-content-between">
               <h2 className="p-0 m-0">{t("home.recentResources")}</h2>
               <Link href="/resources">
@@ -96,7 +92,10 @@ export default async function Page() {
           </div>
         </LandingPageSegment>
         <LandingPageSegment classes="px-3">
-          <div className="m-auto vertical-rhythm" style={{ maxWidth: 720 }}>
+          <div
+            className="m-auto vertical-rhythm"
+            style={{ maxWidth: MAX_WIDTH }}
+          >
             <div className="d-flex flex-row align-items-center justify-content-between">
               <h2 className="p-0 m-0">{t("home.recentReviews")}</h2>
               <Link href="/rate-my-po">
