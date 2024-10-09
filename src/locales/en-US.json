@@ -167,7 +167,9 @@
     "about": "About",
     "account": "Account",
     "contact": "Contact us",
+    "donate": "Donate",
     "ethicalPrinciples": "Ethical principles",
+    "howItWorks": "How does it work?",
     "localeSwitcher": {
       "selectLanguage": "Select your language"
     },

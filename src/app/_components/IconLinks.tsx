@@ -46,9 +46,9 @@ export default async function IconLinks({
     <Row className={classes}>
       <Col>
         <IconLink
-          href="/resources"
-          icon="/images/resources_landing.svg"
-          text={t("home.resourcesTitle")}
+          href={`/content/${locale}/vote`}
+          icon="/images/vote_landing.svg"
+          text={t("home.voteTitle")}
           iconHeight={iconHeight}
         />
       </Col>
@@ -62,9 +62,9 @@ export default async function IconLinks({
       </Col>
       <Col>
         <IconLink
-          href={`/content/${locale}/vote`}
-          icon="/images/vote_landing.svg"
-          text={t("home.voteTitle")}
+          href="/resources"
+          icon="/images/resources_landing.svg"
+          text={t("home.resourcesTitle")}
           iconHeight={iconHeight}
         />
       </Col>
