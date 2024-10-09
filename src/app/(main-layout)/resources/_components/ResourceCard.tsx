@@ -4,9 +4,9 @@ import { Card } from "react-bootstrap";
 import SocialMediaLink from "./SocialMediaLink";
 import TagBadge from "@/components/TagBadge";
 import ResourceVoteControls from "./ResourceVoteControls";
-import Image from "next/image";
 import Link from "next/link";
 
+/* eslint-disable @next/next/no-img-element */
 export default function ResourceCard({ resource }: { resource: Resource }) {
   const t = useTranslations();
 
@@ -46,11 +46,11 @@ export default function ResourceCard({ resource }: { resource: Resource }) {
             className="bg-white d-flex justify-content-center align-items-center rounded rounded-circle border me-2"
             style={{ width: "30px", height: "30px", padding: "6px" }}
           >
-            <Image
+            <img
               src={`https://s2.googleusercontent.com/s2/favicons?domain_url=${url}`}
               width={18}
               height={18}
-              alt={`Favorite icon for ${name}`}
+              alt={""}
             />
           </div>
           <div className="flex flex-column">
