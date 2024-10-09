@@ -21,7 +21,7 @@ function LandingPageSegment({
   classes?: string;
   children: React.ReactNode;
 }) {
-  return <section className={"py-3 " + classes}>{children}</section>;
+  return <section className={"py-5 " + classes}>{children}</section>;
 }
 
 export default async function Page() {
@@ -33,15 +33,15 @@ export default async function Page() {
       <div className={`position-relative w-100 ${styles.topImageContainer}`}>
         <LandingHeroImage />
         <div className={styles.imageOverlay} />
-        <LandingPageHeader locale={locale} />
+
         <div
           className="position-absolute text-white w-100 d-md-none"
           style={{ bottom: 0 }}
         >
-          <div className="d-flex flex-column justy-content-center align-items-center p-3">
+          <div className="d-flex flex-column justy-content-center align-items-center pb-1">
             <h1>{t("home.welcomeTitle")}</h1>
-            <p>
-              {t("home.welcomeMessage")}.{" "}
+            <p className="px-5 text-center">
+              {t("home.welcomeMessage")}{" "}
               <Link href="/content/en-US/about" className="link-white">
                 {t("shared.learnMore")}
               </Link>
@@ -49,6 +49,7 @@ export default async function Page() {
           </div>
         </div>
       </div>
+      <LandingPageHeader locale={locale} />
       <div className="content-page mt-0">
         {/* Desktop Explore Segment */}
         <LandingPageSegment classes="text-center px-4 px-md-0 d-none d-md-block">
@@ -64,7 +65,7 @@ export default async function Page() {
           </div>
         </LandingPageSegment>
         {/* Mobile explore segment */}
-        <LandingPageSegment classes="text-center px-4 d-md-none mt-0">
+        <LandingPageSegment classes="text-center px-4 d-md-none">
           <h2 className="mb-3">{t("home.explore")}</h2>
           <IconLinks locale={locale} />
         </LandingPageSegment>
