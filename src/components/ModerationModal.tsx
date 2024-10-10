@@ -5,11 +5,14 @@ import PopUp, { IPopUp } from "./PopUp";
 import Image from "next/image";
 import { Button } from "react-bootstrap";
 import { acknowledgePolicy } from "@/lib/actions/account";
+import { useAuth } from "@/components/AuthProvider";
 
 export default function ModerationModal(props: IPopUp) {
+  const { updateAcknowledgePolicy } = useAuth();
   const ackPolicy = async () => {
     const result = await acknowledgePolicy();
     if (result) {
+      updateAcknowledgePolicy();
       props.onHide?.();
     }
   };

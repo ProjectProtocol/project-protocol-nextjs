@@ -9,14 +9,17 @@ import Agent from "@/types/Agent";
 import toast from "react-hot-toast";
 import RateAgentModal from "./RateAgentModal";
 import Link from "next/link";
+import ModerationModal from "@/components/ModerationModal";
 
 export default function RateAgentButton({ agent }: { agent: Agent }) {
   const t = useTranslations();
-  const { user } = useAuth();
+  const { user, isPolicyAcknowledged } = useAuth();
+  const [showPolicyModal, setShowPolicyModal] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [showRateAgentModal, setShowRateAgentModal] = useState(false);
 
   useEffect(() => {
+    setShowPolicyModal(false);
     setShowRateAgentModal(false);
   }, [agent]);
 
@@ -31,11 +34,18 @@ export default function RateAgentButton({ agent }: { agent: Agent }) {
       return;
     }
 
-    if (user.isConfirmed) {
+    if (user.isConfirmed && !isPolicyAcknowledged()) {
+      setShowPolicyModal(true);
+    } else if (user.isConfirmed) {
       setShowRateAgentModal(true);
     } else {
       setShowConfirmationModal(true);
     }
+  };
+
+  const handleAcknowledged = () => {
+    setShowPolicyModal(false);
+    setShowRateAgentModal(true);
   };
 
   return (
@@ -64,6 +74,11 @@ export default function RateAgentButton({ agent }: { agent: Agent }) {
         agent={agent}
         show={showRateAgentModal}
         onHide={() => setShowRateAgentModal(false)}
+      />
+      <ModerationModal
+        show={showPolicyModal}
+        closeButton={false}
+        onHide={handleAcknowledged}
       />
     </div>
   );
