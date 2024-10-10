@@ -8,13 +8,7 @@ import LocaleSwitcher from "@/components/LocaleSwitcher";
 import { InView } from "react-intersection-observer";
 import { useState } from "react";
 
-export default function LandingPageHeader({
-  locale,
-  isScrolled,
-}: {
-  locale: string;
-  isScrolled?: boolean;
-}) {
+export default function LandingPageHeader({ locale }: { locale: string }) {
   const [bg, setBg] = useState("transparent");
   return (
     <>
