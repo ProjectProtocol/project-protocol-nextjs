@@ -29,17 +29,18 @@ $light: $platinum;
 $info: $sea-green;
 
 $custom-colors: (
-  'white': $white,
-  'cobalt': $cobalt,
-  'light-cobalt': $light-cobalt,
-  'loquat': $loquat,
-  'meyer-lemon': $meyer-lemon,
-  'medium-gray': $medium-gray,
-  'rating-1': $cherry,
-  'rating-2': $tangelo,
-  'rating-3': $mandarin,
-  'rating-4': $loquat,
-  'rating-5': $meyer-lemon,
+  "white": $white,
+  "cobalt": $cobalt,
+  "light-cobalt": $light-cobalt,
+  "loquat": $loquat,
+  "meyer-lemon": $meyer-lemon,
+  "medium-gray": $medium-gray,
+  "rating-1": $cherry,
+  "rating-2": $tangelo,
+  "rating-3": $mandarin,
+  "rating-4": $loquat,
+  "rating-5": $meyer-lemon,
+  "slate": $slate,
 );
 
 $body-color: $black;
@@ -57,7 +58,7 @@ $placeholder-opacity-min: 0.08;
 // Links and Navs
 $link-color: $body-color;
 
-$navbar-light-hover-color: rgba($primary, 1);
-$navbar-light-active-color: rgba($black, 1);
-$navbar-light-color: rgba($black, 0.85);
-$navbar-light-disabled-color: rgba($black, 0.3);
+$navbar-light-hover-color: $slate;
+$navbar-light-active-color: $black;
+$navbar-light-color: $slate;
+$navbar-light-disabled-color: rgba($black, 0.5);
