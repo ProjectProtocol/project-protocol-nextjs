@@ -8,6 +8,13 @@
 $utilities: map-merge(
   $utilities,
   (
+    "color":
+      map-merge(
+        map-get($utilities, "color"),
+        (
+          responsive: true,
+        )
+      ),
     "width":
       map-merge(
         map-get($utilities, "width"),
