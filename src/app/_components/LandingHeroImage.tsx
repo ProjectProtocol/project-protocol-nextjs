@@ -6,11 +6,10 @@ export default function LandingHeroImage() {
   return (
     <CldImage
       priority
-      src="landing-image_ssfynh"
+      src="landing-page-2_v663w1"
       alt="Palm trees and houses"
       className={styles.topImage}
       sizes="100vw"
-      quality={10}
       fill
     />
   );
