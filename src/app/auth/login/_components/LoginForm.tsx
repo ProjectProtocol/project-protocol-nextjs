@@ -7,7 +7,7 @@ import { login, ILoginFormState } from "@/lib/actions/auth";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import Link from "next/link";
 import { useOriginalPath } from "@/components/OriginalPathProvider";
 import toast from "react-hot-toast";
@@ -15,6 +15,8 @@ import toast from "react-hot-toast";
 export default function LoginForm() {
   const t = useTranslations();
   const { redirectToOriginalPath } = useOriginalPath();
+  const [isLoading, setIsLoading] = useState(false);
+
   const schema = z.object({
     loginEmail: z
       .string()
@@ -36,9 +38,15 @@ export default function LoginForm() {
     });
 
   async function onSubmit(data: ILoginFormState) {
-    await login(data);
-    toast.success(t("login.success"));
-    redirectToOriginalPath();
+    setIsLoading(true);
+    const err = await login(data);
+    if (err) {
+      toast.error(t("login.loginFieldsError"));
+      setIsLoading(false);
+    } else {
+      toast.success(t("login.success"));
+      redirectToOriginalPath();
+    }
   }
 
   const validationProps = useCallback(
@@ -83,7 +91,7 @@ export default function LoginForm() {
           variant="primary"
           type="submit"
           disabled={!formState.isValid}
-          loading={formState.isSubmitting}
+          loading={isLoading}
         >
           {t("login.login")}
         </AsyncButton>

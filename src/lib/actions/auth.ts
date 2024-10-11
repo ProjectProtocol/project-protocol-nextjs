@@ -24,7 +24,6 @@ export async function login({ loginEmail, password }: ILoginFormState) {
   const data = await response.json();
 
   if (!response.ok) {
-    flashError(t("login.loginFieldsError"));
     return {
       error: data.error,
     };
