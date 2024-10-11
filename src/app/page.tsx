@@ -33,7 +33,6 @@ export default async function Page() {
       <div className={`position-relative w-100 ${styles.topImageContainer}`}>
         <LandingHeroImage />
         <div className={styles.imageOverlay} />
-
         <div
           className="position-absolute text-white w-100 d-md-none"
           style={{ bottom: 0 }}
