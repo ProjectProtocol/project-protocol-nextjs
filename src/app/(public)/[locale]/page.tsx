@@ -1,4 +1,8 @@
-import { getLocale, getTranslations } from "next-intl/server";
+import {
+  getLocale,
+  getTranslations,
+  unstable_setRequestLocale,
+} from "next-intl/server";
 import styles from "@/styles/landing-page.module.scss";
 import Link from "next/link";
 import IconLinks from "./_components/IconLinks";
@@ -24,9 +28,14 @@ function LandingPageSegment({
   return <section className={"py-5 " + classes}>{children}</section>;
 }
 
-export default async function Page() {
+export default async function Page({
+  params: { locale },
+}: {
+  params: { locale: string };
+}) {
+  unstable_setRequestLocale(locale);
+
   const t = await getTranslations();
-  const locale = await getLocale();
 
   return (
     <main>

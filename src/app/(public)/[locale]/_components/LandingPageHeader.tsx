@@ -7,6 +7,7 @@ import styles from "@/styles/landing-page.module.scss";
 import LocaleSwitcher from "@/components/LocaleSwitcher";
 import { InView } from "react-intersection-observer";
 import { useState } from "react";
+import LocaleLinks from "./LocaleLinks";
 
 export default function LandingPageHeader({ locale }: { locale: string }) {
   const [bg, setBg] = useState("transparent");
@@ -60,7 +61,7 @@ export default function LandingPageHeader({ locale }: { locale: string }) {
               Project Protocol
             </span>
           </NavbarBrand>
-          <LocaleSwitcher locale={locale} dark />
+          <LocaleLinks locale={locale} dark />
         </Container>
       </Navbar>
     </>
