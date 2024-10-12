@@ -13,10 +13,8 @@ export default function ContentPage({
   children,
   coverImageSrc,
 }: IContentPage) {
-  const TitleEl = <span className="d-md-none">{title}</span>;
   return (
     <div className="pb-4">
-      <PageHeader title={TitleEl} showBack hideOnDesktop />
       <div className="vertical-rhythm">
         {coverImageSrc ? (
           <ContentCoverImage

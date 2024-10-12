@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { Container, Navbar, NavbarBrand } from "react-bootstrap";
 import styles from "@/styles/landing-page.module.scss";
-import LocaleSwitcher from "@/components/LocaleSwitcher";
 import { InView } from "react-intersection-observer";
 import { useState } from "react";
 import LocaleLinks from "./LocaleLinks";

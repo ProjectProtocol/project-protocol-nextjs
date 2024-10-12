@@ -9,6 +9,7 @@ import { metaTitle } from "@/lib/metadataUtils";
 import OriginalPathProvider from "@/components/OriginalPathProvider";
 import Document from "@/components/Document";
 import { routing } from "@/i18n/routing.public";
+import Footer from "@/components/Footer";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -54,7 +55,10 @@ export default async function RootLayout({
   return (
     <Document locale={locale}>
       <NextIntlClientProvider messages={messages}>
-        <OriginalPathProvider>{children}</OriginalPathProvider>
+        <OriginalPathProvider>
+          {children}
+          <Footer />
+        </OriginalPathProvider>
       </NextIntlClientProvider>
     </Document>
   );

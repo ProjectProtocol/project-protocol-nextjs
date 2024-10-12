@@ -8,11 +8,10 @@ import ContentfulClient, {
 import { Document } from "@contentful/rich-text-types";
 import renderRichText from "@/lib/renderRichText";
 import "@/styles/content-pages.scss";
-import ContentPage from "../_components/ContentPage";
+import ContentPage from "../../../../(public)/[locale]/content/_components/ContentPage";
 import { metaTitle } from "@/lib/metadataUtils";
 import { getCldImageUrl } from "next-cloudinary";
-
-export const dynamicParams = false;
+import { unstable_setRequestLocale } from "next-intl/server";
 
 export async function generateStaticParams() {
   const locales = ALL_LOCALES;
@@ -47,11 +46,12 @@ async function getContent(locale: string, slug: ContentfulPageKey) {
 }
 
 export default async function Page({
-  params,
+  params: { locale, slug },
 }: {
   params: { slug: ContentfulPageKey; locale: string };
 }) {
-  const data = await getContent(params.locale, params.slug);
+  unstable_setRequestLocale(locale);
+  const data = await getContent(locale, slug);
   const title = data.fields.title as string;
   const body = data.fields.body as Document;
 

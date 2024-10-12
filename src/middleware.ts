@@ -3,12 +3,24 @@ import { NOPREFIX_HEADER } from "./i18n/config";
 import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing.public";
 
+const prefixRoutes = ["/en-US", "/es-MX", "/content"];
+
+function matchPrefixRoutes(pathname: string) {
+  if (pathname === "/") {
+    return true;
+  }
+
+  for (const prefix of prefixRoutes) {
+    if (pathname.startsWith(prefix)) {
+      return true;
+    }
+  }
+  return false;
+}
+
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
-  const isNextCookieRoute =
-    pathname !== "/" &&
-    !pathname.startsWith("/en-US") &&
-    !pathname.startsWith("/es-MX");
+  const isNextCookieRoute = pathname !== "/" && !matchPrefixRoutes(pathname);
 
   const intlMiddleware = createMiddleware(routing);
 

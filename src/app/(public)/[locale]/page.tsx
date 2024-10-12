@@ -15,8 +15,13 @@ import "@/styles/content-pages.scss";
 import VideoComponent from "./_components/VideoComponent";
 import LandingHeroImage from "./_components/LandingHeroImage";
 import LandingPageHeader from "./_components/LandingPageHeader";
+import { routing } from "@/i18n/routing.public";
 
 const MAX_WIDTH = 720;
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
 
 function LandingPageSegment({
   children,
@@ -35,7 +40,7 @@ export default async function Page({
 }) {
   unstable_setRequestLocale(locale);
 
-  const t = await getTranslations();
+  const t = await getTranslations({ locale });
 
   return (
     <main>
@@ -118,7 +123,6 @@ export default async function Page({
           </div>
         </LandingPageSegment>
       </div>
-      <Footer />
     </main>
   );
 }
