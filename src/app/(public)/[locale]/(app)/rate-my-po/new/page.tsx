@@ -1,19 +1,16 @@
 import PageHeader from "@/components/PageHeader";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import officerIcon from "@/../public/images/officer-icon.svg";
 import Image from "next/image";
-import { getUser } from "@/lib/session";
-import { redirect } from "next/navigation";
 import AddAgentForm from "./_components/AddAgentForm";
 
-export default async function Page() {
+export default async function Page({
+  params: { locale },
+}: {
+  params: { locale: string };
+}) {
+  unstable_setRequestLocale(locale);
   const t = await getTranslations();
-  const user = await getUser();
-
-  if (!user) {
-    redirect("/");
-  }
-
   return (
     <div>
       <PageHeader title={t("agent.addAgent")} showBack />
