@@ -19,7 +19,7 @@ export default async function Layout({
       <NextIntlClientProvider messages={messages}>
         <AuthProvider>
           <main className="d-flex flex-column min-vh-100">
-            <Menu />
+            <Menu locale={locale} />
             <Container className="px-3 flex-grow-1" style={{ maxWidth: 630 }}>
               {children}
             </Container>

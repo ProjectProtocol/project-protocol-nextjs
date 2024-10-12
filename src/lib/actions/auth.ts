@@ -3,7 +3,6 @@
 import { signIn } from "../session";
 import { flashError, flashSuccess } from "../flash-messages";
 import { getTranslations } from "next-intl/server";
-import { redirect } from "next/navigation";
 import Api from "../api";
 import { cookies } from "next/headers";
 

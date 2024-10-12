@@ -1,6 +1,7 @@
 "use client";
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import User from "@/types/User";
+import { first } from "lodash";
 
 type AuthProviderValue = {
   user?: User;
@@ -13,11 +14,11 @@ const AuthContext = createContext<AuthProviderValue | undefined>(undefined);
 
 export default function AuthProvider({
   children,
-  user,
 }: {
   children: React.ReactNode;
-  user?: User;
 }) {
+  const [user, setUser] = useState<User>();
+  const [firstLoad, setFirstLoad] = useState(true);
   const isSignedIn = useMemo(() => !!user, [user]);
   const [policyAcknowledged, setPolicyAcknowledged] = useState(
     user?.isPolicyAcknowledged || false
@@ -31,6 +32,20 @@ export default function AuthProvider({
     return policyAcknowledged;
   }
 
+  useEffect(() => {
+    if (firstLoad && !user) {
+      fetch("/api/user")
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("User found", data);
+          setUser(data);
+        })
+        .finally(() => {
+          setFirstLoad(false);
+        });
+    }
+  }, [firstLoad, user]);
+
   const value = {
     user,
     isSignedIn,
@@ -38,7 +53,11 @@ export default function AuthProvider({
     updateAcknowledgePolicy,
   };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={value}>
+      {!firstLoad && children}
+    </AuthContext.Provider>
+  );
 }
 
 export function useAuth() {

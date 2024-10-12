@@ -2,22 +2,24 @@ import Navbar from "react-bootstrap/Navbar";
 import NavbarBrand from "react-bootstrap/NavbarBrand";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
-import NavLink from "react-bootstrap/NavLink";
 import NavItem from "react-bootstrap/NavItem";
 import Image from "next/image";
 import Link from "next/link";
-import { getLocale, getTranslations } from "next-intl/server";
-import LocaleSwitcher from "../LocaleSwitcher";
-import { getUser } from "@/lib/session";
+import { getTranslations } from "next-intl/server";
 import MenuLink from "./MenuLink";
 import LocaleLinks from "../LocaleLinks";
+import User from "@/types/User";
 
 export const MENU_MAX_WIDTH = 1048;
 
-export default async function Menu() {
+export default async function Menu({
+  locale,
+  user,
+}: {
+  locale: string;
+  user?: User;
+}) {
   const t = await getTranslations();
-  const user = await getUser();
-  const locale = await getLocale();
 
   return (
     <Navbar className="bg-black flex-column py-0 overflow-hidden" sticky="top">

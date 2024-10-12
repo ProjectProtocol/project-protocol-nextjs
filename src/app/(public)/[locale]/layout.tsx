@@ -57,7 +57,7 @@ export default async function RootLayout({
     <Document locale={locale}>
       <NextIntlClientProvider messages={messages}>
         <OriginalPathProvider>
-          <AuthProvider>{children}</AuthProvider>
+          {children}
           <Footer />
         </OriginalPathProvider>
       </NextIntlClientProvider>

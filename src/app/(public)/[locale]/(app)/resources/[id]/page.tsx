@@ -12,10 +12,14 @@ import { metaTitle } from "@/lib/metadataUtils";
 import { getTranslations } from "next-intl/server";
 import { ResourceTag } from "@/types/Resource";
 
-export async function generateMetadata({ params }: { params: { id: string } }) {
-  const t = await getTranslations();
+export async function generateMetadata({
+  params: { id, locale },
+}: {
+  params: { id: string; locale: string };
+}) {
+  const t = await getTranslations({ locale });
   const { resource } = await new Api()
-    .get(`/resources/${params.id}`)
+    .get(`/resources/${id}`)
     .then((res) => res.json());
 
   return {
@@ -24,11 +28,15 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   };
 }
 
-export default async function Page({ params }: { params: { id: string } }) {
+export default async function Page({
+  params: { id },
+}: {
+  params: { id: string };
+}) {
   const session = await getSession();
   const user = session?.user;
   const { resource } = await new Api(session?.apiToken)
-    .get(`/resources/${params.id}`)
+    .get(`/resources/${id}`)
     .then((res) => res.json());
 
   return (

@@ -1,5 +1,5 @@
 import PageHeader from "@/components/PageHeader";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import ResourcesList from "./_components/ResourcesList";
 import { Suspense } from "react";
 import ResourceSearchBar from "./_components/ResourceSearchBar";
@@ -18,9 +18,12 @@ export async function generateMetadata() {
 
 export default async function Page({
   searchParams,
+  params: { locale },
 }: {
   searchParams: ResourceSearchParams;
+  params: { locale: string };
 }) {
+  unstable_setRequestLocale(locale);
   const t = await getTranslations();
 
   return (

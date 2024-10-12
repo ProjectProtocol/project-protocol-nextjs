@@ -3,7 +3,15 @@ import { NOPREFIX_HEADER } from "./i18n/config";
 import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing.public";
 
-const prefixRoutes = ["/en-US", "/es-MX", "/content", "/auth", "/rate-my-po"];
+const prefixRoutes = [
+  "/en-US",
+  "/es-MX",
+  "/content",
+  "/auth",
+  "/rate-my-po",
+  "/account",
+  "/resources",
+];
 
 function matchPrefixRoutes(pathname: string) {
   if (pathname === "/") {
