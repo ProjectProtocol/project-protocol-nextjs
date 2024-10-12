@@ -1,6 +1,6 @@
 // note spanish locale in contentful is es-US
 
-import { ALL_LOCALES } from "@/i18n";
+import { ALL_LOCALES } from "@/i18n/config";
 import ContentfulClient, {
   ContentfulPageKey,
   contentfulPageIds,
