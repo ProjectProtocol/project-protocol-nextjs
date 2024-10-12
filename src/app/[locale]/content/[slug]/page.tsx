@@ -8,7 +8,7 @@ import ContentfulClient, {
 import { Document } from "@contentful/rich-text-types";
 import renderRichText from "@/lib/renderRichText";
 import "@/styles/content-pages.scss";
-import ContentPage from "../../../../(public)/[locale]/content/_components/ContentPage";
+import ContentPage from "../_components/ContentPage";
 import { metaTitle } from "@/lib/metadataUtils";
 import { getCldImageUrl } from "next-cloudinary";
 import { unstable_setRequestLocale } from "next-intl/server";

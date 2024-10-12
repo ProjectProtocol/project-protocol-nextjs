@@ -6,7 +6,7 @@ import { Container, Navbar, NavbarBrand } from "react-bootstrap";
 import styles from "@/styles/landing-page.module.scss";
 import { InView } from "react-intersection-observer";
 import { useState } from "react";
-import LocaleLinks from "../../../../components/LocaleLinks";
+import LocaleLinks from "../../../components/LocaleLinks";
 
 export default function LandingPageHeader({ locale }: { locale: string }) {
   const [bg, setBg] = useState("transparent");

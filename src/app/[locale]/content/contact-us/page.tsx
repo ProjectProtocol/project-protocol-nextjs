@@ -1,4 +1,4 @@
-import ContentPage from "../../../../(public)/[locale]/content/_components/ContentPage";
+import ContentPage from "../_components/ContentPage";
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import { ALL_LOCALES } from "@/i18n/config";
 import { metaTitle } from "@/lib/metadataUtils";

@@ -5,7 +5,7 @@ import { getSession } from "../session";
 import Api from "../api";
 import { flashError, flashSuccess } from "../flash-messages";
 import { revalidatePath } from "next/cache";
-import { IRateAgentFormState } from "@/app/(public)/[locale]/(app)/rate-my-po/[agentId]/_components/RateAgentForm/types";
+import { IRateAgentFormState } from "@/app/[locale]/(app)/rate-my-po/[agentId]/_components/RateAgentForm/types";
 import { replace, snakeCase } from "lodash";
 import { snakeCaseKeys } from "../transformKeys";
 import { redirect } from "next/navigation";
