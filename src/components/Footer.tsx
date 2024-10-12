@@ -1,4 +1,4 @@
-import { Link } from "@/i18n/routing.public";
+import { Link } from "@/i18n/routing";
 import { getTranslations } from "next-intl/server";
 
 export default async function Footer() {

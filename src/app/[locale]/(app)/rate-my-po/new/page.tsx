@@ -11,6 +11,7 @@ export default async function Page({
 }) {
   unstable_setRequestLocale(locale);
   const t = await getTranslations();
+
   return (
     <div>
       <PageHeader title={t("agent.addAgent")} showBack />

@@ -1,7 +1,7 @@
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import styles from "@/styles/landing-page.module.scss";
 import Link from "next/link";
-import { Link as NextIntlLink } from "@/i18n/routing.public";
+import { Link as NextIntlLink } from "@/i18n/routing";
 import IconLinks from "./_components/IconLinks";
 import LandingResources from "./_components/LandingResources";
 import { Suspense } from "react";
@@ -12,7 +12,8 @@ import "@/styles/content-pages.scss";
 import VideoComponent from "./_components/VideoComponent";
 import LandingHeroImage from "./_components/LandingHeroImage";
 import LandingPageHeader from "./_components/LandingPageHeader";
-import { routing } from "@/i18n/routing.public";
+import { routing } from "@/i18n/routing";
+import { Locale } from "@/i18n/config";
 
 const MAX_WIDTH = 720;
 
@@ -33,7 +34,7 @@ function LandingPageSegment({
 export default async function Page({
   params: { locale },
 }: {
-  params: { locale: string };
+  params: { locale: Locale };
 }) {
   unstable_setRequestLocale(locale);
 
@@ -70,14 +71,14 @@ export default async function Page({
               <Link href="/content/about">{t("shared.learnMore")}</Link>
             </p>
             <div>
-              <IconLinks locale={locale} classes="py-3 " iconHeight={75} />
+              <IconLinks classes="py-3 " iconHeight={75} />
             </div>
           </div>
         </LandingPageSegment>
         {/* Mobile explore segment */}
         <LandingPageSegment classes="text-center px-4 d-md-none">
           <h2 className="mb-3">{t("home.explore")}</h2>
-          <IconLinks locale={locale} />
+          <IconLinks />
         </LandingPageSegment>
         <LandingPageSegment classes="text-center px-3 bg-white">
           <h2>{t("home.learnHowToRate")}</h2>

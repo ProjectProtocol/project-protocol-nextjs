@@ -1,6 +1,6 @@
+import { Link } from "@/i18n/routing";
 import { getTranslations } from "next-intl/server";
 import Image from "next/image";
-import Link from "next/link";
 import { Col, Row } from "react-bootstrap";
 
 function IconLink({
@@ -34,11 +34,9 @@ function IconLink({
 
 export default async function IconLinks({
   classes,
-  locale,
   iconHeight,
 }: {
   classes?: string;
-  locale: string;
   iconHeight?: number;
 }) {
   const t = await getTranslations();

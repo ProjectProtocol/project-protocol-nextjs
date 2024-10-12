@@ -1,12 +1,10 @@
 import { getRequestConfig } from "next-intl/server";
-import { cookies, headers } from "next/headers";
 import defaultMessages from "../locales/en-US.json";
 import deepmerge from "deepmerge";
 import { notFound } from "next/navigation";
-import { ALL_LOCALES, NOPREFIX_HEADER } from "./config";
+import { ALL_LOCALES } from "./config";
 
 // Mixed routing example: https://github.com/amannn/next-intl/blob/main/examples/example-app-router-mixed-routing/src/i18n/request.ts
-const COOKIE_NAME = "NEXT_LOCALE";
 async function getLocaleMessages(locale: string) {
   if (!ALL_LOCALES.includes(locale as any)) {
     notFound();
@@ -18,27 +16,6 @@ async function getLocaleMessages(locale: string) {
   };
 }
 
-function getUserLocale() {
-  return cookies().get(COOKIE_NAME)?.value || "en-US";
-}
-
 export default getRequestConfig(async ({ locale }) => {
-  if (locale && locale !== "") {
-    return getLocaleMessages(locale);
-  }
-
-  const isCookieRoute = headers().get(NOPREFIX_HEADER) === "true";
-
-  if (isCookieRoute) {
-    console.log("Cookie route, hon");
-    const locale = await getUserLocale();
-    return {
-      locale,
-      ...(await getLocaleMessages(locale)),
-    };
-  } else {
-    console.log("Luh-oh!!!! No cookie route!");
-
-    return getLocaleMessages(locale);
-  }
+  return getLocaleMessages(locale);
 });

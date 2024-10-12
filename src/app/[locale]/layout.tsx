@@ -8,7 +8,7 @@ import {
 import { metaTitle } from "@/lib/metadataUtils";
 import OriginalPathProvider from "@/components/OriginalPathProvider";
 import Document from "@/components/Document";
-import { routing } from "@/i18n/routing.public";
+import { routing } from "@/i18n/routing";
 import Footer from "@/components/Footer";
 import AuthProvider from "@/components/AuthProvider";
 

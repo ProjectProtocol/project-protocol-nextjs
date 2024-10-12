@@ -1,7 +1,8 @@
 "use client";
 
-import { Link } from "@/i18n/routing.public";
+import { Link } from "@/i18n/routing";
 import classNames from "classnames";
+import { useLocale } from "next-intl";
 import { usePathname } from "next/navigation";
 
 type LanguageProps = {
