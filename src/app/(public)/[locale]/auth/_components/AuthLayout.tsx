@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Container } from "react-bootstrap";
-import LocaleSwitcher from "@/components/LocaleSwitcher";
 import AuthCloseButton from "./AuthCloseButton";
+import LocaleLinks from "../../_components/LocaleLinks";
 
 export default async function AuthLayout({
   locale,
@@ -23,7 +23,7 @@ export default async function AuthLayout({
             <AuthCloseButton />
           </div>
           <div className="text-center">
-            <LocaleSwitcher locale={locale} />
+            <LocaleLinks locale={locale} />
           </div>
           <div className="text-center vertical-rhythm">
             <Image

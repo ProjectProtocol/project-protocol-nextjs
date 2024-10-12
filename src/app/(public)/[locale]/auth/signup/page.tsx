@@ -1,12 +1,7 @@
-import SignupForm from "@/app/auth/signup/_components/SignupForm";
-import { getUser } from "@/lib/session";
-import { redirect } from "next/navigation";
+import SignupForm from "./_components/SignupForm";
+import { unstable_setRequestLocale } from "next-intl/server";
 
-export default async function Page() {
-  const user = await getUser();
-  if (user) {
-    redirect("/");
-  }
-
+export default async function Page({ params }: { params: { locale: string } }) {
+  unstable_setRequestLocale(params.locale);
   return <SignupForm />;
 }

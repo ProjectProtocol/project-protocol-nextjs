@@ -10,6 +10,7 @@ import OriginalPathProvider from "@/components/OriginalPathProvider";
 import Document from "@/components/Document";
 import { routing } from "@/i18n/routing.public";
 import Footer from "@/components/Footer";
+import AuthProvider from "@/components/AuthProvider";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -56,7 +57,7 @@ export default async function RootLayout({
     <Document locale={locale}>
       <NextIntlClientProvider messages={messages}>
         <OriginalPathProvider>
-          {children}
+          <AuthProvider>{children}</AuthProvider>
           <Footer />
         </OriginalPathProvider>
       </NextIntlClientProvider>
