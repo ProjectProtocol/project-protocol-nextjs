@@ -1,10 +1,7 @@
-import {
-  getLocale,
-  getTranslations,
-  unstable_setRequestLocale,
-} from "next-intl/server";
+import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import styles from "@/styles/landing-page.module.scss";
 import Link from "next/link";
+import { Link as NextIntlLink } from "@/i18n/routing.public";
 import IconLinks from "./_components/IconLinks";
 import LandingResources from "./_components/LandingResources";
 import { Suspense } from "react";
@@ -55,9 +52,9 @@ export default async function Page({
             <h1>{t("home.welcomeTitle")}</h1>
             <p className="px-5 text-center">
               {t("home.welcomeMessage")}{" "}
-              <Link href="/content/en-US/about" className="link-white">
+              <NextIntlLink href="/content/about" className="link-white">
                 {t("shared.learnMore")}
-              </Link>
+              </NextIntlLink>
             </p>
           </div>
         </div>
@@ -70,7 +67,7 @@ export default async function Page({
             <h1>{t("home.welcomeTitle")}</h1>
             <p>
               {t("home.welcomeMessage")}.{" "}
-              <Link href="/content/en-US/about">{t("shared.learnMore")}</Link>
+              <Link href="/content/about">{t("shared.learnMore")}</Link>
             </p>
             <div>
               <IconLinks locale={locale} classes="py-3 " iconHeight={75} />

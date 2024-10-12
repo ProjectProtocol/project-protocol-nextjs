@@ -22,7 +22,11 @@ function getUserLocale() {
   return cookies().get(COOKIE_NAME)?.value || "en-US";
 }
 
-export default getRequestConfig(async (params) => {
+export default getRequestConfig(async ({ locale }) => {
+  if (locale && locale !== "") {
+    return getLocaleMessages(locale);
+  }
+
   const isCookieRoute = headers().get(NOPREFIX_HEADER) === "true";
 
   if (isCookieRoute) {
@@ -35,6 +39,6 @@ export default getRequestConfig(async (params) => {
   } else {
     console.log("Luh-oh!!!! No cookie route!");
 
-    return getLocaleMessages(params.locale);
+    return getLocaleMessages(locale);
   }
 });

@@ -46,7 +46,7 @@ export default async function IconLinks({
     <Row className={classes}>
       <Col>
         <IconLink
-          href={`/content/${locale}/vote`}
+          href={`/content/vote`}
           icon="/images/vote_landing.svg"
           text={t("home.voteTitle")}
           iconHeight={iconHeight}

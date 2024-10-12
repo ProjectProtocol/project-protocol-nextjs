@@ -20,7 +20,7 @@ function matchPrefixRoutes(pathname: string) {
 
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
-  const isNextCookieRoute = pathname !== "/" && !matchPrefixRoutes(pathname);
+  const isNextCookieRoute = !matchPrefixRoutes(pathname);
 
   const intlMiddleware = createMiddleware(routing);
 
