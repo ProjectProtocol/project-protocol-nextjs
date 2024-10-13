@@ -10,7 +10,6 @@ import OriginalPathProvider from "@/components/OriginalPathProvider";
 import Document from "@/components/Document";
 import { routing } from "@/i18n/routing";
 import Footer from "@/components/Footer";
-import AuthProvider from "@/components/AuthProvider";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -20,7 +19,7 @@ export const viewport: Viewport = {
   themeColor: [{ media: "(prefers-color-scheme: light)", color: "#f06748" }],
 };
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 

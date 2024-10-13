@@ -17,7 +17,7 @@ import { Locale } from "@/i18n/config";
 
 const MAX_WIDTH = 720;
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
@@ -98,9 +98,9 @@ export default async function Page({
                 <i className="bi bi-chevron-right align-middle"></i>
               </Link>
             </div>
-            <Suspense fallback={<SegmentLoading />}>
+            {/* <Suspense fallback={<SegmentLoading />}>
               <LandingResources />
-            </Suspense>
+            </Suspense> */}
           </div>
         </LandingPageSegment>
         <LandingPageSegment classes="px-3">
@@ -115,9 +115,9 @@ export default async function Page({
                 <i className="bi bi-chevron-right align-middle"></i>
               </Link>
             </div>
-            <Suspense fallback={<SegmentLoading />}>
+            {/* <Suspense fallback={<SegmentLoading />}>
               <LandingReviews />
-            </Suspense>
+            </Suspense> */}
           </div>
         </LandingPageSegment>
       </div>
