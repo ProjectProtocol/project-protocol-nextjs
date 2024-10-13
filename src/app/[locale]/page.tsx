@@ -98,9 +98,9 @@ export default async function Page({
                 <i className="bi bi-chevron-right align-middle"></i>
               </Link>
             </div>
-            {/* <Suspense fallback={<SegmentLoading />}>
+            <Suspense fallback={<SegmentLoading />}>
               <LandingResources />
-            </Suspense> */}
+            </Suspense>
           </div>
         </LandingPageSegment>
         <LandingPageSegment classes="px-3">
@@ -115,9 +115,9 @@ export default async function Page({
                 <i className="bi bi-chevron-right align-middle"></i>
               </Link>
             </div>
-            {/* <Suspense fallback={<SegmentLoading />}>
+            <Suspense fallback={<SegmentLoading />}>
               <LandingReviews />
-            </Suspense> */}
+            </Suspense>
           </div>
         </LandingPageSegment>
       </div>
