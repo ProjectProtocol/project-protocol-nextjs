@@ -39,9 +39,7 @@ export default function LocaleSwitcher({
               [inactiveClass]: !active,
             })}
             role="button"
-            onClick={async () => {
-              await switchLanguage({ locale: key, pathname });
-            }}
+            href={`/${key}${pathname}`}
           >
             {nativeName}
           </a>
