@@ -1,3 +1,4 @@
+import AuthProvider from "@/components/AuthProvider";
 import AuthLayout from "./_components/AuthLayout";
 import { getLocale } from "next-intl/server";
 import { getTranslations } from "next-intl/server";
@@ -11,7 +12,7 @@ export default async function Layout({
   const t = await getTranslations();
   return (
     <AuthLayout locale={locale} pageTitle={t("login.loginTitle")}>
-      {children}
+      <AuthProvider>{children}</AuthProvider>
     </AuthLayout>
   );
 }

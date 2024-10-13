@@ -60,7 +60,6 @@ export async function signUp({ signUpEmail, password }: ISignupFormState) {
   const data = await response.json();
 
   if (!response.ok) {
-    flashError(t("shared.genericError"));
     return {
       error: data.error,
     };
@@ -68,7 +67,6 @@ export async function signUp({ signUpEmail, password }: ISignupFormState) {
 
   const apiToken = response.headers.get("authorization");
   if (!apiToken) {
-    flashError(t("shared.genericError"));
     return {
       error: "Unable to retrieve API token",
     };
@@ -78,9 +76,7 @@ export async function signUp({ signUpEmail, password }: ISignupFormState) {
 
   await signIn(data.user, apiToken, cookies());
 
-  flashSuccess(t("login.register.success"));
-
-  return { email, isConfirmed };
+  return { user: data.user, error: null };
 }
 
 /**
@@ -98,7 +94,6 @@ export async function confirmAccount(token: string) {
   });
 
   if (!response.ok) {
-    flashError(t("shared.genericError"));
     throw new Error("Confirm account: something went wrong");
   }
 

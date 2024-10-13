@@ -1,12 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getUser } from "./lib/session";
 
-const AUTH_REDIRECTS = [
-  "/auth/confirmations",
-  "/auth/login",
-  "/auth/signup",
-  "/auth/forgot-password",
-];
+const AUTH_REDIRECTS = ["/auth/login", "/auth/signup", "/auth/forgot-password"];
 
 const AUTH_REQUIRED = ["/account", "/rate-my-po/new"];
 

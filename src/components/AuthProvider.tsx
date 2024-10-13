@@ -4,6 +4,7 @@ import User from "@/types/User";
 
 type AuthProviderValue = {
   user?: User;
+  setUser: (user: User) => void;
   isSignedIn: boolean;
   isPolicyAcknowledged: () => boolean;
   updateAcknowledgePolicy: () => void;
@@ -46,6 +47,7 @@ export default function AuthProvider({
 
   const value = {
     user,
+    setUser,
     isSignedIn,
     isPolicyAcknowledged,
     updateAcknowledgePolicy,
