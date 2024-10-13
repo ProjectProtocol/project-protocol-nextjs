@@ -6,9 +6,9 @@ import NavItem from "react-bootstrap/NavItem";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import MenuLink from "./MenuLink";
-import LocaleLinks from "../LocaleLinks";
 import User from "@/types/User";
 import { Link } from "@/i18n/routing";
+import LocaleSwitcher from "../LocaleSwitcher";
 
 export const MENU_MAX_WIDTH = 1048;
 
@@ -27,7 +27,7 @@ export default async function Menu({
       <div className="w-100 d-none d-md-block bg-black">
         <Container style={{ maxWidth: MENU_MAX_WIDTH }}>
           <div className="d-flex flex-row justify-content-end align-items-center py-2">
-            <LocaleLinks dark />
+            <LocaleSwitcher locale={locale} dark />
           </div>
         </Container>
       </div>
@@ -90,7 +90,7 @@ export default async function Menu({
             )}
           </Nav>
           <Nav className="d-md-none">
-            <LocaleLinks dark />
+            <LocaleSwitcher locale={locale} dark />
           </Nav>
         </Container>
       </div>
