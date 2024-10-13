@@ -1,9 +1,8 @@
 "use client";
 
-import { Link } from "@/i18n/routing";
+import { Link, usePathname } from "@/i18n/routing";
 import classNames from "classnames";
 import { useLocale } from "next-intl";
-import { usePathname } from "next/navigation";
 
 type LanguageProps = {
   nativeName: string;
@@ -15,16 +14,11 @@ const languages: LanguageProps[] = [
   { nativeName: "Español", key: "es-MX" },
 ];
 
-export default function LocaleLinks({
-  dark = false,
-  locale,
-}: {
-  dark?: boolean;
-  locale: string;
-}) {
+export default function LocaleLinks({ dark = false }: { dark?: boolean }) {
   const activeClass = `fw-semibold ${dark ? "text-white" : "text-body"}`;
   const inactiveClass = dark ? "link-white" : "link-dark";
   const path = usePathname();
+  const locale = useLocale();
 
   return (
     <div aria-label={"Select language"} className="flex flex-row">

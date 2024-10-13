@@ -27,7 +27,7 @@ export default async function Menu({
       <div className="w-100 d-none d-md-block bg-black">
         <Container style={{ maxWidth: MENU_MAX_WIDTH }}>
           <div className="d-flex flex-row justify-content-end align-items-center py-2">
-            <LocaleLinks locale={locale} dark />
+            <LocaleLinks dark />
           </div>
         </Container>
       </div>
@@ -90,7 +90,7 @@ export default async function Menu({
             )}
           </Nav>
           <Nav className="d-md-none">
-            <LocaleLinks locale={locale} dark />
+            <LocaleLinks dark />
           </Nav>
         </Container>
       </div>

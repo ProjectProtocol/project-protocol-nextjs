@@ -60,7 +60,7 @@ export default function LandingPageHeader({ locale }: { locale: string }) {
               Project Protocol
             </span>
           </NavbarBrand>
-          <LocaleLinks locale={locale} dark />
+          <LocaleLinks dark />
         </Container>
       </Navbar>
     </>

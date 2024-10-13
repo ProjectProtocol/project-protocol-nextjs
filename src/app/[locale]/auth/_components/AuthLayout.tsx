@@ -23,7 +23,7 @@ export default async function AuthLayout({
             <AuthCloseButton />
           </div>
           <div className="text-center">
-            <LocaleLinks locale={locale} />
+            <LocaleLinks />
           </div>
           <div className="text-center vertical-rhythm">
             <Image
