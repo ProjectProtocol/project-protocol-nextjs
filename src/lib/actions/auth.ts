@@ -3,7 +3,7 @@
 import { signIn } from "../session";
 import { flashError, flashSuccess } from "../flash-messages";
 import { getTranslations } from "next-intl/server";
-import { redirect } from "next/navigation";
+import { redirect, RedirectType } from "next/navigation";
 import Api from "../api";
 import { cookies } from "next/headers";
 
@@ -12,7 +12,10 @@ export interface ILoginFormState {
   password: string;
 }
 
-export async function login({ loginEmail, password }: ILoginFormState) {
+export async function login(
+  { loginEmail, password }: ILoginFormState,
+  redirectTo = "/"
+) {
   const t = await getTranslations();
 
   const response = await new Api().post("/auth/sign_in", {
@@ -35,8 +38,8 @@ export async function login({ loginEmail, password }: ILoginFormState) {
       error: "Unable to retrieve API token",
     };
   }
-
   await signIn(data.user, apiToken, cookies());
+  redirect(redirectTo, RedirectType.replace);
 }
 
 export interface ISignupFormState {

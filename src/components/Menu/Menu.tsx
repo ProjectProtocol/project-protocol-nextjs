@@ -1,22 +1,23 @@
+"use client";
 import Navbar from "react-bootstrap/Navbar";
 import NavbarBrand from "react-bootstrap/NavbarBrand";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
-import NavLink from "react-bootstrap/NavLink";
 import NavItem from "react-bootstrap/NavItem";
 import Image from "next/image";
 import Link from "next/link";
-import { getLocale, getTranslations } from "next-intl/server";
 import LocaleSwitcher from "../LocaleSwitcher";
-import { getUser } from "@/lib/session";
 import MenuLink from "./MenuLink";
+import { useLocale, useTranslations } from "next-intl";
+import { useAuth } from "../AuthProvider";
 
 export const MENU_MAX_WIDTH = 1048;
 
-export default async function Menu() {
-  const t = await getTranslations();
-  const user = await getUser();
-  const locale = await getLocale();
+export default function Menu() {
+  const { user } = useAuth();
+  const tHome = useTranslations("home");
+  const tNavigation = useTranslations("navigation");
+  const locale = useLocale();
 
   return (
     <Navbar className="bg-black flex-column py-0 overflow-hidden" sticky="top">
@@ -56,11 +57,11 @@ export default async function Menu() {
           </NavbarBrand>
           <Nav className="fs-4 d-none d-md-flex align-items-center gap-2 fw-semibold">
             <MenuLink as={Link} className="m-0" href="/" exact>
-              {t("home.title")}
+              {tHome("title")}
             </MenuLink>
-            <MenuLink href="/rate-my-po">{t("navigation.rateMyPo")}</MenuLink>
+            <MenuLink href="/rate-my-po">{tNavigation("rateMyPo")}</MenuLink>
             <MenuLink className="m-0" href="/resources">
-              {t("navigation.resources")}
+              {tNavigation("resources")}
             </MenuLink>
             {user ? (
               <MenuLink className="m-0" href="/account" title="Account">
@@ -79,7 +80,7 @@ export default async function Menu() {
                   href="/auth/signup"
                   scroll={false}
                 >
-                  {t("navigation.signUp")}
+                  {tNavigation("signUp")}
                 </Link>
               </NavItem>
             )}

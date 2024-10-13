@@ -1,11 +1,13 @@
 "use client";
 
+import { useAuth } from "@/components/AuthProvider";
 import { useOriginalPath } from "@/components/OriginalPathProvider";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 
-export default function ConfirmEmail({ email }: { email: string }) {
+export default function ConfirmEmail() {
   const t = useTranslations();
+  const { user } = useAuth();
   const { getOriginalPath } = useOriginalPath();
 
   return (
@@ -13,7 +15,7 @@ export default function ConfirmEmail({ email }: { email: string }) {
       <div className="text-center mb-3">{t("login.confirmSignupTitle")}</div>
       <p>
         {t.rich("login.loginConfirmSignupDetail1", {
-          email: email,
+          email: user!.email,
           b: (chunks) => <b>{chunks}</b>,
         })}
       </p>

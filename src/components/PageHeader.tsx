@@ -1,8 +1,11 @@
+"use client";
 import { Col, Row } from "react-bootstrap";
 import { getUser } from "@/lib/session";
 import { getTranslations } from "next-intl/server";
 import BackLink from "./BackLink";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { useAuth } from "./AuthProvider";
 
 interface IPageHeader {
   title: string | JSX.Element;
@@ -12,13 +15,14 @@ interface IPageHeader {
   hideOnDesktop?: boolean;
 }
 
-export default async function PageHeader({
+export default function PageHeader({
   title,
   showBack = false,
   hideOnDesktop,
 }: IPageHeader) {
-  const user = await getUser();
-  const t = await getTranslations();
+  const { user } = useAuth();
+  const t = useTranslations();
+
   return (
     <div className={`py-3 ${hideOnDesktop ? "d-md-none" : ""}`}>
       {/* MOBILE PAGE HEADER */}

@@ -13,10 +13,13 @@ import toast from "react-hot-toast";
 import User from "@/types/User";
 import { resendConfirmation } from "@/lib/actions/account";
 import AsyncButton from "@/components/AsyncButton";
+import { useAuth } from "@/components/AuthProvider";
 
-export default function AccountSettings({ user }: { user: User }) {
+export default function AccountSettings() {
   const tAccount = useTranslations("account");
   const tShared = useTranslations("shared");
+  const authInfo = useAuth();
+  const user = authInfo.user as User;
 
   const [resentCode, setResentCode] = useState(false);
   const [loading, setLoading] = useState(false);

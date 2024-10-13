@@ -8,11 +8,6 @@ import AddAgentForm from "./_components/AddAgentForm";
 
 export default async function Page() {
   const t = await getTranslations();
-  const user = await getUser();
-
-  if (!user) {
-    redirect("/");
-  }
 
   return (
     <div>

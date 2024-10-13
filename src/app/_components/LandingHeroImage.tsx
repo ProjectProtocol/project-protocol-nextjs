@@ -1,4 +1,5 @@
 "use client";
+
 import styles from "@/styles/landing-page.module.scss";
 import { CldImage } from "next-cloudinary";
 
