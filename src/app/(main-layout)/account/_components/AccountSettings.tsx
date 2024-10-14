@@ -24,7 +24,7 @@ export default function AccountSettings() {
   const router = useRouter();
   const { getOriginalPath } = useOriginalPath();
   const user = auth.user as User;
-  const { refreshUser, setUser } = auth;
+  const { setUser } = auth;
 
   const [resentCode, setResentCode] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -34,8 +34,8 @@ export default function AccountSettings() {
   const handleSignout = async () => {
     await signOut();
     router.replace(getOriginalPath());
-    refreshUser();
     toast.success(tAccount("signOutSuccess"));
+    setUser();
   };
 
   const requestConfirmationCode = async () => {
