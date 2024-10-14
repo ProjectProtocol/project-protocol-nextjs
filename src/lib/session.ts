@@ -94,7 +94,6 @@ export async function signIn(
 /**
  * Signs the user out by deleting the session cookie.
  */
-export async function destroySession() {
+export async function signOut() {
   cookies().delete("session");
-  redirect("/", RedirectType.replace);
 }

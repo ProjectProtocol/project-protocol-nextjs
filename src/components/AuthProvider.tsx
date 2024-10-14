@@ -4,7 +4,8 @@ import User from "@/types/User";
 
 type AuthProviderValue = {
   user?: User;
-  setUser: (user: User) => void;
+  setUser: (user?: User) => void;
+  refreshUser: () => Promise<void>;
   isSignedIn: boolean;
   isPolicyAcknowledged: () => boolean;
   updateAcknowledgePolicy: () => void;
@@ -17,7 +18,7 @@ export default function AuthProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [user, setUser] = useState<User>();
+  const [user, setUser] = useState<User | undefined>();
   const [firstLoad, setFirstLoad] = useState(true);
   const isSignedIn = useMemo(() => !!user, [user]);
   const [policyAcknowledged, setPolicyAcknowledged] = useState(
@@ -32,22 +33,26 @@ export default function AuthProvider({
     return policyAcknowledged;
   }
 
+  function refreshUser() {
+    return fetch("/api/user")
+      .then((res) => res.json())
+      .then((data) => {
+        setUser(data);
+      });
+  }
+
   useEffect(() => {
     if (firstLoad && !user) {
-      fetch("/api/user")
-        .then((res) => res.json())
-        .then((data) => {
-          setUser(data);
-        })
-        .finally(() => {
-          setFirstLoad(false);
-        });
+      refreshUser().finally(() => {
+        setFirstLoad(false);
+      });
     }
   }, [firstLoad, user]);
 
   const value = {
     user,
     setUser,
+    refreshUser,
     isSignedIn,
     isPolicyAcknowledged,
     updateAcknowledgePolicy,
