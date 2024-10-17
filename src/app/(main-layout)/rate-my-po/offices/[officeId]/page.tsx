@@ -19,7 +19,7 @@ export async function generateMetadata({
     .get(`/offices/${params.officeId}`)
     .then((res) => res.json());
   return {
-    title: metaTitle(office.street),
+    title: metaTitle(office.city + " Office"),
   };
 }
 

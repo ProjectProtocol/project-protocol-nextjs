@@ -68,16 +68,15 @@ export async function createAgent({
 
 interface IAgentList {
   officeId: string;
-  searchText?: string;
   page?: number;
 }
 
 export async function listAgents({
   officeId,
-  ...params
+  page,
 }: IAgentList): Promise<SearchData<Agent>> {
   const response = await new Api().get(`/offices/${officeId}/agents`, {
-    params,
+    page,
   });
   return response.json();
 }

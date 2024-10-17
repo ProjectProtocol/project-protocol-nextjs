@@ -33,7 +33,7 @@ export default function OfficeAgentsSearch({
       agent.fullName.toLowerCase().includes(searchText.toLowerCase())
     );
     setFilteredAgentsList(filtered);
-  }, [searchText, initialData.data]);
+  }, [searchText]);
 
   return (
     <>
@@ -50,7 +50,8 @@ export default function OfficeAgentsSearch({
         <Paginator<Agent>
           animated
           data={filteredAgentsList}
-          meta={{ ...initialData.meta, total: filteredAgentsList.length }}
+          // meta={{ ...initialData.meta, total: filteredAgentsList.length }}
+          meta={initialData.meta}
           getData={getMore}
           keyGenerator={(item) =>
             `office-agents-search-result-${String(searchText)}-${item.type}-${
