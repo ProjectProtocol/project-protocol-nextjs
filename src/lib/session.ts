@@ -5,6 +5,7 @@ import { decrypt, encrypt, freshExpiryDate, timeToExpiryInMs } from "./jwt";
 import { NextRequest, NextResponse } from "next/server";
 import User from "@/types/User";
 import Api from "./api";
+import { getTranslations } from "next-intl/server";
 import { ResponseCookies } from "next/dist/compiled/@edge-runtime/cookies";
 
 type Session = {
@@ -92,6 +93,7 @@ export async function signIn(
 /**
  * Signs the user out by deleting the session cookie.
  */
-export async function signOut() {
+export async function destroySession() {
+  const t = await getTranslations();
   cookies().delete("session");
 }

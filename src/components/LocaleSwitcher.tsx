@@ -2,8 +2,8 @@
 
 import { switchLanguage } from "@/lib/actions/locale";
 import classNames from "classnames";
-import { usePathname } from "next/navigation";
-import Button from "react-bootstrap/Button";
+import { revalidatePath } from "next/cache";
+import { usePathname, useRouter } from "next/navigation";
 
 type LanguageProps = {
   nativeName: string;
@@ -24,7 +24,7 @@ export default function LocaleSwitcher({
 }) {
   const activeClass = `fw-semibold ${dark ? "text-white" : "text-body"}`;
   const inactiveClass = dark ? "link-white" : "link-dark";
-  const path = usePathname();
+  const pathname = usePathname();
 
   return (
     <div aria-label={"Select language"} className="flex flex-row">
@@ -39,9 +39,7 @@ export default function LocaleSwitcher({
               [inactiveClass]: !active,
             })}
             role="button"
-            onClick={async () => {
-              await switchLanguage({ locale: key });
-            }}
+            href={`/${key}${pathname}`}
           >
             {nativeName}
           </a>
