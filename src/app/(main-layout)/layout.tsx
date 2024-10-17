@@ -1,3 +1,4 @@
+import AuthProvider from "@/components/AuthProvider";
 import Footer from "@/components/Footer";
 import Menu from "@/components/Menu/Menu";
 import MobileTabs from "@/components/Menu/MobileTabs";
@@ -10,12 +11,14 @@ export default async function Layout({
 }) {
   return (
     <main className="d-flex flex-column min-vh-100">
-      <Menu />
-      <Container className="px-3 flex-grow-1" style={{ maxWidth: 630 }}>
-        {children}
-      </Container>
-      <Footer />
-      <MobileTabs />
+      <AuthProvider>
+        <Menu />
+        <Container className="px-3 flex-grow-1" style={{ maxWidth: 630 }}>
+          {children}
+        </Container>
+        <Footer />
+        <MobileTabs />
+      </AuthProvider>
     </main>
   );
 }

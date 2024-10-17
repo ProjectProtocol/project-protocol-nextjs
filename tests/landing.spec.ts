@@ -7,15 +7,24 @@ test("has title", async ({ page }) => {
 
 test("top three links to appropriate pages", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("link", { name: "Icon for Search resources" }).click();
+  await page
+    .getByRole("link", { name: "Icon for Search resources" })
+    .locator("visible=true")
+    .click();
   await expect(page).toHaveURL(/resources/);
 
   await page.goBack();
-  await page.getByRole("link", { name: "Icon for Rate my PO" }).click();
+  await page
+    .getByRole("link", { name: "Icon for Rate my PO" })
+    .locator("visible=true")
+    .click();
   await expect(page).toHaveURL(/rate-my-po/);
 
   await page.goBack();
-  await page.getByRole("link", { name: "Icon for Register to vote" }).click();
+  await page
+    .getByRole("link", { name: "Icon for Register to vote" })
+    .locator("visible=true")
+    .click();
   await expect(page).toHaveURL(/content\/en-US\/vote/);
 });
 
