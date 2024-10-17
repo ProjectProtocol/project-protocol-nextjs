@@ -40,7 +40,7 @@ export default function LocaleSwitcher({
               [activeClass]: active,
               [inactiveClass]: !active,
             })}
-            role="button"
+            locale={key}
             href={`/${key}${suffix}`}
           >
             {nativeName}
