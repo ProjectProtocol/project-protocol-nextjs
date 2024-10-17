@@ -9,6 +9,9 @@ import { IRateAgentFormState } from "@/app/(main-layout)/rate-my-po/agents/[agen
 import { replace, snakeCase } from "lodash";
 import { snakeCaseKeys } from "../transformKeys";
 import { redirect } from "next/navigation";
+import { SearchData } from "@/types/Search";
+import Agent from "@/types/Agent";
+import { RateMyPoData } from "@/app/(main-layout)/rate-my-po/_types";
 
 export default async function rateAgent(
   agentId: string,
@@ -61,4 +64,20 @@ export async function createAgent({
   } else {
     return false;
   }
+}
+
+interface IAgentList {
+  officeId: string;
+  searchText?: string;
+  page?: number;
+}
+
+export async function listAgents({
+  officeId,
+  ...params
+}: IAgentList): Promise<SearchData<Agent>> {
+  const response = await new Api().get(`/offices/${officeId}/agents`, {
+    params,
+  });
+  return response.json();
 }
