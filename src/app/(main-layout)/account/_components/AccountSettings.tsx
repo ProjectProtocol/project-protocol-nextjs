@@ -5,27 +5,37 @@ import Row from "react-bootstrap/Row";
 import AccountSettingsRow from "./AccountSettingsRow";
 import { Button } from "react-bootstrap";
 import { useTranslations } from "next-intl";
-import { destroySession } from "@/lib/session";
+import { signOut } from "@/lib/session";
 import { useState } from "react";
 import ChangePasswordModal from "./ChangePasswordModal";
 import DeleteAccountModal from "./DeleteAccountModal";
 import toast from "react-hot-toast";
 import User from "@/types/User";
-import { resendConfirmation } from "@/lib/actions/account";
+import { deleteAccount, resendConfirmation } from "@/lib/actions/account";
 import AsyncButton from "@/components/AsyncButton";
+import { useAuth } from "@/components/AuthProvider";
+import { useOriginalPath } from "@/components/OriginalPathProvider";
+import { useRouter } from "next/navigation";
 
-export default function AccountSettings({ user }: { user: User }) {
+export default function AccountSettings() {
   const tAccount = useTranslations("account");
   const tShared = useTranslations("shared");
+  const auth = useAuth();
+  const router = useRouter();
+  const { getOriginalPath } = useOriginalPath();
+  const user = auth.user as User;
+  const { setUser } = auth;
 
   const [resentCode, setResentCode] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showChangePassword, setShowChangePassword] = useState(false);
   const [showDeleteAccount, setShowDeleteAccount] = useState(false);
 
-  const signOut = async () => {
-    await destroySession();
+  const handleSignout = async () => {
+    await signOut();
+    router.replace(getOriginalPath());
     toast.success(tAccount("signOutSuccess"));
+    setUser();
   };
 
   const requestConfirmationCode = async () => {
@@ -39,7 +49,18 @@ export default function AccountSettings({ user }: { user: User }) {
     setLoading(false);
   };
 
-  return (
+  async function handleDeleteAccount({ password }: { password: string }) {
+    const { error } = await deleteAccount({ password });
+    if (error) {
+      toast.error(error);
+    } else {
+      router.replace(getOriginalPath());
+      toast.success(tAccount("delete.success"));
+      setUser();
+    }
+  }
+
+  return user ? (
     <Row className="gy-4 mt-5">
       {!user.isConfirmed && (
         <>
@@ -75,7 +96,7 @@ export default function AccountSettings({ user }: { user: User }) {
         title={tShared("email")}
         detail={user.email}
         action={
-          <Button variant="outline-dark" size="sm" onClick={signOut}>
+          <Button variant="outline-dark" size="sm" onClick={handleSignout}>
             {tAccount("signOut")}
           </Button>
         }
@@ -114,9 +135,10 @@ export default function AccountSettings({ user }: { user: User }) {
       />
       <DeleteAccountModal
         show={showDeleteAccount}
+        handleDelete={handleDeleteAccount}
         onHide={() => setShowDeleteAccount(false)}
         closeButton
       />
     </Row>
-  );
+  ) : null;
 }

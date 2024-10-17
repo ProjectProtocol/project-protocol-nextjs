@@ -45,7 +45,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const user = await getUser();
   const locale = await getLocale();
   const messages = await getMessages();
 
@@ -59,9 +58,7 @@ export default async function RootLayout({
         <ProgressBarWrapperNoSSR />
         <NextIntlClientProvider messages={messages}>
           <NotificationArea />
-          <OriginalPathProvider>
-            <AuthProvider user={user}>{children}</AuthProvider>
-          </OriginalPathProvider>
+          <OriginalPathProvider>{children}</OriginalPathProvider>
         </NextIntlClientProvider>
       </body>
     </html>

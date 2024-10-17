@@ -3,7 +3,7 @@
 import { signIn } from "../session";
 import { flashError, flashSuccess } from "../flash-messages";
 import { getTranslations } from "next-intl/server";
-import { redirect } from "next/navigation";
+import { redirect, RedirectType } from "next/navigation";
 import Api from "../api";
 import { cookies } from "next/headers";
 
@@ -12,7 +12,10 @@ export interface ILoginFormState {
   password: string;
 }
 
-export async function login({ loginEmail, password }: ILoginFormState) {
+export async function login(
+  { loginEmail, password }: ILoginFormState,
+  redirectTo = "/"
+) {
   const t = await getTranslations();
 
   const response = await new Api().post("/auth/sign_in", {
@@ -35,8 +38,8 @@ export async function login({ loginEmail, password }: ILoginFormState) {
       error: "Unable to retrieve API token",
     };
   }
-
   await signIn(data.user, apiToken, cookies());
+  redirect(redirectTo, RedirectType.replace);
 }
 
 export interface ISignupFormState {
@@ -57,7 +60,6 @@ export async function signUp({ signUpEmail, password }: ISignupFormState) {
   const data = await response.json();
 
   if (!response.ok) {
-    flashError(t("shared.genericError"));
     return {
       error: data.error,
     };
@@ -65,7 +67,6 @@ export async function signUp({ signUpEmail, password }: ISignupFormState) {
 
   const apiToken = response.headers.get("authorization");
   if (!apiToken) {
-    flashError(t("shared.genericError"));
     return {
       error: "Unable to retrieve API token",
     };
@@ -75,9 +76,7 @@ export async function signUp({ signUpEmail, password }: ISignupFormState) {
 
   await signIn(data.user, apiToken, cookies());
 
-  flashSuccess(t("login.register.success"));
-
-  return { email, isConfirmed };
+  return { user: data.user, error: null };
 }
 
 /**
@@ -95,7 +94,6 @@ export async function confirmAccount(token: string) {
   });
 
   if (!response.ok) {
-    flashError(t("shared.genericError"));
     throw new Error("Confirm account: something went wrong");
   }
 

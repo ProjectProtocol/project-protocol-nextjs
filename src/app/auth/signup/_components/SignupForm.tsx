@@ -12,10 +12,12 @@ import AsyncButton from "../../../../components/AsyncButton";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import toast from "react-hot-toast";
+import { useAuth } from "@/components/AuthProvider";
 
 export default function SignupForm() {
   const t = useTranslations();
   const [loading, setLoading] = useState(false);
+  const { setUser } = useAuth();
   const schema = z.object({
     signUpEmail: z
       .string()
@@ -39,8 +41,9 @@ export default function SignupForm() {
 
   async function onSubmit(data: ISignupFormState) {
     setLoading(true);
-    const { error } = await signUp(data);
+    const { user, error } = await signUp(data);
     if (!error) {
+      setUser(user);
       router.replace(`/auth/confirmations`);
     } else {
       setLoading(false);

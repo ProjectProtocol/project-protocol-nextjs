@@ -2,7 +2,7 @@
 
 import Api from "../api";
 import { redirect } from "next/navigation";
-import { destroySession, getSession } from "../session";
+import { signOut, getSession } from "../session";
 import { getTranslations } from "next-intl/server";
 import { flashError, flashSuccess } from "../flash-messages";
 import { snakeCaseKeys } from "../transformKeys";
@@ -128,11 +128,13 @@ export async function changePassword({
   return { error } as ChangePasswordResponse;
 }
 
-export interface IDeleteAccountFormState {
+export async function deleteAccount({
+  password,
+}: {
   password: string;
-}
-
-export async function deleteAccount({ password }: IDeleteAccountFormState) {
+}): Promise<{
+  error?: string;
+}> {
   const session = await getSession();
   const t = await getTranslations();
 
@@ -141,14 +143,14 @@ export async function deleteAccount({ password }: IDeleteAccountFormState) {
   );
 
   if (!response.ok) {
-    flashError(t("account.delete.error"));
     return {
       error: t("account.delete.error"),
     };
   }
 
-  flashSuccess(t("account.delete.success"));
-  await destroySession();
+  await signOut();
+
+  return {};
 }
 
 export async function acknowledgePolicy() {
