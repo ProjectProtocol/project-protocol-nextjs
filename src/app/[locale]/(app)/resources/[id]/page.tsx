@@ -8,24 +8,21 @@ import UnauthorizedCommentArea from "./_components/UnauthorizedCommentArea";
 import CommentArea from "./_components/CommentArea";
 import { Suspense } from "react";
 import ResourcesLoadingPlaceholder from "../_components/ResourcesLoadingPlaceholder";
-import { metaTitle } from "@/lib/metadataUtils";
-import { getTranslations } from "next-intl/server";
-import { ResourceTag } from "@/types/Resource";
+import { defaultMetadata } from "@/lib/metadataUtils";
 
 export async function generateMetadata({
-  params: { id, locale },
+  params: { id },
 }: {
-  params: { id: string; locale: string };
+  params: { id: string };
 }) {
-  const t = await getTranslations({ locale });
   const { resource } = await new Api()
     .get(`/resources/${id}`)
     .then((res) => res.json());
 
-  return {
-    title: metaTitle(resource.name),
+  return defaultMetadata({
+    title: resource.name,
     description: resource.description,
-  };
+  });
 }
 
 export default async function Page({

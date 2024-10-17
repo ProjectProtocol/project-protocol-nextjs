@@ -1,7 +1,7 @@
 import ContentPage from "../_components/ContentPage";
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import { ALL_LOCALES } from "@/i18n/config";
-import { metaTitle } from "@/lib/metadataUtils";
+import { defaultMetadata } from "@/lib/metadataUtils";
 
 const locales = ALL_LOCALES;
 export function generateStaticParams() {
@@ -14,9 +14,7 @@ export async function generateMetadata({
   params: { locale: string };
 }) {
   const t = await getTranslations({ locale, namespace: "home" });
-  return {
-    title: metaTitle(t("contact.title")),
-  };
+  return defaultMetadata({ title: t("contact.title") });
 }
 
 export default async function ContactUs({

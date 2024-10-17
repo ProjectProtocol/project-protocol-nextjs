@@ -9,9 +9,9 @@ import { Document } from "@contentful/rich-text-types";
 import renderRichText from "@/lib/renderRichText";
 import "@/styles/content-pages.scss";
 import ContentPage from "../_components/ContentPage";
-import { metaTitle } from "@/lib/metadataUtils";
 import { getCldImageUrl } from "next-cloudinary";
 import { unstable_setRequestLocale } from "next-intl/server";
+import { defaultMetadata } from "@/lib/metadataUtils";
 
 export async function generateStaticParams() {
   const locales = ALL_LOCALES;
@@ -32,9 +32,7 @@ export async function generateMetadata({
 }) {
   const data = await getContent(params.locale, params.slug);
   const title = data.fields.title as string;
-  return {
-    title: metaTitle(title),
-  };
+  return defaultMetadata({ title });
 }
 
 async function getContent(locale: string, slug: ContentfulPageKey) {
