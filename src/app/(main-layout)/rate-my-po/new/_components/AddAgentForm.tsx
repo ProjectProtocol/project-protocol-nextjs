@@ -57,7 +57,7 @@ export default function AddAgentForm() {
     const { agent } = await createAgent(params);
     if (agent) {
       toast.success(tAgent("successToast"));
-      router.replace(`/rate-my-po/${agent.id}`);
+      router.replace(`/rate-my-po/agents/${agent.id}`);
     } else {
       setLoading(false);
       toast.error(tShared("genericError"));
