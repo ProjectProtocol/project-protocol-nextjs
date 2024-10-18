@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { usePathname } from "next/navigation";
 import { NavLink, NavLinkProps } from "react-bootstrap";
 
@@ -18,7 +18,6 @@ export default function MenuLink({
   exact?: boolean;
 } & NavLinkProps) {
   const pathname = usePathname();
-
   return (
     <NavLink
       as={Link}
