@@ -1,10 +1,10 @@
-import { getLocale, getTranslations } from "next-intl/server";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
+import { getTranslations } from "next-intl/server";
 
 export default async function Footer() {
   const t = await getTranslations("navigation");
-  const locale = await getLocale();
-  const urlPrefix = (path: string) => `/content/${locale}/${path}`;
+  const urlPrefix = (path: string) => `/content/${path}`;
+
   const links = [
     {
       url: urlPrefix("what-is-project-protocol"),

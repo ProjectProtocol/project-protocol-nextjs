@@ -13,7 +13,7 @@ export const OriginalPathContext = createContext<
   OriginalPathProviderValue | undefined
 >(undefined);
 
-const redirectRoutes = ["/auth", "/account"];
+const redirectRoutes = ["/auth"];
 
 function isRedirectRoute(path: string): boolean {
   for (const n of redirectRoutes) {
