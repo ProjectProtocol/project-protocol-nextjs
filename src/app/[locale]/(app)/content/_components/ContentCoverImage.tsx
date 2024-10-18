@@ -20,9 +20,9 @@ export default function ContentCoverImage({
         <CldImage
           src={coverImageSrc}
           sizes="100vw"
+          priority
           fill
           style={{ objectFit: "cover" }}
-          quality={50}
           alt={`Cover image for ${title}`}
         />
         <div className={styles.coverImageOverlay} />
