@@ -20,7 +20,6 @@ export default function AccountSettings() {
   const user = authInfo.user as User;
   const tAccount = useTranslations("account");
   const tShared = useTranslations("shared");
-  console.log(user);
 
   const [resentCode, setResentCode] = useState(false);
   const [loading, setLoading] = useState(false);

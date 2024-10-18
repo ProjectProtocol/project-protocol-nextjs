@@ -9,7 +9,7 @@ export default function LandingHeroImage() {
       src="landing-page-2_v663w1"
       alt="Palm trees and houses"
       className={styles.topImage}
-      sizes="100vw"
+      sizes="(max-width: 575px) 100vw, 575px"
       fill
     />
   );

@@ -1,10 +1,8 @@
 "use client";
 
-import { switchLanguage } from "@/lib/actions/locale";
+import { Link } from "@/i18n/routing";
 import classNames from "classnames";
-import { revalidatePath } from "next/cache";
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 type LanguageProps = {
   nativeName: string;
@@ -26,7 +24,6 @@ export default function LocaleSwitcher({
   const activeClass = `fw-semibold ${dark ? "text-white" : "text-body"}`;
   const inactiveClass = dark ? "link-white" : "link-dark";
   const pathname = usePathname();
-  const suffix = pathname.replace(/(\/en-US|\/es-MX)/, "");
 
   return (
     <div aria-label={"Select language"} className="flex flex-row">
@@ -41,7 +38,7 @@ export default function LocaleSwitcher({
               [inactiveClass]: !active,
             })}
             locale={key}
-            href={`/${key}${suffix}`}
+            href={pathname}
           >
             {nativeName}
           </Link>

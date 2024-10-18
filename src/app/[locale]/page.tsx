@@ -7,7 +7,6 @@ import LandingResources from "./_components/LandingResources";
 import { Suspense } from "react";
 import SegmentLoading from "./_components/SegmentLoading";
 import LandingReviews from "./_components/LandingReviews";
-import Footer from "@/components/Footer";
 import "@/styles/content-pages.scss";
 import VideoComponent from "./_components/VideoComponent";
 import LandingHeroImage from "./_components/LandingHeroImage";
@@ -37,7 +36,6 @@ export default async function Page({
   params: { locale: Locale };
 }) {
   unstable_setRequestLocale(locale);
-
   const t = await getTranslations({ locale });
 
   return (
