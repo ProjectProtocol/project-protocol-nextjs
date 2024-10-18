@@ -56,7 +56,7 @@ export default async function Page({
   let coverImageSrc;
   if (!!data.fields.cloudinaryImgId) {
     let id = data.fields.cloudinaryImgId as string;
-    coverImageSrc = await getCldImageUrl({ src: id, width: 1200 });
+    coverImageSrc = id;
   }
 
   return (

@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import styles from "./content-cover-image.module.scss";
+import { CldImage } from "next-cloudinary";
 
 export default function ContentCoverImage({
   coverImageSrc,
@@ -14,12 +17,12 @@ export default function ContentCoverImage({
         className="w-100 position-absolute"
         style={{ height: 350, left: 0, right: 0 }}
       >
-        <Image
+        <CldImage
           src={coverImageSrc}
           sizes="100vw"
-          priority
           fill
           style={{ objectFit: "cover" }}
+          quality={50}
           alt={`Cover image for ${title}`}
         />
         <div className={styles.coverImageOverlay} />
