@@ -66,26 +66,20 @@ export async function createAgent({
   }
 }
 
-interface IAgentList {
+interface IListAgents {
   officeId: string;
-  searchText?: string;
-  page?: number;
+  searchText: string;
+  page: number;
 }
 
 export async function listAgents({
   officeId,
   searchText = "",
   page = 0,
-}: IAgentList): Promise<SearchData<Agent>> {
-  const params = {
-    searchText,
-    page: page?.toString(),
-    ...(searchText ? {} : { default: "" }),
-  };
-  const url = "?search=" + searchText;
-  const res = await new Api().get(`offices/${officeId}/agents` + url);
-  // console.log(res.url);
-  const data = await res.json();
-
-  return { meta: data.meta as any, data: data.data };
+}: IListAgents): Promise<SearchData<Agent>> {
+  const url =
+    `offices/${officeId}/agents?` +
+    new URLSearchParams({ search: searchText, page: String(page) });
+  const response = await new Api().get(url);
+  return response.json();
 }
