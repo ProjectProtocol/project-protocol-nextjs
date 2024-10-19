@@ -3,11 +3,11 @@ import Agent from "@/types/Agent";
 import RatingsBadge from "../RatingsBadge";
 import AgentInfo from "../AgentInfo";
 
-interface SearchResultAgentI {
+export interface ISearchResultAgent {
   agent: Agent;
 }
 
-export default function SearchResultAgent({ agent }: SearchResultAgentI) {
+export default function SearchResultAgent({ agent }: ISearchResultAgent) {
   return (
     <>
       <Row>
