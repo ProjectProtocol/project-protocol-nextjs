@@ -6,19 +6,13 @@ import { useEffect } from "react";
 import { Spinner } from "react-bootstrap";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { unstable_setRequestLocale } from "next-intl/server";
 
-export default function Page({
-  params: { token, locale },
-}: {
-  params: { token: string; locale: string };
-}) {
-  unstable_setRequestLocale(locale);
+export default function Page({ params }: { params: { token: string } }) {
   const t = useTranslations();
   const router = useRouter();
   async function accountConfirmation() {
     try {
-      await confirmAccount(token);
+      await confirmAccount(params.token);
 
       toast.success(t("account.confirmation.success"));
     } catch (e) {

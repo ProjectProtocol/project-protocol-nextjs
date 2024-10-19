@@ -19,7 +19,7 @@ export default function ConfirmEmail() {
       <div className="text-center mb-3">{t("login.confirmSignupTitle")}</div>
       <p>
         {t.rich("login.loginConfirmSignupDetail1", {
-          email: user.email,
+          email: user!.email,
           b: (chunks) => <b>{chunks}</b>,
         })}
       </p>

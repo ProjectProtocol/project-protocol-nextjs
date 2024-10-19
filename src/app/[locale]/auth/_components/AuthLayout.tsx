@@ -1,9 +1,9 @@
 import Image from "next/image";
 import { Container } from "react-bootstrap";
-import AuthCloseButton from "./AuthCloseButton";
 import LocaleSwitcher from "@/components/LocaleSwitcher";
+import AuthCloseButton from "./AuthCloseButton";
 
-export default async function AuthLayout({
+export default function AuthLayout({
   locale,
   pageTitle,
   children,

@@ -1,7 +1,5 @@
-import SignupForm from "./_components/SignupForm";
-import { unstable_setRequestLocale } from "next-intl/server";
+import SignupForm from "@/app/[locale]/auth/signup/_components/SignupForm";
 
-export default async function Page({ params }: { params: { locale: string } }) {
-  unstable_setRequestLocale(params.locale);
+export default async function Page() {
   return <SignupForm />;
 }

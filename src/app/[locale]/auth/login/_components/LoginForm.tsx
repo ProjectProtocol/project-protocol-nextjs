@@ -11,10 +11,12 @@ import { useCallback, useState } from "react";
 import Link from "next/link";
 import { useOriginalPath } from "@/components/OriginalPathProvider";
 import toast from "react-hot-toast";
+import { useAuth } from "@/components/AuthProvider";
+import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
   const t = useTranslations();
-  const { redirectToOriginalPath } = useOriginalPath();
+  const { getOriginalPath } = useOriginalPath();
   const [isLoading, setIsLoading] = useState(false);
 
   const schema = z.object({
@@ -39,13 +41,14 @@ export default function LoginForm() {
 
   async function onSubmit(data: ILoginFormState) {
     setIsLoading(true);
-    const err = await login(data);
+    const redirectTo = getOriginalPath();
+    const err = await login(data, redirectTo);
+
     if (err) {
       toast.error(t("login.loginFieldsError"));
       setIsLoading(false);
     } else {
       toast.success(t("login.success"));
-      redirectToOriginalPath();
     }
   }
 
