@@ -14,8 +14,8 @@ import { deleteAccount, resendConfirmation } from "@/lib/actions/account";
 import AsyncButton from "@/components/AsyncButton";
 import { useAuth } from "@/components/AuthProvider";
 import { useOriginalPath } from "@/components/OriginalPathProvider";
-import { useRouter } from "next/navigation";
 import { signOut } from "@/lib/session";
+import { useRouter } from "@/i18n/routing";
 
 export default function AccountSettings() {
   const tAccount = useTranslations("account");
