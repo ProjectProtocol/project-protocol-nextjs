@@ -5,11 +5,10 @@ import { metaTitle } from "@/lib/metadataUtils";
 import Office from "@/types/Office";
 import { getTranslations } from "next-intl/server";
 import Image from "next/image";
-import businessIcon from "../../../../../../../public/images/business.svg";
+import businessIcon from "../../../../../../public/images/business.svg";
 import { Suspense } from "react";
 import OfficeAgentsSearchBar from "./_components/OfficeAgentsSearchBar";
 import OfficeAgentsSearchResultsList from "./_components/OfficeAgentsSearchResults";
-import { log } from "console";
 
 export async function generateMetadata({
   params,
