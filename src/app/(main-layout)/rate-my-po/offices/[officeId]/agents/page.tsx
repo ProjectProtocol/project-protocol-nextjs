@@ -2,13 +2,14 @@ import OfficeInfo from "@/components/OfficeInfo";
 import PageHeader from "@/components/PageHeader";
 import Api from "@/lib/api";
 import { metaTitle } from "@/lib/metadataUtils";
-import { getSession } from "@/lib/session";
 import Office from "@/types/Office";
 import { getTranslations } from "next-intl/server";
 import Image from "next/image";
-import businessIcon from "../../../../../../public/images/business.svg";
-import { listAgents } from "@/lib/actions/agent";
-import OfficeAgentsSearch from "./_components/OfficeAgentsSearch";
+import businessIcon from "../../../../../../../public/images/business.svg";
+import { Suspense } from "react";
+import OfficeAgentsSearchBar from "./_components/OfficeAgentsSearchBar";
+import OfficeAgentsSearchResultsList from "./_components/OfficeAgentsSearchResults";
+import { log } from "console";
 
 export async function generateMetadata({
   params,
@@ -25,24 +26,15 @@ export async function generateMetadata({
 
 export default async function Page({
   params,
+  searchParams,
 }: {
   params: { officeId: string };
+  searchParams: { search?: string };
 }) {
   const t = await getTranslations();
-  const session = await getSession();
-  const officeId = params.officeId;
-  const { office } = await new Api(session?.apiToken)
+  const { office } = await new Api()
     .get(`/offices/${params.officeId}`)
     .then((res) => res.json());
-  const initialData = await listAgents({ officeId });
-
-  async function getMore(page: number) {
-    "use server";
-    return await listAgents({
-      officeId,
-      page,
-    });
-  }
 
   return (
     <div>
@@ -64,7 +56,13 @@ export default async function Page({
         </div>
         <hr />
         <h3>{t("agent.agents")}</h3>
-        <OfficeAgentsSearch initialData={initialData} getMore={getMore} />
+        <Suspense>
+          <OfficeAgentsSearchBar />
+          <OfficeAgentsSearchResultsList
+            officeId={params.officeId}
+            searchText={searchParams?.search}
+          />
+        </Suspense>
       </div>
     </div>
   );

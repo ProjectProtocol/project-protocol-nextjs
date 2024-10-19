@@ -18,7 +18,7 @@ export default function SearchResult({
   const href =
     result.type === "Agent"
       ? `/rate-my-po/agents/${result.id}`
-      : `/rate-my-po/offices/${result.id}`;
+      : `/rate-my-po/offices/${result.id}/agents`;
 
   return (
     <ListItem onClick={onClick} body {...cardProps} href={href}>

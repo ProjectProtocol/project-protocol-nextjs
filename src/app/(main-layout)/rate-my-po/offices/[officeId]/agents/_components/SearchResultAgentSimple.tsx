@@ -1,15 +1,10 @@
 import { Card, Col, Row } from "react-bootstrap";
-import Agent from "@/types/Agent";
 import RatingsBadge from "@/components/RatingsBadge";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { getTranslations } from "next-intl/server";
+import { ISearchResultAgent } from "@/components/search/SearchResultAgent";
 
-interface SearchResultAgentI {
-  agent: Agent;
-}
-
-export default function SearchResultAgentSimple({ agent }: SearchResultAgentI) {
+export default function SearchResultAgentSimple({ agent }: ISearchResultAgent) {
   const t = useTranslations();
 
   return (
