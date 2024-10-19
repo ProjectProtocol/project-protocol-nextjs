@@ -1,8 +1,7 @@
 "use client";
 
-import { Link } from "@/i18n/routing";
+import { Link, usePathname } from "@/i18n/routing";
 import classNames from "classnames";
-import { usePathname } from "next/navigation";
 
 type LanguageProps = {
   nativeName: string;

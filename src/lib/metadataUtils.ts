@@ -1,7 +1,9 @@
 import { Metadata } from "next";
 
 export function defaultMetadata(overrides: Metadata = {}): Metadata {
-  const metadataBase = process.env.HOST ? new URL(process.env.HOST) : undefined;
+  const metadataBase = process.env.HOST
+    ? new URL(process.env.HOST)
+    : new URL("https://project-protocol-staging.netlify.app");
   return {
     title: {
       template: "%s | Project Protocol",
