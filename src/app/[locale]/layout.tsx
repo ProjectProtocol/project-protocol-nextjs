@@ -1,15 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import { NextIntlClientProvider } from "next-intl";
-import {
-  getMessages,
-  getTranslations,
-  unstable_setRequestLocale,
-} from "next-intl/server";
+import { getMessages, unstable_setRequestLocale } from "next-intl/server";
 import { defaultMetadata } from "@/lib/metadataUtils";
 import OriginalPathProvider from "@/components/OriginalPathProvider";
 import Document from "@/components/Document";
 import { routing } from "@/i18n/routing";
 import Footer from "@/components/Footer";
+import AuthProvider from "@/components/AuthProvider";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -38,10 +35,12 @@ export default async function RootLayout({
   return (
     <Document locale={locale}>
       <NextIntlClientProvider messages={messages}>
-        <OriginalPathProvider>
-          {children}
-          <Footer />
-        </OriginalPathProvider>
+        <AuthProvider>
+          <OriginalPathProvider>
+            {children}
+            <Footer />
+          </OriginalPathProvider>
+        </AuthProvider>
       </NextIntlClientProvider>
     </Document>
   );

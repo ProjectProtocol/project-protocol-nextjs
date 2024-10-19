@@ -15,13 +15,11 @@ export default async function Layout({
 
   return (
     <main className="d-flex flex-column min-vh-100">
-      <AuthProvider>
-        <Menu />
-        <Container className="px-3 flex-grow-1" style={{ maxWidth: 630 }}>
-          {children}
-        </Container>
-        <MobileTabs />
-      </AuthProvider>
+      <Menu />
+      <Container className="px-3 flex-grow-1" style={{ maxWidth: 630 }}>
+        {children}
+      </Container>
+      <MobileTabs />
     </main>
   );
 }
