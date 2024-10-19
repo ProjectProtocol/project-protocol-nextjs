@@ -4,21 +4,20 @@ import { useTranslations } from "next-intl";
 import PopUp, { IPopUp } from "@/components/PopUp";
 import AsyncButton from "@/components/AsyncButton";
 import { Button } from "react-bootstrap";
-import { deleteAccount, IDeleteAccountFormState } from "@/lib/actions/account";
 import Input from "@/components/Input";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useCallback } from "react";
 
 interface IDeleteAccountModal {
   onHide: () => void;
-  closeButton?: boolean;
+  handleDelete: SubmitHandler<{ password: string }>;
 }
 
 export default function DeleteAccountModal({
   onHide,
-  closeButton,
+  handleDelete,
   ...popUpProps
 }: IDeleteAccountModal & IPopUp) {
   const t = useTranslations();
@@ -30,22 +29,18 @@ export default function DeleteAccountModal({
         t("shared.requiredField", { field: t("account.delete.password") })
       ),
   });
-  const { register, handleSubmit, getFieldState, formState } =
-    useForm<IDeleteAccountFormState>({
-      mode: "onBlur",
-      defaultValues: {
-        password: "",
-      },
-      resolver: zodResolver(schema),
-    });
-
-  async function onSubmit(data: IDeleteAccountFormState) {
-    await deleteAccount(data);
-    onHide();
-  }
+  const { register, handleSubmit, getFieldState, formState } = useForm<{
+    password: string;
+  }>({
+    mode: "onBlur",
+    defaultValues: {
+      password: "",
+    },
+    resolver: zodResolver(schema),
+  });
 
   const validationProps = useCallback(
-    (fieldName: keyof IDeleteAccountFormState) => {
+    (fieldName: keyof { password: string }) => {
       const { invalid, error } = getFieldState(fieldName, formState);
       return {
         isInvalid: invalid,
@@ -56,13 +51,8 @@ export default function DeleteAccountModal({
   );
 
   return (
-    <PopUp
-      title={t("account.delete.title")}
-      {...popUpProps}
-      closeButton
-      onHide={onHide}
-    >
-      <form className="vertical-rhythm" onSubmit={handleSubmit(onSubmit)}>
+    <PopUp title={t("account.delete.title")} {...popUpProps} onHide={onHide}>
+      <form className="vertical-rhythm" onSubmit={handleSubmit(handleDelete)}>
         <p>{t("account.delete.confirmMessage")}</p>
         <p>{t("account.delete.enterPassword")}</p>
         <Input
