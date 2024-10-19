@@ -22,7 +22,7 @@ export default function OfficeAgentsResultsList({
   return (
     <>
       <Paginator<Agent>
-        animated
+        animated={false}
         data={initialData.data}
         meta={initialData.meta}
         getData={getMore}
