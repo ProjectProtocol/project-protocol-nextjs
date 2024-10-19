@@ -8,4 +8,5 @@ export const routing = defineRouting({
 });
 
 // Should only be used on public routes in the `[locale]` segment
-export const { Link, usePathname } = createSharedPathnamesNavigation(routing);
+export const { Link, usePathname, useRouter, redirect } =
+  createSharedPathnamesNavigation(routing);

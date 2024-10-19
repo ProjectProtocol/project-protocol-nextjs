@@ -1,25 +1,26 @@
 "use server";
 
 import { signIn } from "../session";
-import { flashError, flashSuccess } from "../flash-messages";
-import { getTranslations } from "next-intl/server";
 import Api from "../api";
 import { cookies } from "next/headers";
+import User from "@/types/User";
+import { ActionResponse } from "@/types/ActionResponse";
 
 export interface ILoginFormState {
   loginEmail: string;
   password: string;
 }
-
-export async function login({ loginEmail, password }: ILoginFormState) {
-  const t = await getTranslations();
-
+export async function login({
+  loginEmail,
+  password,
+}: ILoginFormState): Promise<ActionResponse<User>> {
   const response = await new Api().post("/auth/sign_in", {
     body: JSON.stringify({
       email: loginEmail,
       password: password,
     }),
   });
+
   const data = await response.json();
 
   if (!response.ok) {
@@ -34,8 +35,8 @@ export async function login({ loginEmail, password }: ILoginFormState) {
       error: "Unable to retrieve API token",
     };
   }
-
   await signIn(data.user, apiToken, cookies());
+  return { data: data.user };
 }
 
 export interface ISignupFormState {
@@ -43,9 +44,10 @@ export interface ISignupFormState {
   password: string;
 }
 
-export async function signUp({ signUpEmail, password }: ISignupFormState) {
-  const t = await getTranslations();
-
+export async function signUp({
+  signUpEmail,
+  password,
+}: ISignupFormState): Promise<ActionResponse<User>> {
   const response = await new Api().post("/auth/sign_up", {
     body: JSON.stringify({
       email: signUpEmail,
@@ -56,7 +58,6 @@ export async function signUp({ signUpEmail, password }: ISignupFormState) {
   const data = await response.json();
 
   if (!response.ok) {
-    flashError(t("shared.genericError"));
     return {
       error: data.error,
     };
@@ -64,37 +65,26 @@ export async function signUp({ signUpEmail, password }: ISignupFormState) {
 
   const apiToken = response.headers.get("authorization");
   if (!apiToken) {
-    flashError(t("shared.genericError"));
     return {
       error: "Unable to retrieve API token",
     };
   }
 
-  const { email, isConfirmed } = data.user;
-
   await signIn(data.user, apiToken, cookies());
 
-  flashSuccess(t("login.register.success"));
-
-  return { email, isConfirmed };
+  return { data: data.user };
 }
 
 /**
  * Attempts to confirm user account with token. If successful, use the returned
  * user object and authorization header to create a session and sign the user in.
- *
- * @param token {string}
- * @returns {null | Error}
  */
 export async function confirmAccount(token: string) {
-  const t = await getTranslations();
-
   const response = await new Api().post("/auth/confirmations", {
     body: JSON.stringify({ token }),
   });
 
   if (!response.ok) {
-    flashError(t("shared.genericError"));
     throw new Error("Confirm account: something went wrong");
   }
 
