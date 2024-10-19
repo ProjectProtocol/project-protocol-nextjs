@@ -29,7 +29,7 @@ export default async function Page({
   searchParams,
 }: {
   params: { officeId: string };
-  searchParams: { search?: string };
+  searchParams: { search: string };
 }) {
   const t = await getTranslations();
   const { office } = await new Api()
@@ -60,7 +60,7 @@ export default async function Page({
           <OfficeAgentsSearchBar />
           <OfficeAgentsSearchResultsList
             officeId={params.officeId}
-            searchText={searchParams?.search}
+            searchText={searchParams.search}
           />
         </Suspense>
       </div>

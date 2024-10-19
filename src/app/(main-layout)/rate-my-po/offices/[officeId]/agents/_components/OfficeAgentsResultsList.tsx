@@ -8,7 +8,7 @@ import SearchResultAgentSimple from "./SearchResultAgentSimple";
 
 type OfficeAgentsResultsListProps = {
   initialData: SearchData<Agent>;
-  searchText?: string;
+  searchText: string;
   getMore: (page: number) => Promise<SearchData<Agent>>;
 };
 
