@@ -12,11 +12,13 @@ import Link from "next/link";
 import { useOriginalPath } from "@/components/OriginalPathProvider";
 import toast from "react-hot-toast";
 import { useAuth } from "@/components/AuthProvider";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/routing";
 
 export default function LoginForm() {
   const t = useTranslations();
+  const { setUser } = useAuth();
   const { getOriginalPath } = useOriginalPath();
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
   const schema = z.object({
@@ -39,16 +41,18 @@ export default function LoginForm() {
       resolver: zodResolver(schema),
     });
 
-  async function onSubmit(data: ILoginFormState) {
+  async function onSubmit(formData: ILoginFormState) {
     setIsLoading(true);
     const redirectTo = getOriginalPath();
-    const err = await login(data, redirectTo);
+    const { data, error } = await login(formData);
 
-    if (err) {
+    if (error) {
       toast.error(t("login.loginFieldsError"));
       setIsLoading(false);
     } else {
+      setUser(data);
       toast.success(t("login.success"));
+      router.replace(redirectTo);
     }
   }
 

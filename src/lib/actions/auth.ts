@@ -1,26 +1,29 @@
 "use server";
 
 import { signIn } from "../session";
+import { getTranslations } from "next-intl/server";
 import Api from "../api";
 import { cookies } from "next/headers";
-import User from "@/types/User";
 import { ActionResponse } from "@/types/ActionResponse";
+import User from "@/types/User";
 
 export interface ILoginFormState {
   loginEmail: string;
   password: string;
 }
+
 export async function login({
   loginEmail,
   password,
 }: ILoginFormState): Promise<ActionResponse<User>> {
+  const t = await getTranslations();
+
   const response = await new Api().post("/auth/sign_in", {
     body: JSON.stringify({
       email: loginEmail,
       password: password,
     }),
   });
-
   const data = await response.json();
 
   if (!response.ok) {
@@ -35,8 +38,14 @@ export async function login({
       error: "Unable to retrieve API token",
     };
   }
-  await signIn(data.user, apiToken, cookies());
-  return { data: data.user };
+  try {
+    await signIn(data.user, apiToken, cookies());
+    return { data: data.user };
+  } catch {
+    return {
+      error: "Error signing in",
+    };
+  }
 }
 
 export interface ISignupFormState {
@@ -79,7 +88,11 @@ export async function signUp({
  * Attempts to confirm user account with token. If successful, use the returned
  * user object and authorization header to create a session and sign the user in.
  */
-export async function confirmAccount(token: string) {
+export async function confirmAccount(
+  token: string
+): Promise<ActionResponse<User>> {
+  const t = await getTranslations();
+
   const response = await new Api().post("/auth/confirmations", {
     body: JSON.stringify({ token }),
   });
@@ -100,4 +113,6 @@ export async function confirmAccount(token: string) {
   }
 
   await signIn(user, apiToken, cookies());
+
+  return { data: user };
 }
