@@ -90,7 +90,9 @@ export default function LoginForm() {
           {...validationProps("password")}
         />
         <div>
-          <Link href="/auth/forgot-password">{t("login.forgotPassword")}</Link>
+          <Link href="/auth/forgot-password" replace>
+            {t("login.forgotPassword")}
+          </Link>
         </div>
         <AsyncButton
           size="lg"
@@ -104,7 +106,7 @@ export default function LoginForm() {
         </AsyncButton>
         <div className="text-center">
           {t("login.loginHelper")}
-          <Link className="link ms-1" href="/auth/signup">
+          <Link className="link ms-1" href="/auth/signup" replace>
             {t("login.signup")}
           </Link>
         </div>

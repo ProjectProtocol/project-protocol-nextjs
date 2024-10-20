@@ -39,11 +39,11 @@ export default function SignupForm() {
       resolver: zodResolver(schema),
     });
 
-  async function onSubmit(data: ISignupFormState) {
+  async function onSubmit(formData: ISignupFormState) {
     setLoading(true);
-    const { user, error } = await signUp(data);
+    const { data, error } = await signUp(formData);
     if (!error) {
-      setUser(user);
+      setUser(data);
       router.replace(`/auth/confirmations`);
     } else {
       setLoading(false);
@@ -99,14 +99,18 @@ export default function SignupForm() {
           }
           <div className="mt-3 text-center">
             {t("login.signupHelper")}
-            <Link className="link ms-1" href="/auth/login">
+            <Link className="link ms-1" href="/auth/login" replace>
               {t("login.login")}
             </Link>
           </div>
         </div>
       </form>
       <div className="mt-5 text-center">
-        <Link className="link ms-1" href="/content/en-US/terms-of-service">
+        <Link
+          className="link ms-1"
+          href="/content/en-US/terms-of-service"
+          replace
+        >
           {t("login.readTermsOfService")}
         </Link>
       </div>

@@ -7,19 +7,25 @@ import { requestPasswordReset } from "@/lib/actions/account";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import Link from "next/link";
 import { useOriginalPath } from "@/components/OriginalPathProvider";
+import toast from "react-hot-toast";
+import { useRouter } from "@/i18n/routing";
 
 export interface IRequestPasswordResetFormState {
   email: string;
 }
 export default function ForgotPasswordForm() {
-  const t = useTranslations();
+  const tPasswordReset = useTranslations("password_reset");
+  const tLogin = useTranslations("login");
+  const tShared = useTranslations("shared");
   const { getOriginalPath } = useOriginalPath();
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   const schema = z.object({
-    email: z.string().email(t("login.emailMessage")),
+    email: z.string().email(tLogin("emailMessage")),
   });
   const { register, handleSubmit, getFieldState, formState } =
     useForm<IRequestPasswordResetFormState>({
@@ -30,8 +36,20 @@ export default function ForgotPasswordForm() {
       resolver: zodResolver(schema),
     });
 
-  async function onSubmit(data: IRequestPasswordResetFormState) {
-    await requestPasswordReset({ ...data, originalPath: getOriginalPath() });
+  async function onSubmit(formData: IRequestPasswordResetFormState) {
+    const originalPath = getOriginalPath();
+    setIsLoading(true);
+    const { data } = await requestPasswordReset({
+      ...formData,
+      originalPath,
+    });
+    if (data?.success) {
+      toast.success(tPasswordReset("resetRequestSuccess"));
+      router.replace(originalPath);
+    } else {
+      toast.error(tShared("genericError"));
+      setIsLoading(false);
+    }
   }
 
   const validationProps = useCallback(
@@ -48,13 +66,13 @@ export default function ForgotPasswordForm() {
   return (
     <div className="d-block p-4">
       <div className="text-center mb-3">
-        {t("login.forgotPasswordTitleHelper")}
+        {tLogin("forgotPasswordTitleHelper")}
       </div>
       <form className="vertical-rhythm" onSubmit={handleSubmit(onSubmit)}>
         <Input
           type="email"
-          label={t("login.email")}
-          placeholder={t("login.emailPlaceholder")}
+          label={tLogin("email")}
+          placeholder={tLogin("emailPlaceholder")}
           {...validationProps("email")}
           {...register("email")}
         />
@@ -64,14 +82,14 @@ export default function ForgotPasswordForm() {
           variant="primary"
           type="submit"
           disabled={!formState.isValid}
-          loading={formState.isSubmitting}
+          loading={isLoading}
         >
-          {t("login.resetPassword.submit")}
+          {tLogin("resetPassword.submit")}
         </AsyncButton>
         <div>
-          {t("login.loginHelper")}
-          <Link className="link ms-1" href="/auth/signup">
-            {t("login.signup")}
+          {tLogin("loginHelper")}
+          <Link className="link ms-1" href="/auth/signup" replace>
+            {tLogin("signup")}
           </Link>
         </div>
       </form>

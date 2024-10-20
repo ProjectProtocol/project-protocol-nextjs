@@ -17,12 +17,7 @@ export async function generateMetadata({
   return defaultMetadata({ title: t("contact.title") });
 }
 
-export default async function ContactUs({
-  params,
-}: {
-  params: { locale: string };
-}) {
-  unstable_setRequestLocale(params.locale);
+export default async function ContactUs() {
   const t = await getTranslations("home");
 
   return (

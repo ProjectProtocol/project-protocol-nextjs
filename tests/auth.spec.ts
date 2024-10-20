@@ -5,7 +5,8 @@ const USER_PW = "P@ssword";
 
 test("allows user to log in and return to original page", async ({ page }) => {
   // Go to Voting rights article before accessing log in screen
-  await page.goto("/content/en-US/vote");
+  const originalPath = "/en-US/content/vote";
+  await page.goto(originalPath);
   await page.getByRole("link", { name: "Sign up" }).click();
   await page.getByRole("link", { name: "Log in" }).click();
 
@@ -17,14 +18,14 @@ test("allows user to log in and return to original page", async ({ page }) => {
   await expect(page.getByText("Sign in successful!")).toBeVisible();
 
   // Check that user is redirected to voting article after login
-  await expect(page).toHaveURL("/content/en-US/vote");
+  await expect(page).toHaveURL(originalPath);
 });
 
 // Test forgot password and redirect to original page
 test("user is redirected to original page after password reset", async ({
   page,
 }) => {
-  const originalPath = "/content/en-US/contact-us";
+  const originalPath = "/en-US/content/contact-us";
   await page.goto(originalPath);
   await page.getByRole("link", { name: "Sign up" }).click();
   await page.getByRole("link", { name: "Log in" }).click();
