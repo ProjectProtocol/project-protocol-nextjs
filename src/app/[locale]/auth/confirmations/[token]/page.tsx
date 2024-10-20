@@ -6,8 +6,14 @@ import { useEffect } from "react";
 import { Spinner } from "react-bootstrap";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { unstable_setRequestLocale } from "next-intl/server";
 
-export default function Page({ params }: { params: { token: string } }) {
+export default function Page({
+  params,
+}: {
+  params: { token: string; locale: string };
+}) {
+  unstable_setRequestLocale(params.locale);
   const t = useTranslations();
   const router = useRouter();
   async function accountConfirmation() {
