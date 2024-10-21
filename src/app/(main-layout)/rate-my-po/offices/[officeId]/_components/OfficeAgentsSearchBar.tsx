@@ -29,6 +29,7 @@ export default function OfficeAgentsSearchBar() {
         type="text"
         role="searchbox"
         onChange={(e) => handleInput(e.target.value)}
+        defaultValue={searchParams.get("search")?.toString()}
         placeholder={t("agent.searchByOffice")}
       />
     </InputGroup>

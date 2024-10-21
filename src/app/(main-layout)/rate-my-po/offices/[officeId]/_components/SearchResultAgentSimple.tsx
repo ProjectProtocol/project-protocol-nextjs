@@ -15,21 +15,19 @@ export default function SearchResultAgentSimple({ agent }: ISearchResultAgent) {
         as={Link}
         href={"/rate-my-po/agents/" + agent.id}
       >
-        <Card.Body>
-          <Row>
-            <Col>
-              <div className="h-100 d-flex flex-column justify-content-center">
-                <h4 className="mb-0">
-                  {agent.lastName}, {agent.firstName}
-                </h4>
-                <h5 className="text-dark">{t("agent.agent")}</h5>
-              </div>
-            </Col>
-            <Col className="text-end">
-              <RatingsBadge rating={agent.averageRating} />
-            </Col>
-          </Row>
-        </Card.Body>
+        <Row>
+          <Col>
+            <div className="h-100 d-flex flex-column justify-content-center">
+              <h4 className="mb-0">
+                {agent.lastName}, {agent.firstName}
+              </h4>
+              <h5 className="text-dark">{t("agent.agent")}</h5>
+            </div>
+          </Col>
+          <Col className="text-end">
+            <RatingsBadge rating={agent.averageRating} />
+          </Col>
+        </Row>
       </Card>
     </>
   );
