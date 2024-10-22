@@ -5,10 +5,13 @@ import { getSession } from "../session";
 import Api from "../api";
 import { flashError, flashSuccess } from "../flash-messages";
 import { revalidatePath } from "next/cache";
-import { IRateAgentFormState } from "@/app/(main-layout)/rate-my-po/[agentId]/_components/RateAgentForm/types";
+import { IRateAgentFormState } from "@/app/(main-layout)/rate-my-po/agents/[agentId]/_components/RateAgentForm/types";
 import { replace, snakeCase } from "lodash";
 import { snakeCaseKeys } from "../transformKeys";
 import { redirect } from "next/navigation";
+import { SearchData } from "@/types/Search";
+import Agent from "@/types/Agent";
+import { RateMyPoData } from "@/app/(main-layout)/rate-my-po/_types";
 
 export default async function rateAgent(
   agentId: string,
@@ -35,7 +38,7 @@ export default async function rateAgent(
       : t("rate_agent.createdSuccess")
   );
 
-  revalidatePath(`/rate-my-po/${agentId}`);
+  revalidatePath(`/rate-my-po/agents/${agentId}`);
 }
 
 export async function createAgent({
@@ -61,4 +64,22 @@ export async function createAgent({
   } else {
     return false;
   }
+}
+
+interface IListAgents {
+  officeId: string;
+  searchText: string;
+  page: number;
+}
+
+export async function listAgents({
+  officeId,
+  searchText = "",
+  page = 0,
+}: IListAgents): Promise<SearchData<Agent>> {
+  const url =
+    `offices/${officeId}/agents?` +
+    new URLSearchParams({ search: searchText, page: String(page) });
+  const response = await new Api().get(url);
+  return response.json();
 }

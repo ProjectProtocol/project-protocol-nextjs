@@ -8,7 +8,7 @@ export default function AgentCardSimple({ agent }: { agent: Agent }) {
       body
       className="shadow-none"
       as={Link}
-      href={"/rate-my-po/" + agent.id}
+      href={"/rate-my-po/agents/" + agent.id}
     >
       <Row>
         <Col>
