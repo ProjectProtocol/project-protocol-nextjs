@@ -8,8 +8,8 @@ import ConfirmationModal from "./ConfirmationModal";
 import Agent from "@/types/Agent";
 import toast from "react-hot-toast";
 import RateAgentModal from "./RateAgentModal";
-import Link from "next/link";
 import ModerationModal from "@/components/ModerationModal";
+import { Link } from "@/i18n/routing";
 
 export default function RateAgentButton({ agent }: { agent: Agent }) {
   const t = useTranslations();
