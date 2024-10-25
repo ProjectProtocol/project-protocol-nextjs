@@ -1,7 +1,5 @@
 "use client";
 import { Col, Row } from "react-bootstrap";
-import { getUser } from "@/lib/session";
-import { getTranslations } from "next-intl/server";
 import BackLink from "./BackLink";
 import Link from "next/link";
 import { useTranslations } from "next-intl";

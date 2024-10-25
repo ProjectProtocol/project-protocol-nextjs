@@ -1,4 +1,6 @@
-import Link from "next/link";
+"use client";
+
+import { Link } from "@/i18n/routing";
 import { Card, CardProps } from "react-bootstrap";
 
 export interface IListItem extends CardProps {
@@ -13,8 +15,6 @@ export default function ListItem({
   cardClasses,
   ...cardProps
 }: IListItem) {
-  const conditionalProps: { as?: string; href?: string } = {};
-
   return (
     <Card
       as={href ? Link : undefined}
