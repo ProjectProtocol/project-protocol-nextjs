@@ -34,7 +34,7 @@ export default function ConfirmEmail() {
         </Link>
       </div>
       <div className="text-center mt-5">
-        <Link href="/content/en-US/terms-of-service" className="link">
+        <Link href="/content/terms-of-service" className="link">
           {t("navigation.termsOfService")}
         </Link>
       </div>

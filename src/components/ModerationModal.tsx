@@ -61,7 +61,7 @@ export default function ModerationModal(props: IPopUp) {
             .
           </p>
           <div className="text-center">
-            <Link href="/content/en-US/terms-of-service">
+            <Link href="/content/terms-of-service">
               Read our terms of service
             </Link>
           </div>
