@@ -6,7 +6,7 @@ import { useAuth } from "@/components/AuthProvider";
 import ConfirmationModal from "../agents/[agentId]/_components/ConfirmationModal";
 import { useState } from "react";
 import { Button } from "react-bootstrap";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/routing";
 import { Link } from "@/i18n/routing";
 
 export default function AddAgentCard() {
