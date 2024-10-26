@@ -1,7 +1,7 @@
 "use client";
 
 import classNames from "classnames";
-import { usePathname } from "next/navigation";
+import { usePathname } from "@/i18n/routing";
 
 export default function MobileTabItem({
   icon,

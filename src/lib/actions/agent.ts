@@ -5,13 +5,10 @@ import { getSession } from "../session";
 import Api from "../api";
 import { flashError, flashSuccess } from "../flash-messages";
 import { revalidatePath } from "next/cache";
-import { IRateAgentFormState } from "@/app/(main-layout)/rate-my-po/agents/[agentId]/_components/RateAgentForm/types";
-import { replace, snakeCase } from "lodash";
 import { snakeCaseKeys } from "../transformKeys";
-import { redirect } from "next/navigation";
 import { SearchData } from "@/types/Search";
 import Agent from "@/types/Agent";
-import { RateMyPoData } from "@/app/(main-layout)/rate-my-po/_types";
+import { IRateAgentFormState } from "@/app/[locale]/(app)/rate-my-po/agents/[agentId]/_components/RateAgentForm/types";
 
 export default async function rateAgent(
   agentId: string,
@@ -50,7 +47,6 @@ export async function createAgent({
   lastName: string;
   officeId: string;
 }) {
-  const t = await getTranslations();
   const session = await getSession();
   const agent = snakeCaseKeys({ firstName, lastName, officeId });
   const response = await new Api(session?.apiToken).post(`/agents`, {

@@ -21,20 +21,20 @@
     "deepmerge": "^4.3.1",
     "dotenv": "^16.4.5",
     "framer-motion": "^11.2.12",
-    "jose": "^5.4.1",
+    "jose": "^5.6.2",
     "lodash": "^4.17.21",
     "lodash-es": "^4.17.21",
     "next": "14.2.10",
     "next-cloudinary": "^6.12.0",
-    "next-intl": "^3.15.0",
+    "next-intl": "^3.21.1",
     "next-pwa": "^5.6.0",
-    "react": "^18",
+    "react": "^18.3.1",
     "react-bootstrap": "^2.10.2",
-    "react-dom": "^18",
+    "react-dom": "^18.3.1",
     "react-hook-form": "^7.52.1",
     "react-hot-toast": "^2.4.1",
     "react-intersection-observer": "^9.10.3",
-    "sass": "^1.77.5",
+    "sass": "^1.77.6",
     "sharp": "^0.33.4",
     "topbar": "^3.0.0",
     "zod": "^3.23.8"
@@ -42,12 +42,12 @@
   "devDependencies": {
     "@playwright/test": "^1.46.0",
     "@tolgee/cli": "^2.0.4",
-    "@types/node": "^20",
-    "@types/react": "^18",
+    "@types/node": "^20.12.7",
+    "@types/react": "^18.3.1",
     "@types/react-bootstrap": "^0.32.36",
-    "@types/react-dom": "^18",
-    "eslint": "^8",
+    "@types/react-dom": "^18.3.0",
+    "eslint": "^8.57.0",
     "eslint-config-next": "14.2.4",
-    "typescript": "^5"
+    "typescript": "^5.4.5"
   }
 }

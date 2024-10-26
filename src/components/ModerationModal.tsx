@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import PopUp, { IPopUp } from "./PopUp";
 import Image from "next/image";
 import { Button } from "react-bootstrap";
@@ -61,7 +61,7 @@ export default function ModerationModal(props: IPopUp) {
             .
           </p>
           <div className="text-center">
-            <Link href="/content/en-US/terms-of-service">
+            <Link href="/content/terms-of-service">
               Read our terms of service
             </Link>
           </div>

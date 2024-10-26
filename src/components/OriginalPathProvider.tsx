@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter } from "@/i18n/routing";
 import { createContext, useContext, useEffect, useState } from "react";
 
 type OriginalPathProviderValue = {

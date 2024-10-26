@@ -1,21 +1,21 @@
 "use server";
 
 import { signIn } from "../session";
-import { flashError, flashSuccess } from "../flash-messages";
 import { getTranslations } from "next-intl/server";
-import { redirect, RedirectType } from "next/navigation";
 import Api from "../api";
 import { cookies } from "next/headers";
+import { ActionResponse } from "@/types/ActionResponse";
+import User from "@/types/User";
 
 export interface ILoginFormState {
   loginEmail: string;
   password: string;
 }
 
-export async function login(
-  { loginEmail, password }: ILoginFormState,
-  redirectTo = "/"
-) {
+export async function login({
+  loginEmail,
+  password,
+}: ILoginFormState): Promise<ActionResponse<User>> {
   const t = await getTranslations();
 
   const response = await new Api().post("/auth/sign_in", {
@@ -38,8 +38,14 @@ export async function login(
       error: "Unable to retrieve API token",
     };
   }
-  await signIn(data.user, apiToken, cookies());
-  redirect(redirectTo, RedirectType.replace);
+  try {
+    await signIn(data.user, apiToken, cookies());
+    return { data: data.user };
+  } catch {
+    return {
+      error: "Error signing in",
+    };
+  }
 }
 
 export interface ISignupFormState {
@@ -47,9 +53,10 @@ export interface ISignupFormState {
   password: string;
 }
 
-export async function signUp({ signUpEmail, password }: ISignupFormState) {
-  const t = await getTranslations();
-
+export async function signUp({
+  signUpEmail,
+  password,
+}: ISignupFormState): Promise<ActionResponse<User>> {
   const response = await new Api().post("/auth/sign_up", {
     body: JSON.stringify({
       email: signUpEmail,
@@ -72,21 +79,18 @@ export async function signUp({ signUpEmail, password }: ISignupFormState) {
     };
   }
 
-  const { email, isConfirmed } = data.user;
-
   await signIn(data.user, apiToken, cookies());
 
-  return { user: data.user, error: null };
+  return { data: data.user };
 }
 
 /**
  * Attempts to confirm user account with token. If successful, use the returned
  * user object and authorization header to create a session and sign the user in.
- *
- * @param token {string}
- * @returns {null | Error}
  */
-export async function confirmAccount(token: string) {
+export async function confirmAccount(
+  token: string
+): Promise<ActionResponse<User>> {
   const t = await getTranslations();
 
   const response = await new Api().post("/auth/confirmations", {
@@ -109,4 +113,6 @@ export async function confirmAccount(token: string) {
   }
 
   await signIn(user, apiToken, cookies());
+
+  return { data: user };
 }

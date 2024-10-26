@@ -1,12 +1,11 @@
 "use server";
 
 import Api from "../api";
-import { redirect } from "next/navigation";
 import { signOut, getSession } from "../session";
 import { getTranslations } from "next-intl/server";
-import { flashError, flashSuccess } from "../flash-messages";
 import { snakeCaseKeys } from "../transformKeys";
 import { MessageKeys } from "next-intl";
+import { ActionResponse } from "@/types/ActionResponse";
 
 /**
  * Initiates a password reset request for "forgot password" flow.
@@ -17,23 +16,17 @@ export async function requestPasswordReset({
 }: {
   email: string;
   originalPath: string;
-}) {
-  const t = await getTranslations();
-
+}): Promise<ActionResponse<{ success: boolean }>> {
   const response = await new Api().post("/auth/password_resets", {
     body: JSON.stringify({ email: email, original_location: originalPath }),
   });
 
   if (!response.ok) {
     return {
-      error: t("shared.genericError"),
+      error: response.statusText,
     };
   } else {
-    flashSuccess(t("password_reset.resetRequestSuccess"), {
-      template: "dismissable",
-    });
-
-    redirect(originalPath);
+    return { data: { success: true } };
   }
 }
 
