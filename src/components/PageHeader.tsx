@@ -1,7 +1,7 @@
 "use client";
 import { Col, Row } from "react-bootstrap";
 import BackLink from "./BackLink";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import { useAuth } from "./AuthProvider";
 

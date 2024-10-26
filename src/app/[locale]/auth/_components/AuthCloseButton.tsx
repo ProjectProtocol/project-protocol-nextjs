@@ -1,7 +1,7 @@
 "use client";
 
 import { useOriginalPath } from "@/components/OriginalPathProvider";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 
 export default function AuthCloseButton() {
   const { getOriginalPath } = useOriginalPath();

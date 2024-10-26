@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import PopUp, { IPopUp } from "./PopUp";
 import Image from "next/image";
 import { Button } from "react-bootstrap";

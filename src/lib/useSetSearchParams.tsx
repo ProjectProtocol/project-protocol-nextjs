@@ -1,9 +1,5 @@
-import {
-  ReadonlyURLSearchParams,
-  usePathname,
-  useRouter,
-  useSearchParams,
-} from "next/navigation";
+import { usePathname, useRouter } from "@/i18n/routing";
+import { ReadonlyURLSearchParams, useSearchParams } from "next/navigation";
 import { startTransition, useCallback } from "react";
 
 /**

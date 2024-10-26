@@ -7,9 +7,10 @@ import { useCallback } from "react";
 import AsyncButton from "@/components/AsyncButton";
 import { IPasswordResetsFormState, resetPassword } from "@/lib/actions/account";
 import toast from "react-hot-toast";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "@/i18n/routing";
 
 export default function PasswordResetForm({ token }: { token: string }) {
   const t = useTranslations();

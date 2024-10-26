@@ -1,6 +1,6 @@
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import styles from "@/styles/landing-page.module.scss";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { Link as NextIntlLink } from "@/i18n/routing";
 import IconLinks from "./_components/IconLinks";
 import LandingResources from "./_components/LandingResources";

@@ -4,7 +4,7 @@ import { Card } from "react-bootstrap";
 import SocialMediaLink from "./SocialMediaLink";
 import TagBadge from "@/components/TagBadge";
 import ResourceVoteControls from "./ResourceVoteControls";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 
 /* eslint-disable @next/next/no-img-element */
 export default function ResourceCard({ resource }: { resource: Resource }) {

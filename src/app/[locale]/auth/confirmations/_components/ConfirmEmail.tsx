@@ -3,7 +3,7 @@
 import { useAuth } from "@/components/AuthProvider";
 import { useOriginalPath } from "@/components/OriginalPathProvider";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 
 export default function ConfirmEmail() {
   const { user } = useAuth();

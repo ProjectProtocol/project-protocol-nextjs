@@ -4,7 +4,7 @@ import User from "@/types/User";
 import PopUp, { IPopUp } from "@/components/PopUp";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { resendConfirmation } from "@/lib/actions/account";
 import toast from "react-hot-toast";
 

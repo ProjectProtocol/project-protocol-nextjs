@@ -2,7 +2,7 @@
 
 import { Button } from "react-bootstrap";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/routing";
 
 export default function UnauthorizedCommentArea() {
   const t = useTranslations();

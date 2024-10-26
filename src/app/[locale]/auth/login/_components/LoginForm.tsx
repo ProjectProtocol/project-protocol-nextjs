@@ -8,7 +8,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, useState } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { useOriginalPath } from "@/components/OriginalPathProvider";
 import toast from "react-hot-toast";
 import { useAuth } from "@/components/AuthProvider";

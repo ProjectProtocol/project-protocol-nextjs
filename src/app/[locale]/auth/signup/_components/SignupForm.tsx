@@ -9,8 +9,8 @@ import { signUp } from "@/lib/actions/auth";
 import { useCallback, useState } from "react";
 import Input from "../../../../../components/Input";
 import AsyncButton from "../../../../../components/AsyncButton";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
+import { useRouter } from "@/i18n/routing";
+import { Link } from "@/i18n/routing";
 import toast from "react-hot-toast";
 import { useAuth } from "@/components/AuthProvider";
 

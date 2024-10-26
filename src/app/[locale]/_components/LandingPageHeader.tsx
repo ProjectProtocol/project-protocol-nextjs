@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { Container, Navbar, NavbarBrand } from "react-bootstrap";
 import styles from "@/styles/landing-page.module.scss";
 import { InView } from "react-intersection-observer";

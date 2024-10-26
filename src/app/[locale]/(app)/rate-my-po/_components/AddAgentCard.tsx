@@ -1,13 +1,9 @@
 import Card from "react-bootstrap/Card";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
 import { useAuth } from "@/components/AuthProvider";
+import { Link } from "@/i18n/routing";
 
-interface IAddAgentCard {
-  signedIn?: boolean;
-}
-
-export default function AddAgentCard({ signedIn }: IAddAgentCard) {
+export default function AddAgentCard() {
   const t = useTranslations();
   const { user } = useAuth();
   return (
@@ -16,7 +12,7 @@ export default function AddAgentCard({ signedIn }: IAddAgentCard) {
         <h3>{t("rate_my_po.noResults", { ns: "rate_my_po" })}</h3>
         {user ? (
           <Link
-            href="/rate-my-po/new"
+            href="/rate-my-po/agents/new"
             aria-label={t("agent.addAgent")}
             className="w-75 btn btn-lg btn-primary"
           >
@@ -25,7 +21,7 @@ export default function AddAgentCard({ signedIn }: IAddAgentCard) {
         ) : (
           <>
             <Link
-              href="/auth/sign-up"
+              href="/auth/signup"
               aria-label={t("agent.signUpToAddAgent")}
               className="btn btn-lg btn-primary w-75 mb-3"
             >

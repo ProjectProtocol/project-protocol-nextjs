@@ -4,21 +4,15 @@ import SearchResult from "@/components/search/SearchResult";
 import Office from "@/types/Office";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import Button from "react-bootstrap/Button";
-import {
-  Controller,
-  FieldValues,
-  SubmitHandler,
-  useForm,
-} from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import SelectOfficeModal from "./SelectOfficeModal";
 import Input from "@/components/Input";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createAgent } from "@/lib/actions/agent";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
 import AsyncButton from "@/components/AsyncButton";
+import { useRouter } from "@/i18n/routing";
 
 export default function AddAgentForm() {
   const [showModal, setShowModal] = useState(false);
@@ -57,7 +51,7 @@ export default function AddAgentForm() {
     const { agent } = await createAgent(params);
     if (agent) {
       toast.success(tAgent("successToast"));
-      router.replace(`/rate-my-po/${agent.id}`);
+      router.replace(`/rate-my-po/agents/${agent.id}`);
     } else {
       setLoading(false);
       toast.error(tShared("genericError"));
