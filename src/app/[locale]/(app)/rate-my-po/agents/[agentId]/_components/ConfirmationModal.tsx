@@ -11,10 +11,12 @@ import toast from "react-hot-toast";
 interface IConfirmationModal extends IPopUp {
   user?: User;
   resentCodeAt?: Date;
+  title?: string;
 }
 
 export default function ConfirmationModal({
   user,
+  title,
   ...popUpProps
 }: IConfirmationModal) {
   const [resentCodeAt, setResentCodeAt] = useState<Date>();
@@ -29,7 +31,10 @@ export default function ConfirmationModal({
   };
 
   return (
-    <PopUp title={t("home.confirmationModal.title")} {...popUpProps}>
+    <PopUp
+      title={title ? title : t("home.confirmationModal.title")}
+      {...popUpProps}
+    >
       {user && (
         <>
           <p>
