@@ -13,6 +13,7 @@
     "@contentful/rich-text-react-renderer": "^15.22.1",
     "@contentful/rich-text-types": "^16.6.1",
     "@hookform/resolvers": "^3.9.0",
+    "@sentry/nextjs": "^8",
     "@types/lodash-es": "^4.17.12",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",

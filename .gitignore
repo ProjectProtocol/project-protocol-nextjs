@@ -52,3 +52,6 @@ tmp/*
 /public/worker-*.js
 /public/worker-*.js.map
 
+
+# Sentry Config File
+.env.sentry-build-plugin
