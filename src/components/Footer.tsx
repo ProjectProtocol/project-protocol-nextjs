@@ -34,21 +34,51 @@ export default async function Footer() {
     },
   ];
 
+  const socialMediaLinks = [
+    {
+      url: "https://www.instagram.com/project.protocol",
+      icon: "instagram",
+    },
+    {
+      url: "https://www.linkedin.com/company/projectprotocol/",
+      icon: "linkedin",
+    },
+    {
+      url: "https://www.tiktok.com/@projectprotocol",
+      icon: "tiktok",
+    },
+    {
+      url: "https://www.facebook.com/projectprotocol/",
+      icon: "facebook",
+    },
+  ];
+
   return (
-    <div
-      className="bg-dark text-center mt-auto py-md-4 pt-4"
-      style={{ paddingBottom: "100px" }}
-    >
-      {links.map(({ label, url, target }) => (
-        <Link
-          key={`footer-link-${label}`}
-          className="mx-3 my-3 d-block d-md-inline text-center link-white link-underline-opacity-0"
-          href={url}
-          target={target || "_self"}
-        >
-          {label}
-        </Link>
-      ))}
-    </div>
+    <>
+      <div className="bg-dark text-center mt-auto py-md-4 pt-4">
+        {links.map(({ label, url, target }) => (
+          <Link
+            key={`footer-link-${label}`}
+            className="mx-3 my-3 d-block d-md-inline text-center link-white link-underline-opacity-0"
+            href={url}
+            target={target || "_self"}
+          >
+            {label}
+          </Link>
+        ))}
+        <span className="d-flex flex-wrap justify-content-center">
+          {socialMediaLinks.map(({ url, icon }) => (
+            <a
+              key={`social-link-${icon}`}
+              href={url}
+              target="_blank"
+              className="mx-3 my-3 d-block d-md-inline text-center link-white link-underline-opacity-0"
+            >
+              <i className={`bi bi-${icon}`}></i>
+            </a>
+          ))}
+        </span>
+      </div>
+    </>
   );
 }
