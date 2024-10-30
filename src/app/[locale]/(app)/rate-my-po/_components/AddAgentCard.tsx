@@ -3,7 +3,7 @@
 import Card from "react-bootstrap/Card";
 import { useTranslations } from "next-intl";
 import { useAuth } from "@/components/AuthProvider";
-import ConfirmationModal from "../agents/[agentId]/_components/ConfirmationModal";
+import ConfirmationModal from "../../../../../components/ConfirmationModal";
 import { useState } from "react";
 import { Button } from "react-bootstrap";
 import { useRouter } from "@/i18n/routing";

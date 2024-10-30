@@ -285,6 +285,7 @@
     "commentCreatedSuccess": "Comment created successfully",
     "comments": {
       "add": "Add a comment",
+      "confirmAccountToAddComment": "Confirm your account to add a resource comment",
       "signUpToLeaveComment": "Sign up to leave a comment"
     },
     "filters": {

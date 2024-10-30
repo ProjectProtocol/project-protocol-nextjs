@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 import { useTranslations } from "next-intl";
 import { useAuth } from "@/components/AuthProvider";
 import { useEffect, useState } from "react";
-import ConfirmationModal from "./ConfirmationModal";
+import ConfirmationModal from "../../../../../../../components/ConfirmationModal";
 import Agent from "@/types/Agent";
 import toast from "react-hot-toast";
 import RateAgentModal from "./RateAgentModal";
