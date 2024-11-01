@@ -40,22 +40,22 @@ export default async function Footer() {
       icon: "instagram",
     },
     {
-      url: "https://www.linkedin.com/company/projectprotocol/",
-      icon: "linkedin",
+      url: "https://www.facebook.com/projectprotocol/",
+      icon: "facebook",
     },
     {
       url: "https://www.tiktok.com/@projectprotocol",
       icon: "tiktok",
     },
     {
-      url: "https://www.facebook.com/projectprotocol/",
-      icon: "facebook",
+      url: "https://www.linkedin.com/company/projectprotocol/",
+      icon: "linkedin",
     },
   ];
 
   return (
     <>
-      <div className="bg-dark text-center mt-auto py-md-4 pt-4">
+      <div className="bg-dark text-center mt-auto py-md-4 pt-4 pb-5">
         {links.map(({ label, url, target }) => (
           <Link
             key={`footer-link-${label}`}
@@ -74,7 +74,7 @@ export default async function Footer() {
               target="_blank"
               className="mx-3 my-3 d-block d-md-inline text-center link-white link-underline-opacity-0"
             >
-              <i className={`bi bi-${icon}`}></i>
+              <i className={`bi bi-${icon} h1`}></i>
             </a>
           ))}
         </span>
