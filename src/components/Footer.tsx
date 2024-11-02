@@ -54,31 +54,29 @@ export default async function Footer() {
   ];
 
   return (
-    <>
-      <div className="bg-dark text-center mt-auto py-md-4 pt-4 pb-5">
-        {links.map(({ label, url, target }) => (
-          <Link
-            key={`footer-link-${label}`}
-            className="mx-3 my-3 d-block d-md-inline text-center link-white link-underline-opacity-0"
+    <div className="bg-dark text-center mt-auto py-md-4 pt-4 pb-5 mb-5 mb-md-0">
+      {links.map(({ label, url, target }) => (
+        <Link
+          key={`footer-link-${label}`}
+          className="mx-3 my-3 d-block d-md-inline text-center link-white link-underline-opacity-0"
+          href={url}
+          target={target || "_self"}
+        >
+          {label}
+        </Link>
+      ))}
+      <span className="d-flex flex-wrap justify-content-center my-3">
+        {socialMediaLinks.map(({ url, icon }) => (
+          <a
+            key={`social-link-${icon}`}
             href={url}
-            target={target || "_self"}
+            target="_blank"
+            className="mx-3 my-3 d-block d-md-inline text-center link-white link-underline-opacity-0"
           >
-            {label}
-          </Link>
+            <i className={`bi bi-${icon} fs-1`}></i>
+          </a>
         ))}
-        <span className="d-flex flex-wrap justify-content-center">
-          {socialMediaLinks.map(({ url, icon }) => (
-            <a
-              key={`social-link-${icon}`}
-              href={url}
-              target="_blank"
-              className="mx-3 my-3 d-block d-md-inline text-center link-white link-underline-opacity-0"
-            >
-              <i className={`bi bi-${icon} h1`}></i>
-            </a>
-          ))}
-        </span>
-      </div>
-    </>
+      </span>
+    </div>
   );
 }
