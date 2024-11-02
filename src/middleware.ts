@@ -37,5 +37,6 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: "/((?!api|_next/static|favicon.ico|images|monitoring).*)",
+  matcher:
+    "/((?!api|_next/static|favicon.ico|images|monitoring|sitemap|opengraph-image).*)",
 };

@@ -21,8 +21,6 @@ export async function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-export const metadata: Metadata = defaultMetadata();
-
 export default async function RootLayout({
   children,
   params: { locale },
