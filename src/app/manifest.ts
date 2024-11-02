@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Project Protocol",
     short_name: "Project Protocol",
-    description: "Empowering people on their reuntry journey.",
+    description: "Empowering people on their reentry journey.",
     start_url: "/",
     theme_color: "#f8f7f8",
     background_color: "#ffffff",
