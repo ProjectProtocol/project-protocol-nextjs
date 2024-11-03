@@ -44,7 +44,7 @@ nextConfig = withPWA(nextConfig);
 export default withSentryConfig(nextConfig, {
   // For all available options, see:
   // https://github.com/getsentry/sentry-webpack-plugin#options
-  environment: process.env.SENTRY_ENVIRONMENT ?? "development",
+  environment: process.env.NEXT_PUBLIC_SENTRY_ENVIRONMENT ?? "development",
   org: "project-protocol-hh",
   project: "project-protocol-nextjs",
 
@@ -64,7 +64,7 @@ export default withSentryConfig(nextConfig, {
 
   // Disable sourcemap upload outside of production
   sourcemaps: {
-    disable: process.env.SENTRY_ENVIRONMENT !== "production",
+    disable: process.env.NEXT_PUBLIC_SENTRY_ENVIRONMENT !== "production",
   },
 
   // Route browser requests to Sentry through a Next.js rewrite to circumvent ad-blockers.
