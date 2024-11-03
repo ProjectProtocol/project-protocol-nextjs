@@ -62,6 +62,11 @@ export default withSentryConfig(nextConfig, {
     enabled: true,
   },
 
+  // Disable sourcemap upload outside of production
+  sourcemaps: {
+    disable: process.env.SENTRY_ENVIRONMENT !== "production",
+  },
+
   // Route browser requests to Sentry through a Next.js rewrite to circumvent ad-blockers.
   // This can increase your server load as well as your hosting bill.
   // Note: Check that the configured route will not match with your Next.js middleware, otherwise reporting of client-
