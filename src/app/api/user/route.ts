@@ -1,7 +1,13 @@
-import { getUser } from "@/lib/session";
+import { getUser, signOut } from "@/lib/session";
 
 export async function GET() {
-  const user = await getUser();
-
-  return Response.json(user || null);
+  let user;
+  try {
+    user = await getUser();
+  } catch (e) {
+    // TODO: log message about invalid token/clearing session
+    await signOut();
+  } finally {
+    return Response.json(user || null);
+  }
 }
