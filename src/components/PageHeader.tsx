@@ -24,14 +24,6 @@ export default function PageHeader({
   return (
     <div className={`py-3 ${hideOnDesktop ? "d-md-none" : ""}`}>
       {/* MOBILE PAGE HEADER */}
-      <button
-        type="button"
-        onClick={() => {
-          throw new Error("Sentry Frontend Error");
-        }}
-      >
-        Throw error
-      </button>
       <Row className="d-md-none">
         <Col>
           {showBack && (
@@ -70,6 +62,7 @@ export default function PageHeader({
           </div>
         </Col>
       </Row>
+
       {/* DESKTOP PAGE HEADER */}
       <div className="d-none d-md-block vertical-rhythm py-3">
         {showBack && (
