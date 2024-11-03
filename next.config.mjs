@@ -44,7 +44,7 @@ nextConfig = withPWA(nextConfig);
 export default withSentryConfig(nextConfig, {
   // For all available options, see:
   // https://github.com/getsentry/sentry-webpack-plugin#options
-
+  environment: process.env.SENTRY_ENVIRONMENT ?? "development",
   org: "project-protocol-hh",
   project: "project-protocol-nextjs",
 
