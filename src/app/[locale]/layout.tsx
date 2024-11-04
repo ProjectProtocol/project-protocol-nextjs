@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 import AuthProvider from "@/components/AuthProvider";
 import NotificationArea from "@/components/notifications/NotificationArea";
 import HeapAnalytics from "./_components/HeapAnalytics";
+import { environment } from "@/lib/constants";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -36,7 +37,7 @@ export default async function RootLayout({
     <Document locale={locale}>
       <NextIntlClientProvider messages={messages}>
         <AuthProvider>
-          <HeapAnalytics />
+          {environment === "production" && <HeapAnalytics />}
           <NotificationArea />
           <OriginalPathProvider>
             {children}
