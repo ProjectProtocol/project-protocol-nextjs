@@ -8,6 +8,7 @@ import { routing } from "@/i18n/routing";
 import Footer from "@/components/Footer";
 import AuthProvider from "@/components/AuthProvider";
 import NotificationArea from "@/components/notifications/NotificationArea";
+import HeapAnalytics from "./_components/HeapAnalytics";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -35,6 +36,7 @@ export default async function RootLayout({
     <Document locale={locale}>
       <NextIntlClientProvider messages={messages}>
         <AuthProvider>
+          <HeapAnalytics />
           <NotificationArea />
           <OriginalPathProvider>
             {children}

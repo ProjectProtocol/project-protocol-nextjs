@@ -8,6 +8,15 @@ export async function GET() {
     // TODO: log message about invalid token/clearing session
     await signOut();
   } finally {
-    return Response.json(user || null);
+    const sanitizedUser = user
+      ? {
+          email: user?.email,
+          isConfirmed: user?.isConfirmed,
+          confirmationSentAt: user?.confirmationSentAt,
+          isPolicyAcknowledged: user?.isPolicyAcknowledged,
+        }
+      : null;
+
+    return Response.json(sanitizedUser);
   }
 }
