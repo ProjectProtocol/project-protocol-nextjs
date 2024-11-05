@@ -1,8 +1,11 @@
-import AuthProvider from "@/components/AuthProvider";
 import Menu from "@/components/Menu/Menu";
 import MobileTabs from "@/components/Menu/MobileTabs";
+import { defaultMetadata } from "@/lib/metadataUtils";
+import { Metadata } from "next";
 import { unstable_setRequestLocale } from "next-intl/server";
 import { Container } from "react-bootstrap";
+
+export const metadata: Metadata = defaultMetadata();
 
 export default async function Layout({
   children,
