@@ -11,6 +11,8 @@ import NotificationArea from "@/components/notifications/NotificationArea";
 import HeapAnalytics from "./_components/HeapAnalytics";
 import { environment } from "@/lib/constants";
 
+export const metadata: Metadata = defaultMetadata();
+
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
