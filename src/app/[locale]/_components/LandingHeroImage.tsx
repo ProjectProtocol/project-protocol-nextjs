@@ -12,6 +12,7 @@ export default function LandingHeroImage() {
       className={styles.topImage}
       sizes="100vw"
       priority
+      unoptimized
       fill
     />
   );
