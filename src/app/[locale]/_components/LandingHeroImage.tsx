@@ -11,6 +11,7 @@ export default function LandingHeroImage() {
       alt="Palm trees and houses"
       className={styles.topImage}
       sizes="100vw"
+      priority
       fill
     />
   );
