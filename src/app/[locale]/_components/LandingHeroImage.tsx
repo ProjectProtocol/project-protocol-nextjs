@@ -1,15 +1,16 @@
-"use client";
 import styles from "@/styles/landing-page.module.scss";
-import { CldImage } from "next-cloudinary";
+import landingImage from "@public/images/landing-image.jpg";
+import Image from "next/image";
 
 export default function LandingHeroImage() {
   return (
-    <CldImage
-      priority
-      src="landing-page-2_v663w1"
+    <Image
+      src={landingImage}
+      quality={100}
+      placeholder="blur"
       alt="Palm trees and houses"
       className={styles.topImage}
-      sizes="(max-width: 575px) 100vw, 575px"
+      sizes="100vw"
       fill
     />
   );
