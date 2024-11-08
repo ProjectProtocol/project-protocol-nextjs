@@ -1,5 +1,5 @@
 import styles from "@/styles/landing-page.module.scss";
-import landingImage from "@public/images/landing-image.jpg";
+import landingImage from "@public/images/landing-page.webp";
 import Image from "next/image";
 
 export default function LandingHeroImage() {
