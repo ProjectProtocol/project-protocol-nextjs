@@ -1,4 +1,4 @@
-import { unstable_setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import ConfirmationSpinner from "./_components/ConfirmationSpinner";
 
 export default function Page({
@@ -6,7 +6,7 @@ export default function Page({
 }: {
   params: { token: string; locale: string };
 }) {
-  unstable_setRequestLocale(params.locale);
+  setRequestLocale(params.locale);
 
   return <ConfirmationSpinner token={params.token} />;
 }

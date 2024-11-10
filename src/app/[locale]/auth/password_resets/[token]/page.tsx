@@ -1,4 +1,4 @@
-import { unstable_setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import PasswordResetForm from "./_components/PasswordResetForm";
 
 export default async function Page({
@@ -6,6 +6,6 @@ export default async function Page({
 }: {
   params: { token: string; locale: string };
 }) {
-  unstable_setRequestLocale(params.locale);
+  setRequestLocale(params.locale);
   return <PasswordResetForm token={params.token} />;
 }

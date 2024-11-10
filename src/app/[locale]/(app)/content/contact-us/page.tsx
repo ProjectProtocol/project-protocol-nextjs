@@ -1,5 +1,5 @@
 import ContentPage from "../_components/ContentPage";
-import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ALL_LOCALES } from "@/i18n/config";
 import { defaultMetadata } from "@/lib/metadataUtils";
 
@@ -22,7 +22,7 @@ export default async function ContactUs({
 }: {
   params: { locale: string };
 }) {
-  unstable_setRequestLocale(params.locale);
+  setRequestLocale(params.locale);
   const t = await getTranslations("home");
 
   return (

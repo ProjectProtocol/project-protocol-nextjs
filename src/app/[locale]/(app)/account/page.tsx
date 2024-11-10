@@ -1,5 +1,5 @@
 import PageHeader from "@/components/PageHeader";
-import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import AccountSettings from "./_components/AccountSettings";
 
 export async function generateMetadata({
@@ -16,7 +16,7 @@ export default async function Page({
 }: {
   params: { locale: string };
 }) {
-  unstable_setRequestLocale(locale);
+  setRequestLocale(locale);
 
   const t = await getTranslations();
 

@@ -11,7 +11,7 @@ function removeLocalePrefix(pathname: string) {
   return pathname.replace(/^\/(en|es)/, "");
 }
 
-const intlMiddleware = createMiddleware(routing, { alternateLinks: false });
+const intlMiddleware = createMiddleware(routing);
 export async function middleware(request: NextRequest) {
   if (AUTH_REQUIRED.includes(removeLocalePrefix(request.nextUrl.pathname))) {
     const user = await getUser();

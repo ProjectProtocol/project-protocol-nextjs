@@ -1,4 +1,4 @@
-import { unstable_setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 
 export default async function Page({
   params,
@@ -7,6 +7,6 @@ export default async function Page({
   children: React.ReactNode;
   params: { slug: string; locale: string };
 }) {
-  unstable_setRequestLocale(params.locale);
+  setRequestLocale(params.locale);
   return <div style={{ maxWidth: 600, margin: "0 auto" }}>{children}</div>;
 }
