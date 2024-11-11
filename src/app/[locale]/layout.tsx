@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages, unstable_setRequestLocale } from "next-intl/server";
+import { getMessages, setRequestLocale } from "next-intl/server";
 import { defaultMetadata } from "@/lib/metadataUtils";
 import OriginalPathProvider from "@/components/OriginalPathProvider";
 import Document from "@/components/Document";
@@ -32,7 +32,7 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }>) {
-  unstable_setRequestLocale(locale);
+  setRequestLocale(locale);
   const messages = await getMessages();
 
   return (

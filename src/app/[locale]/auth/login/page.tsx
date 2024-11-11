@@ -1,4 +1,4 @@
-import { unstable_setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import LoginForm from "./_components/LoginForm";
 
 export default async function Page({
@@ -6,6 +6,6 @@ export default async function Page({
 }: {
   params: { locale: string };
 }) {
-  unstable_setRequestLocale(locale);
+  setRequestLocale(locale);
   return <LoginForm />;
 }

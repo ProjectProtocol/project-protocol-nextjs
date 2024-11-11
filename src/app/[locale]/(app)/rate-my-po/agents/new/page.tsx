@@ -1,5 +1,5 @@
 import PageHeader from "@/components/PageHeader";
-import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import officerIcon from "@/../public/images/officer-icon.svg";
 import Image from "next/image";
 import AddAgentForm from "./_components/AddAgentForm";
@@ -9,7 +9,7 @@ export default async function Page({
 }: {
   params: { locale: string };
 }) {
-  unstable_setRequestLocale(locale);
+  setRequestLocale(locale);
   const t = await getTranslations();
 
   return (

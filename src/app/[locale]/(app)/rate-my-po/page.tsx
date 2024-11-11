@@ -1,5 +1,5 @@
 import PageHeader from "@/components/PageHeader";
-import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import RateMyPoSearchbar from "./_components/RateMyPoSearchBar";
 import RateMyPoSearchResults from "./_components/RateMyPoSearchResults";
 import { Suspense } from "react";
@@ -31,7 +31,7 @@ export default async function Page({
   };
   params: { locale: string };
 }) {
-  unstable_setRequestLocale(locale);
+  setRequestLocale(locale);
   const t = await getTranslations();
 
   return (

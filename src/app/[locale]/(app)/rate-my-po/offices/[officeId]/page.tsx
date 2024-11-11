@@ -2,7 +2,7 @@ import OfficeInfo from "@/components/OfficeInfo";
 import PageHeader from "@/components/PageHeader";
 import Api from "@/lib/api";
 import Office from "@/types/Office";
-import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import Image from "next/image";
 import { Suspense } from "react";
 import OfficeAgentsSearchBar from "./_components/OfficeAgentsSearchBar";
@@ -28,7 +28,7 @@ export default async function Page({
   params: { officeId: string; locale: string };
   searchParams: { search: string };
 }) {
-  unstable_setRequestLocale(params.locale);
+  setRequestLocale(params.locale);
   const t = await getTranslations();
   const { office } = await new Api()
     .get(`/offices/${params.officeId}`)

@@ -9,7 +9,7 @@ import { Document } from "@contentful/rich-text-types";
 import renderRichText from "@/lib/renderRichText";
 import "@/styles/content-pages.scss";
 import ContentPage from "../_components/ContentPage";
-import { unstable_setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import { defaultMetadata } from "@/lib/metadataUtils";
 
 export async function generateStaticParams() {
@@ -47,7 +47,7 @@ export default async function Page({
 }: {
   params: { slug: ContentfulPageKey; locale: string };
 }) {
-  unstable_setRequestLocale(locale);
+  setRequestLocale(locale);
   const data = await getContent(locale, slug);
   const title = data.fields.title as string;
   const body = data.fields.body as Document;

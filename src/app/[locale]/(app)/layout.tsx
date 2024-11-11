@@ -2,7 +2,7 @@ import Menu from "@/components/Menu/Menu";
 import MobileTabs from "@/components/Menu/MobileTabs";
 import { defaultMetadata } from "@/lib/metadataUtils";
 import { Metadata } from "next";
-import { unstable_setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import { Container } from "react-bootstrap";
 
 export const metadata: Metadata = defaultMetadata();
@@ -14,7 +14,7 @@ export default async function Layout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  unstable_setRequestLocale(locale);
+  setRequestLocale(locale);
 
   return (
     <main className="d-flex flex-column min-vh-100">
