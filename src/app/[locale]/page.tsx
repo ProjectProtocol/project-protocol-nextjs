@@ -65,8 +65,11 @@ export default async function Page({
           <div className="m-auto" style={{ maxWidth: MAX_WIDTH }}>
             <h1>{t("home.welcomeTitle")}</h1>
             <p>
-              {t("home.welcomeMessage")}.{" "}
-              <Link href="/content/about">{t("shared.learnMore")}</Link>
+              {t("home.welcomeMessage")} {t("home.learnMoreAbout")}{" "}
+              <Link href="/content/what-is-project-protocol">
+                {t("home.ourMission")}
+              </Link>
+              .
             </p>
             <div>
               <IconLinks classes="py-3 " iconHeight={75} />
