@@ -50,7 +50,10 @@ export default async function Page({
             <h1>{t("home.welcomeTitle")}</h1>
             <p className="px-5 text-center">
               {t("home.welcomeMessage")} {t("home.learnMoreAbout")}{" "}
-              <NextIntlLink href="/content/what-is-project-protocol">
+              <NextIntlLink
+                href="/content/what-is-project-protocol"
+                className="link-white"
+              >
                 {t("home.ourMission")}
               </NextIntlLink>
               .
