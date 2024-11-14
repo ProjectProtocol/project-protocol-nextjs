@@ -1,6 +1,5 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import styles from "@/styles/landing-page.module.scss";
-import { Link } from "@/i18n/routing";
 import { Link as NextIntlLink } from "@/i18n/routing";
 import IconLinks from "./_components/IconLinks";
 import LandingResources from "./_components/LandingResources";
@@ -50,10 +49,14 @@ export default async function Page({
           <div className="d-flex flex-column justy-content-center align-items-center pb-1">
             <h1>{t("home.welcomeTitle")}</h1>
             <p className="px-5 text-center">
-              {t("home.welcomeMessage")}{" "}
-              <NextIntlLink href="/content/about" className="link-white">
-                {t("shared.learnMore")}
+              {t("home.welcomeMessage")} {t("home.learnMoreAbout")}{" "}
+              <NextIntlLink
+                href="/content/what-is-project-protocol"
+                className="link-white"
+              >
+                {t("home.ourMission")}
               </NextIntlLink>
+              .
             </p>
           </div>
         </div>
@@ -65,8 +68,11 @@ export default async function Page({
           <div className="m-auto" style={{ maxWidth: MAX_WIDTH }}>
             <h1>{t("home.welcomeTitle")}</h1>
             <p>
-              {t("home.welcomeMessage")}.{" "}
-              <Link href="/content/about">{t("shared.learnMore")}</Link>
+              {t("home.welcomeMessage")} {t("home.learnMoreAbout")}{" "}
+              <NextIntlLink href="/content/what-is-project-protocol">
+                {t("home.ourMission")}
+              </NextIntlLink>
+              .
             </p>
             <div>
               <IconLinks classes="py-3 " iconHeight={75} />
