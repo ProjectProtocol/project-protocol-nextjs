@@ -48,20 +48,20 @@ export default function ModerationModal(props: IPopUp) {
           </ul>
           <p>
             You can see more of our community moderation guidelines{" "}
-            <Link href="/content/en-US/community-posting-guidelines">
+            <Link href="/content/community-posting-guidelines" target="_blank">
               here.
             </Link>
           </p>
           <p>
             During the review process, we may email you to make changes to your
             comment. If you have any questions, contact us at{" "}
-            <a href="mailto:info@projectprotocol.org">
+            <a href="mailto:info@projectprotocol.org" target="_blank">
               info@projectprotocol.org
             </a>
             .
           </p>
           <div className="text-center">
-            <Link href="/content/terms-of-service">
+            <Link href="/content/terms-of-service" target="_blank">
               Read our terms of service
             </Link>
           </div>
