@@ -10,6 +10,7 @@ export const resourceTags = {
   MENTAL_HEALTH_SUPPORT: "mentalHealthSupport",
   REENTRY_PROGRAM: "reentryProgram",
   SERVICE_PROVIDERS: "serviceProviders",
+  EXPUNGEMENT: "expungement",
 } as const;
 
 export type ResourceTag = (typeof resourceTags)[keyof typeof resourceTags];
