@@ -2,6 +2,7 @@
 
 import { Link, usePathname } from "@/i18n/routing";
 import classNames from "classnames";
+import { Button } from "react-bootstrap";
 
 type LanguageProps = {
   nativeName: string;
@@ -43,6 +44,14 @@ export default function LocaleSwitcher({
           </Link>
         );
       })}
+      <Button
+        size="sm"
+        className="px-2 py-1 mx-1"
+        href="https://youngwomenfree.app.neoncrm.com/forms/project-protocol"
+        target="_blank"
+      >
+        Donate
+      </Button>
     </div>
   );
 }
