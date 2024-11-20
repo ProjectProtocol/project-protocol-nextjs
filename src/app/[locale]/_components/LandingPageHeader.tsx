@@ -3,13 +3,14 @@
 import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import { Container, Navbar, NavbarBrand } from "react-bootstrap";
-import styles from "@/styles/landing-page.module.scss";
 import { InView } from "react-intersection-observer";
 import { useState } from "react";
 import LocaleSwitcher from "@/components/LocaleSwitcher";
+import { useTranslations } from "next-intl";
 
 export default function LandingPageHeader({ locale }: { locale: string }) {
   const [bg, setBg] = useState("transparent");
+  const t = useTranslations();
   return (
     <>
       <InView
@@ -51,16 +52,17 @@ export default function LandingPageHeader({ locale }: { locale: string }) {
                 alt={"Project Protocol logo"}
               />
             </div>
-            <span
-              className={
-                "w-100 d-md-inline fw-medium pe-auto text-white " +
-                styles.navbarTitle
-              }
-            >
-              Project Protocol
-            </span>
           </NavbarBrand>
-          <LocaleSwitcher locale={locale} dark />
+          <div className="d-flex flex-row align-items-center gap-1">
+            <LocaleSwitcher locale={locale} dark />
+            <a
+              href="https://youngwomenfree.app.neoncrm.com/forms/project-protocol"
+              target="_blank"
+              className="btn btn-primary btn-sm"
+            >
+              {t("navigation.donate")}
+            </a>
+          </div>
         </Container>
       </Navbar>
     </>
