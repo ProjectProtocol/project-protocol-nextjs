@@ -24,8 +24,15 @@ export default function Menu() {
       {/* Desktop locale switcher */}
       <div className="w-100 d-none d-md-block bg-black">
         <Container style={{ maxWidth: MENU_MAX_WIDTH }}>
-          <div className="d-flex flex-row justify-content-end align-items-center py-2">
+          <div className="d-flex flex-row justify-content-end align-items-center py-2 gap-1">
             <LocaleSwitcher locale={locale} dark />
+            <a
+              href="https://youngwomenfree.app.neoncrm.com/forms/project-protocol"
+              target="_blank"
+              className="btn btn-primary btn-sm"
+            >
+              {tNavigation("donate")}
+            </a>
           </div>
         </Container>
       </div>
@@ -83,7 +90,16 @@ export default function Menu() {
             )}
           </Nav>
           <Nav className="d-md-none">
-            <LocaleSwitcher locale={locale} dark />
+            <div className="d-flex flex-row align-items-center gap-1">
+              <LocaleSwitcher locale={locale} dark />
+              <a
+                href="https://youngwomenfree.app.neoncrm.com/forms/project-protocol"
+                target="_blank"
+                className="btn btn-primary btn-sm"
+              >
+                {tNavigation("donate")}
+              </a>
+            </div>
           </Nav>
         </Container>
       </div>
