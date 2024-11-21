@@ -169,6 +169,7 @@
     "localeSwitcher": {
       "selectLanguage": "Elige tu idioma"
     },
+    "partners": "Nuestros Socios",
     "rateMyPo": "Buscar por agente",
     "registerToVote": "Registrarse para votar",
     "resources": "Recursos",
@@ -286,10 +287,11 @@
     "tags": {
       "advocacy": "Abogacía",
       "education": "Educación",
-      "expungement": "Cancelación de antecedentes penales",
+      "expungement": "Expurgar",
       "familyReunification": "Reunificación Familiar",
       "housing": "Vivienda",
       "identityBasedSupport": "Apoyo Basado en la Identidad",
+      "immigration": "Inmigración",
       "jobTraining": "Formación Profesional",
       "legalHelp": "Ayuda Legal",
       "lifeSkills": "Habilidades para la Vida",

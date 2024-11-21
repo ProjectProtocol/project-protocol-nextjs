@@ -1,16 +1,17 @@
 export const resourceTags = {
   ADVOCACY: "advocacy",
   EDUCATION: "education",
+  EXPUNGEMENT: "expungement",
   FAMILY_REUNIFICATION: "familyReunification",
   HOUSING: "housing",
   IDENTITY_BASED_SUPPORT: "identityBasedSupport",
+  IMMIGRATION: "immigration",
   JOB_TRAINING: "jobTraining",
   LEGAL_HELP: "legalHelp",
   LIFE_SKILLS: "lifeSkills",
   MENTAL_HEALTH_SUPPORT: "mentalHealthSupport",
   REENTRY_PROGRAM: "reentryProgram",
   SERVICE_PROVIDERS: "serviceProviders",
-  EXPUNGEMENT: "expungement",
 } as const;
 
 export type ResourceTag = (typeof resourceTags)[keyof typeof resourceTags];
