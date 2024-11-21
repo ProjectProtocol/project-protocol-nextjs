@@ -175,6 +175,7 @@
     "localeSwitcher": {
       "selectLanguage": "Select your language"
     },
+    "partners": "Our Partners",
     "rateMyPo": "Rate My PO",
     "registerToVote": "Register to vote",
     "resources": "Resources",
@@ -313,6 +314,7 @@
       "familyReunification": "Family Reunification",
       "housing": "Housing",
       "identityBasedSupport": "Identity-Based Support",
+      "immigration": "Immigration",
       "jobTraining": "Job Training",
       "legalHelp": "Legal Help",
       "lifeSkills": "Life Skills",

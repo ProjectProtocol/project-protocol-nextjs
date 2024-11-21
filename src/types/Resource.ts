@@ -1,9 +1,11 @@
 export const resourceTags = {
   ADVOCACY: "advocacy",
   EDUCATION: "education",
+  EXPUNGEMENT: "expungement",
   FAMILY_REUNIFICATION: "familyReunification",
   HOUSING: "housing",
   IDENTITY_BASED_SUPPORT: "identityBasedSupport",
+  IMMIGRATION: "immigration",
   JOB_TRAINING: "jobTraining",
   LEGAL_HELP: "legalHelp",
   LIFE_SKILLS: "lifeSkills",
