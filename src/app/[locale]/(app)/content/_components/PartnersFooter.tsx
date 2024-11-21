@@ -1,7 +1,7 @@
 "use client";
 import { CldImage } from "next-cloudinary";
 import { useTranslations } from "next-intl";
-import { usePathname } from "next/navigation";
+import { usePathname } from "@/i18n/routing";
 
 export default function PartnersFooter() {
   const p = usePathname();
