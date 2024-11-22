@@ -33,7 +33,7 @@ export default async function TeamMemberList({ locale }: { locale: string }) {
   return (
     <Container>
       {allTeamMemberProps.map((props: TeamMemberProps) => (
-        <TeamMember {...props} />
+        <TeamMember key={props.name} {...props} />
       ))}
     </Container>
   );
