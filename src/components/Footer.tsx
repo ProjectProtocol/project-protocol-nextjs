@@ -1,3 +1,4 @@
+import PartnersFooter from "@/app/[locale]/(app)/content/_components/PartnersFooter";
 import { Link } from "@/i18n/routing";
 import { getTranslations } from "next-intl/server";
 
@@ -54,29 +55,32 @@ export default async function Footer() {
   ];
 
   return (
-    <div className="bg-dark text-center mt-auto py-md-4 pt-4 pb-5 mb-5 mb-md-0">
-      {links.map(({ label, url, target }) => (
-        <Link
-          key={`footer-link-${label}`}
-          className="mx-3 my-3 d-block d-md-inline text-center link-white link-underline-opacity-0"
-          href={url}
-          target={target || "_self"}
-        >
-          {label}
-        </Link>
-      ))}
-      <span className="d-flex flex-wrap justify-content-center my-3">
-        {socialMediaLinks.map(({ url, icon }) => (
-          <a
-            key={`social-link-${icon}`}
-            href={url}
-            target="_blank"
+    <>
+      <PartnersFooter />
+      <div className="bg-dark text-center mt-auto py-md-4 pt-4 pb-5 mb-5 mb-md-0">
+        {links.map(({ label, url, target }) => (
+          <Link
+            key={`footer-link-${label}`}
             className="mx-3 my-3 d-block d-md-inline text-center link-white link-underline-opacity-0"
+            href={url}
+            target={target || "_self"}
           >
-            <i className={`bi bi-${icon} fs-1`}></i>
-          </a>
+            {label}
+          </Link>
         ))}
-      </span>
-    </div>
+        <span className="d-flex flex-wrap justify-content-center my-3">
+          {socialMediaLinks.map(({ url, icon }) => (
+            <a
+              key={`social-link-${icon}`}
+              href={url}
+              target="_blank"
+              className="mx-3 my-3 d-block d-md-inline text-center link-white link-underline-opacity-0"
+            >
+              <i className={`bi bi-${icon} fs-1`}></i>
+            </a>
+          ))}
+        </span>
+      </div>
+    </>
   );
 }

@@ -1,5 +1,3 @@
-// note spanish locale in contentful is es-US
-
 import { ALL_LOCALES } from "@/i18n/config";
 import ContentfulClient, {
   ContentfulPageKey,
@@ -35,6 +33,7 @@ export async function generateMetadata({
 }
 
 async function getContent(locale: string, slug: ContentfulPageKey) {
+  // note spanish locale in contentful is es-US
   const contentfulLocale = locale === "es-MX" ? "es-US" : locale;
   const data = await ContentfulClient.getEntry(contentfulPageIds[slug], {
     locale: contentfulLocale,
