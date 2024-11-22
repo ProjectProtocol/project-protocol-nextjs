@@ -36,6 +36,21 @@ let nextConfig = {
       fullUrl: true,
     },
   },
+  async redirects() {
+    return [
+      {
+        source: "/:slug*",
+        has: [
+          {
+            type: "host",
+            value: "app.projectprotocol.org",
+          },
+        ],
+        permanent: true,
+        destination: "https://projectprotocol.org/:slug*",
+      },
+    ];
+  },
 };
 
 nextConfig = withNextIntl(nextConfig);
