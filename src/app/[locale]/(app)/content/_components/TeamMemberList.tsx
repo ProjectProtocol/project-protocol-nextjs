@@ -13,21 +13,13 @@ export async function getTeamMemberProps(locale: string) {
   for (const slug of Object.keys(contentfulTeamPageIds)) {
     const data = await getContent(locale, slug as TeamContentfulPageKey);
 
-    let imageSrc;
-    if (!!data.fields.cloudinaryId) {
-      let id = data.fields.cloudinaryId as string;
-      imageSrc = id;
-    } else {
-      imageSrc = undefined;
-    }
-
-    const bio = data.fields.bio as Document;
-
     allTeamMemberProps.push({
       name: data.fields.name as string,
       title: data.fields.jobTitle as string,
-      bio: bio,
-      imgId: imageSrc,
+      bio: data.fields.bio as Document,
+      imgId: !!data.fields.cloudinaryId
+        ? (data.fields.cloudinaryId as string)
+        : undefined,
     });
   }
   return allTeamMemberProps;
