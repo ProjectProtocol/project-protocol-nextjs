@@ -14,6 +14,17 @@ export const contentfulPageIds = {
 
 export type ContentfulPageKey = keyof typeof contentfulPageIds;
 
+export const contentfulTeamPageIds = {
+  "emiliano-lopez": "4FP3XyfyfkC9o68ofMLrFo",
+  "yindi-pei": "3nCFxVLQgT60wsrIVvxvDX",
+  "tim-sandberg": "7t5bJNvlML0unFl8TvbHMs",
+  "eddie-menefee": "2Z9dHhaMoFh91Uum9hhBvM",
+  "emily-chao": "1i2TzlCjMYp7et2GVajG6X",
+  "jazmine-rodriguez": "1zaxzn70VIXHeBAgfDpgSh",
+};
+
+export type TeamContentfulPageKey = keyof typeof contentfulTeamPageIds;
+
 const client = createClient({
   space: "zwkgwua3qde9",
   accessToken: "kKEOXwvZcsASfym1i7BjO-g65KX5esCTa08w9rGHYBg",
@@ -26,3 +37,17 @@ const ContentfulClient = {
 };
 
 export default ContentfulClient;
+
+export async function getContent(
+  locale: string,
+  slug: ContentfulPageKey | TeamContentfulPageKey
+) {
+  // note spanish locale in contentful is es-US
+  const contentfulLocale = locale === "es-MX" ? "es-US" : locale;
+  const contentFulIdSrc: { [key: string]: string } =
+    slug in contentfulPageIds ? contentfulPageIds : contentfulTeamPageIds;
+  const data = await ContentfulClient.getEntry(contentFulIdSrc[slug], {
+    locale: contentfulLocale,
+  });
+  return data;
+}
