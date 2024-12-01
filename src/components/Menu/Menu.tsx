@@ -10,7 +10,6 @@ import MenuLink from "./MenuLink";
 import { useLocale, useTranslations } from "next-intl";
 import { useAuth } from "../AuthProvider";
 import { Link } from "@/i18n/routing";
-import styles from "@/styles/landing-page.module.scss";
 
 export const MENU_MAX_WIDTH = 1048;
 
@@ -49,15 +48,17 @@ export default function Menu() {
             >
               <Image
                 priority
-                unoptimized
-                src={"/images/icon.svg"}
+                src="/images/icon.svg"
                 width="0"
                 height="0"
                 className="me-2"
                 style={{ width: 28, height: 28 }}
                 alt={"Project Protocol logo"}
               />
-              <span className="fs-2 w-100 d-md-inline fw-semibold pe-auto text-white text-md-black">
+              <span
+                className="fs-2 w-100 d-none d-md-inline fw-semibold pe-auto text-white text-md-black"
+                style={{ letterSpacing: -0.5 }}
+              >
                 Project Protocol
               </span>
             </div>
