@@ -10,6 +10,7 @@ import MenuLink from "./MenuLink";
 import { useLocale, useTranslations } from "next-intl";
 import { useAuth } from "../AuthProvider";
 import { Link } from "@/i18n/routing";
+import styles from "@/styles/landing-page.module.scss";
 
 export const MENU_MAX_WIDTH = 1048;
 
@@ -36,7 +37,6 @@ export default function Menu() {
           </div>
         </Container>
       </div>
-
       <div className="w-100 d-block bg-black bg-md-white">
         <Container
           style={{ maxWidth: MENU_MAX_WIDTH }}
@@ -57,6 +57,9 @@ export default function Menu() {
                 style={{ width: 28, height: 28 }}
                 alt={"Project Protocol logo"}
               />
+              <span className="fs-2 w-100 d-md-inline fw-semibold pe-auto text-white text-md-black">
+                Project Protocol
+              </span>
             </div>
           </NavbarBrand>
           <Nav className="fs-4 d-none d-md-flex align-items-center gap-2 fw-semibold">
