@@ -36,7 +36,6 @@ export default function Menu() {
           </div>
         </Container>
       </div>
-
       <div className="w-100 d-block bg-black bg-md-white">
         <Container
           style={{ maxWidth: MENU_MAX_WIDTH }}
@@ -49,14 +48,19 @@ export default function Menu() {
             >
               <Image
                 priority
-                unoptimized
-                src={"/images/icon.svg"}
+                src="/images/icon.svg"
                 width="0"
                 height="0"
                 className="me-2"
                 style={{ width: 28, height: 28 }}
                 alt={"Project Protocol logo"}
               />
+              <span
+                className="fs-2 w-100 d-none d-md-inline fw-semibold pe-auto text-white text-md-black"
+                style={{ letterSpacing: -0.5 }}
+              >
+                Project Protocol
+              </span>
             </div>
           </NavbarBrand>
           <Nav className="fs-4 d-none d-md-flex align-items-center gap-2 fw-semibold">
