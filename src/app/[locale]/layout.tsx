@@ -10,6 +10,8 @@ import AuthProvider from "@/components/AuthProvider";
 import NotificationArea from "@/components/notifications/NotificationArea";
 import HeapAnalytics from "./_components/HeapAnalytics";
 import { environment } from "@/lib/constants";
+import { Provider as RollbarProvider } from "@rollbar/react";
+import { clientConfig } from "@/rollbar";
 
 export const metadata: Metadata = defaultMetadata();
 
@@ -36,17 +38,19 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <Document locale={locale}>
-      <NextIntlClientProvider messages={messages}>
-        <AuthProvider>
-          {environment === "production" && <HeapAnalytics />}
-          <NotificationArea />
-          <OriginalPathProvider>
-            {children}
-            <Footer />
-          </OriginalPathProvider>
-        </AuthProvider>
-      </NextIntlClientProvider>
-    </Document>
+    <RollbarProvider config={clientConfig}>
+      <Document locale={locale}>
+        <NextIntlClientProvider messages={messages}>
+          <AuthProvider>
+            {environment === "production" && <HeapAnalytics />}
+            <NotificationArea />
+            <OriginalPathProvider>
+              {children}
+              <Footer />
+            </OriginalPathProvider>
+          </AuthProvider>
+        </NextIntlClientProvider>
+      </Document>
+    </RollbarProvider>
   );
 }

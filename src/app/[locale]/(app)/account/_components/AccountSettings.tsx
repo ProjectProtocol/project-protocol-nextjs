@@ -62,6 +62,13 @@ export default function AccountSettings() {
 
   return user ? (
     <Row className="gy-4 mt-5">
+      <button
+        onClick={() => {
+          throw new Error("Hello Rollbar");
+        }}
+      >
+        Test
+      </button>
       {!user.isConfirmed && (
         <>
           <AccountSettingsRow
