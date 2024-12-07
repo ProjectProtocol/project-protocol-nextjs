@@ -35,6 +35,7 @@ let nextConfig = {
       fullUrl: true,
     },
   },
+  productionBrowserSourceMaps: true,
   async redirects() {
     return [
       {
