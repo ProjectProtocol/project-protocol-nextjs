@@ -1,15 +1,27 @@
 import Rollbar from "rollbar";
 
+const {
+  NEXT_PUBLIC_ROLLBAR_CLIENT_TOKEN,
+  NEXT_PUBLIC_ROLLBAR_ENV,
+  ROLLBAR_SERVER_TOKEN,
+} = process.env;
+
+const rollbarEnabled =
+  NEXT_PUBLIC_ROLLBAR_ENV == "production" ||
+  NEXT_PUBLIC_ROLLBAR_ENV == "staging" ||
+  NEXT_PUBLIC_ROLLBAR_ENV == "preview";
+
 const baseConfig: Rollbar.Configuration = {
   captureUncaught: true,
   captureUnhandledRejections: true,
-  environment: process.env.NEXT_PUBLIC_ROLLBAR_ENV ?? "testenv",
+  environment: NEXT_PUBLIC_ROLLBAR_ENV,
   verbose: true,
+  enabled: rollbarEnabled,
 };
 
 export const clientConfig = {
   ...baseConfig,
-  accessToken: process.env.NEXT_PUBLIC_ROLLBAR_CLIENT_TOKEN,
+  accessToken: NEXT_PUBLIC_ROLLBAR_CLIENT_TOKEN,
   client: {
     javascript: {
       source_map_enabled: true,
@@ -20,6 +32,6 @@ export const clientConfig = {
 };
 
 export const serverInstance = new Rollbar({
-  accessToken: process.env.ROLLBAR_SERVER_TOKEN,
+  accessToken: ROLLBAR_SERVER_TOKEN,
   ...baseConfig,
 });
