@@ -14,11 +14,12 @@ import { getSession } from "@/lib/session";
 import Agent from "@/types/Agent";
 import { defaultMetadata } from "@/lib/metadataUtils";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { agentId: string };
-}) {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ agentId: string }>;
+  }
+) {
+  const params = await props.params;
   const { agent }: { agent: Agent } = await new Api()
     .get(`/agents/${params.agentId}`)
     .then((res) => res.json());
@@ -28,11 +29,12 @@ export async function generateMetadata({
   });
 }
 
-export default async function Page({
-  params,
-}: {
-  params: { agentId: string };
-}) {
+export default async function Page(
+  props: {
+    params: Promise<{ agentId: string }>;
+  }
+) {
+  const params = await props.params;
   const t = await getTranslations();
   const session = await getSession();
   const { agent } = await new Api(session?.apiToken)

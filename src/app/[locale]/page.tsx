@@ -29,11 +29,17 @@ function LandingPageSegment({
   return <section className={"py-5 " + classes}>{children}</section>;
 }
 
-export default async function Page({
-  params: { locale },
-}: {
-  params: { locale: Locale };
-}) {
+export default async function Page(
+  props: {
+    params: Promise<{ locale: Locale }>;
+  }
+) {
+  const params = await props.params;
+
+  const {
+    locale
+  } = params;
+
   setRequestLocale(locale);
   const t = await getTranslations({ locale });
 

@@ -4,11 +4,17 @@ import officerIcon from "@/../public/images/officer-icon.svg";
 import Image from "next/image";
 import AddAgentForm from "./_components/AddAgentForm";
 
-export default async function Page({
-  params: { locale },
-}: {
-  params: { locale: string };
-}) {
+export default async function Page(
+  props: {
+    params: Promise<{ locale: string }>;
+  }
+) {
+  const params = await props.params;
+
+  const {
+    locale
+  } = params;
+
   setRequestLocale(locale);
   const t = await getTranslations();
 

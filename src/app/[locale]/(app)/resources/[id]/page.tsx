@@ -10,11 +10,17 @@ import { Suspense } from "react";
 import ResourcesLoadingPlaceholder from "../_components/ResourcesLoadingPlaceholder";
 import { defaultMetadata } from "@/lib/metadataUtils";
 
-export async function generateMetadata({
-  params: { id },
-}: {
-  params: { id: string };
-}) {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ id: string }>;
+  }
+) {
+  const params = await props.params;
+
+  const {
+    id
+  } = params;
+
   const { resource } = await new Api()
     .get(`/resources/${id}`)
     .then((res) => res.json());
@@ -25,11 +31,17 @@ export async function generateMetadata({
   });
 }
 
-export default async function Page({
-  params: { id },
-}: {
-  params: { id: string };
-}) {
+export default async function Page(
+  props: {
+    params: Promise<{ id: string }>;
+  }
+) {
+  const params = await props.params;
+
+  const {
+    id
+  } = params;
+
   const session = await getSession();
   const user = session?.user;
   const { resource } = await new Api(session?.apiToken)

@@ -8,11 +8,12 @@ import { Suspense } from "react";
 import OfficeAgentsSearchBar from "./_components/OfficeAgentsSearchBar";
 import OfficeAgentsSearchResultsList from "./_components/OfficeAgentsSearchResults";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { officeId: string };
-}) {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ officeId: string }>;
+  }
+) {
+  const params = await props.params;
   const { office }: { office: Office } = await new Api()
     .get(`/offices/${params.officeId}`)
     .then((res) => res.json());
@@ -21,13 +22,14 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({
-  params,
-  searchParams,
-}: {
-  params: { officeId: string; locale: string };
-  searchParams: { search: string };
-}) {
+export default async function Page(
+  props: {
+    params: Promise<{ officeId: string; locale: string }>;
+    searchParams: Promise<{ search: string }>;
+  }
+) {
+  const searchParams = await props.searchParams;
+  const params = await props.params;
   setRequestLocale(params.locale);
   const t = await getTranslations();
   const { office } = await new Api()

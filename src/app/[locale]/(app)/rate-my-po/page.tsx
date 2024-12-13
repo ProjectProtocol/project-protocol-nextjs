@@ -10,11 +10,17 @@ export async function generateStaticParams() {
   return ALL_LOCALES.map((locale) => ({ locale }));
 }
 
-export async function generateMetadata({
-  params: { locale },
-}: {
-  params: { locale: string };
-}) {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ locale: string }>;
+  }
+) {
+  const params = await props.params;
+
+  const {
+    locale
+  } = params;
+
   const t = await getTranslations({ locale, namespace: "home" });
   return defaultMetadata({
     title: t("rateMyPoTitle"), // Create a method for building this
@@ -22,15 +28,21 @@ export async function generateMetadata({
   });
 }
 
-export default async function Page({
-  searchParams,
-  params: { locale },
-}: {
-  searchParams?: {
-    search?: string;
-  };
-  params: { locale: string };
-}) {
+export default async function Page(
+  props: {
+    searchParams?: Promise<{
+      search?: string;
+    }>;
+    params: Promise<{ locale: string }>;
+  }
+) {
+  const params = await props.params;
+
+  const {
+    locale
+  } = params;
+
+  const searchParams = await props.searchParams;
   setRequestLocale(locale);
   const t = await getTranslations();
 

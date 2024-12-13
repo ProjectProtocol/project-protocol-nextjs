@@ -1,6 +1,8 @@
 import PageHeader from "@/components/PageHeader";
 import ContentCoverImage from "./ContentCoverImage";
 
+import type { JSX } from "react";
+
 interface IContentPage {
   title: string | JSX.Element;
   children: React.ReactNode;
