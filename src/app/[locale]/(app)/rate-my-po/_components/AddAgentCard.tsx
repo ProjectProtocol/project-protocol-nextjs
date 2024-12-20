@@ -37,7 +37,7 @@ export default function AddAgentCard() {
           ) : (
             <>
               <Link
-                href="/auth/sign-up"
+                href="/auth/signup"
                 aria-label={t("agent.signUpToAddAgent")}
                 className="btn btn-lg btn-primary w-75 mb-3"
               >
