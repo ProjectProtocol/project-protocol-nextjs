@@ -1,7 +1,8 @@
 import { ALL_LOCALES } from "@/i18n/config";
-import ContentfulClient, {
+import {
   ContentfulPageKey,
   contentfulPageIds,
+  getContent,
 } from "@/lib/contentful";
 import { Document } from "@contentful/rich-text-types";
 import renderRichText from "@/lib/renderRichText";
@@ -9,6 +10,7 @@ import "@/styles/content-pages.scss";
 import ContentPage from "../_components/ContentPage";
 import { setRequestLocale } from "next-intl/server";
 import { defaultMetadata } from "@/lib/metadataUtils";
+import TeamMemberList from "../_components/TeamMemberList";
 
 export async function generateStaticParams() {
   const locales = ALL_LOCALES;
@@ -32,15 +34,6 @@ export async function generateMetadata({
   return defaultMetadata({ title });
 }
 
-async function getContent(locale: string, slug: ContentfulPageKey) {
-  // note spanish locale in contentful is es-US
-  const contentfulLocale = locale === "es-MX" ? "es-US" : locale;
-  const data = await ContentfulClient.getEntry(contentfulPageIds[slug], {
-    locale: contentfulLocale,
-  });
-  return data;
-}
-
 export default async function Page({
   params: { locale, slug },
 }: {
@@ -59,7 +52,13 @@ export default async function Page({
 
   return (
     <ContentPage title={title} coverImageSrc={coverImageSrc}>
-      <div className="content-page">{renderRichText(body)}</div>
+      {slug != "the-team" ? (
+        <div className="content-page">{renderRichText(body)}</div>
+      ) : (
+        <div className="content-page">
+          <TeamMemberList locale={locale} />
+        </div>
+      )}
     </ContentPage>
   );
 }
