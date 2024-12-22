@@ -37,8 +37,10 @@ export default function TeamMember({
                 alt={name}
                 style={{
                   maxWidth: 100,
-                  objectFit: "contain",
-                  alignSelf: "center",
+                  objectFit: "cover",
+                  objectPosition: "top",
+                  alignSelf: "top",
+                  display: "block",
                 }}
               />
             ) : (
