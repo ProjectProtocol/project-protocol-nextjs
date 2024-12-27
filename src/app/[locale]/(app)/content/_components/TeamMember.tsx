@@ -11,7 +11,7 @@ export interface TeamMemberProps {
   name: string;
   title: string;
   bio: Document;
-  imgId?: string;
+  imgId: string;
 }
 
 export default function TeamMember({
@@ -26,31 +26,27 @@ export default function TeamMember({
   };
   return (
     <>
-      <Row className="mb-3" onClick={handleBio}>
+      <Row className="mb-3 align-items-center" onClick={handleBio}>
         <Col xs={4} sm={3} className="text-left">
           <div className="position-relative">
-            {imgId ? (
-              <CldImage
-                src={imgId}
-                width="100"
-                height="100"
-                alt={name}
-                style={{
-                  maxWidth: 100,
-                  objectFit: "cover",
-                  objectPosition: "top",
-                  alignSelf: "top",
-                  display: "block",
-                }}
-              />
-            ) : (
-              <Placeholder as={Image} width={100} height={100} />
-            )}
+            <CldImage
+              src={imgId}
+              width="100"
+              height="100"
+              alt={name}
+              style={{
+                maxWidth: 100,
+                objectFit: "cover",
+                objectPosition: "top",
+                alignSelf: "top",
+                display: "block",
+              }}
+            />
           </div>
         </Col>
         <Col xs={8} sm={9} className="text-left">
-          <h2>{name}</h2>
-          <h3>{title}</h3>
+          <h2 className="mb-1">{name}</h2>
+          <p className="my-0 py-0">{title}</p>
         </Col>
       </Row>
       <Collapse in={showBio}>

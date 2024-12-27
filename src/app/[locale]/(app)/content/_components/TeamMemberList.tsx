@@ -19,9 +19,7 @@ export async function getTeamMemberProps(locale: string) {
       name: data.fields.name as string,
       title: data.fields.jobTitle as string,
       bio: data.fields.bio as Document,
-      imgId: !!data.fields.cloudinaryId
-        ? (data.fields.cloudinaryId as string)
-        : undefined,
+      imgId: data.fields.cloudinaryId as string,
     });
   }
   return allTeamMemberProps;
@@ -36,9 +34,7 @@ export async function getBoardMemberProps(locale: string) {
       name: data.fields.name as string,
       title: data.fields.jobTitle as string,
       bio: data.fields.bio as Document,
-      imgId: !!data.fields.cloudinaryId
-        ? (data.fields.cloudinaryId as string)
-        : undefined,
+      imgId: data.fields.cloudinaryId as string,
     });
   }
   return allBoardMemberProps;
@@ -52,14 +48,16 @@ export default async function TeamMemberList({ locale }: { locale: string }) {
 
   return (
     <Container>
-      <h2>Board Members</h2>
+      <h3 className="mb-3">Board members</h3>
       {allBoardMemberProps.map((props: TeamMemberProps) => (
         <TeamMember key={props.name} {...props} />
       ))}
       <hr />
       {allTeamMemberProps.map((props: TeamMemberProps) => (
         <>
-          {props.title.includes("Founder") ? <h2>Founder</h2> : null}
+          {props.title.includes("Founder") ? (
+            <h3 className="mb-3">Founder</h3>
+          ) : null}
           <TeamMember key={props.name} {...props} />
           {props.title.includes("Founder") ? <hr /> : null}
         </>

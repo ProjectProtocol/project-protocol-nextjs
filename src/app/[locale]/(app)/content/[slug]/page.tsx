@@ -10,7 +10,6 @@ import "@/styles/content-pages.scss";
 import ContentPage from "../_components/ContentPage";
 import { setRequestLocale } from "next-intl/server";
 import { defaultMetadata } from "@/lib/metadataUtils";
-import TeamMemberList from "../_components/TeamMemberList";
 
 export async function generateStaticParams() {
   const locales = ALL_LOCALES;
@@ -52,13 +51,7 @@ export default async function Page({
 
   return (
     <ContentPage title={title} coverImageSrc={coverImageSrc}>
-      {slug != "the-team" ? (
-        <div className="content-page">{renderRichText(body)}</div>
-      ) : (
-        <div className="content-page">
-          <TeamMemberList locale={locale} />
-        </div>
-      )}
+      <div className="content-page">{renderRichText(body)}</div>
     </ContentPage>
   );
 }
