@@ -15,7 +15,7 @@ export async function generateMetadata({
   params: { locale: string };
 }) {
   const t = await getTranslations({ locale, namespace: "navigation" });
-  return defaultMetadata({ title: t("theTeam") });
+  return defaultMetadata({ title: t("theTeam.team") });
 }
 
 export default async function TheTeam({
@@ -26,7 +26,7 @@ export default async function TheTeam({
   setRequestLocale(params.locale);
   const t = await getTranslations("navigation");
   return (
-    <ContentPage title={t("theTeam")} coverImageSrc={"team-cover_t33lhk"}>
+    <ContentPage title={t("theTeam.team")} coverImageSrc={"team-cover_t33lhk"}>
       <TeamMemberList locale={params.locale} />
     </ContentPage>
   );

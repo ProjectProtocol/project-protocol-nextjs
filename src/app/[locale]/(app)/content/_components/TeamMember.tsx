@@ -4,8 +4,6 @@ import { Col, Row, Collapse } from "react-bootstrap";
 import { useState } from "react";
 import renderRichText from "@/lib/renderRichText";
 import { Document } from "@contentful/rich-text-types";
-import Image from "next/image";
-import { Placeholder } from "react-bootstrap";
 
 export interface TeamMemberProps {
   name: string;

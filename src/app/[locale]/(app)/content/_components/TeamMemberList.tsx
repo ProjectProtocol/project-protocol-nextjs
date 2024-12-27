@@ -6,7 +6,7 @@ import {
   BoardContentfulPageKey,
 } from "@/lib/contentful";
 import { Document } from "@contentful/rich-text-types";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Container } from "react-bootstrap";
 import TeamMember, { TeamMemberProps } from "./TeamMember";
 
@@ -45,21 +45,22 @@ export default async function TeamMemberList({ locale }: { locale: string }) {
 
   const allTeamMemberProps = await getTeamMemberProps(locale);
   const allBoardMemberProps = await getBoardMemberProps(locale);
+  const t = await getTranslations("navigation");
 
   return (
     <Container>
-      <h3 className="mb-3">Board members</h3>
+      <h3 className="mb-3">{t("theTeam.boardMembers")}</h3>
       {allBoardMemberProps.map((props: TeamMemberProps) => (
         <TeamMember key={props.name} {...props} />
       ))}
       <hr />
       {allTeamMemberProps.map((props: TeamMemberProps) => (
         <>
-          {props.title.includes("Founder") ? (
-            <h3 className="mb-3">Founder</h3>
+          {props.title.includes(t("theTeam.founder")) ? (
+            <h3 className="mb-3">{t("theTeam.founder")}</h3>
           ) : null}
           <TeamMember key={props.name} {...props} />
-          {props.title.includes("Founder") ? <hr /> : null}
+          {props.title.includes(t("theTeam.founder")) ? <hr /> : null}
         </>
       ))}
     </Container>
