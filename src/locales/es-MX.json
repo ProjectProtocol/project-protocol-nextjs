@@ -175,7 +175,11 @@
     "resources": "Recursos",
     "signUp": "Registrarse",
     "termsOfService": "Términos de servicio",
-    "theTeam": "El equipo",
+    "theTeam": {
+      "boardMembers": "Miembros de la Junta Directiva",
+      "founder": "Fundador",
+      "team": "El equipo"
+    },
     "whatIsProjectProtocol": "¿Qué es Project Protocol?"
   },
   "password_reset": {

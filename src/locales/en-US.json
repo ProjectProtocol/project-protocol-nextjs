@@ -181,7 +181,11 @@
     "resources": "Resources",
     "signUp": "Sign up",
     "termsOfService": "Terms of Service",
-    "theTeam": "The team",
+    "theTeam": {
+      "boardMembers": "Board members",
+      "founder": "Founder",
+      "team": "The team"
+    },
     "whatIsProjectProtocol": "What is Project Protocol?"
   },
   "password_reset": {
