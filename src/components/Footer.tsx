@@ -17,7 +17,7 @@ export default async function Footer() {
     },
     {
       url: urlPrefix("the-team"),
-      label: t("theTeam"),
+      label: t("theTeam.team"),
     },
     {
       url: urlPrefix("ethical-principles"),
