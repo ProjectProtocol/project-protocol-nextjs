@@ -134,6 +134,7 @@
     "forgotPassword": "¿Olvidaste tu contraseña?",
     "forgotPasswordTitle": "Contraseña olvidada",
     "forgotPasswordTitleHelper": "Ingresa la dirección de correo electrónico que usaste para registrarte y te enviaremos por correo electrónico un enlace para restablecer la contraseña.",
+    "joinMailingList": "Suscríbeme para recibir noticias de Project Protocol",
     "login": "Iniciar sesión",
     "loginConfirmSignupDetail1": "Enviamos un correo electrónico a <b>{email}</b> para confirmar que este correo electrónico le pertenece.",
     "loginConfirmSignupDetail2": "Toca el botón en el correo electrónico para terminar de registrarte.",

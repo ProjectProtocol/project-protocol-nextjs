@@ -139,6 +139,7 @@
     "forgotPassword": "Forgot password?",
     "forgotPasswordTitle": "Forgot password",
     "forgotPasswordTitleHelper": "Enter the email address you used to register, and we'll email you a password reset link.",
+    "joinMailingList": "Sign me up for news from Project Protocol",
     "login": "Log in",
     "loginConfirmSignupDetail1": "We sent an email to <b>{email}</b> to confirm this email belongs to you.",
     "loginConfirmSignupDetail2": "Tap on the button in the email to finish signing up.",
