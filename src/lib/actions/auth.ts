@@ -51,16 +51,19 @@ export async function login({
 export interface ISignupFormState {
   signUpEmail: string;
   password: string;
+  joinMailingList?: boolean;
 }
 
 export async function signUp({
   signUpEmail,
   password,
+  joinMailingList,
 }: ISignupFormState): Promise<ActionResponse<User>> {
   const response = await new Api().post("/auth/sign_up", {
     body: JSON.stringify({
       email: signUpEmail,
       password: password,
+      join_mailing_list: joinMailingList ? "true" : undefined,
     }),
   });
 

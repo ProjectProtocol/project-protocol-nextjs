@@ -13,21 +13,25 @@ import { useRouter } from "@/i18n/routing";
 import { Link } from "@/i18n/routing";
 import toast from "react-hot-toast";
 import { useAuth } from "@/components/AuthProvider";
+import { FormCheck } from "react-bootstrap";
 
 export default function SignupForm() {
-  const t = useTranslations();
+  const tShared = useTranslations("shared");
+  const tLogin = useTranslations("login");
   const [loading, setLoading] = useState(false);
   const { setUser } = useAuth();
   const schema = z.object({
     signUpEmail: z
       .string()
-      .min(1, t("login.emailRequired"))
-      .email(t("login.emailMessage")),
+      .min(1, tLogin("emailRequired"))
+      .email(tLogin("emailMessage")),
     password: z
       .string()
-      .min(1, t("login.passwordRequired"))
-      .min(8, t("shared.passwordLengthError")),
+      .min(1, tLogin("passwordRequired"))
+      .min(8, tShared("passwordLengthError")),
+    joinMailingList: z.boolean().optional(),
   });
+
   const router = useRouter();
   const { register, handleSubmit, getFieldState, formState } =
     useForm<ISignupFormState>({
@@ -35,6 +39,7 @@ export default function SignupForm() {
       defaultValues: {
         signUpEmail: "",
         password: "",
+        joinMailingList: false,
       },
       resolver: zodResolver(schema),
     });
@@ -47,7 +52,7 @@ export default function SignupForm() {
       router.replace(`/auth/confirmations`);
     } else {
       setLoading(false);
-      toast.error(t("shared.genericError"));
+      toast.error(tShared("genericError"));
     }
   }
 
@@ -65,25 +70,30 @@ export default function SignupForm() {
   return (
     <div className="d-block p-4">
       <div className="text-center text-wrap mb-3">
-        {t("login.signupTitleHelper")}
+        {tLogin("signupTitleHelper")}
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className="vertical-rhythm">
         <Input
           size="lg"
           controlId={`signup-email`}
-          label={t("login.email")}
+          label={tLogin("email")}
           type="email"
           {...register("signUpEmail")}
           {...validationProps("signUpEmail")}
-          placeholder={t("login.emailPlaceholder")}
+          placeholder={tLogin("emailPlaceholder")}
         />
         <Input
           size="lg"
           controlId={`signup-password`}
-          label={t("login.password")}
+          label={tLogin("password")}
           type="password"
           {...register("password")}
           {...validationProps("password")}
+        />
+        <FormCheck
+          type={"checkbox"}
+          label={tLogin("joinMailingList")}
+          {...register("joinMailingList")}
         />
         <div>
           {
@@ -94,20 +104,20 @@ export default function SignupForm() {
               variant="primary"
               type="submit"
             >
-              {t("login.signup")}
+              {tLogin("signup")}
             </AsyncButton>
           }
           <div className="mt-3 text-center">
-            {t("login.signupHelper")}
+            {tLogin("signupHelper")}
             <Link className="link ms-1" href="/auth/login" replace>
-              {t("login.login")}
+              {tLogin("login")}
             </Link>
           </div>
         </div>
       </form>
       <div className="mt-5 text-center">
         <Link className="link ms-1" href="/content/terms-of-service" replace>
-          {t("login.readTermsOfService")}
+          {tLogin("readTermsOfService")}
         </Link>
       </div>
     </div>
