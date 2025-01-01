@@ -10,6 +10,7 @@ import MenuLink from "./MenuLink";
 import { useLocale, useTranslations } from "next-intl";
 import { useAuth } from "../AuthProvider";
 import { Link } from "@/i18n/routing";
+import EnvironmentBadge from "./EnvironmentBadge";
 
 export const MENU_MAX_WIDTH = 1048;
 
@@ -61,6 +62,7 @@ export default function Menu() {
               >
                 Project Protocol
               </span>
+              <EnvironmentBadge />
             </div>
           </NavbarBrand>
           <Nav className="fs-4 d-none d-md-flex align-items-center gap-2 fw-semibold">
