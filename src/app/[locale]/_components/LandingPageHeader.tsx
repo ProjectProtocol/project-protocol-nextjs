@@ -7,6 +7,7 @@ import { InView } from "react-intersection-observer";
 import { useState } from "react";
 import LocaleSwitcher from "@/components/LocaleSwitcher";
 import { useTranslations } from "next-intl";
+import EnvironmentBadge from "@/components/Menu/EnvironmentBadge";
 
 export default function LandingPageHeader({ locale }: { locale: string }) {
   const [bg, setBg] = useState("transparent");
@@ -52,6 +53,7 @@ export default function LandingPageHeader({ locale }: { locale: string }) {
                 alt={"Project Protocol logo"}
               />
             </div>
+            <EnvironmentBadge />
           </NavbarBrand>
           <div className="d-flex flex-row align-items-center gap-1">
             <LocaleSwitcher locale={locale} dark />
