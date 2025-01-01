@@ -10,8 +10,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@contentful/rich-text-react-renderer": "^15.22.1",
-    "@contentful/rich-text-types": "^16.6.1",
+    "@contentful/rich-text-react-renderer": "^16.0.1",
+    "@contentful/rich-text-types": "^17.0.0",
     "@hookform/resolvers": "^3.9.0",
     "@rollbar/react": "0.12.0-beta",
     "@types/lodash-es": "^4.17.12",
@@ -21,7 +21,7 @@
     "contentful": "^10.15.1",
     "deepmerge": "^4.3.1",
     "dotenv": "^16.4.5",
-    "framer-motion": "^11.2.12",
+    "framer-motion": "^11.15.0",
     "jose": "^5.6.2",
     "lodash": "^4.17.21",
     "lodash-es": "^4.17.21",
@@ -30,7 +30,7 @@
     "next-intl": "^3.25.0",
     "next-pwa": "^5.6.0",
     "react": "19.0.0",
-    "react-bootstrap": "^2.10.2",
+    "react-bootstrap": "^2.10.7",
     "react-dom": "19.0.0",
     "react-hook-form": "^7.52.1",
     "react-hot-toast": "^2.4.1",
