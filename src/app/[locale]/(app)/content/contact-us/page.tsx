@@ -9,10 +9,11 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({
-  params: { locale },
+  params,
 }: {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "home" });
   return defaultMetadata({ title: t("contact.title") });
 }
@@ -20,9 +21,10 @@ export async function generateMetadata({
 export default async function ContactUs({
   params,
 }: {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
-  setRequestLocale(params.locale);
+  const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations("home");
 
   return (

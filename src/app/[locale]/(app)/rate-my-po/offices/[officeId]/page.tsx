@@ -11,27 +11,27 @@ import OfficeAgentsSearchResultsList from "./_components/OfficeAgentsSearchResul
 export async function generateMetadata({
   params,
 }: {
-  params: { officeId: string };
+  params: Promise<{ officeId: string }>;
 }) {
+  const { officeId } = await params;
   const { office }: { office: Office } = await new Api()
-    .get(`/offices/${params.officeId}`)
+    .get(`/offices/${officeId}`)
     .then((res) => res.json());
   return {
     title: office.city + " Office",
   };
 }
 
-export default async function Page({
-  params,
-  searchParams,
-}: {
-  params: { officeId: string; locale: string };
-  searchParams: { search: string };
+export default async function Page(props: {
+  params: Promise<{ officeId: string; locale: string }>;
+  searchParams: Promise<{ search: string }>;
 }) {
-  setRequestLocale(params.locale);
+  const searchParams = await props.searchParams;
+  const { officeId, locale } = await props.params;
+  setRequestLocale(locale);
   const t = await getTranslations();
   const { office } = await new Api()
-    .get(`/offices/${params.officeId}`)
+    .get(`/offices/${officeId}`)
     .then((res) => res.json());
 
   return (
@@ -57,7 +57,7 @@ export default async function Page({
         <Suspense>
           <OfficeAgentsSearchBar />
           <OfficeAgentsSearchResultsList
-            officeId={params.officeId}
+            officeId={officeId}
             searchText={searchParams.search}
           />
         </Suspense>

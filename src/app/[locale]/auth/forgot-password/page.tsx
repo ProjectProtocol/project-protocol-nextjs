@@ -2,10 +2,12 @@ import { setRequestLocale } from "next-intl/server";
 import ForgotPasswordForm from "./_components/ForgotPasswordForm";
 
 export default async function Page({
-  params: { locale },
+  params,
 }: {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await params;
+
   setRequestLocale(locale);
   return <ForgotPasswordForm />;
 }

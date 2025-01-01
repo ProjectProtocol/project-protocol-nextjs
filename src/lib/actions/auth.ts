@@ -39,7 +39,7 @@ export async function login({
     };
   }
   try {
-    await signIn(data.user, apiToken, cookies());
+    await signIn(data.user, apiToken, await cookies());
     return { data: data.user };
   } catch {
     return {
@@ -82,7 +82,7 @@ export async function signUp({
     };
   }
 
-  await signIn(data.user, apiToken, cookies());
+  await signIn(data.user, apiToken, await cookies());
 
   return { data: data.user };
 }
@@ -115,7 +115,7 @@ export async function confirmAccount(
     throw new Error("Confirm account: No api token present in response");
   }
 
-  await signIn(user, apiToken, cookies());
+  await signIn(user, apiToken, await cookies());
 
   return { data: user };
 }

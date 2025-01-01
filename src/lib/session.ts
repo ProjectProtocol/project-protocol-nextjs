@@ -18,7 +18,7 @@ type Session = {
  * @returns The decrypted session payload if found, otherwise null.
  */
 export async function getSession(): Promise<Session | undefined> {
-  const session = cookies().get("session")?.value;
+  const session = (await cookies()).get("session")?.value;
   if (!session) return;
   return await decrypt(session);
 }
@@ -93,5 +93,5 @@ export async function signIn(
  * Signs the user out by deleting the session cookie.
  */
 export async function signOut() {
-  cookies().delete("session");
+  (await cookies()).delete("session");
 }
