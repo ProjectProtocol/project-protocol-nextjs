@@ -1,4 +1,5 @@
 import { Col } from "react-bootstrap";
+import type { JSX } from "react";
 
 interface IAccountSettingsRow {
   title: string;

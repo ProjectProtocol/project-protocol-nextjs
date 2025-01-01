@@ -11,10 +11,12 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({
-  params: { locale },
+  params,
 }: {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await params;
+
   const t = await getTranslations({ locale, namespace: "home" });
   return defaultMetadata({
     title: t("rateMyPoTitle"), // Create a method for building this
@@ -22,15 +24,15 @@ export async function generateMetadata({
   });
 }
 
-export default async function Page({
-  searchParams,
-  params: { locale },
-}: {
-  searchParams?: {
+export default async function Page(props: {
+  searchParams?: Promise<{
     search?: string;
-  };
-  params: { locale: string };
+  }>;
+  params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await props.params;
+  const searchParams = await props.searchParams;
+
   setRequestLocale(locale);
   const t = await getTranslations();
 

@@ -16,13 +16,19 @@ export async function generateMetadata() {
   });
 }
 
-export default async function Page({
-  searchParams,
-  params: { locale },
-}: {
-  searchParams: ResourceSearchParams;
-  params: { locale: string };
-}) {
+export default async function Page(
+  props: {
+    searchParams: Promise<ResourceSearchParams>;
+    params: Promise<{ locale: string }>;
+  }
+) {
+  const params = await props.params;
+
+  const {
+    locale
+  } = params;
+
+  const searchParams = await props.searchParams;
   setRequestLocale(locale);
   const t = await getTranslations();
 

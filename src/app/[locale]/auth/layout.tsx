@@ -9,11 +9,13 @@ export async function generateStaticParams() {
 
 export default async function Layout({
   children,
-  params: { locale },
+  params,
 }: {
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await params;
+
   setRequestLocale(locale);
   const t = await getTranslations();
   return (

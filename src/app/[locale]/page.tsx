@@ -30,10 +30,12 @@ function LandingPageSegment({
 }
 
 export default async function Page({
-  params: { locale },
+  params,
 }: {
-  params: { locale: Locale };
+  params: Promise<{ locale: Locale }>;
 }) {
+  const { locale } = await params;
+
   setRequestLocale(locale);
   const t = await getTranslations({ locale });
 

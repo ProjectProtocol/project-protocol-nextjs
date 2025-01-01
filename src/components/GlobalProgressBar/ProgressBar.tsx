@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * GlobalProgressBar
+ * ProgressBar
  * Adapted from https://github.com/TheSGJ/nextjs-toploader/blob/master/src/index.tsx
  * @description Adds gobal event listeners to show and hide the topbar progress indicator when navigating between pages.
  * @returns {null}
@@ -19,7 +19,7 @@ topbar.config({
 });
 
 const THRESHOLD = 200; // Only show if request takes longer than 200ms
-export default function GlobalProgressBar() {
+export default function ProgressBar() {
   const toAbsoluteURL = (url: string): string => {
     return new URL(url, window.location.href).href;
   };

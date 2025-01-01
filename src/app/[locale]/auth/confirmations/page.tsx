@@ -2,10 +2,12 @@ import ConfirmEmail from "./_components/ConfirmEmail";
 import { setRequestLocale } from "next-intl/server";
 
 export default async function Page({
-  params: { locale },
+  params,
 }: {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await params;
+
   setRequestLocale(locale);
   return <ConfirmEmail />;
 }

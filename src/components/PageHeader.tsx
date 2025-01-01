@@ -1,9 +1,11 @@
 "use client";
+
 import { Col, Row } from "react-bootstrap";
 import BackLink from "./BackLink";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import { useAuth } from "./AuthProvider";
+import type { JSX } from "react";
 
 interface IPageHeader {
   title: string | JSX.Element;

@@ -1,12 +1,13 @@
 import { setRequestLocale } from "next-intl/server";
 import ConfirmationSpinner from "./_components/ConfirmationSpinner";
 
-export default function Page({
+export default async function Page({
   params,
 }: {
-  params: { token: string; locale: string };
+  params: Promise<{ token: string; locale: string }>;
 }) {
-  setRequestLocale(params.locale);
+  const { locale, token } = await params;
+  setRequestLocale(locale);
 
-  return <ConfirmationSpinner token={params.token} />;
+  return <ConfirmationSpinner token={token} />;
 }

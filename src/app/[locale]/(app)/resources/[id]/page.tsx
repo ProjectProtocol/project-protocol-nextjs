@@ -11,10 +11,12 @@ import ResourcesLoadingPlaceholder from "../_components/ResourcesLoadingPlacehol
 import { defaultMetadata } from "@/lib/metadataUtils";
 
 export async function generateMetadata({
-  params: { id },
+  params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
+  const { id } = await params;
+
   const { resource } = await new Api()
     .get(`/resources/${id}`)
     .then((res) => res.json());
@@ -26,10 +28,12 @@ export async function generateMetadata({
 }
 
 export default async function Page({
-  params: { id },
+  params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
+  const { id } = await params;
+
   const session = await getSession();
   const user = session?.user;
   const { resource } = await new Api(session?.apiToken)

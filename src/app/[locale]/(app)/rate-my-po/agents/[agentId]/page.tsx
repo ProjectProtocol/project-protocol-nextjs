@@ -17,10 +17,11 @@ import { defaultMetadata } from "@/lib/metadataUtils";
 export async function generateMetadata({
   params,
 }: {
-  params: { agentId: string };
+  params: Promise<{ agentId: string }>;
 }) {
+  const { agentId } = await params;
   const { agent }: { agent: Agent } = await new Api()
-    .get(`/agents/${params.agentId}`)
+    .get(`/agents/${agentId}`)
     .then((res) => res.json());
 
   return defaultMetadata({
@@ -31,12 +32,13 @@ export async function generateMetadata({
 export default async function Page({
   params,
 }: {
-  params: { agentId: string };
+  params: Promise<{ agentId: string }>;
 }) {
+  const { agentId } = await params;
   const t = await getTranslations();
   const session = await getSession();
   const { agent } = await new Api(session?.apiToken)
-    .get(`/agents/${params.agentId}`)
+    .get(`/agents/${agentId}`)
     .then((res) => res.json());
 
   return (

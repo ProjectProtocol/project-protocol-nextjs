@@ -29,11 +29,13 @@ export async function generateStaticParams() {
 
 export default async function RootLayout({
   children,
-  params: { locale },
+  params,
 }: Readonly<{
   children: React.ReactNode;
   params: { locale: string };
 }>) {
+  const { locale } = await params;
+
   setRequestLocale(locale);
   const messages = await getMessages();
 
