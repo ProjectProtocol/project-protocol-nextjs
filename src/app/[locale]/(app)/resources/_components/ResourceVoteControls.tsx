@@ -4,7 +4,7 @@ import Resource from "@/types/Resource";
 import { useEffect, useState } from "react";
 import { like, dislike } from "@/lib/actions/resource";
 import { useAuth } from "@/components/AuthProvider";
-import toast from "react-hot-toast";
+import toast, { Toast } from "react-hot-toast";
 import { Button } from "react-bootstrap";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/routing";
@@ -21,7 +21,7 @@ export default function ResourceVoteControls({
 
   const displayToast = () => {
     toast(
-      (toastObject) => (
+      (toastObject: Toast) => (
         <div>
           {t("resources.signInRequired")}
           <div className="d-flex py-2 flex-row justify-content-between align-items-center">
