@@ -3,19 +3,23 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import AccountSettings from "./_components/AccountSettings";
 
 export async function generateMetadata({
-  params: { locale },
+  params,
 }: {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await params;
+
   const t = await getTranslations({ locale });
   return { title: t("account.title") };
 }
 
-export default async function Page({
-  params: { locale },
-}: {
-  params: { locale: string };
+export default async function Page(props: {
+  params: Promise<{ locale: string }>;
 }) {
+  const params = await props.params;
+
+  const { locale } = params;
+
   setRequestLocale(locale);
 
   const t = await getTranslations();
