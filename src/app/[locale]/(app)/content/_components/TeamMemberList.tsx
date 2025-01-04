@@ -9,6 +9,7 @@ import { Document } from "@contentful/rich-text-types";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Container } from "react-bootstrap";
 import TeamMember, { TeamMemberProps } from "./TeamMember";
+import { Fragment } from "react";
 
 export async function getTeamMemberProps(locale: string) {
   const allTeamMemberProps = [];
@@ -55,13 +56,13 @@ export default async function TeamMemberList({ locale }: { locale: string }) {
       ))}
       <hr />
       {allTeamMemberProps.map((props: TeamMemberProps) => (
-        <>
+        <Fragment key={props.name}>
           {props.title.includes(t("theTeam.founder")) ? (
             <h3>{t("theTeam.founder")}</h3>
           ) : null}
-          <TeamMember key={props.name} {...props} />
+          <TeamMember {...props} />
           {props.title.includes(t("theTeam.founder")) ? <hr /> : null}
-        </>
+        </Fragment>
       ))}
     </Container>
   );
