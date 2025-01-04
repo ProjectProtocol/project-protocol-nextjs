@@ -1,4 +1,5 @@
 "use client";
+
 import { CldImage } from "next-cloudinary";
 import { Col, Row, Collapse } from "react-bootstrap";
 import { useState } from "react";
@@ -24,7 +25,7 @@ export default function TeamMember({
   };
   return (
     <>
-      <Row className="mb-3 align-items-center" onClick={handleBio}>
+      <Row className="align-items-center" role="button" onClick={handleBio}>
         <Col xs={4} sm={3} className="text-left">
           <div className="position-relative">
             <CldImage

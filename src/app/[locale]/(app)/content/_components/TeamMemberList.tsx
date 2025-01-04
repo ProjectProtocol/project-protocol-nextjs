@@ -48,8 +48,8 @@ export default async function TeamMemberList({ locale }: { locale: string }) {
   const t = await getTranslations("navigation");
 
   return (
-    <Container>
-      <h3 className="mb-3">{t("theTeam.boardMembers")}</h3>
+    <Container className="vertical-rhythm">
+      <h3>{t("theTeam.boardMembers")}</h3>
       {allBoardMemberProps.map((props: TeamMemberProps) => (
         <TeamMember key={props.name} {...props} />
       ))}
@@ -57,7 +57,7 @@ export default async function TeamMemberList({ locale }: { locale: string }) {
       {allTeamMemberProps.map((props: TeamMemberProps) => (
         <>
           {props.title.includes(t("theTeam.founder")) ? (
-            <h3 className="mb-3">{t("theTeam.founder")}</h3>
+            <h3>{t("theTeam.founder")}</h3>
           ) : null}
           <TeamMember key={props.name} {...props} />
           {props.title.includes(t("theTeam.founder")) ? <hr /> : null}
