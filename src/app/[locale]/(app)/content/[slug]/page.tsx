@@ -1,7 +1,8 @@
 import { ALL_LOCALES } from "@/i18n/config";
-import ContentfulClient, {
+import {
   ContentfulPageKey,
   contentfulPageIds,
+  getContent,
 } from "@/lib/contentful";
 import { Document } from "@contentful/rich-text-types";
 import renderRichText from "@/lib/renderRichText";
@@ -31,15 +32,6 @@ export async function generateMetadata({
   const data = await getContent(locale, slug);
   const title = data.fields.title as string;
   return defaultMetadata({ title });
-}
-
-async function getContent(locale: string, slug: ContentfulPageKey) {
-  // note spanish locale in contentful is es-US
-  const contentfulLocale = locale === "es-MX" ? "es-US" : locale;
-  const data = await ContentfulClient.getEntry(contentfulPageIds[slug], {
-    locale: contentfulLocale,
-  });
-  return data;
 }
 
 export default async function Page(props: {
