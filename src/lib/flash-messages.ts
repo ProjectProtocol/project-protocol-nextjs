@@ -1,5 +1,5 @@
 import { randomUUID } from "crypto";
-import { cookies } from "next/headers";
+import { cookies, type UnsafeUnwrappedCookies } from "next/headers";
 
 export type FlashMessage = {
   id?: string;
@@ -37,7 +37,7 @@ export function flashSuccess(txt: string, opts: any = {}) {
  * the browser cookies.
  */
 class FlashStore {
-  private store = cookies();
+  private store = (cookies() as unknown as UnsafeUnwrappedCookies);
 
   getMessages() {
     const raw = this.store.get("flashMessages")?.value || "[]";

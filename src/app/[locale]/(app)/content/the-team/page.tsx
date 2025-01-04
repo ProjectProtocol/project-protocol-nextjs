@@ -10,10 +10,11 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({
-  params: { locale },
+  params,
 }: {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "navigation" });
   return defaultMetadata({ title: t("theTeam.team") });
 }
@@ -21,13 +22,15 @@ export async function generateMetadata({
 export default async function TheTeam({
   params,
 }: {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
-  setRequestLocale(params.locale);
+  const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations("navigation");
+
   return (
     <ContentPage title={t("theTeam.team")} coverImageSrc={"team-cover_t33lhk"}>
-      <TeamMemberList locale={params.locale} />
+      <TeamMemberList locale={locale} />
     </ContentPage>
   );
 }

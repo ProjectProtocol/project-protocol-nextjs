@@ -26,18 +26,21 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { locale: string; slug: ContentfulPageKey };
+  params: Promise<{ locale: string; slug: ContentfulPageKey }>;
 }) {
-  const data = await getContent(params.locale, params.slug);
+  const { locale, slug } = await params;
+  const data = await getContent(locale, slug);
   const title = data.fields.title as string;
   return defaultMetadata({ title });
 }
 
-export default async function Page({
-  params: { locale, slug },
-}: {
-  params: { slug: ContentfulPageKey; locale: string };
+export default async function Page(props: {
+  params: Promise<{ slug: ContentfulPageKey; locale: string }>;
 }) {
+  const params = await props.params;
+
+  const { locale, slug } = params;
+
   setRequestLocale(locale);
   const data = await getContent(locale, slug);
   const title = data.fields.title as string;

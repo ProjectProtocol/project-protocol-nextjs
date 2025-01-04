@@ -9,11 +9,13 @@ export const metadata: Metadata = defaultMetadata();
 
 export default async function Layout({
   children,
-  params: { locale },
+  params,
 }: {
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await params;
+
   setRequestLocale(locale);
 
   return (

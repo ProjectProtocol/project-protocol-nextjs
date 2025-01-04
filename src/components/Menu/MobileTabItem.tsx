@@ -1,7 +1,7 @@
 "use client";
-
 import classNames from "classnames";
 import { usePathname } from "@/i18n/routing";
+import type { JSX } from "react";
 
 export default function MobileTabItem({
   icon,
