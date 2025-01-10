@@ -49,7 +49,7 @@ export default function TeamMember({
         </Col>
       </Row>
       <Collapse in={showBio}>
-        <Row>{renderRichText(bio)}</Row>
+        <div>{renderRichText(bio)}</div>
       </Collapse>
     </>
   );
