@@ -5,20 +5,13 @@ import { Col, Row, Collapse } from "react-bootstrap";
 import { useState } from "react";
 import renderRichText from "@/lib/renderRichText";
 import { Document } from "@contentful/rich-text-types";
+import { ContentfulTeamMember } from "@/lib/contentful/team-member";
 
 export interface TeamMemberProps {
-  name: string;
-  title: string;
-  bio: Document;
-  imgId: string;
+  teamMember: ContentfulTeamMember;
 }
 
-export default function TeamMember({
-  name,
-  title,
-  bio,
-  imgId,
-}: TeamMemberProps) {
+export default function TeamMember({ teamMember }: TeamMemberProps) {
   const [showBio, setShowBio] = useState(false);
   const handleBio = () => {
     setShowBio(!showBio);
@@ -29,10 +22,10 @@ export default function TeamMember({
         <Col xs={4} sm={3} className="text-left">
           <div className="position-relative">
             <CldImage
-              src={imgId}
+              src={teamMember.cloudinaryId}
               width="100"
               height="100"
-              alt={name}
+              alt={teamMember.name}
               style={{
                 maxWidth: 100,
                 objectFit: "cover",
@@ -44,12 +37,12 @@ export default function TeamMember({
           </div>
         </Col>
         <Col xs={8} sm={9} className="text-left">
-          <h2 className="mb-1">{name}</h2>
-          <p className="my-0 py-0">{title}</p>
+          <h2 className="mb-1">{teamMember.name}</h2>
+          <p className="my-0 py-0">{teamMember.jobTitle}</p>
         </Col>
       </Row>
       <Collapse in={showBio}>
-        <div>{renderRichText(bio)}</div>
+        <div>{renderRichText(teamMember.bio.json)}</div>
       </Collapse>
     </>
   );
