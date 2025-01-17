@@ -1,22 +1,11 @@
 import { createClient } from "contentful";
 
-export const contentfulPageIds = {
-  about: "01l6lbfvmtbqQHjt7LuUFL",
-  "the-team": "41UOkLNQQfa6pK2U7Gr46d",
-  "why-email": "6K61ZF3VLMPMi0BjOQ3gjk",
-  "ethical-principles": "6UFa3N1g7ytcAxeBCQVyTY",
-  vote: "6VgcyUQKmZTr955WYmlhr8",
-  "terms-of-service": "1acLWVokjkixcvTh0b3gup",
-  "community-posting-guidelines": "fYYpah3B5mppvE7rXY1gY",
-  "what-is-project-protocol": "1Is9QM4ez0YDMYktRuuJZx",
-  "how-it-works": "1BQDLK4P2L1E0DmCwLOrDR",
-};
-
-export type ContentfulPageKey = keyof typeof contentfulPageIds;
-
+const SPACE_ID = "zwkgwua3qde9";
+const ACCESS_TOKEN = "kKEOXwvZcsASfym1i7BjO-g65KX5esCTa08w9rGHYBg";
+const GRAPHQL_URL = `https://graphql.contentful.com/content/v1/spaces/${SPACE_ID}`;
 const client = createClient({
-  space: "zwkgwua3qde9",
-  accessToken: "kKEOXwvZcsASfym1i7BjO-g65KX5esCTa08w9rGHYBg",
+  space: SPACE_ID,
+  accessToken: ACCESS_TOKEN,
 });
 
 const ContentfulClient = {
@@ -25,22 +14,27 @@ const ContentfulClient = {
   getTags: client.getTags,
 };
 
+export const contentfulLocale = (locale: string) =>
+  locale === "es-MX" ? "es-US" : locale;
+
 export default ContentfulClient;
 
 export async function getContentfulType(type: string, locale: string) {
-  const contentfulLocale = locale === "es-MX" ? "es-US" : locale;
   const data = await ContentfulClient.getEntries({
     content_type: type,
-    locale: contentfulLocale,
+    locale: contentfulLocale(locale),
   });
   return data;
 }
 
-export async function getContent(locale: string, slug: ContentfulPageKey) {
-  // note spanish locale in contentful is es-US
-  const contentfulLocale = locale === "es-MX" ? "es-US" : locale;
-  const data = await ContentfulClient.getEntry(contentfulPageIds[slug], {
-    locale: contentfulLocale,
-  });
-  return data;
+export async function fetchGraphQL(query: string, cacheKeys: string[]) {
+  return fetch(GRAPHQL_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${ACCESS_TOKEN}`,
+    },
+    body: JSON.stringify({ query }),
+    next: { tags: cacheKeys },
+  }).then((response) => response.json());
 }

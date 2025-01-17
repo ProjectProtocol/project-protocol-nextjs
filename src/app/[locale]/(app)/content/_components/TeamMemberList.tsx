@@ -1,27 +1,15 @@
-import { getContentfulType } from "@/lib/contentful";
-import { Document } from "@contentful/rich-text-types";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Container } from "react-bootstrap";
-import TeamMember, { TeamMemberProps } from "./TeamMember";
+import TeamMember from "./TeamMember";
+import {
+  ContentfulTeamMember,
+  getTeamMembers,
+} from "@/lib/contentful/team-member";
+import { groupBy } from "lodash";
 
 async function getTeamMemberProps(locale: string) {
-  const people: { [key: string]: TeamMemberProps[] } = {
-    team_member: [],
-    board_member: [],
-    founder: [],
-  };
-
-  const data = await getContentfulType("teamMember", locale);
-  data.items.forEach((item) => {
-    const role = item.fields.role as "team_member" | "board_member" | "founder";
-    people[role].push({
-      name: item.fields.name as string,
-      title: item.fields.jobTitle as string,
-      bio: item.fields.bio as Document,
-      imgId: item.fields.cloudinaryId as string,
-    });
-  });
-  return people;
+  const teamMembers = await getTeamMembers(locale);
+  return groupBy(teamMembers, "role");
 }
 
 export default async function TeamMemberList({ locale }: { locale: string }) {
@@ -36,17 +24,17 @@ export default async function TeamMemberList({ locale }: { locale: string }) {
   return (
     <Container className="vertical-rhythm">
       <h3>{t("theTeam.boardMembers")}</h3>
-      {board_member.map((props: TeamMemberProps) => (
-        <TeamMember key={props.name} {...props} />
+      {board_member.map((t: ContentfulTeamMember) => (
+        <TeamMember key={t.name} teamMember={t} />
       ))}
       <hr />
       <h3>{t("theTeam.founder")}</h3>
-      {founder.map((props: TeamMemberProps) => (
-        <TeamMember key={props.name} {...props} />
+      {founder.map((t: ContentfulTeamMember) => (
+        <TeamMember key={t.name} teamMember={t} />
       ))}
       <hr />
-      {team_member.map((props: TeamMemberProps) => (
-        <TeamMember {...props} key={props.name} />
+      {team_member.map((t: ContentfulTeamMember) => (
+        <TeamMember key={t.name} teamMember={t} />
       ))}
     </Container>
   );
